@@ -24,6 +24,8 @@ interface Course {
     icon: React.ComponentType
   }[]
   topics: string[]
+  status?: string
+  folderPath?: string
 }
 
 interface Resource {
@@ -44,11 +46,11 @@ interface DialogState {
 
 export function TeachingPage() {
   const containerRef = useRef(null)
-  
+
   // Enhanced dialog state management
   const [dialogStates, setDialogStates] = useState<Map<string, DialogState>>(new Map())
   const dialogTimeouts = useRef<Map<string, NodeJS.Timeout>>(new Map())
-  
+
   // Track active dialogs for proper cleanup
   const activeDialogs = useRef<Set<string>>(new Set())
 
@@ -79,7 +81,7 @@ export function TeachingPage() {
 
   const closeDialog = useCallback((dialogId: string) => {
     const dialogState = dialogStates.get(dialogId)
-    
+
     // Return focus to trigger element if available
     if (dialogState?.triggerElement) {
       // Use a timeout to ensure the dialog has fully closed before focusing
@@ -92,7 +94,7 @@ export function TeachingPage() {
         }
         dialogTimeouts.current.delete(dialogId)
       }, 100)
-      
+
       dialogTimeouts.current.set(dialogId, timeout)
     }
 
@@ -126,10 +128,10 @@ export function TeachingPage() {
       // Clear all timeouts on unmount
       dialogTimeouts.current.forEach(timeout => clearTimeout(timeout))
       dialogTimeouts.current.clear()
-      
+
       // Clear active dialogs tracking
       activeDialogs.current.clear()
-      
+
       // Clear dialog states
       setDialogStates(new Map())
     }
@@ -163,84 +165,84 @@ export function TeachingPage() {
 
   const courses = [
     {
-      code: 'ECON 8301',
-      title: 'Advanced Macroeconomic Theory I',
-      level: 'Graduate',
-      semester: 'Fall 2024',
+      code: 'EC 201',
+      title: 'Principles of Microeconomics',
+      level: 'Undergraduate',
+      semester: 'Spring 2025',
       description:
-        'First-year PhD course covering dynamic optimization, growth theory, and real business cycle models.',
+        'Examines how consumers and firms make choices when facing scarce resources, and how those choices are related to government policy and market outcomes, such as prices and output.',
       materials: [
-        { type: 'Lecture Notes', count: 12, icon: FileText },
-        { type: 'Problem Sets', count: 8, icon: FileText },
-        { type: 'Video Lectures', count: 24, icon: Video },
-        { type: 'Matlab Code', count: 15, icon: FileText },
+        { type: 'Course Materials', count: 0, icon: FileText },
       ],
       topics: [
-        'Dynamic Programming',
-        'Growth Models',
-        'RBC Theory',
-        'Calibration',
+        'Not available',
       ],
+      status: 'Not available in Course Materials'
     },
     {
-      code: 'ECON 8302',
-      title: 'Advanced Macroeconomic Theory II',
-      level: 'Graduate',
-      semester: 'Spring 2024',
+      code: 'EC201',
+      title: 'Principles of Microeconomics',
+      level: 'Undergraduate',
+      semester: 'Winter 2024',
       description:
-        'Second-year PhD course on New Keynesian models, monetary policy, and business cycles.',
+        'Examines how consumers and firms make choices when facing scarce resources, and how those choices are related to government policy and market outcomes, such as prices and output.',
       materials: [
-        { type: 'Lecture Notes', count: 14, icon: FileText },
-        { type: 'Problem Sets', count: 6, icon: FileText },
-        { type: 'Video Lectures', count: 28, icon: Video },
-        { type: 'Dynare Code', count: 10, icon: FileText },
+        { type: 'Weekly Materials', count: 9, icon: FileText },
+        { type: 'PDF Lectures', count: 3, icon: FileText },
+        { type: 'Pages Documents', count: 6, icon: FileText },
       ],
       topics: [
-        'New Keynesian Models',
-        'Monetary Policy',
-        'DSGE Methods',
-        'Bayesian Estimation',
+        'Consumer Choice Theory',
+        'Producer Theory',
+        'Market Structures',
+        'Government Policy',
+        'Market Outcomes',
+        'Price Theory',
       ],
+      status: 'Available',
+      folderPath: 'EC201_Winter_2024'
     },
     {
-      code: 'ECON 4050',
-      title: 'Intermediate Macroeconomics',
+      code: 'EC101',
+      title: 'Contemporary Economic Issues',
       level: 'Undergraduate',
       semester: 'Fall 2024',
       description:
-        'Upper-level undergraduate course on macroeconomic theory and policy applications.',
+        'Examines contemporary public policy using economic principles. Topics may include balanced budgets and tax reform, unemployment, health care, poverty and income redistribution, environmental policy, and international trade policy.',
       materials: [
-        { type: 'Lecture Slides', count: 20, icon: FileText },
-        { type: 'Problem Sets', count: 5, icon: FileText },
-        { type: 'Exams', count: 3, icon: FileText },
-        { type: 'Review Sessions', count: 10, icon: Video },
+        { type: 'Course Materials', count: 0, icon: FileText },
       ],
       topics: [
-        'IS-LM Model',
-        'AD-AS Framework',
-        'Fiscal Policy',
-        'Monetary Policy',
+        'Not available',
       ],
+      status: 'Not available in Course Materials'
     },
     {
-      code: 'ECON 7100',
-      title: 'Mathematical Methods for Economists',
-      level: 'Graduate',
-      semester: 'Summer 2024',
+      code: 'ECON1002',
+      title: 'Introductory Macroeconomics',
+      level: 'Undergraduate',
+      semester: 'Semester 1, 2024',
       description:
-        'Intensive course on mathematical techniques essential for graduate economic analysis.',
+        'Addresses the analysis of the level of employment and economic activity in the economy as a whole. The unit examines the main factors that determine the overall levels of production and employment in the economy, including the influence of government policy and international trade. This analysis enables an exploration of money, interest rates and financial markets, and a deeper examination of inflation, unemployment and economic policy. Prior knowledge of algebraic equations and differential calculus is assumed.',
       materials: [
-        { type: 'Lecture Notes', count: 16, icon: FileText },
-        { type: 'Problem Sets', count: 12, icon: FileText },
-        { type: 'Software Tutorials', count: 8, icon: Video },
-        { type: 'Reference Materials', count: 25, icon: FileText },
+        { type: 'Tutorial Materials', count: 12, icon: FileText },
+        { type: 'Weekly Presentations', count: 11, icon: FileText },
+        { type: 'Economic Figures', count: 85, icon: FileText },
+        { type: 'Interactive Presentations', count: 2, icon: Video },
+        { type: 'Answer Keys', count: 4, icon: FileText },
       ],
       topics: [
-        'Linear Algebra',
-        'Real Analysis',
-        'Optimization',
-        'Dynamic Systems',
+        'Employment and Economic Activity',
+        'Production and Employment Levels',
+        'Government Policy',
+        'International Trade',
+        'Money and Interest Rates',
+        'Financial Markets',
+        'Inflation and Unemployment',
+        'Economic Policy Analysis',
       ],
+      status: 'Available',
+      folderPath: 'ECON1002_S1_2024'
     },
   ]
 
@@ -300,6 +302,12 @@ export function TeachingPage() {
     }
   }
 
+  const handleDownload = (folderPath: string) => {
+    // Create a zip download link for the entire course folder
+    const downloadUrl = `/downloadable/teach/${folderPath}`
+    window.open(downloadUrl, '_blank')
+  }
+
   return (
     <motion.div
       ref={containerRef}
@@ -311,8 +319,7 @@ export function TeachingPage() {
         <div className='text-center mb-12'>
           <h1 className='text-4xl text-black mb-4'>Teaching Materials</h1>
           <p className='text-xl text-black mb-6 max-w-3xl mx-auto'>
-            Educational resources, course materials, and tutorials for students
-            and researchers in macroeconomics and mathematical economics.
+            Educational resources, course materials, and tutorials for students.
           </p>
         </div>
 
@@ -340,102 +347,129 @@ export function TeachingPage() {
                       <div className='text-sm text-gray-600 mb-2'>
                         {course.description}
                       </div>
+                      {course.status === 'Not available in Course Materials' && (
+                        <div className='text-sm text-red-600 font-medium mb-2'>
+                          Not available in Course Materials
+                        </div>
+                      )}
                     </div>
                     <div className='ml-6 text-right'>
-                      <Dialog 
-                        open={getDialogState(`course-${index}`).isOpen}
-                        onOpenChange={(open) => {
-                          if (!open) {
-                            closeDialog(`course-${index}`)
-                          }
-                        }}
-                      >
-                        <DialogTrigger asChild>
-                          <Button
-                            size='sm'
-                            variant='outline'
-                            className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
-                            onClick={(e) => {
-                              openDialog(`course-${index}`, course, e.currentTarget)
-                            }}
-                          >
-                            View Materials
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto'>
-                          <DialogHeader>
-                            <DialogTitle className='text-2xl text-black mb-2'>
-                              {course.title} - Course Materials
-                            </DialogTitle>
-                            <DialogDescription>
-                              Access all course materials, assignments, and
-                              resources for this {course.level.toLowerCase()} level
-                              course.
-                            </DialogDescription>
-                            <Badge
-                              className={`w-fit ${getLevelColor(course.level)}`}
+                      {course.status === 'Available' ? (
+                        <Dialog
+                          open={getDialogState(`course-${index}`).isOpen}
+                          onOpenChange={(open) => {
+                            if (!open) {
+                              closeDialog(`course-${index}`)
+                            }
+                          }}
+                        >
+                          <DialogTrigger asChild>
+                            <Button
+                              size='sm'
+                              variant='outline'
+                              className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
+                              onClick={(e) => {
+                                openDialog(`course-${index}`, course, e.currentTarget)
+                              }}
                             >
-                              {course.level}
-                            </Badge>
-                          </DialogHeader>
-                          <div className='mt-6'>
-                            <div className='mb-6'>
-                              <p className='text-black mb-4'>
-                                {course.description}
-                              </p>
-                              <div className='flex items-center space-x-4 text-sm text-black'>
-                                <span>
-                                  <strong>Course Code:</strong> {course.code}
-                                </span>
-                                <span>
-                                  <strong>Semester:</strong> {course.semester}
-                                </span>
+                              View Materials
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto'>
+                            <DialogHeader>
+                              <DialogTitle className='text-2xl text-black mb-2'>
+                                {course.title} - Course Materials
+                              </DialogTitle>
+                              <DialogDescription>
+                                Access all course materials, assignments, and
+                                resources for this {course.level.toLowerCase()} level
+                                course.
+                              </DialogDescription>
+                              <Badge
+                                className={`w-fit ${getLevelColor(course.level)}`}
+                              >
+                                {course.level}
+                              </Badge>
+                            </DialogHeader>
+                            <div className='mt-6'>
+                              <div className='mb-6'>
+                                <p className='text-black mb-4'>
+                                  {course.description}
+                                </p>
+                                <div className='flex items-center space-x-4 text-sm text-black'>
+                                  <span>
+                                    <strong>Course Code:</strong> {course.code}
+                                  </span>
+                                  <span>
+                                    <strong>Semester:</strong> {course.semester}
+                                  </span>
+                                </div>
                               </div>
-                            </div>
 
-                            <div className='mb-6'>
-                              <h4 className='text-lg text-black mb-3'>
-                                Available Materials
-                              </h4>
-                              <div className='space-y-2'>
-                                {course.materials.map((material, matIndex) => (
-                                  <div
-                                    key={matIndex}
-                                    className='flex items-center justify-between py-2 px-3 hover:bg-gray-50 rounded'
+                              <div className='mb-6'>
+                                <div className='flex items-center justify-between mb-3'>
+                                  <h4 className='text-lg text-black'>
+                                    Available Materials
+                                  </h4>
+                                  <Button
+                                    size='sm'
+                                    className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white'
+                                    onClick={() => course.folderPath && handleDownload(course.folderPath)}
                                   >
-                                    <div className='flex items-center space-x-3'>
-                                      <material.icon className='w-4 h-4 text-[#6A5ACD]' />
-                                      <span className='text-black text-sm'>
-                                        {material.type} ({material.count} items)
-                                      </span>
-                                    </div>
-                                    <Button
-                                      size='sm'
-                                      variant='outline'
-                                      className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#e9e5ff] text-xs'
+                                    <Download className='w-3 h-3 mr-1' />
+                                    Download All Materials
+                                  </Button>
+                                </div>
+                                <div className='space-y-2'>
+                                  {course.materials.map((material, matIndex) => (
+                                    <div
+                                      key={matIndex}
+                                      className='flex items-center justify-between py-2 px-3 hover:bg-gray-50 rounded'
                                     >
-                                      <Download className='w-3 h-3 mr-1' />
-                                      Get
-                                    </Button>
-                                  </div>
-                                ))}
+                                      <div className='flex items-center space-x-3'>
+                                        <material.icon className='w-4 h-4 text-[#6A5ACD]' />
+                                        <span className='text-black text-sm'>
+                                          {material.type} ({material.count} items)
+                                        </span>
+                                      </div>
+                                      <Button
+                                        size='sm'
+                                        variant='outline'
+                                        className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#e9e5ff] text-xs'
+                                        onClick={() => course.folderPath && handleDownload(course.folderPath)}
+                                      >
+                                        <Download className='w-3 h-3 mr-1' />
+                                        Browse
+                                      </Button>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
 
-                            <div>
-                              <h4 className='text-lg text-black mb-3'>
-                                Topics Covered
-                              </h4>
-                              <div className='text-sm text-gray-600'>
-                                {course.topics.join(', ')}
+                              <div>
+                                <h4 className='text-lg text-black mb-3'>
+                                  Topics Covered
+                                </h4>
+                                <div className='text-sm text-gray-600'>
+                                  {course.topics.join(', ')}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
+                          </DialogContent>
+                        </Dialog>
+                      ) : (
+                        <Button
+                          size='sm'
+                          variant='outline'
+                          disabled
+                          className='border-gray-300 text-gray-400'
+                        >
+                          No Materials
+                        </Button>
+                      )}
                     </div>
                   </div>
-                  
+
                   {/* Tabular Course Information */}
                   <div className='grid grid-cols-3 gap-4 text-sm bg-gray-50 p-3 rounded'>
                     <div>
@@ -445,7 +479,11 @@ export function TeachingPage() {
                       <span className='font-medium text-gray-700'>Semester:</span> {course.semester}
                     </div>
                     <div>
-                      <span className='font-medium text-gray-700'>Materials:</span> {course.materials.reduce((sum, m) => sum + m.count, 0)} items
+                      <span className='font-medium text-gray-700'>Materials:</span> {
+                        course.status === 'Available'
+                          ? `${course.materials.reduce((sum, m) => sum + m.count, 0)} items`
+                          : 'Not available'
+                      }
                     </div>
                   </div>
                 </div>
@@ -453,21 +491,30 @@ export function TeachingPage() {
                 {/* Materials List */}
                 <div className='mb-4'>
                   <h4 className='text-sm font-medium text-gray-700 mb-2'>Course Materials:</h4>
-                  <ul className='space-y-1 ml-4'>
-                    {course.materials.map((material, matIndex) => (
-                      <li key={matIndex} className='text-sm text-gray-600 flex items-center'>
-                        <span className='w-2 h-2 bg-gray-400 rounded-full mr-3 flex-shrink-0'></span>
-                        {material.type}: {material.count} items
-                      </li>
-                    ))}
-                  </ul>
+                  {course.status === 'Available' ? (
+                    <ul className='space-y-1 ml-4'>
+                      {course.materials.map((material, matIndex) => (
+                        <li key={matIndex} className='text-sm text-gray-600 flex items-center'>
+                          <span className='w-2 h-2 bg-gray-400 rounded-full mr-3 flex-shrink-0'></span>
+                          {material.type}: {material.count} items
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className='text-sm text-red-600 ml-4'>
+                      Not available in Course Materials
+                    </div>
+                  )}
                 </div>
 
                 {/* Topics */}
                 <div>
                   <h4 className='text-sm font-medium text-gray-700 mb-2'>Topics:</h4>
                   <div className='text-sm text-gray-600 ml-4'>
-                    {course.topics.join(' • ')}
+                    {course.status === 'Available' && course.topics[0] !== 'Not available'
+                      ? course.topics.join(' • ')
+                      : 'Not available in Course Materials'
+                    }
                   </div>
                 </div>
               </motion.div>
@@ -606,7 +653,7 @@ export function TeachingPage() {
                     </Dialog>
                   </div>
                 </div>
-                
+
                 {/* Inline Metadata */}
                 <div className='grid grid-cols-4 gap-4 text-sm bg-gray-50 p-3 rounded'>
                   <div>

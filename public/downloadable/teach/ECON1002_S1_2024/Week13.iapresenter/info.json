@@ -1,0 +1,13 @@
+{
+  "creatorIdentifier" : "net.ia.presenter",
+  "net.ia.presenter" : {
+    "appearance" : "dark",
+    "footerleading" : "logo",
+    "logo" : "\/assets\/USYD-logo.png",
+    "preset" : "Default",
+    "template" : "university of sydney"
+  },
+  "transient" : false,
+  "type" : "net.daringfireball.markdown",
+  "version" : 2
+}
