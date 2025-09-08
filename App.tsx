@@ -54,6 +54,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
+  const [isSearchActive, setIsSearchActive] = useState(false)
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -286,13 +287,32 @@ export default function App() {
         />
       </div>
 
+      {/* Search Overlay Blur */}
+      {isSearchActive && (
+        <div 
+          className='fixed inset-0 backdrop-blur-sm bg-black/10 transition-all duration-300'
+          style={{ zIndex: 40 }}
+        />
+      )}
+
       {/* Navigation */}
       <div className='relative' style={{ zIndex: 50 }}>
-        <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
+        <Navigation 
+          currentPage={currentPage} 
+          onPageChange={setCurrentPage}
+          onSearchStateChange={setIsSearchActive}
+        />
       </div>
 
       {/* Main Content */}
-      <main className='relative pt-32' style={{ zIndex: 10 }}>{renderPage()}</main>
+      <main 
+        className={`relative pt-32 transition-all duration-300 ${
+          isSearchActive ? 'blur-sm scale-[0.98]' : ''
+        }`} 
+        style={{ zIndex: 10 }}
+      >
+        {renderPage()}
+      </main>
     </div>
   )
 }

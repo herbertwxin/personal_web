@@ -1,19 +1,25 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, X } from 'lucide-react'
+import { Search, X, ArrowRight } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+import { searchContent, getSearchSuggestions, SearchResult } from '../lib/search'
 
 interface NavigationProps {
   currentPage: string
   onPageChange: (page: string) => void
+  onSearchStateChange?: (isSearchActive: boolean) => void
 }
 
-export function Navigation({ currentPage, onPageChange }: NavigationProps) {
+export function Navigation({ currentPage, onPageChange, onSearchStateChange }: NavigationProps) {
   const [searchMode, setSearchMode] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [showResults, setShowResults] = useState(false)
+  const [selectedResultIndex, setSelectedResultIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [tempPosition, setTempPosition] = useState({ x: 0, width: 0 })
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   // Responsive behavior detection
   useEffect(() => {
@@ -26,6 +32,97 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
     
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  // Search functionality
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      const results = searchContent(searchQuery)
+      setSearchResults(results)
+      setShowResults(results.length > 0)
+      setSelectedResultIndex(0)
+    } else {
+      setSearchResults([])
+      setShowResults(false)
+    }
+  }, [searchQuery])
+
+  // Lock body scroll when search is active
+  useEffect(() => {
+    if (searchMode) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [searchMode])
+
+  // Keyboard navigation for search results
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!searchMode) return
+
+      const suggestions = ['DSGE models', 'Publications', 'Blog posts', 'Economics', 'Teaching']
+      const maxIndex = searchQuery.trim() ? Math.max(0, searchResults.length - 1) : suggestions.length - 1
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault()
+          setSelectedResultIndex(prev => prev < maxIndex ? prev + 1 : 0)
+          break
+        case 'ArrowUp':
+          e.preventDefault()
+          setSelectedResultIndex(prev => prev > 0 ? prev - 1 : maxIndex)
+          break
+        case 'Enter':
+          e.preventDefault()
+          if (!searchQuery.trim()) {
+            // Handle suggestion selection
+            const suggestion = suggestions[selectedResultIndex]
+            if (suggestion) {
+              setSearchQuery(suggestion)
+            }
+          } else if (searchResults.length > 0 && searchResults[selectedResultIndex]) {
+            // Handle search result selection
+            handleSearchResultClick(searchResults[selectedResultIndex])
+          }
+          break
+        case 'Escape':
+          e.preventDefault()
+          closeSearch()
+          break
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [searchMode, searchResults, selectedResultIndex, searchQuery])
+
+  // Search handler functions
+  const handleSearchResultClick = (result: SearchResult) => {
+    onPageChange(result.url)
+    closeSearch()
+  }
+
+  const closeSearch = () => {
+    setSearchMode(false)
+    setSearchQuery('')
+    setSearchResults([])
+    setShowResults(false)
+    setSelectedResultIndex(0)
+    onSearchStateChange?.(false)
+  }
+
+  const openSearch = () => {
+    setSearchMode(true)
+    onSearchStateChange?.(true)
+    setTimeout(() => {
+      searchInputRef.current?.focus()
+    }, 100)
+  }
 
   const pages = [
     { id: 'home', label: 'Home', width: isMobile ? 60 : 82, mobileLabel: 'Home' },
@@ -84,6 +181,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   };
 
   return (
+    <>
     <nav className='fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50'>
       <motion.div
         className='relative backdrop-blur-xl rounded-full shadow-2xl overflow-hidden'
@@ -185,6 +283,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
             >
               <Search className='w-5 h-5 text-black flex-shrink-0' />
               <input
+                ref={searchInputRef}
                 type='text'
                 placeholder='Search academic content...'
                 value={searchQuery}
@@ -193,10 +292,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                 autoFocus
               />
               <motion.button
-                onClick={() => {
-                  setSearchMode(false)
-                  setSearchQuery('')
-                }}
+                onClick={closeSearch}
                 className='text-black hover:text-gray-800 transition-colors flex-shrink-0'
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -251,7 +347,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                         }
                       }}
                       onClick={(e) => handlePageChange(page.id, e.currentTarget)}
-                      className={`relative transition-all duration-200 rounded-full z-10 h-8 justify-center font-medium flex items-center hover:bg-transparent border-0 shadow-none focus:outline-none focus:ring-0 active:bg-transparent ${
+                      className={`relative transition-all duration-200 rounded-full z-10 h-8 justify-center font-medium flex items-center hover:bg-transparent border-0 shadow-none focus:outline-none focus:ring-0 active:bg-transparent outline-none ${
                         isMobile ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'
                       }`}
                       style={{
@@ -268,7 +364,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
 
               {/* Search Icon */}
               <motion.button
-                onClick={() => setSearchMode(true)}
+                onClick={openSearch}
                 className='ml-3 p-2 text-black hover:text-gray-800 transition-colors rounded-full hover:bg-[#f3f1ff] h-8 w-8 flex items-center justify-center'
                 whileHover={{
                   scale: 1.1,
@@ -296,5 +392,169 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
         />
       </motion.div>
     </nav>
+
+    {/* Search Results Dropdown - Outside navigation container */}
+    <AnimatePresence>
+      {searchMode && (
+        <motion.div
+          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+          transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className='fixed top-16 sm:top-20 left-1/2 transform -translate-x-1/2 rounded-2xl overflow-hidden shadow-2xl z-50'
+          style={{
+            background: 'rgba(255,255,255,0.98)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
+            border: '1px solid rgba(0,0,0,0.1)',
+            maxHeight: '500px',
+            overflowY: 'auto',
+            width: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
+            maxWidth: '90vw',
+            marginLeft: '-210px',
+          }}
+        >
+          {!searchQuery.trim() ? (
+            // Show search suggestions when no query
+            <div className='p-4'>
+              <h3 className='text-sm font-semibold text-gray-700 mb-3'>Search Suggestions</h3>
+              <div className='space-y-2'>
+                {['DSGE models', 'Publications', 'Blog posts', 'Economics', 'Teaching'].map((suggestion, index) => (
+                  <motion.button
+                    key={suggestion}
+                    onClick={() => setSearchQuery(suggestion)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+                      index === selectedResultIndex ? 'bg-purple-50 text-purple-700' : 'hover:bg-gray-50 text-gray-600'
+                    }`}
+                    whileHover={{ x: 2 }}
+                  >
+                    <div className='flex items-center space-x-2'>
+                      <Search className='w-3 h-3' />
+                      <span>{suggestion}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+              <div className='mt-4 pt-3 border-t border-gray-100'>
+                <p className='text-xs text-gray-500'>
+                  💡 <strong>Tip:</strong> Use keywords like "macroeconomics", "policy", or "research" to find specific content
+                </p>
+              </div>
+            </div>
+          ) : searchResults.length === 0 ? (
+            // No results found
+            <div className='p-4 text-center'>
+              <div className='text-gray-400 mb-2'>
+                <Search className='w-8 h-8 mx-auto' />
+              </div>
+              <h3 className='text-sm font-medium text-gray-700'>No results found</h3>
+              <p className='text-xs text-gray-500 mt-1'>
+                Try searching for "economics", "DSGE", or "publications"
+              </p>
+            </div>
+          ) : (
+            // Categorized search results
+            (() => {
+              const groupedResults = searchResults.reduce((acc, result, index) => {
+                const type = result.type === 'page' ? 'Pages' : 
+                           result.type === 'publication' ? 'Publications' :
+                           result.type === 'blog' ? 'Blog Posts' :
+                           result.type === 'teaching' ? 'Teaching' : 'Other'
+                if (!acc[type]) acc[type] = []
+                acc[type].push({ ...result, originalIndex: index })
+                return acc
+              }, {} as Record<string, Array<SearchResult & { originalIndex: number }>>)
+
+              const typeOrder = ['Pages', 'Publications', 'Blog Posts', 'Teaching', 'Other']
+              let currentIndex = 0
+
+              return (
+                <div className='py-2'>
+                  {typeOrder.map(type => {
+                    if (!groupedResults[type] || groupedResults[type].length === 0) return null
+                    
+                    const typeResults = groupedResults[type]
+                    const sectionStartIndex = currentIndex
+                    currentIndex += typeResults.length
+
+                    return (
+                      <div key={type} className='mb-1 last:mb-0'>
+                        <div className='px-4 py-2 bg-gray-50'>
+                          <h4 className='text-xs font-semibold text-gray-600 uppercase tracking-wide'>
+                            {type} ({typeResults.length})
+                          </h4>
+                        </div>
+                        {typeResults.map((result, typeIndex) => {
+                          const globalIndex = sectionStartIndex + typeIndex
+                          return (
+                            <motion.div
+                              key={result.id}
+                              onClick={() => handleSearchResultClick(result)}
+                              className={`px-4 py-3 cursor-pointer transition-all duration-150 border-b border-gray-50 last:border-b-0 ${
+                                globalIndex === selectedResultIndex
+                                  ? 'bg-purple-50 border-purple-100'
+                                  : 'hover:bg-gray-50'
+                              }`}
+                              whileHover={{ x: 4 }}
+                              transition={{ duration: 0.15 }}
+                            >
+                              <div className='flex items-start justify-between'>
+                                <div className='flex-1'>
+                                  <div className='flex items-center space-x-2'>
+                                    <h3 className='text-sm font-medium text-gray-900 line-clamp-1'>
+                                      {result.title}
+                                    </h3>
+                                    <span className={`px-2 py-1 text-xs rounded-full ${{
+                                      'page': 'bg-blue-100 text-blue-700',
+                                      'publication': 'bg-green-100 text-green-700',
+                                      'blog': 'bg-purple-100 text-purple-700',
+                                      'teaching': 'bg-orange-100 text-orange-700'
+                                    }[result.type]}`}>
+                                      {result.type}
+                                    </span>
+                                  </div>
+                                  {result.excerpt && (
+                                    <p className='text-xs text-gray-600 mt-1 line-clamp-2'>
+                                      {result.excerpt}
+                                    </p>
+                                  )}
+                                  {result.metadata && (
+                                    <div className='flex items-center space-x-2 mt-1'>
+                                      {result.metadata.date && (
+                                        <span className='text-xs text-gray-500'>
+                                          {new Date(result.metadata.date).toLocaleDateString()}
+                                        </span>
+                                      )}
+                                      {result.metadata.journal && (
+                                        <span className='text-xs text-gray-500'>
+                                          {result.metadata.journal}
+                                        </span>
+                                      )}
+                                      {result.metadata.year && (
+                                        <span className='text-xs text-gray-500'>
+                                          {result.metadata.year}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
+                                <ArrowRight className={`w-4 h-4 transition-all duration-150 ${
+                                  globalIndex === selectedResultIndex ? 'text-purple-600' : 'text-gray-400'
+                                }`} />
+                              </div>
+                            </motion.div>
+                          )
+                        })}
+                      </div>
+                    )
+                  })}
+                </div>
+              )
+            })()
+          )}
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   )
 }
