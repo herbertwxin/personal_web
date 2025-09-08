@@ -32,128 +32,18 @@ export function PublicationsPage() {
 
   const publications = [
     {
-      title:
-        'Dynamic Equilibrium Models in Modern Macroeconomics: A Comprehensive Survey',
-      authors: 'Your Name, Co-Author A, Co-Author B',
-      journal: 'Journal of Economic Theory',
+      title: 'The sacrifice ratio and active fiscal policy',
+      authors: 'Christopher G. Gibbs and Herbert W. Xin',
+      journal: 'Economics Letters',
       year: '2024',
-      volume: 'Vol. 45, No. 3',
-      pages: 'pp. 123-156',
+      volume: 'Vol. 245',
+      pages: '112038',
       type: 'Journal Article',
       status: 'Published',
-      abstract:
-        'This paper provides a comprehensive survey of dynamic equilibrium models used in modern macroeconomics, analyzing their theoretical foundations and empirical applications...',
-      keywords: ['DSGE', 'Economic Modeling', 'Monetary Policy'],
-      citations: 12,
-      doi: '10.1016/j.jet.2024.01.003',
-    },
-    {
-      title:
-        'Stochastic Growth Models: Theory and Applications in Developing Economies',
-      authors: 'Your Name, International Collaborator',
-      journal: 'Economic Review',
-      year: '2023',
-      volume: 'Vol. 78, No. 4',
-      pages: 'pp. 445-472',
-      type: 'Journal Article',
-      status: 'Published',
-      abstract:
-        'We develop a stochastic growth model tailored for developing economies, incorporating institutional factors and external shocks...',
-      keywords: ['Growth Theory', 'Developing Economies', 'Stochastic Models'],
-      citations: 28,
-      doi: '10.1111/ecca.2023.78.4.445',
-    },
-    {
-      title:
-        'Monetary Policy in New Keynesian Framework: Evidence from Emerging Markets',
-      authors: 'Your Name',
-      journal: 'Macroeconomic Dynamics',
-      year: '2023',
-      volume: 'Vol. 27, No. 8',
-      pages: 'pp. 1891-1920',
-      type: 'Journal Article',
-      status: 'Published',
-      abstract:
-        'This study examines monetary policy transmission mechanisms in emerging market economies using a New Keynesian DSGE framework...',
-      keywords: ['Monetary Policy', 'Emerging Markets', 'DSGE'],
-      citations: 15,
-      doi: '10.1017/S1365100522000645',
-    },
-    {
-      title:
-        'Financial Frictions and Business Cycles: A Quantitative Assessment',
-      authors: 'Your Name, Research Partner',
-      journal: 'Review of Economic Dynamics',
-      year: '2022',
-      volume: 'Vol. 46',
-      pages: 'pp. 89-115',
-      type: 'Journal Article',
-      status: 'Published',
-      abstract:
-        'We quantify the role of financial frictions in business cycle fluctuations using a medium-scale DSGE model...',
-      keywords: ['Financial Frictions', 'Business Cycles', 'DSGE'],
-      citations: 34,
-      doi: '10.1016/j.red.2022.05.003',
-    },
-    {
-      title: 'Labor Market Dynamics and Unemployment Persistence',
-      authors: 'Your Name, Academic Colleague',
-      journal: 'American Economic Journal: Macroeconomics',
-      year: '2022',
-      volume: 'Vol. 14, No. 2',
-      pages: 'pp. 156-189',
-      type: 'Journal Article',
-      status: 'Published',
-      abstract:
-        'This paper investigates the sources of unemployment persistence using a search and matching model with heterogeneous workers...',
-      keywords: ['Labor Markets', 'Unemployment', 'Search Models'],
-      citations: 19,
-      doi: '10.1257/mac.20200045',
-    },
-    {
-      title: 'Optimal Fiscal Policy in a Liquidity Trap',
-      authors: 'Your Name',
-      journal: 'Journal of Monetary Economics',
-      year: '2021',
-      volume: 'Vol. 124',
-      pages: 'pp. 78-95',
-      type: 'Journal Article',
-      status: 'Published',
-      abstract:
-        'We analyze optimal fiscal policy when the economy is at the zero lower bound using a New Keynesian model...',
-      keywords: ['Fiscal Policy', 'Zero Lower Bound', 'Optimal Policy'],
-      citations: 41,
-      doi: '10.1016/j.jmoneco.2021.09.008',
-    },
-    {
-      title: 'Heterogeneous Agents and Inequality Dynamics',
-      authors: 'Your Name, Co-Author C',
-      journal: 'Quarterly Journal of Economics',
-      year: '2024',
-      volume: 'Vol. 139, No. 1',
-      pages: 'pp. 234-278',
-      type: 'Journal Article',
-      status: 'Under Review',
-      abstract:
-        'We study the evolution of income and wealth inequality in a heterogeneous agent model with endogenous skill formation...',
-      keywords: ['Heterogeneous Agents', 'Inequality', 'Skill Formation'],
+      abstract: 'We compare sacrifice ratios for disinflations under an active monetary and passive fiscal policy mix to those obtained under passive monetary and active fiscal policy, holding all else equal. The sacrifice ratio may be higher or lower in the active fiscal policy regime depending on the fiscal rule and the design of the disinflation policy. Fiscal-led disinflations may be less costly than monetary-led ones when they are anticipated. However, they may generate larger sacrifice ratios than monetary-led ones when implemented "cold turkey". Overall, the variance in possible sacrifice ratios under fiscal-led policies is much higher than under monetary-led policies.',
+      keywords: ['Sacrifice ratio', 'Monetary policy', 'Fiscal policy', 'Inflation', 'Disinflation'],
       citations: 0,
-      doi: '',
-    },
-    {
-      title: 'Climate Change and Economic Growth: A DSGE Approach',
-      authors: 'Your Name, Environmental Economist',
-      journal: 'Working Paper Series',
-      year: '2024',
-      volume: 'WP-2024-15',
-      pages: 'pp. 1-67',
-      type: 'Working Paper',
-      status: 'Working Paper',
-      abstract:
-        'This paper incorporates climate change effects into a DSGE framework to analyze the macroeconomic consequences of environmental policies...',
-      keywords: ['Climate Change', 'DSGE', 'Environmental Policy'],
-      citations: 3,
-      doi: '',
+      doi: '10.1016/j.econlet.2024.112038',
     },
   ]
 
@@ -232,11 +122,22 @@ export function PublicationsPage() {
             className='text-[2.5rem] font-normal text-black mb-6 leading-tight'
             id="page-title"
           >
-            Publications
+            Publication
           </h1>
           <p className='text-lg text-black mb-8 max-w-3xl leading-relaxed'>
-            A collection of my research contributions to macroeconomic theory and applied economics.
+            Research contributions in economics and related fields.
           </p>
+          <div className='flex items-center gap-2 text-sm text-gray-600'>
+            <span>ORCID:</span>
+            <a 
+              href="https://orcid.org/0009-0000-9394-9423" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className='text-[#6A5ACD] hover:underline'
+            >
+              https://orcid.org/0009-0000-9394-9423
+            </a>
+          </div>
         </motion.header>
 
         {/* Filter Options */}

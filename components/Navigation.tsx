@@ -293,7 +293,12 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               />
               <motion.button
                 onClick={closeSearch}
-                className='text-black hover:text-gray-800 transition-colors flex-shrink-0'
+                className='text-black hover:text-gray-800 transition-colors flex-shrink-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                style={{
+                  outline: 'none',
+                  boxShadow: 'none',
+                }}
+                onBlur={(e) => e.target.blur()}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -347,14 +352,17 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                         }
                       }}
                       onClick={(e) => handlePageChange(page.id, e.currentTarget)}
-                      className={`relative transition-all duration-200 rounded-full z-10 h-8 justify-center font-medium flex items-center hover:bg-transparent border-0 shadow-none focus:outline-none focus:ring-0 active:bg-transparent outline-none ${
+                      className={`relative transition-all duration-200 rounded-full z-10 h-8 justify-center font-medium flex items-center hover:bg-transparent border-0 shadow-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:bg-transparent outline-none ${
                         isMobile ? 'px-2 py-1 text-xs' : 'px-4 py-2 text-sm'
                       }`}
                       style={{
                         width: `${page.width}px`,
                         color: '#000000',
                         opacity: isActive ? 1 : 0.7,
+                        outline: 'none',
+                        boxShadow: 'none',
                       }}
+                      onBlur={(e) => e.target.blur()}
                     >
                       {page.label}
                     </button>
@@ -365,7 +373,12 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               {/* Search Icon */}
               <motion.button
                 onClick={openSearch}
-                className='ml-3 p-2 text-black hover:text-gray-800 transition-colors rounded-full hover:bg-[#f3f1ff] h-8 w-8 flex items-center justify-center'
+                className='ml-3 p-2 text-black hover:text-gray-800 transition-colors rounded-full hover:bg-[#f3f1ff] h-8 w-8 flex items-center justify-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                style={{
+                  outline: 'none',
+                  boxShadow: 'none',
+                }}
+                onBlur={(e) => e.target.blur()}
                 whileHover={{
                   scale: 1.1,
                   rotate: 5,
