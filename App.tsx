@@ -1,5 +1,7 @@
 import { useState, Suspense, lazy, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Navigation } from './components/Navigation'
 import { HomePage } from './components/HomePage'
 import { perf, logMemoryUsage } from './lib/performance'
@@ -313,6 +315,10 @@ export default function App() {
       >
         {renderPage()}
       </main>
+
+      {/* Vercel Analytics and Speed Insights */}
+      <Analytics />
+      <SpeedInsights />
     </div>
   )
 }
