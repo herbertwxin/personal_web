@@ -292,7 +292,7 @@ export default function App() {
       </div>
 
       {/* Main Content */}
-      <main className='relative pt-20' style={{ zIndex: 10 }}>{renderPage()}</main>
+      <main className='relative pt-32' style={{ zIndex: 10 }}>{renderPage()}</main>
     </div>
   )
 }
