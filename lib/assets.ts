@@ -50,6 +50,11 @@ export const loadCSS = (href: string): Promise<void> => {
 
 // Preload critical assets
 export const preloadAssets = (assets: string[]) => {
+  // Only run in browser environment
+  if (typeof document === 'undefined') {
+    return
+  }
+
   assets.forEach(asset => {
     const link = document.createElement('link')
     link.rel = 'preload'

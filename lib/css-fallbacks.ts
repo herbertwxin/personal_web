@@ -28,6 +28,11 @@ export const cssVariableFallbacks = {
 
 // Apply CSS fallbacks for unsupported features
 export const applyCSSFallbacks = () => {
+  // Only run in browser environment
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const style = document.createElement('style')
   style.id = 'css-fallbacks'
 
@@ -103,15 +108,20 @@ export const applyCSSFallbacks = () => {
 
 // Check for CSS feature support
 export const checkCSSSupport = {
-  backdropFilter: () => CSS.supports('backdrop-filter', 'blur(1px)'),
-  grid: () => CSS.supports('display', 'grid'),
-  customProperties: () => CSS.supports('color', 'var(--test)'),
-  focusVisible: () => CSS.supports('selector(:focus-visible)'),
-  scrollBehavior: () => CSS.supports('scroll-behavior', 'smooth'),
+  backdropFilter: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('backdrop-filter', 'blur(1px)'),
+  grid: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('display', 'grid'),
+  customProperties: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('color', 'var(--test)'),
+  focusVisible: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('selector(:focus-visible)'),
+  scrollBehavior: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('scroll-behavior', 'smooth'),
 }
 
 // Progressive enhancement for CSS features
 export const enhanceCSS = () => {
+  // Only run in browser environment
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return
+  }
+
   const root = document.documentElement
 
   // Add feature detection classes

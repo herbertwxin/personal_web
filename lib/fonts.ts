@@ -28,6 +28,11 @@ export const fontFamilies = {
 
 // Font loading optimization
 export const preloadFonts = () => {
+  // Only run in browser environment
+  if (typeof document === 'undefined') {
+    return
+  }
+
   // Preload critical fonts for better performance
   const fontPreloads = [
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
@@ -50,6 +55,11 @@ export const preloadFonts = () => {
 
 // Font display optimization
 export const optimizeFontDisplay = () => {
+  // Only run in browser environment
+  if (typeof document === 'undefined') {
+    return
+  }
+
   // Add font-display: swap to improve loading performance
   const style = document.createElement('style')
   style.textContent = `
