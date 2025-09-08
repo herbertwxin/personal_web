@@ -8,232 +8,521 @@ export function BlogPage({ onReadPost }: BlogPageProps) {
   const blogPosts = [
     {
       id: 1,
-      title: 'Understanding DSGE Models in Modern Economics',
-      excerpt:
-        'A deep dive into Dynamic Stochastic General Equilibrium models and their practical applications in policy analysis.',
-      date: '2024-02-15',
-      readTime: '8 min read',
-      tags: ['Macroeconomics', 'DSGE', 'Policy'],
+      title: 'Kornai (1979) Framework on Autocratic Governance',
+      excerpt: 'A comment on Kornai (1979) where I found similarities between socialist firms and autocratic local governments',
+      date: '2024-02-05',
+      readTime: '6 min read',
+      tags: ['Political Economy', 'Governance', 'Theory'],
       featured: true,
-      content: `Dynamic Stochastic General Equilibrium (DSGE) models have become the workhorse of modern macroeconomic analysis. These models provide a comprehensive framework for understanding how economies respond to various shocks and policy interventions.
+      content: `## Introduction
 
-## What are DSGE Models?
+After randomly came across Kornai's work on _"Resource-Constrained versus Demand-Constrained System" (1979)_, I realized it idea of soft/hard budget constraint displays a very neat framework to explain why autocratic government, especially the local government, often deviates from the demand of populace.
 
-DSGE models are mathematical representations of the economy that are built on microeconomic foundations. They attempt to explain macroeconomic phenomena by modeling the behavior of individual agents - households, firms, and governments - and then aggregating these behaviors to understand economy-wide outcomes.
+In Kornai's work, he suggests that firms in socialist systems are only subject to soft budget constraints, i.e. the loss from investment does not damage the financial ability of the firm as it is owned by the state. Whereas in capitalist system, firms are immediately constrained by demands from the market, avoiding overly occupying social resources. In all circumstances, however, firms prioritize the most immediate constraint as it decides the survival of the firm. Thus, socialist firms suffer from "investment hunger", which relentlessly push for expansion regardless of actual market demands or the efficient use of resources to maintain state support till the exhaustion of resources, creating shortages.
 
-### Key Features:
+## A Political Perspective
 
-1. **Dynamic**: The models track variables over time
-2. **Stochastic**: They incorporate random shocks and uncertainty
-3. **General Equilibrium**: All markets clear simultaneously
+The detachment of firms from the market could certainly be undesirable. The detachment of local government from its residents, however, could raise more issues. In fact, any autocratic state should suffer from this issue more or less.
 
-## Mathematical Foundation
+As the nature of all autocratic system, local government officials are appointed by its superior, which means their responsibilities lies in achieving need of the superior. That need, however, does not necessary align with those from the residents. Put it into Karnai's framework, local government in autocratic state is delimited by the by its interaction with superior, while in democratic state, it is delimited by the interaction with local resident. This is an analogous of the resource/demand constraint faced by socialist/capitalist firms. Thus, just like socialist firms have no incentive to save resources, autocratic local governments have no incentive to benefit its residents.
 
-The basic structure of a DSGE model can be represented by the following equations:
+This lack of incentive occurs even when the central government's ultimate goal is to benefit the populace, as any policy relies on local government's implementation. With its hard constraint bounded by the populace, local government has to achieve the policy in a way that is generally agreed by the resident, where autocratic local governments, who's hard constraint is bounded by the central government, the policy can executed in any form, as long as it achieves the target.
 
-**Household Optimization:**
-Max E₀ Σ βᵗ U(Cₜ, Lₜ)
+The aforementioned idea could be illustrated using my **mushroom-shaped flowchart**.
 
-**Production Function:**
-Yₜ = AₜKₜ^α Lₜ^(1-α)
+![Mushroom Flowchart](downloadable/blog/Mushroom.png)
 
-**Resource Constraint:**
-Yₜ = Cₜ + Iₜ + Gₜ
+As one could see from the chart, the local government has the ruling power towards the people, while its primary responsibility is not tied with the needs of people. Local government only has a secondary responsibility towards the populace, i.e. the people influence the central government, which governs the local government.
 
-These equations capture the essential trade-offs that economic agents face and how their decisions aggregate to determine macroeconomic outcomes.
+Such detachment between local government's responsibility and power has caused issues like the overly stringent lock-down policy during the COVID-19 era in China. The ultimate goal of the central government is to reduce the number of cases, which is certainly not wrong. However, since local government has no incentive to benefit its people, especially during such urgent event, it takes every measure at any cost to eliminate any possibility of COVID spreading, which, of course, includes killing dogs during break-in home COVID tests and leaving people that are suspect to be infected in Fangcang Hospital without any actual treatment. These measures obviously harms the welfare of general public and it does not matter as local government's primary responsibility, the one that decides the political career of local governor, is to fulfill the goal of the superior.
 
-## Policy Applications
+## Conclusion
 
-DSGE models are particularly valuable for policy analysis because they:
-- Provide structural interpretation of economic relationships
-- Allow for counterfactual policy experiments
-- Incorporate expectations in a consistent manner
-- Can evaluate welfare implications of different policies
-
-The models have been extensively used by central banks worldwide for monetary policy analysis, helping policymakers understand the transmission mechanisms of their decisions.`,
+It is sad to say this, but I think in any autocratic system, where the responsibility goes upward and power goes downward, faces the same problem. It shall be the intrinsic nature of autocratic systems, a steady state that any autocratic system converge to.`,
     },
     {
       id: 2,
-      title: 'The Mathematics Behind Stochastic Growth Theory',
-      excerpt:
-        'Exploring the mathematical foundations that make stochastic growth models so powerful for economic forecasting.',
-      date: '2024-01-28',
-      readTime: '12 min read',
-      tags: ['Mathematics', 'Growth Theory', 'Modeling'],
-      content: `Stochastic growth theory represents one of the most elegant applications of mathematical analysis to economic problems. By incorporating random shocks into growth models, we can better understand the sources of economic fluctuations and long-term development patterns.
+      title: 'Fedora Silverblue Setup Guide',
+      excerpt: 'Here are some steps I would take after installing Fedora Silverblue',
+      date: '2023-12-25',
+      readTime: '15 min read',
+      tags: ['Fedora', 'Linux', 'Guide'],
+      content: `Feel free to contact me if you have any question with these instructions! Either through email or on the website's GitHub repository.
 
-## The Mathematical Framework
+> Many of the contents here are borrowed from [Willi Mutschler](https://mutschler.dev/linux/fedora-post-install/#). However, since I work with Fedora Silverblue rather than Fedora Workstation, many of the installation steps would be different due to the immutable nature of Silverblue. For that reason, I think this post would still show it's value.
 
-The foundation of stochastic growth theory lies in the Ramsey-Cass-Koopmans model extended with uncertainty:
+The version used is Fedora Silverblue 39 at the time this post is written. Most of the softwares are probably more personal and economists-oriented.
 
-**Capital Accumulation:**
-dKₑ = [f(Kₑ, Aₑ) - δKₑ - Cₑ]dt + σₖKₑdWₑ
+## Background Info for Silverblue
 
-**Technology Evolution:**
-dAₑ = μAₑdt + σₐAₑdWₑ
+Silverblue differs from the normal Fedora Workstation as it is immutable, meaning the system files are read-only and updates are installed as a whole. Put it more technically, \`/\` and \`/usr\` and everything below it is read-only, while stuffs under \`/var\` are user-changeable. For more information, please consult [Fedora Docs](https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/).
 
-Where Wₑ represents Wiener processes capturing technological and investment uncertainties.
+This means Silverblue needs to install applications and packages differently from Workstation, i.e. \`dnf install\` will not work, more specifically, there are 3 ways to do it.
 
-## Solving Stochastic Differential Equations
+### Flatpak
 
-The key challenge in stochastic growth models is solving the Hamilton-Jacobi-Bellman equation:
+Flatpak is the predominant way to install applications, as it places each application into a sandbox, aligning with the immutable approach of the Silverblue.
 
-ρV(K,A) = max{U(C) + Vₖ[f(K,A) - δK - C] + VₐμA + ½Vₖₖσₖ²K² + ½Vₐₐσₐ²A²}
+It is generally recommended to add Flathub repo to gain access to more applications, for instructions to do that, please consult [Fedora Doc](https://docs.fedoraproject.org/en-US/fedora-silverblue/getting-started/).
 
-This partial differential equation determines the optimal consumption and investment policies under uncertainty.
+### Toolbox
 
-## Computational Methods
+Toolbox creates an isolated container to install packages and softwares, it is almost like a emulator of the host system, or like a self-contained system that is attached to the host system.
 
-Modern approaches to solving these models include:
-1. **Finite Difference Methods**
-2. **Spectral Methods** 
-3. **Monte Carlo Simulations**
-4. **Perturbation Techniques**
+To create a toolbox, you can use the command:
 
-Each method has its advantages depending on the complexity of the model and the desired accuracy of the solution.`,
-    },
-    {
-      id: 3,
-      title: 'New Keynesian Framework: A Computational Approach',
-      excerpt:
-        'How computational methods are revolutionizing our understanding of New Keynesian economic models.',
-      date: '2024-01-10',
-      readTime: '10 min read',
-      tags: ['New Keynesian', 'Computation', 'Monetary Policy'],
-      content: `The New Keynesian framework has evolved significantly with advances in computational methods. Modern techniques allow us to solve and estimate these models with unprecedented precision and scope.
+\`\`\`bash
+create toolbox --container [name of container]
+\`\`\`
 
-## Core New Keynesian Equations
+After entering the toolbox
 
-The basic three-equation system consists of:
+\`\`\`bash
+toolbox eneter [name of container]
+\`\`\`
 
-**Phillips Curve:**
-πₑ = βEₑπₑ₊₁ + κxₑ
+It is possible to use the normal Fedora/RHEL command.
 
-**Dynamic IS Curve:**
-xₑ = Eₑxₑ₊₁ - σ(iₑ - Eₑπₑ₊₁)
+### Layering
 
-**Monetary Policy Rule:**
-iₑ = ρᵢiₑ₋₁ + (1-ρᵢ)[φπ πₑ + φₓxₑ]
+Layering is against the immutable approach of the system, but, many packages benefits from layering as it is layer upon the system and has a more direct connection with the system. I would recommend only install very necessary packages using layering, like graphics card drivers etc.
 
-## Computational Challenges
+To layer a package onto the system:
 
-Solving these models computationally involves several challenges:
-- **Non-linearity**: Many NK models are inherently non-linear
-- **Expectations**: Forward-looking behavior requires sophisticated solution methods
-- **Multiple Equilibria**: Some models have multiple rational expectations equilibria
+\`\`\`bash
+rpm-ostree install [package name]
+\`\`\`
 
-## Solution Methods
+To uninstall a layered package:
 
-Modern computational approaches include:
-1. **Linear Approximation** around steady state
-2. **Global Solution Methods** for handling large shocks  
-3. **Particle Filters** for estimation
-4. **MCMC Bayesian Estimation**
+\`\`\`bash
+rpm-ostree uninstall [package name]
+\`\`\`
 
-These methods have revolutionized our ability to bring NK models to the data and use them for policy analysis.`,
-    },
-    {
-      id: 4,
-      title: 'Teaching Economics Through Interactive Models',
-      excerpt:
-        'Innovative approaches to making complex economic concepts accessible to undergraduate students.',
-      date: '2023-12-22',
-      readTime: '6 min read',
-      tags: ['Teaching', 'Education', 'Interactive Models'],
-      content: `Teaching complex economic models to undergraduate students requires innovative pedagogical approaches. Interactive models and visual demonstrations can transform abstract concepts into intuitive understanding.
+## Graphics
 
-## The Challenge
+### Wayland & Xorg
 
-Traditional textbook approaches to macroeconomics often present students with:
-- Abstract mathematical formulations
-- Static graphs and diagrams  
-- Limited connection to real-world phenomena
+Fedora uses Wayland as default and will depreciate Xorg gradually, but in practice the experience is quite awful if you have a Nvidia card with drivers not properly set up. However, lately advancement from Nvidia side has made Wayland quite usable, providing you installed all the drivers.
 
-## Interactive Solutions
+#### Use Xorg
 
-Modern technology enables new teaching methods:
+By using Xorg session, I can solve most displaying issues with VSCode and Obsidian (Both installed through Flatpak). To use Xorg instead of Wayland, uncomment \`WaylandEnable=false\` and add \`DefaultSession=gnome-xorg.desktop\` to the [daemon] section of \`/etc/gdm/custom.conf\`
 
-### 1. Dynamic Simulations
-Students can manipulate parameters and immediately see the effects on economic outcomes.
+\`\`\`bash
+sudo nano /etc/gdm/custom.conf
+# [daemon]
+# WaylandEnable=false
+# DefaultSession=gnome-xorg.desktop
 
-### 2. Visual Learning
-Complex relationships become clearer when students can see variables evolve over time.
+# Cuda libs for Xorg
+rpm-ostree install xorg-x11-drv-nvidia-cuda
+rpm-ostree install xorg-x11-drv-nvidia-cuda-libs
+\`\`\`
 
-### 3. Real-Time Data Integration
-Connecting theoretical models with live economic data makes learning more relevant.
+And then reboot for the change to take effect.
 
-## Practical Implementation
+#### Nvidia & Wayland
 
-Successful interactive teaching involves:
-- **Progressive Complexity**: Start simple, add layers gradually
-- **Active Learning**: Students learn by doing, not just observing
-- **Immediate Feedback**: Real-time responses to parameter changes
-- **Collaborative Exploration**: Group activities with shared models
+To install the proprietary Nvidia driver
 
-## Results
+\`\`\`bash
+rpm-ostree update
 
-Students who learn through interactive models show:
-- Better retention of complex concepts
-- Improved problem-solving abilities
-- Greater engagement with economic theory
-- Enhanced preparation for advanced coursework`,
-    },
-    {
-      id: 5,
-      title: 'The Future of Macroeconomic Modeling',
-      excerpt:
-        'Emerging trends and technologies that will shape the next generation of economic models.',
-      date: '2023-12-08',
-      readTime: '9 min read',
-      tags: ['Future', 'Technology', 'Modeling'],
-      content: `The future of macroeconomic modeling is being shaped by revolutionary advances in technology, data availability, and computational methods. These developments promise to transform how we understand and predict economic phenomena.
+# Nvidia proprieatary driver
+rpm-ostree install akmod-nvidia
 
-## Technological Frontiers
+# The Nvidia proprieatary driver doesn't support VAAPI, but there is a wrapper that can bridge NVDEC/NVENC with VAAPI
+rpm-ostree install nvidia-vaapi-driver
 
-### Artificial Intelligence and Machine Learning
-- **Neural Networks** for non-linear relationship discovery
-- **Reinforcement Learning** for policy optimization
-- **Natural Language Processing** for sentiment analysis in models
+# Provides more codec for video streaming
+rpm-ostree install libavcodec-freeworld
+\`\`\`
 
-### Big Data Integration
-- **High-frequency data** from digital transactions
-- **Satellite imagery** for real-time economic activity measurement
-- **Social media data** for expectations formation modeling
+After all the installations, follow the instruction and reboot the system
 
-### Quantum Computing
-Potential applications include:
-- Solving large-scale optimization problems
-- Handling complex interdependencies
-- Massive parallel processing of scenarios
+\`\`\`bash
+systemctl reboot
+\`\`\`
 
-## Methodological Advances
+## Softwares
 
-### Agent-Based Modeling
-Moving beyond representative agents to model heterogeneous populations with:
-- Individual learning and adaptation
-- Network effects and social interactions
-- Emergent macroeconomic phenomena
+### Foliate
 
-### Real-Time Estimation
-- Continuous model updating with streaming data
-- Adaptive learning algorithms
-- Dynamic model selection
+I really like this handy software to read my \`.epub\` books, but it has some problem accessing the graphics card or some sort, resulting in the page not being able to render properly. I think the problem mostly lies with the fact of lack of permission.
 
-## Challenges Ahead
+The simplest way to fix this issue is to disable GPU acceleration for Foliate, to do that.
 
-The future also brings challenges:
-- **Data privacy** concerns
-- **Model interpretability** vs. predictive power trade-offs
-- **Computational complexity** management
-- **Integration** of traditional theory with new methods
+1.  Install \`Flatseal\` either by GUI or command line
+2.  Disable the **GPU acceleration** option for Foliate
+3.  Problem fixed!
 
-## Implications for Policy
+Since **Foliate** is not a very demanding software, even without GPU acceleration the whole thing runs smoothly enough for me to not search for other solutions.
 
-These advances will enable:
-- More accurate forecasting
-- Better understanding of economic heterogeneity  
-- Real-time policy impact assessment
-- Improved crisis prediction and management`,
+### MATLAB
+
+#### Installation
+
+Always refer to the official installation guide for more info.
+
+1. After the downloading the MATLAB installation file, unzip it with
+
+   \`\`\`bash
+   	unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
+   \`\`\`
+
+2. Navigate to \`matlab_R2023b_glnxa64\` directory and launch the installer with
+
+   \`\`\`bash
+   ./install
+   \`\`\`
+
+3. Install MATLAB under \`/var\` directory so you have full permission, the way I do it is
+
+   \`\`\`bash
+   /var/home/$USER/bin
+   \`\`\`
+
+#### Desktop Entry
+
+Here is a reference for what you need to put in for the desktop entry
+
+\`\`\`bash
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/var/home/$USER/bin/MATLAB/R2023b/bin/matlab -desktop
+Name=MATLAB R2023b
+Icon=/var/home/$USER/bin/MATLAB/bin/glnxa64/cef_resources/matlab_icon.png
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
+StartupWMClass=sun-awt-X11-XFramePeer
+MimeType=text/x-matlab
+\`\`\`
+
+#### Libraries
+
+Although [Willi Mutschler](https://mutschler.dev/linux/fedora-post-install/#) suggests that it is better to use system libraries instead of MATLAB's shipped libraries, as it solves most issues with MATLAB. During my experiment, this is not the case as with Silverblue, MATLAB does not have the access to system level files and is unable to utilize the system libraries. Thus, there is no need to exclude the shipped packages with MATLAB, in fact, you need to copy some packages from system to MATLAB directories for Dynare to work properly, as it cannot access system level file either.
+
+### Dynare
+
+Dynare needs to be compiled from source on a Fedora-based system, and the method to do it is slightly different in Silverblue.
+
+#### Fundamental packages
+
+In order to compile Dynare, we need to install several packages, I would recommend install these packages in a toolbox to align with the immutable approach.
+
+\`\`\`bash
+toolbox create --container Dynare-compile
+# Enter the toolbox
+toolbox enter Dynare-compile
+\`\`\`
+
+Install all the packages inside this toolbox
+
+\`\`\`bash
+# Minimal packages (use --disable-doc and --disable-octave flags)
+sudo dnf install -y gcc gcc-g++ gfortran boost-devel gsl-devel lapack lapack-devel matio-devel openblas openblas-devel suitesparse-devel bison flex make autoconf automake redhat-rpm-config
+# Octave packages (use --disable-doc flag)
+sudo dnf install -y octave octave-devel octave-statistics octave-io octave-optim octave-control
+# Documentation packages
+sudo dnf install -y texlive-scheme-minimal texlive-collection-publishers texlive-collection-latexextra texlive-collection-fontsextra texlive-collection-latexrecommended texlive-collection-science texlive-collection-plaingeneric texlive-lm python3-sphinx latexmk mathjax doxygen
+\`\`\`
+
+Next, compile \`solicot\` and \`x13as\`, although I am not very sure the use of \`x13as\` as it is not directly involved in the compiling. The code below are from [Dynare compiling instruction for Fedora, CentOS or RHEL on GitLab](https://git.dynare.org/Dynare/dynare#fedora-centos-or-rhel).
+
+\`\`\`bash
+# compile slicot from source and put it into /home/$USER/dynare/slicot/lib/
+mkdir -p /var/home/$USER/dynare/slicot
+cd /var/home/$USER/dynare/slicot
+wget https://deb.debian.org/debian/pool/main/s/slicot/slicot_5.0+20101122.orig.tar.gz
+tar xf slicot_5.0+20101122.orig.tar.gz
+cd slicot-5.0+20101122
+make FORTRAN=gfortran OPTS="-O2 -fPIC -fdefault-integer-8" LOADER=gfortran lib
+mkdir -p /var/home/$USER/dynare/slicot/lib
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot64_pic.a #for MATLAB
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot_pic.a #for octave
+
+# compile x13as from source and put it into /usr/bin/
+mkdir -p /var/home/$USER/dynare/x13as
+cd /var/home/$USER/dynare/x13as
+wget https://www2.census.gov/software/x-13arima-seats/x13as/unix-linux/program-archives/x13as_asciisrc-v1-1-b60.tar.gz
+tar xf x13as_asciisrc-v1-1-b60.tar.gz
+sed -i "s|-static| |" makefile.gf # this removes '-static' in the makefile.gf
+make -f makefile.gf FFLAGS="-O2 -std=legacy" PROGRAM=x13as
+sudo cp x13as /usr/bin/
+\`\`\`
+
+#### Compile Dynare
+
+Once the perquisite packages are sorted, we can start to compile Dynare.
+
+\`\`\`bash
+cd /var/home/$USER/dynare
+# This uses the current unstable branch
+git clone --recurse-submodules https://git.dynare.org/dynare/dynare.git unstable
+cd unstable
+# Direct Dynare to your MATLAB path
+meson setup -Dmatlab_path=/var/home/$USER/bin/MATLAB -Dfortran_args="[ '-B', '/var/home/$USER/dynare/slicot/lib']" -Dbuildtype=debugoptimized build-matlab
+meson compile -C build-matlab
+ninja -C build-matlab
+meson install -C build-matlab
+\`\`\`
+
+These steps shall give you a nearly workable Dynare, expect now it needs the latest \`libstdc++.so.6\` and \`libstdc++.so.6.0.32\` packages shipped with the system. As I mentioned before, Silverblue makes MATLAB lack the access to use the system shipped packages, rather, we have to rely on those shipped with MATLAB.
+
+To do this, we first move the \`libstdc++.so.6\` and \`libstdc++.so.6.0.32\` packages came with MATLAB to an exclude folder and the copy-paste the one from our system into MATLAB.
+
+\`\`\`bash
+export MATLAB_ROOT=/var/home/$USER/bin/MATLAB
+cd /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+mkdir -p exclude
+mv libstdc++* exclude/
+cd /lib64
+cp libstdc++.so.6 /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+cp libstdc++.so.6.0.32 /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+\`\`\`
+
+This should give you a running Dynare, simply add Dynare into the directory in MATLAB after.
+
+### LaTeX
+
+I use LaTeX with VSCode for all my writings, but to use this combo is a bit harder in Silverblue. My approach is to install LaTeX in a toolbox and then let VSCode (and LaTeX Workshop) communicate with LaTeX stored inside the toolbox.
+
+#### Install TeX Live
+
+\`\`\`bash
+# Create the LaTeX container
+toolbox create --container LaTeX
+toolbox enter LaTeX
+
+# Add the Tex Live repository if needed
+sudo dnf config-manager --add-repo https://mirrors.tuna.tsinghua.edu.cn/texlive/fedora/
+
+# Instal the package
+sudo dnf install texlive texlive-scheme-full texlive-extra-utils
+
+# Update the packages
+sudo dnf update texlive*
+
+# Verify the installation
+tex --version
+\`\`\`
+
+#### VSCode and LaTeX Workshop extension
+
+Simply use the flatpak to install VSCode, the community maintained version works fine for me, or you could work a way to install the official one by layering or through toolbox.
+
+After installing VSCode, use the extension shop to install LaTeX Workshop extension.
+
+Once LaTeX Workshop is install, we need to configure it so that it can communicate with LaTeX in the toolbox, for that, we need to edit the \`settings.json\` of VSCode
+
+Change the corresponding entries in the \`settings.json\` to be
+
+\`\`\`json
+// Only if you use LaTeX Utilities extension for word count etc.
+"latex-utilities.countWord.path": "host-spawn",
+"latex-utilities.countWord.args": ["toolbox", "run", "--container", "LaTeX", "texcount"],
+
+// Required for LaTeX Workshop
+"latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-xelatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pdflatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+        },
+        {
+            "name": "bibtex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "bibtex",
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "Rscript",
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "julia",
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2texminted",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "julia",
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pweave",
+                "-f",
+                "tex",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2texminted",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pweave",
+                "-f",
+                "texminted",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tectonic",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "tectonic",
+                "--synctex",
+                "--keep-logs",
+                "%DOC%.tex"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.linting.chktex.enabled": true,
+    "latex-workshop.linting.chktex.exec.path": "host-spawn",
+    "latex-workshop.linting.chktex.exec.args": [
+        "toolbox",
+        "run",
+        "--container",
+        "LaTeX",
+        "chktex",
+        "-wall",
+        "-n22",
+        "-n30",
+        "-e16",
+        "-q"
+    ],
+\`\`\`
+
+This would allow LaTeX Workshop to communicate with LaTeX.`,
     },
   ]
 
@@ -245,7 +534,7 @@ These advances will enable:
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='mb-12'>
-          <h1 
+          <h1
             className='text-black mb-4'
             style={{
               fontSize: 'var(--academic-font-size-page-title)',
@@ -255,7 +544,7 @@ These advances will enable:
           >
             Academic Blog
           </h1>
-          <p 
+          <p
             className='text-black max-w-3xl'
             style={{
               fontSize: 'var(--academic-font-size-body)',
@@ -272,7 +561,7 @@ These advances will enable:
         {/* Academic Article List */}
         <div className='space-y-8'>
           {sortedPosts.map((post, index) => (
-            <article 
+            <article
               key={post.id}
               className='cursor-pointer group'
               onClick={() => onReadPost(post.id)}
@@ -284,7 +573,7 @@ These advances will enable:
             >
               {/* Entry Number and Title */}
               <div className='inline'>
-                <span 
+                <span
                   className='text-black mr-2'
                   style={{
                     fontSize: 'var(--academic-font-size-metadata)',
@@ -294,7 +583,7 @@ These advances will enable:
                 >
                   [{index + 1}]
                 </span>
-                <h2 
+                <h2
                   className='inline text-black group-hover:text-[var(--academic-text-accent)] transition-colors duration-200'
                   style={{
                     fontSize: 'var(--academic-font-size-entry-title)',
@@ -307,14 +596,14 @@ These advances will enable:
               </div>
 
               {/* Inline Metadata */}
-              <div 
+              <div
                 className='mt-1'
                 style={{
                   paddingLeft: 'var(--academic-hanging-indent)',
                   textIndent: '0'
                 }}
               >
-                <span 
+                <span
                   className='text-black'
                   style={{
                     fontSize: 'var(--academic-font-size-metadata)',
@@ -339,14 +628,14 @@ These advances will enable:
               </div>
 
               {/* Abstract/Excerpt */}
-              <div 
+              <div
                 className='mt-2'
                 style={{
                   paddingLeft: 'var(--academic-hanging-indent)',
                   textIndent: '0'
                 }}
               >
-                <p 
+                <p
                   className='text-black leading-relaxed'
                   style={{
                     fontSize: 'var(--academic-font-size-body)',
@@ -360,14 +649,14 @@ These advances will enable:
               </div>
 
               {/* Read More Link */}
-              <div 
+              <div
                 className='mt-2'
                 style={{
                   paddingLeft: 'var(--academic-hanging-indent)',
                   textIndent: '0'
                 }}
               >
-                <span 
+                <span
                   className='text-[var(--academic-text-accent)] group-hover:underline'
                   style={{
                     fontSize: 'var(--academic-font-size-metadata)',
@@ -382,14 +671,14 @@ These advances will enable:
         </div>
 
         {/* Newsletter Signup - Academic Style */}
-        <div 
+        <div
           className='mt-16 pt-8'
           style={{
             borderTop: '1px solid var(--academic-border-subtle)',
             marginTop: 'var(--academic-spacing-3xl)'
           }}
         >
-          <h3 
+          <h3
             className='text-black mb-4'
             style={{
               fontSize: 'var(--academic-font-size-section-header)',
@@ -399,7 +688,7 @@ These advances will enable:
           >
             Subscribe to Updates
           </h3>
-          <p 
+          <p
             className='text-black mb-6 max-w-2xl'
             style={{
               fontSize: 'var(--academic-font-size-body)',
@@ -408,7 +697,7 @@ These advances will enable:
               color: 'var(--academic-text-secondary)'
             }}
           >
-            Receive notifications about new research articles, methodological insights, 
+            Receive notifications about new research articles, methodological insights,
             and developments in mathematical macroeconomics.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 max-w-md'>
@@ -421,7 +710,7 @@ These advances will enable:
                 borderRadius: '2px'
               }}
             />
-            <Button 
+            <Button
               className='text-white'
               style={{
                 backgroundColor: 'var(--academic-text-accent)',

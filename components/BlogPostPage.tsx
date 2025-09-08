@@ -30,1334 +30,521 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
   const blogPosts = [
     {
       id: 1,
-      title: 'Understanding DSGE Models in Modern Economics',
-      excerpt:
-        'A deep dive into Dynamic Stochastic General Equilibrium models and their practical applications in policy analysis.',
-      date: '2024-02-15',
-      readTime: '8 min read',
-      tags: ['Macroeconomics', 'DSGE', 'Policy'],
+      title: 'Kornai (1979) Framework on Autocratic Governance',
+      excerpt: 'A comment on Kornai (1979) where I found similarities between socialist firms and autocratic local governments',
+      date: '2024-02-05',
+      readTime: '6 min read',
+      tags: ['Political Economy', 'Governance', 'Theory'],
       featured: true,
-      content: `Dynamic Stochastic General Equilibrium (DSGE) models have become the workhorse of modern macroeconomic analysis. These models provide a comprehensive framework for understanding how economies respond to various shocks and policy interventions.
+      content: `## Introduction
 
-## What are DSGE Models?
+After randomly came across Kornai's work on _"Resource-Constrained versus Demand-Constrained System" (1979)_, I realized it idea of soft/hard budget constraint displays a very neat framework to explain why autocratic government, especially the local government, often deviates from the demand of populace.
 
-DSGE models are mathematical representations of the economy that are built on microeconomic foundations. They attempt to explain macroeconomic phenomena by modeling the behavior of individual agents - households, firms, and governments - and then aggregating these behaviors to understand economy-wide outcomes.
+In Kornai's work, he suggests that firms in socialist systems are only subject to soft budget constraints, i.e. the loss from investment does not damage the financial ability of the firm as it is owned by the state. Whereas in capitalist system, firms are immediately constrained by demands from the market, avoiding overly occupying social resources. In all circumstances, however, firms prioritize the most immediate constraint as it decides the survival of the firm. Thus, socialist firms suffer from "investment hunger", which relentlessly push for expansion regardless of actual market demands or the efficient use of resources to maintain state support till the exhaustion of resources, creating shortages.
 
-### Key Features
+## A Political Perspective
 
-1. **Dynamic**: The models track variables over time, allowing us to analyze how current decisions affect future outcomes
-2. **Stochastic**: They incorporate random shocks and uncertainty, making them more realistic representations of the economic environment
-3. **General Equilibrium**: All markets clear simultaneously, ensuring consistency across different sectors of the economy
+The detachment of firms from the market could certainly be undesirable. The detachment of local government from its residents, however, could raise more issues. In fact, any autocratic state should suffer from this issue more or less.
 
-## Mathematical Foundation
+As the nature of all autocratic system, local government officials are appointed by its superior, which means their responsibilities lies in achieving need of the superior. That need, however, does not necessary align with those from the residents. Put it into Karnai's framework, local government in autocratic state is delimited by the by its interaction with superior, while in democratic state, it is delimited by the interaction with local resident. This is an analogous of the resource/demand constraint faced by socialist/capitalist firms. Thus, just like socialist firms have no incentive to save resources, autocratic local governments have no incentive to benefit its residents.
 
-The basic structure of a DSGE model can be represented by the following core equations:
+This lack of incentive occurs even when the central government's ultimate goal is to benefit the populace, as any policy relies on local government's implementation. With its hard constraint bounded by the populace, local government has to achieve the policy in a way that is generally agreed by the resident, where autocratic local governments, who's hard constraint is bounded by the central government, the policy can executed in any form, as long as it achieves the target.
 
-### Household Optimization
-The representative household maximizes expected lifetime utility:
+The aforementioned idea could be illustrated using my **mushroom-shaped flowchart**.
 
-$$\\max E_0 \\sum_{t=0}^{\\infty} \\beta^t U(C_t, L_t)$$
+![Mushroom Flowchart](downloadable/blog/Mushroom.png)
 
-where $\\beta$ is the discount factor, $C_t$ is consumption, and $L_t$ is labor supply.
+As one could see from the chart, the local government has the ruling power towards the people, while its primary responsibility is not tied with the needs of people. Local government only has a secondary responsibility towards the populace, i.e. the people influence the central government, which governs the local government.
 
-### Production Function
-Firms produce output according to:
-
-$$Y_t = A_t K_t^{\\alpha} L_t^{1-\\alpha}$$
-
-where $A_t$ represents total factor productivity, $K_t$ is capital, and $\\alpha$ is the capital share.
-
-### Resource Constraint
-The economy's resource constraint ensures that output is allocated between consumption, investment, and government spending:
-
-$$Y_t = C_t + I_t + G_t$$
-
-These equations capture the essential trade-offs that economic agents face and how their decisions aggregate to determine macroeconomic outcomes.
-
-## The Linearization Process
-
-One of the key technical challenges in DSGE modeling is solving the system of non-linear equations. Most practical applications use log-linearization around the steady state:
-
-1. **Find the Steady State**: Solve for the non-stochastic steady state values of all variables
-2. **Log-Linearize**: Express all variables as percentage deviations from steady state
-3. **Solve the Linear System**: Use methods like the Blanchard-Kahn technique to find the solution
-
-### The New Keynesian Core
-
-A standard New Keynesian DSGE model reduces to three key equations:
-
-**Phillips Curve:**
-$$\\pi_t = \\beta E_t \\pi_{t+1} + \\kappa x_t$$
-
-**Dynamic IS Curve:**
-$$x_t = E_t x_{t+1} - \\sigma(i_t - E_t \\pi_{t+1})$$
-
-**Policy Rule:**
-$$i_t = \\phi_\\pi \\pi_t + \\phi_x x_t + \\varepsilon_t$$
-
-## Policy Applications
-
-DSGE models are particularly valuable for policy analysis because they:
-
-- **Provide structural interpretation**: Unlike reduced-form models, DSGE models tell us why relationships exist
-- **Allow counterfactual experiments**: We can ask "what if" questions about alternative policies
-- **Incorporate expectations consistently**: Forward-looking behavior is built into the model's foundation
-- **Enable welfare analysis**: We can evaluate whether policies make agents better or worse off
-
-### Central Banking Applications
-
-Central banks around the world use DSGE models for:
-
-1. **Forecasting**: Predicting key macroeconomic variables
-2. **Policy Analysis**: Evaluating the effects of different interest rate rules
-3. **Communication**: Explaining policy decisions to the public and markets
-4. **Stress Testing**: Assessing how the economy might respond to various shocks
-
-## Limitations and Criticisms
-
-Despite their widespread use, DSGE models face several important criticisms:
-
-### Theoretical Limitations
-
-- **Representative Agent Assumption**: The models often ignore heterogeneity across households and firms
-- **Rational Expectations**: Agents are assumed to have perfect knowledge of the model structure
-- **Market Clearing**: All markets are assumed to clear continuously, which may not reflect reality
-
-### Empirical Challenges
-
-- **Parameter Estimation**: Many parameters are difficult to identify from data
-- **Model Selection**: Choosing between competing specifications is challenging
-- **Forecasting Performance**: DSGE models don't always outperform simpler alternatives
-
-## Recent Developments
-
-The field continues to evolve with several exciting developments:
-
-### Heterogeneous Agent Models
-
-New research incorporates:
-- **Income and wealth inequality**: How policy affects different groups differently
-- **Financial frictions**: The role of credit constraints and banking
-- **Network effects**: How agents interact through various channels
-
-### Computational Advances
-
-- **Global solution methods**: Handling large shocks and non-linearities
-- **Machine learning integration**: Using AI to improve model specification and estimation
-- **High-frequency data**: Incorporating real-time information
+Such detachment between local government's responsibility and power has caused issues like the overly stringent lock-down policy during the COVID-19 era in China. The ultimate goal of the central government is to reduce the number of cases, which is certainly not wrong. However, since local government has no incentive to benefit its people, especially during such urgent event, it takes every measure at any cost to eliminate any possibility of COVID spreading, which, of course, includes killing dogs during break-in home COVID tests and leaving people that are suspect to be infected in Fangcang Hospital without any actual treatment. These measures obviously harms the welfare of general public and it does not matter as local government's primary responsibility, the one that decides the political career of local governor, is to fulfill the goal of the superior.
 
 ## Conclusion
 
-DSGE models remain the dominant paradigm in macroeconomic policy analysis despite their limitations. Their strength lies in providing a coherent framework for thinking about complex economic interactions while maintaining theoretical consistency.
-
-As the field continues to evolve, we can expect these models to become more realistic and empirically relevant while retaining their core advantage: providing a structural understanding of how economic policy affects welfare.
-
-The key for practitioners is to understand both the power and limitations of these tools, using them as one input among many in the policy-making process.
-
----
-
-*What are your thoughts on DSGE models? Have you worked with these frameworks in your research? I'd love to hear about your experiences in the comments below.*`,
+It is sad to say this, but I think in any autocratic system, where the responsibility goes upward and power goes downward, faces the same problem. It shall be the intrinsic nature of autocratic systems, a steady state that any autocratic system converge to.`,
     },
-
     {
       id: 2,
-      title: 'The Mathematics Behind Stochastic Growth Theory',
-      excerpt:
-        'Exploring the mathematical foundations that make stochastic growth models so powerful for economic forecasting.',
-      date: '2024-01-28',
-      readTime: '12 min read',
-      tags: ['Mathematics', 'Growth Theory', 'Modeling'],
-      content: `Stochastic growth theory represents one of the most elegant applications of mathematical analysis to economic problems. By incorporating random shocks into growth models, we can better understand the sources of economic fluctuations and long-term development patterns.
+      title: 'Fedora Silverblue Setup Guide',
+      excerpt: 'Here are some steps I would take after installing Fedora Silverblue',
+      date: '2023-12-25',
+      readTime: '15 min read',
+      tags: ['Fedora', 'Linux', 'Guide'],
+      content: `Feel free to contact me if you have any question with these instructions! Either through email or on the website's GitHub repository.
 
-## The Mathematical Framework
+> Many of the contents here are borrowed from [Willi Mutschler](https://mutschler.dev/linux/fedora-post-install/#). However, since I work with Fedora Silverblue rather than Fedora Workstation, many of the installation steps would be different due to the immutable nature of Silverblue. For that reason, I think this post would still show it's value.
 
-The foundation of stochastic growth theory lies in extending the deterministic Ramsey-Cass-Koopmans model to include uncertainty. This extension requires sophisticated mathematical tools from stochastic calculus and optimal control theory.
+The version used is Fedora Silverblue 39 at the time this post is written. Most of the softwares are probably more personal and economists-oriented.
 
-### Basic Setup
+## Background Info for Silverblue
 
-Consider an economy where the representative agent maximizes expected lifetime utility:
+Silverblue differs from the normal Fedora Workstation as it is immutable, meaning the system files are read-only and updates are installed as a whole. Put it more technically, \`/\` and \`/usr\` and everything below it is read-only, while stuffs under \`/var\` are user-changeable. For more information, please consult [Fedora Docs](https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/).
 
-$$V(k_0) = \\max E_0 \\int_0^{\\infty} e^{-\\rho t} u(c_t) dt$$
+This means Silverblue needs to install applications and packages differently from Workstation, i.e. \`dnf install\` will not work, more specifically, there are 3 ways to do it.
 
-subject to the stochastic capital accumulation equation:
+### Flatpak
 
-$$dk_t = [f(k_t, A_t) - \\delta k_t - c_t]dt + \\sigma_k k_t dW_t$$
+Flatpak is the predominant way to install applications, as it places each application into a sandbox, aligning with the immutable approach of the Silverblue.
 
-where $W_t$ is a Wiener process representing investment uncertainty.
+It is generally recommended to add Flathub repo to gain access to more applications, for instructions to do that, please consult [Fedora Doc](https://docs.fedoraproject.org/en-US/fedora-silverblue/getting-started/).
 
-## The Technology Process
+### Toolbox
 
-Technology evolution follows a geometric Brownian motion:
+Toolbox creates an isolated container to install packages and softwares, it is almost like a emulator of the host system, or like a self-contained system that is attached to the host system.
 
-$$dA_t = \\mu A_t dt + \\sigma_A A_t dW_t^A$$
+To create a toolbox, you can use the command:
 
-This specification ensures that technology remains positive and captures the idea that technological progress is inherently uncertain.
-
-### Properties of the Technology Process
-
-1. **Log-normality**: $\\log A_t$ follows a normal distribution
-2. **Non-stationary**: Technology can grow without bound
-3. **Volatility proportional to level**: Bigger shocks occur at higher technology levels
-
-## The Hamilton-Jacobi-Bellman Equation
-
-The key mathematical challenge in stochastic growth models is solving the Hamilton-Jacobi-Bellman (HJB) equation:
-
-$$\\rho V(k,A) = \\max_c \\left\\{ u(c) + V_k[f(k,A) - \\delta k - c] + V_A \\mu A + \\frac{1}{2}V_{kk}\\sigma_k^2 k^2 + \\frac{1}{2}V_{AA}\\sigma_A^2 A^2 \\right\\}$$
-
-This partial differential equation determines the optimal consumption and investment policies under uncertainty.
-
-### Solution Techniques
-
-#### 1. Guess and Verify Method
-
-For specific functional forms, we can guess the form of the value function. For example, with CRRA utility and Cobb-Douglas production:
-
-$$V(k,A) = \\frac{B k^{\\gamma} A^{\\eta}}{\\gamma}$$
-
-Substituting this guess into the HJB equation and solving for the unknown parameters $B$, $\\gamma$, and $\\eta$.
-
-#### 2. Perturbation Methods
-
-For more complex models, we can use perturbation around the deterministic steady state:
-
-$$V(k,A) = V_0(k,A) + \\sigma V_1(k,A) + \\sigma^2 V_2(k,A) + ...$$
-
-where $\\sigma$ is a scaling parameter for uncertainty.
-
-## Solving Stochastic Differential Equations
-
-The model generates a system of stochastic differential equations that must be solved numerically in most cases.
-
-### Euler Scheme
-
-The simplest numerical method discretizes the continuous-time system:
-
-$$k_{t+\\Delta t} = k_t + [f(k_t,A_t) - \\delta k_t - c_t]\\Delta t + \\sigma_k k_t \\sqrt{\\Delta t} \\epsilon_t$$
-
-$$A_{t+\\Delta t} = A_t + \\mu A_t \\Delta t + \\sigma_A A_t \\sqrt{\\Delta t} \\eta_t$$
-
-where $\\epsilon_t$ and $\\eta_t$ are independent standard normal random variables.
-
-### Higher-Order Schemes
-
-More accurate methods include:
-
-- **Milstein Scheme**: Includes second-order terms for better accuracy
-- **Runge-Kutta Methods**: Higher-order deterministic methods adapted for SDEs
-- **Implicit Methods**: Better stability properties for stiff equations
-
-## Policy Functions and Dynamics
-
-The solution yields policy functions that depend on both state variables:
-
-$$c^*(k,A) = \\arg\\max_c \\left\\{ u(c) + V_k[f(k,A) - \\delta k - c] \\right\\}$$
-
-### Comparative Statics
-
-The stochastic environment generates rich comparative statics:
-
-1. **Precautionary Savings**: Uncertainty typically reduces consumption
-2. **Risk Premium**: Higher volatility requires higher expected returns
-3. **Volatility Effects**: Second-moment shocks have first-moment effects
-
-## Computational Methods
-
-Modern approaches to solving these models include:
-
-### 1. Finite Difference Methods
-
-Discretize the state space and approximate derivatives:
-
-$$V_k(k,A) \\approx \\frac{V(k+h,A) - V(k-h,A)}{2h}$$
-
-**Pros**: Straightforward implementation
-**Cons**: Curse of dimensionality, boundary conditions
-
-### 2. Spectral Methods
-
-Approximate the value function using basis functions:
-
-$$V(k,A) \\approx \\sum_{i,j} c_{ij} \\phi_i(k) \\psi_j(A)$$
-
-where $\\phi_i$ and $\\psi_j$ are chosen basis functions (e.g., Chebyshev polynomials).
-
-**Pros**: High accuracy, global approximation
-**Cons**: Difficult to implement, requires smooth solutions
-
-### 3. Monte Carlo Simulations
-
-Simulate many paths of the economy and compute averages:
-
-$$E[g(k_T, A_T)] \\approx \\frac{1}{N} \\sum_{i=1}^N g(k_T^{(i)}, A_T^{(i)})$$
-
-**Pros**: Can handle complex models, easy to parallelize
-**Cons**: Slow convergence, requires many simulations
-
-### 4. Perturbation Techniques
-
-Expand around the deterministic steady state:
-
-$$k_t = k_{ss} + k_1 \\sigma + k_2 \\sigma^2 + ...$$
-
-**Pros**: Analytical expressions, fast computation
-**Cons**: Local accuracy only, may not capture important non-linearities
-
-## Applications and Extensions
-
-### Real Business Cycle Models
-
-The stochastic growth framework forms the backbone of RBC models:
-
-- **Technology shocks drive cycles**: Temporary productivity changes generate fluctuations
-- **Calibration methodology**: Parameters chosen to match data moments
-- **Impulse response functions**: Track how shocks propagate through time
-
-### Asset Pricing Implications
-
-The model generates predictions for asset prices:
-
-$$r_t = \\rho + \\gamma \\mu_c - \\frac{\\gamma(\\gamma+1)}{2} \\sigma_c^2$$
-
-This connects growth theory to finance through the consumption-based CAPM.
-
-### Environmental Applications
-
-Extensions include:
-- **Resource depletion**: Finite natural resources
-- **Climate change**: Temperature affects productivity
-- **Pollution**: Environmental quality as a stock variable
-
-## Conclusion
-
-Stochastic growth theory provides a rich framework for understanding economic dynamics under uncertainty. While the mathematical complexity is substantial, modern computational methods make these models tractable for both theoretical analysis and empirical work.
-
-The key insight is that uncertainty isn't just noise - it fundamentally changes behavior and outcomes in ways that deterministic models miss. As we continue to develop more sophisticated mathematical and computational tools, these models will become even more powerful for understanding economic growth and development.
-
----
-
-*Have you worked with stochastic growth models? What computational challenges have you encountered? Share your experiences in the comments!*`,
-    },
-
-    {
-      id: 3,
-      title: 'New Keynesian Framework: A Computational Approach',
-      excerpt:
-        'How computational methods are revolutionizing our understanding of New Keynesian economic models.',
-      date: '2024-01-10',
-      readTime: '10 min read',
-      tags: ['New Keynesian', 'Computation', 'Monetary Policy'],
-      content: `The New Keynesian framework has evolved significantly with advances in computational methods. Modern techniques allow us to solve and estimate these models with unprecedented precision and scope, opening new avenues for both theoretical understanding and practical policy analysis.
-
-## The Computational Revolution
-
-Traditional macroeconomic analysis relied heavily on pencil-and-paper methods that severely limited model complexity. The computational revolution has transformed this landscape, enabling economists to:
-
-- Solve high-dimensional non-linear models
-- Estimate complex models using Bayesian methods  
-- Perform real-time policy analysis
-- Incorporate rich heterogeneity and market frictions
-
-### From Simple to Complex
-
-The journey from simple textbook models to modern computational frameworks represents a quantum leap in our analytical capabilities.
-
-## Core New Keynesian Equations
-
-Let's start with the canonical three-equation New Keynesian model that forms the foundation for more complex versions.
-
-### The Phillips Curve
-
-The New Keynesian Phillips Curve relates inflation to expected future inflation and the output gap:
-
-$$\\pi_t = \\beta E_t \\pi_{t+1} + \\kappa x_t + u_t$$
-
-where:
-- $\\pi_t$ is inflation
-- $x_t$ is the output gap
-- $u_t$ is a cost-push shock
-- $\\kappa = \\frac{(1-\\theta)(1-\\beta\\theta)}{\\theta}$ depends on price stickiness parameter $\\theta$
-
-### Dynamic IS Curve
-
-The consumption Euler equation gives us the dynamic IS curve:
-
-$$x_t = E_t x_{t+1} - \\sigma(i_t - E_t \\pi_{t+1} - r_t^n)$$
-
-where:
-- $i_t$ is the nominal interest rate
-- $r_t^n$ is the natural rate of interest
-- $\\sigma$ is the intertemporal elasticity of substitution
-
-### Monetary Policy Rule
-
-The central bank follows a Taylor-type rule:
-
-$$i_t = \\rho_i i_{t-1} + (1-\\rho_i)[\\phi_\\pi \\pi_t + \\phi_x x_t] + \\varepsilon_t$$
-
-where $\\varepsilon_t$ is a monetary policy shock.
-
-## Computational Challenges
-
-Solving these models computationally involves several significant challenges:
-
-### 1. Non-linearity
-
-Many New Keynesian models are inherently non-linear due to:
-- Zero lower bound on interest rates
-- Occasionally binding constraints
-- Time-varying parameters
-- Regime switches
-
-**Solution Approach**: Global methods that can handle non-linearities across the entire state space.
-
-### 2. Forward-Looking Expectations
-
-The presence of $E_t x_{t+1}$ terms requires sophisticated solution methods:
-- Rational expectations must be satisfied
-- Models may have multiple equilibria
-- Solution methods must handle the curse of dimensionality
-
-**Solution Approach**: Projection methods that iterate on policy functions until convergence.
-
-### 3. High-Dimensional State Spaces
-
-Realistic models include many state variables:
-- Multiple types of shocks
-- Heterogeneous agents
-- Financial frictions
-- International linkages
-
-**Solution Approach**: Approximation methods that reduce dimensionality while preserving essential features.
-
-## Solution Methods
-
-### 1. Linear Approximation
-
-The most common approach linearizes the model around the steady state:
-
-$$\\begin{bmatrix} x_t \\\\ \\pi_t \\\\ i_t \\end{bmatrix} = A \\begin{bmatrix} x_{t-1} \\\\ \\pi_{t-1} \\\\ i_{t-1} \\end{bmatrix} + B \\begin{bmatrix} E_t x_{t+1} \\\\ E_t \\pi_{t+1} \\\\ E_t i_{t+1} \\end{bmatrix} + C \\begin{bmatrix} u_t \\\\ r_t^n \\\\ \\varepsilon_t \\end{bmatrix}$$
-
-**Advantages**:
-- Fast computation
-- Analytical insights
-- Easy to estimate
-
-**Disadvantages**:
-- Local accuracy only
-- Misses important non-linearities
-- Certainty equivalence
-
-### 2. Global Solution Methods
-
-These methods solve the model over the entire state space without linearization.
-
-#### Projection Methods
-
-The idea is to approximate policy functions using basis functions:
-
-$$g(x) \\approx \\sum_{i=1}^N c_i \\phi_i(x)$$
-
-where $\\phi_i(x)$ are basis functions (polynomials, splines, etc.).
-
-**Algorithm**:
-1. Choose functional form and basis functions
-2. Define residual functions from equilibrium conditions
-3. Choose collocation points
-4. Solve for coefficients that minimize residuals
-
-#### Value Function Iteration
-
-For dynamic programming problems:
-1. Discretize state space
-2. Iterate on Bellman equation: $V^{n+1} = TV^n$
-3. Continue until convergence: $||V^{n+1} - V^n|| < \\epsilon$
-
-### 3. Perturbation Methods
-
-These expand the solution around the deterministic steady state:
-
-$$x_t = x_{ss} + x^{(1)}\\sigma + x^{(2)}\\sigma^2 + ...$$
-
-where $\\sigma$ scales uncertainty.
-
-**Second-order approximation** captures:
-- Risk premia
-- Precautionary behavior  
-- Jensen's inequality effects
-
-## Estimation Techniques
-
-### 1. Method of Moments
-
-Match model-generated moments with data moments:
-
-$$\\hat{\\theta} = \\arg\\min_\\theta [m_d - m_m(\\theta)]'W[m_d - m_m(\\theta)]$$
-
-where $m_d$ are data moments and $m_m(\\theta)$ are model moments.
-
-### 2. Maximum Likelihood
-
-For linear models, use the Kalman filter to evaluate likelihood:
-
-$$L(\\theta) = \\prod_{t=1}^T f(y_t | y_{t-1}, \\theta)$$
-
-**Steps**:
-1. Cast model in state-space form
-2. Apply Kalman filter to get likelihood
-3. Maximize likelihood numerically
-
-### 3. Bayesian Estimation
-
-Combine prior information with data:
-
-$$p(\\theta|Y) \\propto p(Y|\\theta) p(\\theta)$$
-
-**Metropolis-Hastings Algorithm**:
-1. Start with initial parameter value
-2. Propose new value: $\\theta' = \\theta + \\epsilon$
-3. Accept/reject based on posterior ratio
-4. Repeat until convergence
-
-### 4. Particle Filters
-
-For non-linear models, use particle filters:
-1. Generate particles from prior: $\\{\\theta^{(i)}\\}_{i=1}^N$
-2. Weight by likelihood: $w^{(i)} = p(y_t|\\theta^{(i)})$
-3. Resample and continue
-
-## Implementation Examples
-
-### MATLAB/Dynare
-
-\`\`\`matlab
-% Model equations
-model;
-  % Phillips Curve
-  pi = beta*pi(+1) + kappa*x + u;
-  
-  % IS Curve  
-  x = x(+1) - sigma*(i - pi(+1) - rn);
-  
-  % Policy Rule
-  i = rho*i(-1) + (1-rho)*(phi_pi*pi + phi_x*x) + eps_i;
-end;
+\`\`\`bash
+create toolbox --container [name of container]
 \`\`\`
 
-### Python/PyDSOGE
+After entering the toolbox
 
-\`\`\`python
-from pydsoge import DSGE
-
-# Define model
-model = DSGE.read('nk_model.yaml')
-
-# Estimate parameters
-model.estimate(data, method='mcmc', draws=10000)
-
-# Compute IRFs
-irf = model.irf(periods=40)
+\`\`\`bash
+toolbox eneter [name of container]
 \`\`\`
 
-## Applications in Policy Analysis
+It is possible to use the normal Fedora/RHEL command.
 
-### 1. Optimal Monetary Policy
+### Layering
 
-Solve Ramsey problem:
+Layering is against the immutable approach of the system, but, many packages benefits from layering as it is layer upon the system and has a more direct connection with the system. I would recommend only install very necessary packages using layering, like graphics card drivers etc.
 
-$$\\max E_0 \\sum_{t=0}^{\\infty} \\beta^t [\\alpha_\\pi \\pi_t^2 + \\alpha_x x_t^2 + \\alpha_i (i_t - i_{t-1})^2]$$
+To layer a package onto the system:
 
-subject to Phillips curve and IS curve.
-
-### 2. Forward Guidance
-
-Analyze effects of communication about future policy:
-
-$$E_t i_{t+k} = \\phi_\\pi E_t \\pi_{t+k} + \\phi_x E_t x_{t+k} \\quad \\text{for } k = 1,2,...,T$$
-
-### 3. Zero Lower Bound
-
-Handle occasionally binding constraint:
-
-$$i_t = \\max\\{0, i_t^*\\}$$
-
-where $i_t^*$ is the unconstrained optimal rate.
-
-## Recent Developments
-
-### Machine Learning Integration
-
-- **Neural networks** for policy function approximation
-- **Reinforcement learning** for optimal policy design
-- **Deep learning** for state space reduction
-
-### High-Frequency Data
-
-- **Mixed-frequency models** combining monthly and quarterly data
-- **Real-time estimation** with streaming data
-- **News-based nowcasting** using textual analysis
-
-### Heterogeneous Agents
-
-- **TANK models**: Two-agent New Keynesian models
-- **HANK models**: Heterogeneous agent New Keynesian models  
-- **Distributional effects**: How policy affects different groups
-
-## Conclusion
-
-Computational methods have revolutionized New Keynesian macroeconomics, enabling researchers and policymakers to tackle previously intractable problems. While challenges remain, particularly in handling high-dimensional non-linear models, the trajectory is clear: computation will continue to expand the frontier of what's possible in macroeconomic analysis.
-
-The key insight is that computation doesn't just make existing methods faster - it enables entirely new approaches to understanding economic phenomena. As computational power continues to grow and methods become more sophisticated, we can expect even more dramatic advances in our ability to understand and manage macroeconomic systems.
-
----
-
-*What computational challenges have you encountered in macroeconomic modeling? Which methods have you found most effective? Share your thoughts below!*`,
-    },
-
-    {
-      id: 4,
-      title: 'Teaching Economics Through Interactive Models',
-      excerpt:
-        'Innovative approaches to making complex economic concepts accessible to undergraduate students.',
-      date: '2023-12-22',
-      readTime: '6 min read',
-      tags: ['Teaching', 'Education', 'Interactive Models'],
-      content: `Teaching complex economic models to undergraduate students presents unique challenges. Traditional approaches often rely on static presentations and abstract mathematical formulations that can seem disconnected from real-world phenomena. Interactive models and visual demonstrations offer a powerful alternative that can transform abstract concepts into intuitive understanding.
-
-## The Pedagogical Challenge
-
-Economic education faces several fundamental challenges that have persisted despite decades of curriculum development:
-
-### Abstract Nature of Economic Concepts
-
-Many core economic concepts are inherently abstract:
-- **Equilibrium**: A theoretical state that may never be observed
-- **Expectations**: Unobservable mental states that drive behavior
-- **Dynamic processes**: Changes that unfold over time in complex ways
-- **Feedback loops**: Circular causality that can be counterintuitive
-
-### Mathematical Complexity
-
-Modern economics relies heavily on mathematics:
-- **Optimization problems**: Many students struggle with calculus-based approaches
-- **Stochastic processes**: Uncertainty and random variables are difficult to visualize
-- **General equilibrium**: Multiple markets clearing simultaneously
-- **Dynamic systems**: Differential equations and stability analysis
-
-### Disconnect from Reality
-
-Students often perceive economics as:
-- Too theoretical and unrealistic
-- Irrelevant to their daily lives
-- Overly simplified relative to actual complexity
-- Dominated by unrealistic assumptions
-
-## The Promise of Interactive Learning
-
-Interactive models address these challenges by making the invisible visible and the abstract concrete.
-
-### What Makes Learning Interactive?
-
-Interactive learning involves:
-1. **Active participation**: Students manipulate variables and observe outcomes
-2. **Immediate feedback**: Changes are reflected instantly in the model
-3. **Experimentation**: Students can test hypotheses and explore scenarios
-4. **Visual representation**: Complex relationships become graphically apparent
-
-### Cognitive Benefits
-
-Research in educational psychology shows that interactive learning:
-- **Improves retention**: Active engagement enhances memory formation
-- **Develops intuition**: Pattern recognition through repeated interaction
-- **Builds confidence**: Students can explore without fear of "wrong" answers
-- **Encourages curiosity**: Interactive elements naturally prompt questions
-
-## Designing Effective Interactive Models
-
-Creating successful educational tools requires careful attention to both pedagogical and technical considerations.
-
-### Progressive Complexity
-
-Effective models follow a structured progression:
-
-#### Level 1: Basic Concepts
-Start with simple, one-variable relationships:
-- Supply and demand with linear curves
-- Single-market equilibrium
-- Basic comparative statics
-
-**Example Interface Elements**:
-- Slider for "Consumer Income"
-- Real-time graph updates
-- Simple text explanations
-
-#### Level 2: Dynamic Interactions
-Introduce time and adjustment processes:
-- Market adjustment toward equilibrium
-- Inflation and unemployment relationships
-- Simple business cycles
-
-**Enhanced Features**:
-- Play/pause controls for time evolution
-- Speed adjustment sliders
-- Historical trace visualization
-
-#### Level 3: Multi-Market Systems
-Show interconnected markets:
-- General equilibrium effects
-- Policy spillovers across sectors
-- International trade linkages
-
-**Advanced Interfaces**:
-- Multiple synchronized graphs
-- Network visualizations
-- Scenario comparison tools
-
-### Principles of Good Design
-
-#### Clarity and Focus
-- **Single concept per module**: Avoid cognitive overload
-- **Clear visual hierarchy**: Important elements should stand out
-- **Minimal interface clutter**: Remove unnecessary decorative elements
-- **Consistent navigation**: Predictable user experience
-
-#### Meaningful Interaction
-- **Direct manipulation**: Click and drag rather than typing numbers
-- **Natural mappings**: Intuitive relationships between controls and effects
-- **Appropriate feedback**: Visual and auditory cues for user actions
-- **Reversible actions**: Easy to undo changes and start over
-
-#### Pedagogical Alignment
-- **Learning objectives**: Every feature should serve a clear educational purpose
-- **Assessment integration**: Built-in questions and checks for understanding
-- **Scaffolding**: Gradual removal of support as mastery develops
-- **Personalization**: Adaptation to different learning speeds and styles
-
-## Implementation Strategies
-
-### Technology Choices
-
-#### Web-Based Platforms
-**Advantages**:
-- Cross-platform compatibility
-- Easy distribution and updates
-- Rich interactive capabilities
-- Integration with learning management systems
-
-**Popular Frameworks**:
-- D3.js for custom visualizations
-- React for interactive interfaces
-- WebGL for high-performance graphics
-- Progressive Web Apps for mobile compatibility
-
-#### Specialized Software
-**Mathematical Tools**:
-- MATLAB for complex modeling
-- Mathematica for symbolic computation  
-- R/Shiny for statistical applications
-- GeoGebra for geometric concepts
-
-### Content Development Process
-
-#### 1. Learning Objective Analysis
-- Identify core concepts to be taught
-- Define measurable learning outcomes
-- Map prerequisites and dependencies
-- Consider common student misconceptions
-
-#### 2. Conceptual Design
-- Sketch key relationships and variables
-- Design the interaction flow
-- Plan progressive disclosure of complexity
-- Create assessment checkpoints
-
-#### 3. Technical Implementation
-- Choose appropriate technology stack
-- Build minimum viable product
-- Iterate based on user testing
-- Optimize for performance and accessibility
-
-#### 4. Classroom Integration
-- Develop instructor guides and materials
-- Create assignments and assessments
-- Train faculty on effective use
-- Establish technical support procedures
-
-## Case Studies in Interactive Economics Education
-
-### 1. Supply and Demand Simulator
-
-**Concept**: Market equilibrium and comparative statics
-
-**Interactive Elements**:
-- Draggable supply and demand curves
-- Parameter sliders (income, prices of substitutes)
-- Real-time equilibrium calculation
-- Consumer and producer surplus visualization
-
-**Learning Outcomes**:
-- Students can predict equilibrium changes
-- Understanding of welfare effects
-- Intuition for elasticity concepts
-
-**Implementation Results**:
-- 40% improvement in quiz scores
-- Increased engagement in class discussions
-- Better performance on graphical analysis problems
-
-### 2. Monetary Policy Game
-
-**Concept**: Central bank decision-making and macroeconomic tradeoffs
-
-**Interactive Elements**:
-- Interest rate setting tool
-- Real-time economic indicators (inflation, unemployment, growth)
-- Multiple scenarios with different economic conditions
-- Historical comparison with actual Fed decisions
-
-**Learning Outcomes**:
-- Appreciation for policy complexity
-- Understanding of lag effects
-- Recognition of uncertainty in policy-making
-
-**Student Feedback**:
-- "Finally understood why the Fed doesn't just set rates at zero"
-- "Realized how hard it is to time policy correctly"
-- "Made the connection between theory and real-world decisions"
-
-### 3. International Trade Explorer
-
-**Concept**: Comparative advantage and gains from trade
-
-**Interactive Elements**:
-- Production possibility frontiers for two countries
-- Trade flow visualization
-- Welfare calculations for consumers and producers
-- Tariff and quota analysis tools
-
-**Learning Outcomes**:
-- Deeper understanding of comparative advantage
-- Recognition of distributional effects
-- Ability to analyze trade policy impacts
-
-## Measuring Effectiveness
-
-### Quantitative Metrics
-
-#### Performance Measures
-- **Pre/post test scores**: Compare before and after exposure
-- **Problem-solving accuracy**: Performance on applied problems
-- **Retention tests**: Understanding after time delay
-- **Transfer tasks**: Application to new contexts
-
-#### Engagement Indicators
-- **Time on task**: How long students interact with materials
-- **Exploration patterns**: Which features are used most
-- **Return visits**: Frequency of voluntary use
-- **Help-seeking behavior**: When and why students ask for assistance
-
-### Qualitative Assessment
-
-#### Student Surveys
-Regular feedback on:
-- Perceived usefulness and engagement
-- Difficulty level and learning curve
-- Technical issues and usability problems
-- Suggestions for improvement
-
-#### Focus Groups
-In-depth discussions about:
-- Learning preferences and study habits
-- Comparison with traditional methods
-- Emotional responses to interactive elements
-- Recommendations for other topics
-
-#### Instructor Observations
-Faculty insights on:
-- Changes in classroom dynamics
-- Quality of student questions and discussions
-- Performance on assignments and exams
-- Long-term retention in advanced courses
-
-## Challenges and Limitations
-
-### Technical Challenges
-
-#### Development Costs
-- **Time-intensive**: Creating quality interactive content requires significant investment
-- **Specialized skills**: Need programmers who understand both technology and pedagogy
-- **Maintenance burden**: Software requires ongoing updates and bug fixes
-- **Platform compatibility**: Ensuring functionality across different devices and browsers
-
-#### User Experience Issues
-- **Learning curve**: Some students may struggle with technology
-- **Distraction potential**: Interactive elements might divert attention from learning goals
-- **Technical failures**: Software bugs can disrupt learning experience
-- **Accessibility concerns**: Need to accommodate students with disabilities
-
-### Pedagogical Limitations
-
-#### Over-Reliance Risk
-- **Substitution fallacy**: Technology cannot replace good teaching
-- **Conceptual shortcuts**: Students might memorize patterns without understanding principles
-- **Reduced analytical skills**: Less practice with formal mathematical reasoning
-- **False precision**: Models may give illusion of certainty in uncertain domain
-
-#### Implementation Barriers
-- **Faculty training**: Instructors need support to use new tools effectively
-- **Institutional resistance**: Change is often slow in academic settings
-- **Resource constraints**: Limited budgets for technology investment
-- **Assessment alignment**: Traditional exams may not reflect interactive learning gains
-
-## Future Directions
-
-### Emerging Technologies
-
-#### Artificial Intelligence
-- **Adaptive learning**: Personalized experiences based on individual progress
-- **Intelligent tutoring**: AI-powered assistance and feedback
-- **Natural language processing**: Conversational interfaces for economic exploration
-- **Predictive analytics**: Early identification of students at risk
-
-#### Virtual and Augmented Reality
-- **Immersive environments**: Walk through economic models in 3D space
-- **Spatial reasoning**: Better understanding of multi-dimensional relationships
-- **Collaborative experiences**: Multiple students exploring shared virtual economies
-- **Historical simulations**: Experience economic events from different perspectives
-
-#### Blockchain and Distributed Systems
-- **Decentralized simulations**: Students participate in actual economic systems
-- **Cryptocurrency economics**: Hands-on experience with digital assets
-- **Smart contracts**: Programming economic relationships directly
-- **Peer-to-peer markets**: Real trading with educational safeguards
-
-### Pedagogical Innovations
-
-#### Gamification
-- **Achievement systems**: Rewards for mastering concepts
-- **Leaderboards**: Friendly competition to encourage engagement
-- **Narrative elements**: Story-driven economic exploration
-- **Role-playing**: Students take on different economic roles
-
-#### Collaborative Learning
-- **Multi-player simulations**: Students interact as different economic agents
-- **Peer teaching**: Students create content for each other
-- **Real-time collaboration**: Synchronized exploration of economic scenarios
-- **Global classrooms**: International students working together
-
-## Conclusion
-
-Interactive models represent a powerful tool for economics education, but they are not a panacea. Success requires careful design, thoughtful implementation, and realistic expectations about both benefits and limitations.
-
-The key insight is that interactivity is most valuable when it serves clear pedagogical purposes rather than being implemented for its own sake. The best interactive learning experiences combine the engagement of modern technology with the rigor of economic reasoning.
-
-As we continue to develop these tools, the focus should remain on student learning outcomes. Technology should enhance rather than replace the fundamental goals of economics education: developing analytical thinking, understanding human behavior, and preparing citizens to participate in complex economic systems.
-
-The future of economics education will likely involve a blend of traditional and interactive approaches, with the specific mix depending on learning objectives, student needs, and available resources. What matters most is not the technology itself, but how effectively it helps students develop deep, lasting understanding of economic principles.
-
----
-
-*What has been your experience with interactive learning in economics? Have you found certain types of simulations particularly effective? I'd love to hear your thoughts and experiences in the comments below.*`,
-    },
-
-    {
-      id: 5,
-      title: 'The Future of Macroeconomic Modeling',
-      excerpt:
-        'Emerging trends and technologies that will shape the next generation of economic models.',
-      date: '2023-12-08',
-      readTime: '9 min read',
-      tags: ['Future', 'Technology', 'Modeling'],
-      content: `The landscape of macroeconomic modeling is undergoing a fundamental transformation. Driven by exponential advances in computing power, revolutionary developments in artificial intelligence, and unprecedented access to real-time data, the next generation of economic models promises to be more accurate, more comprehensive, and more relevant to policy-making than ever before.
-
-## The Current State of Macroeconomic Modeling
-
-Before exploring future possibilities, it's worth reflecting on where we stand today. Modern macroeconomic modeling is dominated by Dynamic Stochastic General Equilibrium (DSGE) models, which have served as the workhorse of central banks and policy institutions worldwide.
-
-### Strengths of Current Approaches
-
-**Theoretical Consistency**: DSGE models are built on solid microeconomic foundations, ensuring that macroeconomic relationships derive from individual optimization behavior.
-
-**Policy Analysis**: These frameworks excel at analyzing the effects of policy changes while maintaining theoretical coherence.
-
-**Expectation Formation**: Rational expectations are embedded naturally in the model structure.
-
-### Persistent Limitations
-
-Despite their widespread adoption, current models face significant challenges:
-
-**Linearization**: Most applications rely on linear approximations that may miss important non-linearities
-**Representative Agents**: Heterogeneity is often ignored or heavily simplified
-**Financial Frictions**: Traditional models struggle to capture complex financial market dynamics
-**Computational Constraints**: Even modern models are limited by what can be solved analytically or numerically
-
-## Technological Frontiers
-
-The convergence of several technological trends is creating unprecedented opportunities for advancing macroeconomic modeling.
-
-### Artificial Intelligence and Machine Learning
-
-AI is not just changing how we analyze data—it's fundamentally altering how we can think about economic modeling itself.
-
-#### Neural Networks for Economic Relationships
-
-Traditional economic models assume specific functional forms (linear, Cobb-Douglas, CES, etc.). Neural networks can discover non-linear relationships directly from data without imposing parametric restrictions.
-
-**Deep Learning Applications**:
-- **Universal function approximation**: Neural networks can represent arbitrarily complex relationships
-- **Feature discovery**: Automatic identification of relevant economic indicators
-- **Pattern recognition**: Detection of regime changes and structural breaks
-- **High-dimensional analysis**: Handling thousands of variables simultaneously
-
-**Example Implementation**:
-\`\`\`python
-import tensorflow as tf
-
-class EconomicPredictionModel(tf.keras.Model):
-    def __init__(self, num_variables):
-        super().__init__()
-        self.dense1 = tf.keras.layers.Dense(128, activation='relu')
-        self.dense2 = tf.keras.layers.Dense(64, activation='relu')
-        self.output_layer = tf.keras.layers.Dense(num_variables)
-        
-    def call(self, inputs):
-        x = self.dense1(inputs)
-        x = self.dense2(x)
-        return self.output_layer(x)
+\`\`\`bash
+rpm-ostree install [package name]
 \`\`\`
 
-#### Reinforcement Learning for Policy Optimization
+To uninstall a layered package:
 
-Traditional optimal policy analysis relies on solving complex dynamic programming problems. Reinforcement learning offers an alternative approach where AI agents learn optimal policies through trial and error.
-
-**Applications**:
-- **Central bank policy**: Learning optimal interest rate rules
-- **Fiscal policy**: Discovering effective government spending strategies
-- **Regulatory policy**: Optimizing financial sector regulations
-- **International coordination**: Multi-agent learning for global policy cooperation
-
-#### Natural Language Processing for Economic Analysis
-
-The explosion of textual data—from news articles to social media posts to central bank communications—offers rich information about economic conditions and expectations.
-
-**NLP Applications**:
-- **Sentiment analysis**: Real-time measures of economic confidence
-- **Topic modeling**: Identifying emerging economic themes
-- **Event extraction**: Automated detection of policy announcements
-- **Expectation measurement**: Inferring market expectations from text
-
-### Big Data Integration
-
-The digital economy generates vast amounts of high-frequency data that traditional models cannot fully exploit.
-
-#### High-Frequency Economic Indicators
-
-**Digital Transactions**: Real-time spending patterns from credit card companies and payment processors provide immediate insights into economic activity.
-
-**Search Data**: Google searches for unemployment benefits, job openings, or economic terms can predict economic turning points.
-
-**Satellite Imagery**: Night-time light intensity, parking lot occupancy, and shipping traffic offer alternative measures of economic activity.
-
-**Social Media**: Twitter sentiment, Facebook check-ins, and LinkedIn job postings provide real-time economic sentiment indicators.
-
-#### Alternative Data Sources
-
-**Energy Consumption**: Real-time electricity usage patterns correlate strongly with industrial production.
-
-**Transportation Data**: Traffic patterns, flight schedules, and shipping routes reveal economic activity in real-time.
-
-**Financial Market Microstructure**: High-frequency trading data captures market expectations and risk perceptions.
-
-### Quantum Computing
-
-While still in early development, quantum computing promises to solve computational problems that are intractable for classical computers.
-
-#### Potential Applications
-
-**Optimization Problems**: Quantum algorithms could solve large-scale portfolio optimization and resource allocation problems exponentially faster.
-
-**Monte Carlo Simulations**: Quantum Monte Carlo methods could dramatically improve the accuracy of stochastic economic models.
-
-**Machine Learning**: Quantum machine learning algorithms might discover patterns in economic data that classical methods miss.
-
-**Cryptographic Applications**: Quantum-safe encryption will be essential as quantum computers develop.
-
-**Timeline and Challenges**:
-- **Near-term (5-10 years)**: Limited applications to specific optimization problems
-- **Medium-term (10-20 years)**: Broader applications as quantum hardware improves
-- **Long-term (20+ years)**: Potential for breakthrough applications in economic modeling
-
-## Methodological Advances
-
-Beyond technological improvements, new methodological approaches are expanding the toolkit available to macroeconomic modelers.
-
-### Agent-Based Modeling
-
-Traditional macro models assume representative agents, but real economies consist of heterogeneous individuals and firms with different characteristics and behaviors.
-
-#### Key Features of ABM
-
-**Heterogeneous Agents**: Individual agents with different preferences, constraints, and decision-making processes
-
-**Bounded Rationality**: Agents use simple heuristics rather than perfect optimization
-
-**Network Effects**: Agents interact through various networks (social, financial, trade)
-
-**Emergent Phenomena**: Macroeconomic patterns emerge from micro-level interactions
-
-#### Implementation Example
-
-\`\`\`python
-class EconomicAgent:
-    def __init__(self, agent_id, wealth, consumption_propensity):
-        self.id = agent_id
-        self.wealth = wealth
-        self.consumption_propensity = consumption_propensity
-        self.neighbors = []
-    
-    def make_consumption_decision(self, economic_conditions):
-        # Simple decision rule based on wealth and social influences
-        neighbor_avg_consumption = np.mean([n.last_consumption for n in self.neighbors])
-        
-        base_consumption = self.wealth * self.consumption_propensity
-        social_influence = 0.1 * neighbor_avg_consumption
-        
-        return base_consumption + social_influence
-    
-    def update_expectations(self, observed_outcomes):
-        # Adaptive learning mechanism
-        self.consumption_propensity *= (1 + 0.01 * observed_outcomes)
+\`\`\`bash
+rpm-ostree uninstall [package name]
 \`\`\`
 
-### Real-Time Estimation and Learning
+## Graphics
 
-Static models estimated on historical data may miss important changes in economic structure. Real-time methods continuously update model parameters as new data arrives.
+### Wayland & Xorg
 
-#### Approaches
+Fedora uses Wayland as default and will depreciate Xorg gradually, but in practice the experience is quite awful if you have a Nvidia card with drivers not properly set up. However, lately advancement from Nvidia side has made Wayland quite usable, providing you installed all the drivers.
 
-**Kalman Filtering**: Sequential updating of model states and parameters
+#### Use Xorg
 
-**Particle Filtering**: Non-linear filtering for complex models
+By using Xorg session, I can solve most displaying issues with VSCode and Obsidian (Both installed through Flatpak). To use Xorg instead of Wayland, uncomment \`WaylandEnable=false\` and add \`DefaultSession=gnome-xorg.desktop\` to the [daemon] section of \`/etc/gdm/custom.conf\`
 
-**Online Learning**: Machine learning algorithms that adapt continuously
+\`\`\`bash
+sudo nano /etc/gdm/custom.conf
+# [daemon]
+# WaylandEnable=false
+# DefaultSession=gnome-xorg.desktop
 
-**Regime-Switching Models**: Models that allow for structural changes over time
+# Cuda libs for Xorg
+rpm-ostree install xorg-x11-drv-nvidia-cuda
+rpm-ostree install xorg-x11-drv-nvidia-cuda-libs
+\`\`\`
 
-### Network Economics
+And then reboot for the change to take effect.
 
-Economic systems are increasingly understood as complex networks where the structure of connections matters as much as individual node characteristics.
+#### Nvidia & Wayland
 
-#### Network Applications
+To install the proprietary Nvidia driver
 
-**Financial Contagion**: How financial distress spreads through banking networks
+\`\`\`bash
+rpm-ostree update
 
-**Trade Networks**: How international trade patterns affect economic outcomes
+# Nvidia proprieatary driver
+rpm-ostree install akmod-nvidia
 
-**Knowledge Networks**: How information and innovation spread through economic systems
+# The Nvidia proprieatary driver doesn't support VAAPI, but there is a wrapper that can bridge NVDEC/NVENC with VAAPI
+rpm-ostree install nvidia-vaapi-driver
 
-**Social Networks**: How social connections affect economic behavior
+# Provides more codec for video streaming
+rpm-ostree install libavcodec-freeworld
+\`\`\`
 
-## Data Revolution
+After all the installations, follow the instruction and reboot the system
 
-The availability and quality of economic data has exploded, creating new opportunities and challenges for modelers.
+\`\`\`bash
+systemctl reboot
+\`\`\`
 
-### Real-Time Data Streams
+## Softwares
 
-#### Financial Markets
-- Millisecond-level transaction data
-- Order book dynamics
-- Cross-asset correlations
-- Global market linkages
+### Foliate
 
-#### Consumer Behavior
-- Real-time spending patterns
-- Location-based activity data
-- Search and browsing behavior
-- Social media activity
+I really like this handy software to read my \`.epub\` books, but it has some problem accessing the graphics card or some sort, resulting in the page not being able to render properly. I think the problem mostly lies with the fact of lack of permission.
 
-#### Business Operations
-- Supply chain data
-- Production schedules
-- Inventory levels
-- Employment flows
+The simplest way to fix this issue is to disable GPU acceleration for Foliate, to do that.
 
-### Privacy and Ethical Considerations
+1.  Install \`Flatseal\` either by GUI or command line
+2.  Disable the **GPU acceleration** option for Foliate
+3.  Problem fixed!
 
-The use of big data in economic modeling raises important privacy and ethical questions:
+Since **Foliate** is not a very demanding software, even without GPU acceleration the whole thing runs smoothly enough for me to not search for other solutions.
 
-**Data Privacy**: Protecting individual privacy while extracting economic insights
+### MATLAB
 
-**Algorithmic Bias**: Ensuring that AI systems don't perpetuate or amplify economic inequalities
+#### Installation
 
-**Transparency**: Making complex AI models interpretable for policy purposes
+Always refer to the official installation guide for more info.
 
-**Consent and Governance**: Establishing appropriate frameworks for data use
+1. After the downloading the MATLAB installation file, unzip it with
 
-## Implications for Policy
+   \`\`\`bash
+   	unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
+   \`\`\`
 
-These technological and methodological advances will transform how economic policy is formulated and implemented.
+2. Navigate to \`matlab_R2023b_glnxa64\` directory and launch the installer with
 
-### Enhanced Forecasting Capabilities
+   \`\`\`bash
+   ./install
+   \`\`\`
 
-**Short-term Accuracy**: Real-time data and AI could dramatically improve nowcasting abilities
+3. Install MATLAB under \`/var\` directory so you have full permission, the way I do it is
 
-**Long-term Precision**: Better models of structural change could improve long-term forecasts
+   \`\`\`bash
+   /var/home/$USER/bin
+   \`\`\`
 
-**Uncertainty Quantification**: More sophisticated methods for measuring and communicating forecast uncertainty
+#### Desktop Entry
 
-**Scenario Analysis**: Rapid exploration of alternative policy scenarios
+Here is a reference for what you need to put in for the desktop entry
 
-### Personalized Policy Analysis
+\`\`\`bash
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/var/home/$USER/bin/MATLAB/R2023b/bin/matlab -desktop
+Name=MATLAB R2023b
+Icon=/var/home/$USER/bin/MATLAB/bin/glnxa64/cef_resources/matlab_icon.png
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
+StartupWMClass=sun-awt-X11-XFramePeer
+MimeType=text/x-matlab
+\`\`\`
+
+#### Libraries
+
+Although [Willi Mutschler](https://mutschler.dev/linux/fedora-post-install/#) suggests that it is better to use system libraries instead of MATLAB's shipped libraries, as it solves most issues with MATLAB. During my experiment, this is not the case as with Silverblue, MATLAB does not have the access to system level files and is unable to utilize the system libraries. Thus, there is no need to exclude the shipped packages with MATLAB, in fact, you need to copy some packages from system to MATLAB directories for Dynare to work properly, as it cannot access system level file either.
+
+### Dynare
 
-Traditional models analyze effects on representative agents. Future models could analyze distributional effects across different demographic groups, regions, and sectors.
+Dynare needs to be compiled from source on a Fedora-based system, and the method to do it is slightly different in Silverblue.
+
+#### Fundamental packages
 
-**Targeted Interventions**: Policies designed for specific populations based on detailed microdata
+In order to compile Dynare, we need to install several packages, I would recommend install these packages in a toolbox to align with the immutable approach.
 
-**Regional Policy**: Subnational models that account for local economic conditions
+\`\`\`bash
+toolbox create --container Dynare-compile
+# Enter the toolbox
+toolbox enter Dynare-compile
+\`\`\`
 
-**Sectoral Analysis**: Industry-specific policies based on detailed business data
+Install all the packages inside this toolbox
 
-### Real-Time Policy Adjustment
+\`\`\`bash
+# Minimal packages (use --disable-doc and --disable-octave flags)
+sudo dnf install -y gcc gcc-g++ gfortran boost-devel gsl-devel lapack lapack-devel matio-devel openblas openblas-devel suitesparse-devel bison flex make autoconf automake redhat-rpm-config
+# Octave packages (use --disable-doc flag)
+sudo dnf install -y octave octave-devel octave-statistics octave-io octave-optim octave-control
+# Documentation packages
+sudo dnf install -y texlive-scheme-minimal texlive-collection-publishers texlive-collection-latexextra texlive-collection-fontsextra texlive-collection-latexrecommended texlive-collection-science texlive-collection-plaingeneric texlive-lm python3-sphinx latexmk mathjax doxygen
+\`\`\`
 
-Rather than setting policies and waiting to observe effects, future systems might enable continuous policy adjustment based on real-time feedback.
+Next, compile \`solicot\` and \`x13as\`, although I am not very sure the use of \`x13as\` as it is not directly involved in the compiling. The code below are from [Dynare compiling instruction for Fedora, CentOS or RHEL on GitLab](https://git.dynare.org/Dynare/dynare#fedora-centos-or-rhel).
 
-**Algorithmic Policy**: AI systems that automatically adjust certain policy instruments
-
-**Predictive Intervention**: Early warning systems that trigger policy responses
-
-**A/B Testing**: Randomized policy experiments at scale
-
-### International Coordination
-
-Global economic challenges require coordinated responses. Future modeling capabilities could enable:
-
-**Multi-Country Models**: Detailed models of international economic linkages
-
-**Policy Spillover Analysis**: Understanding how domestic policies affect other countries
-
-**Coordinated Optimization**: Finding globally optimal policy combinations
-
-## Challenges and Risks
-
-While the future of macroeconomic modeling holds great promise, it also presents significant challenges and risks.
-
-### Technical Challenges
-
-#### Computational Complexity
-Even with improving technology, the computational demands of sophisticated models remain enormous.
-
-**Scalability**: Models need to handle increasingly large datasets and complex relationships
-
-**Speed**: Policy analysis requires rapid turnaround times
-
-**Reliability**: Models must be robust and stable across different conditions
-
-#### Model Validation
-Complex models are harder to validate and interpret:
-
-**Black Box Problem**: Neural networks and other AI methods often lack interpretability
-
-**Overfitting**: Complex models may fit historical data perfectly but fail to generalize
-
-**Causal Inference**: Distinguishing correlation from causation remains challenging
-
-### Economic and Policy Risks
-
-#### Over-Reliance on Models
-The sophistication of future models might create false confidence:
-
-**Model Uncertainty**: All models are approximations of reality
-
-**Structural Breaks**: Economic relationships can change in ways models don't anticipate
-
-**Lucas Critique**: Policy changes can alter the underlying economic relationships
-
-#### Inequality and Access
-Advanced modeling capabilities might not be equally available:
-
-**Resource Requirements**: Sophisticated models require significant computational resources
-
-**Expertise Barriers**: Few institutions have the technical expertise to develop and maintain advanced models
-
-**Democratic Accountability**: Complex models might be less transparent to the public
-
-### Social and Ethical Considerations
-
-#### Privacy and Surveillance
-The data requirements of future models raise privacy concerns:
-
-**Individual Tracking**: Detailed economic models might require invasive data collection
-
-**Government Surveillance**: Economic modeling could become a tool for social control
-
-**Commercial Exploitation**: Private companies might use economic insights for profit rather than public benefit
-
-#### Algorithmic Governance
-As models become more sophisticated, they might increasingly drive policy decisions:
-
-**Human Oversight**: Maintaining human judgment in policy-making
-
-**Democratic Legitimacy**: Ensuring that algorithmic decisions reflect democratic values
-
-**Accountability**: Clear responsibility for model-driven policy decisions
-
-## Preparing for the Future
-
-The transformation of macroeconomic modeling will require coordinated efforts across multiple dimensions.
-
-### Education and Training
-
-**Interdisciplinary Skills**: Future economists will need training in computer science, statistics, and domain expertise
-
-**Continuing Education**: Practitioners will need ongoing training to keep up with technological advances
-
-**Public Understanding**: Better public education about economic models and their limitations
-
-### Infrastructure Development
-
-**Computing Resources**: Investment in high-performance computing facilities
-
-**Data Infrastructure**: Secure, accessible data platforms for research and policy
-
-**Software Development**: Open-source tools for advanced economic modeling
-
-### Institutional Changes
-
-**Regulatory Frameworks**: New regulations for AI use in economic policy
-
-**International Standards**: Common standards for data sharing and model validation
-
-**Research Funding**: Support for interdisciplinary research in computational economics
-
-### Ethical Guidelines
-
-**Professional Standards**: Codes of conduct for economists using AI and big data
-
-**Transparency Requirements**: Standards for model documentation and disclosure
-
-**Public Participation**: Mechanisms for public input into model development and use
-
-## Conclusion
-
-The future of macroeconomic modeling stands at an inflection point. The convergence of artificial intelligence, big data, and quantum computing promises to revolutionize our ability to understand and manage economic systems. These advances offer the potential for more accurate forecasts, better policy analysis, and deeper insights into economic behavior.
-
-However, this transformation also brings significant challenges. Technical complexity, computational demands, and ethical considerations all require careful attention. The risk of over-reliance on sophisticated but imperfect models is real, as is the potential for these tools to exacerbate existing inequalities or undermine democratic governance.
-
-Success in navigating this transition will require:
-
-1. **Balanced Perspective**: Recognizing both the potential and limitations of new technologies
-2. **Interdisciplinary Collaboration**: Bringing together economists, computer scientists, statisticians, and domain experts
-3. **Ethical Framework**: Developing guidelines that ensure technology serves the public interest
-4. **Continuous Learning**: Adapting educational programs and professional development to keep pace with change
-5. **Democratic Participation**: Maintaining public oversight and accountability in an age of algorithmic governance
-
-The models of the future will be more powerful than anything we have today, but they will still be models—simplified representations of an enormously complex reality. The key to success will be using these tools wisely, maintaining appropriate humility about their limitations while leveraging their capabilities to build more prosperous and equitable societies.
-
-As we stand on the threshold of this new era, the choices we make today about research priorities, institutional structures, and ethical frameworks will shape the field of macroeconomics for generations to come. The opportunity is immense, but so is the responsibility to get it right.
-
----
-
-*What aspects of future macroeconomic modeling do you find most promising or concerning? How do you think the field should balance innovation with caution? Share your thoughts on the future of economic modeling in the comments below.*`,
+\`\`\`bash
+# compile slicot from source and put it into /home/$USER/dynare/slicot/lib/
+mkdir -p /var/home/$USER/dynare/slicot
+cd /var/home/$USER/dynare/slicot
+wget https://deb.debian.org/debian/pool/main/s/slicot/slicot_5.0+20101122.orig.tar.gz
+tar xf slicot_5.0+20101122.orig.tar.gz
+cd slicot-5.0+20101122
+make FORTRAN=gfortran OPTS="-O2 -fPIC -fdefault-integer-8" LOADER=gfortran lib
+mkdir -p /var/home/$USER/dynare/slicot/lib
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot64_pic.a #for MATLAB
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot_pic.a #for octave
+
+# compile x13as from source and put it into /usr/bin/
+mkdir -p /var/home/$USER/dynare/x13as
+cd /var/home/$USER/dynare/x13as
+wget https://www2.census.gov/software/x-13arima-seats/x13as/unix-linux/program-archives/x13as_asciisrc-v1-1-b60.tar.gz
+tar xf x13as_asciisrc-v1-1-b60.tar.gz
+sed -i "s|-static| |" makefile.gf # this removes '-static' in the makefile.gf
+make -f makefile.gf FFLAGS="-O2 -std=legacy" PROGRAM=x13as
+sudo cp x13as /usr/bin/
+\`\`\`
+
+#### Compile Dynare
+
+Once the perquisite packages are sorted, we can start to compile Dynare.
+
+\`\`\`bash
+cd /var/home/$USER/dynare
+# This uses the current unstable branch
+git clone --recurse-submodules https://git.dynare.org/dynare/dynare.git unstable
+cd unstable
+# Direct Dynare to your MATLAB path
+meson setup -Dmatlab_path=/var/home/$USER/bin/MATLAB -Dfortran_args="[ '-B', '/var/home/$USER/dynare/slicot/lib']" -Dbuildtype=debugoptimized build-matlab
+meson compile -C build-matlab
+ninja -C build-matlab
+meson install -C build-matlab
+\`\`\`
+
+These steps shall give you a nearly workable Dynare, expect now it needs the latest \`libstdc++.so.6\` and \`libstdc++.so.6.0.32\` packages shipped with the system. As I mentioned before, Silverblue makes MATLAB lack the access to use the system shipped packages, rather, we have to rely on those shipped with MATLAB.
+
+To do this, we first move the \`libstdc++.so.6\` and \`libstdc++.so.6.0.32\` packages came with MATLAB to an exclude folder and the copy-paste the one from our system into MATLAB.
+
+\`\`\`bash
+export MATLAB_ROOT=/var/home/$USER/bin/MATLAB
+cd /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+mkdir -p exclude
+mv libstdc++* exclude/
+cd /lib64
+cp libstdc++.so.6 /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+cp libstdc++.so.6.0.32 /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+\`\`\`
+
+This should give you a running Dynare, simply add Dynare into the directory in MATLAB after.
+
+### LaTeX
+
+I use LaTeX with VSCode for all my writings, but to use this combo is a bit harder in Silverblue. My approach is to install LaTeX in a toolbox and then let VSCode (and LaTeX Workshop) communicate with LaTeX stored inside the toolbox.
+
+#### Install TeX Live
+
+\`\`\`bash
+# Create the LaTeX container
+toolbox create --container LaTeX
+toolbox enter LaTeX
+
+# Add the Tex Live repository if needed
+sudo dnf config-manager --add-repo https://mirrors.tuna.tsinghua.edu.cn/texlive/fedora/
+
+# Instal the package
+sudo dnf install texlive texlive-scheme-full texlive-extra-utils
+
+# Update the packages
+sudo dnf update texlive*
+
+# Verify the installation
+tex --version
+\`\`\`
+
+#### VSCode and LaTeX Workshop extension
+
+Simply use the flatpak to install VSCode, the community maintained version works fine for me, or you could work a way to install the official one by layering or through toolbox.
+
+After installing VSCode, use the extension shop to install LaTeX Workshop extension.
+
+Once LaTeX Workshop is install, we need to configure it so that it can communicate with LaTeX in the toolbox, for that, we need to edit the \`settings.json\` of VSCode
+
+Change the corresponding entries in the \`settings.json\` to be
+
+\`\`\`json
+// Only if you use LaTeX Utilities extension for word count etc.
+"latex-utilities.countWord.path": "host-spawn",
+"latex-utilities.countWord.args": ["toolbox", "run", "--container", "LaTeX", "texcount"],
+
+// Required for LaTeX Workshop
+"latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatexmk",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "latexmk",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-xelatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pdflatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+        },
+        {
+            "name": "bibtex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "bibtex",
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "Rscript",
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "julia",
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2texminted",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "julia",
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2tex",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pweave",
+                "-f",
+                "tex",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pnw2texminted",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "pweave",
+                "-f",
+                "texminted",
+                "%DOC_EXT%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tectonic",
+            "command": "host-spawn",
+            "args": [
+                "toolbox",
+                "run",
+                "--container",
+                "LaTeX",
+                "tectonic",
+                "--synctex",
+                "--keep-logs",
+                "%DOC%.tex"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.linting.chktex.enabled": true,
+    "latex-workshop.linting.chktex.exec.path": "host-spawn",
+    "latex-workshop.linting.chktex.exec.args": [
+        "toolbox",
+        "run",
+        "--container",
+        "LaTeX",
+        "chktex",
+        "-wall",
+        "-n22",
+        "-n30",
+        "-e16",
+        "-q"
+    ],
+\`\`\`
+
+This would allow LaTeX Workshop to communicate with LaTeX.`,
     },
   ]
 
@@ -1365,207 +552,139 @@ As we stand on the threshold of this new era, the choices we make today about re
 
   if (!post) {
     return (
-      <motion.div className='min-h-screen pb-12 px-6 flex items-center justify-center'>
+      <div className='min-h-screen flex items-center justify-center'>
         <div className='text-center'>
-          <h1 className='text-2xl text-black mb-4'>Post Not Found</h1>
-          <Button
-            onClick={onBack}
-            className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white'
-          >
+          <h1 className='text-2xl font-bold mb-4'>Post not found</h1>
+          <Button onClick={onBack}>
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
           </Button>
         </div>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <motion.div
-      className='min-h-screen pb-12 px-6'
-      initial={hasAnimated ? false : { opacity: 0, y: 10 }}
-      animate={hasAnimated ? false : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      style={{ willChange: hasAnimated ? 'auto' : 'transform, opacity' }}
-    >
-      <div className='max-w-4xl mx-auto'>
+    <div className='min-h-screen pb-12'>
+      <div className='max-w-4xl mx-auto px-6'>
         {/* Header */}
         <motion.div
-          initial={hasAnimated ? false : { opacity: 0, y: 20 }}
-          animate={hasAnimated ? false : { opacity: 1, y: 0 }}
-          transition={{
-            duration: hasAnimated ? 0 : 0.4,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className='mb-8'
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className='py-8'
         >
           <Button
-            onClick={onBack}
             variant='ghost'
-            className='mb-6 text-black hover:text-[#6A5ACD]'
+            onClick={onBack}
+            className='mb-8 text-black hover:bg-gray-100'
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
           </Button>
 
-          <div className='mb-6'>
-            <h1 className='text-4xl text-black mb-4 leading-tight'>
+          {/* Article Header */}
+          <header className='mb-8'>
+            <h1 
+              className='text-black mb-6'
+              style={{
+                fontSize: 'var(--academic-font-size-page-title)',
+                fontWeight: 'var(--academic-font-weight-page-title)',
+                lineHeight: 'var(--academic-line-height-tight)'
+              }}
+            >
               {post.title}
             </h1>
 
-            <div className='flex items-center justify-between mb-4'>
-              <div className='flex items-center space-x-4 text-black'>
-                <div className='flex items-center space-x-1'>
-                  <Calendar className='w-4 h-4' />
-                  <span>
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </span>
-                </div>
-                <div className='flex items-center space-x-1'>
-                  <Clock className='w-4 h-4' />
-                  <span>{post.readTime}</span>
-                </div>
+            {/* Article Meta */}
+            <div className='flex flex-wrap items-center gap-6 mb-6'>
+              <div className='flex items-center gap-2 text-gray-600'>
+                <Calendar className='w-4 h-4' />
+                <span style={{ fontSize: 'var(--academic-font-size-metadata)' }}>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </span>
               </div>
-
-              <div className='flex items-center space-x-2'>
-                <Button
-                  variant='ghost'
-                  size='sm'
-                  onClick={() => setLiked(!liked)}
-                  className={`text-black hover:text-[#6A5ACD] ${liked ? 'text-red-600' : ''}`}
-                >
-                  <ThumbsUp
-                    className={`w-4 h-4 ${liked ? 'fill-current' : ''}`}
-                  />
-                </Button>
-                <Button
-                  variant='ghost'
-                  size='sm'
-                  onClick={() => setBookmarked(!bookmarked)}
-                  className={`text-black hover:text-[#6A5ACD] ${bookmarked ? 'text-yellow-600' : ''}`}
-                >
-                  <Bookmark
-                    className={`w-4 h-4 ${bookmarked ? 'fill-current' : ''}`}
-                  />
-                </Button>
-                <Button
-                  variant='ghost'
-                  size='sm'
-                  className='text-black hover:text-[#6A5ACD]'
-                >
-                  <Share2 className='w-4 h-4' />
-                </Button>
+              <div className='flex items-center gap-2 text-gray-600'>
+                <Clock className='w-4 h-4' />
+                <span style={{ fontSize: 'var(--academic-font-size-metadata)' }}>
+                  {post.readTime}
+                </span>
               </div>
             </div>
 
             {/* Tags */}
-            <div className='flex flex-wrap gap-2 mb-6'>
-              {post.tags.map((tag, index) => (
+            <div className='flex flex-wrap gap-2 mb-8'>
+              {post.tags.map((tag) => (
                 <Badge
-                  key={index}
-                  variant='outline'
-                  className='bg-[#f3f1ff] text-[#6A5ACD] border-[#d6ceff]'
+                  key={tag}
+                  variant='secondary'
+                  className='bg-gray-100 text-gray-700 hover:bg-gray-200'
                 >
                   {tag}
                 </Badge>
               ))}
             </div>
-
-            {/* Excerpt */}
-            <p className='text-xl text-black leading-relaxed italic border-l-4 border-[#b8a9ff] pl-6'>
-              {post.excerpt}
-            </p>
-          </div>
+          </header>
         </motion.div>
 
-        {/* Content */}
+        {/* Article Content */}
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className='prose prose-lg max-w-none'
+          style={{
+            fontSize: 'var(--academic-font-size-body)',
+            lineHeight: 'var(--academic-line-height-normal)',
+            color: 'var(--academic-text-primary)'
+          }}
+        >
+          <MarkdownRenderer content={post.content} />
+        </motion.article>
+
+        {/* Article Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className='prose prose-lg max-w-none mb-12'
+          animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className='mt-12 pt-8 border-t border-gray-200'
         >
-          <div className='p-8 border border-[#e9e5ff] rounded-lg bg-white/50'>
-            <div
-              className='text-black leading-relaxed whitespace-pre-line'
-              style={{ lineHeight: '1.7' }}
-            >
-              <MarkdownRenderer content={post.content} className='' />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Footer Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className='border-t border-[#d6ceff] pt-8'
-        >
-          <div className='flex items-center justify-between mb-8'>
-            <div className='flex items-center space-x-4'>
-              <Button
-                onClick={() => setLiked(!liked)}
-                variant={liked ? 'default' : 'outline'}
-                className={
-                  liked
-                    ? 'bg-red-600 hover:bg-red-700 text-white'
-                    : 'border-red-300 text-red-600 hover:bg-red-50'
-                }
-              >
-                <ThumbsUp className='w-4 h-4 mr-2' />
-                {liked ? 'Liked' : 'Like'}
-              </Button>
-
-              <Button
-                onClick={() => setBookmarked(!bookmarked)}
-                variant={bookmarked ? 'default' : 'outline'}
-                className={
-                  bookmarked
-                    ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
-                    : 'border-yellow-300 text-yellow-600 hover:bg-yellow-50'
-                }
-              >
-                <Bookmark className='w-4 h-4 mr-2' />
-                {bookmarked ? 'Bookmarked' : 'Bookmark'}
-              </Button>
-
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-4'>
               <Button
                 variant='outline'
-                className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
+                size='sm'
+                onClick={() => setLiked(!liked)}
+                className={`${
+                  liked ? 'bg-blue-50 text-blue-600 border-blue-200' : ''
+                }`}
               >
-                <Share2 className='w-4 h-4 mr-2' />
-                Share
+                <ThumbsUp className={`w-4 h-4 mr-2 ${liked ? 'fill-current' : ''}`} />
+                {liked ? 'Liked' : 'Like'}
+              </Button>
+              <Button
+                variant='outline'
+                size='sm'
+                onClick={() => setBookmarked(!bookmarked)}
+                className={`${
+                  bookmarked ? 'bg-yellow-50 text-yellow-600 border-yellow-200' : ''
+                }`}
+              >
+                <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
+                {bookmarked ? 'Saved' : 'Save'}
               </Button>
             </div>
-          </div>
-
-          {/* Navigation */}
-          <div className='flex justify-between items-center'>
-            <Button
-              onClick={onBack}
-              variant='outline'
-              className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
-            >
-              <ArrowLeft className='w-4 h-4 mr-2' />
-              Back to Blog
+            <Button variant='outline' size='sm'>
+              <Share2 className='w-4 h-4 mr-2' />
+              Share
             </Button>
-
-            <div className='flex space-x-2'>
-              <Button className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white'>
-                Previous Post
-              </Button>
-              <Button className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white'>
-                Next Post
-              </Button>
-            </div>
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   )
 }
