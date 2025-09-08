@@ -1,0 +1,13 @@
+{
+  "icons": {
+    "favicon": "/favicon.svg",
+    "favicon-png": "/favicon.png",
+    "og-image": "/og-image.png",
+    "twitter-image": "/twitter-image.png"
+  },
+  "fonts": {
+    "primary": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  },
+  "critical-assets": ["/favicon.svg", "/favicon.png"],
+  "preload-assets": ["/favicon.svg"]
+}

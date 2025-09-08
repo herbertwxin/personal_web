@@ -1,0 +1,2123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  /* Custom purple-blue accent tones (#6A5ACD) */
+  --muted-purple-50: rgba(106, 90, 205, 0.05);
+  --muted-purple-100: rgba(106, 90, 205, 0.1);
+  --muted-purple-200: rgba(106, 90, 205, 0.2);
+  --muted-purple-300: rgba(106, 90, 205, 0.3);
+  --muted-purple-600: rgb(106, 90, 205);
+  --muted-purple-700: rgb(90, 76, 175);
+  
+  /* Background Texture System Configuration */
+  --texture-opacity: 0.03;
+  --texture-scale: 1;
+  --texture-pattern: noise;
+  --texture-color: rgba(106, 90, 205, 0.8);
+  --texture-blend-mode: multiply;
+  --texture-animation-duration: 20s;
+  
+  /* Academic Typography System */
+  --academic-font-size-page-title: 2.5rem;
+  --academic-font-size-section-header: 1.75rem;
+  --academic-font-size-entry-title: 1.25rem;
+  --academic-font-size-body: 1rem;
+  --academic-font-size-metadata: 0.875rem;
+  --academic-font-size-caption: 0.75rem;
+  
+  --academic-font-weight-page-title: 400;
+  --academic-font-weight-section-header: 500;
+  --academic-font-weight-entry-title: 500;
+  --academic-font-weight-body: 400;
+  --academic-font-weight-metadata: 400;
+  --academic-font-weight-caption: 400;
+  
+  --academic-line-height-tight: 1.2;
+  --academic-line-height-normal: 1.5;
+  --academic-line-height-relaxed: 1.6;
+  
+  /* Academic Spacing System */
+  --academic-spacing-xs: 0.25rem;
+  --academic-spacing-sm: 0.5rem;
+  --academic-spacing-md: 0.75rem;
+  --academic-spacing-lg: 1rem;
+  --academic-spacing-xl: 1.5rem;
+  --academic-spacing-2xl: 2rem;
+  --academic-spacing-3xl: 3rem;
+  
+  /* Academic List Layout Variables */
+  --academic-list-item-spacing: var(--academic-spacing-lg);
+  --academic-list-section-spacing: var(--academic-spacing-2xl);
+  --academic-hanging-indent: 2rem;
+  --academic-nested-indent: 1.5rem;
+  --academic-metadata-spacing: var(--academic-spacing-sm);
+  
+  /* Academic Color Scheme */
+  --academic-text-primary: var(--foreground);
+  --academic-text-secondary: var(--muted-foreground);
+  --academic-text-accent: var(--muted-purple-600);
+  --academic-border-subtle: rgba(0, 0, 0, 0.08);
+  --academic-background-subtle: rgba(0, 0, 0, 0.02);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+  
+  /* Dark mode texture adjustments */
+  --texture-opacity: 0.02;
+  --texture-color: rgba(255, 255, 255, 0.6);
+  
+  /* Academic Dark Mode Adjustments */
+  --academic-text-primary: var(--foreground);
+  --academic-text-secondary: var(--muted-foreground);
+  --academic-text-accent: oklch(0.7 0.15 270);
+  --academic-border-subtle: rgba(255, 255, 255, 0.08);
+  --academic-background-subtle: rgba(255, 255, 255, 0.02);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  /* Prevent layout shifts during font loading */
+  font-display: swap;
+}
+
+/* Performance optimizations for smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  overscroll-behavior: bounce;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent layout shifts from margin collapsing */
+  margin: 0;
+  padding: 0;
+  /* Ensure consistent box-sizing */
+  box-sizing: border-box;
+}
+
+/* Ensure all elements use border-box sizing to prevent layout shifts */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Optimize transforms for better performance and prevent layout shifts */
+[class*='transform'],
+[style*='transform'] {
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* Prevent subpixel rendering issues that can cause layout shifts */
+  backface-visibility: hidden;
+  /* Force hardware acceleration to prevent layout recalculations */
+  transform: translateZ(0);
+}
+
+/* Modern Glass Morphism Effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(106, 90, 205, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(106, 90, 205, 0.1);
+  box-shadow: 0 8px 32px rgba(106, 90, 205, 0.1);
+}
+
+/* Custom scrollbar for modern theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(106, 90, 205, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(106, 90, 205, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(106, 90, 205, 0.4);
+}
+
+/* Enhanced Dialog Overlay Styles for Better Cross-Browser Support */
+[data-slot='dialog-overlay'] {
+  /* Enhanced backdrop blur with multiple fallbacks */
+  backdrop-filter: blur(4px) saturate(1.1);
+  -webkit-backdrop-filter: blur(4px) saturate(1.1);
+  
+  /* Fallback for browsers without backdrop-filter support */
+  background-color: rgba(0, 0, 0, 0.6);
+  
+  /* Ensure proper stacking and interaction */
+  pointer-events: auto;
+  touch-action: none;
+  
+  /* Performance optimizations */
+  will-change: backdrop-filter, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  
+  /* Ensure overlay covers entire viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Enhanced Dialog Content Styles */
+[data-slot='dialog-content'] {
+  /* Ensure content is properly positioned above overlay */
+  pointer-events: auto;
+  
+  /* Performance optimizations for animations */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  
+  /* Ensure proper focus management */
+  outline: none;
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(4px)) {
+  [data-slot='dialog-overlay'] {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  [data-slot='dialog-overlay'],
+  [data-slot='dialog-content'] {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Custom navigation button styles to prevent color changes */
+.navigation-button {
+  color: #ffffff !important;
+  background-color: transparent !important;
+  transform: translateZ(0); /* Force hardware acceleration */
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.navigation-button:active,
+.navigation-button:focus,
+.navigation-button:focus-visible,
+.navigation-button:hover {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+.navigation-button[data-state='active'] {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.navigation-button[data-state='inactive'] {
+  color: #ffffff !important;
+  opacity: 0.7 !important;
+}
+
+/* Additional performance optimizations for navigation */
+nav {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* ========================================
+   Responsive Navigation Positioning System
+   ======================================== */
+
+/* Base navigation positioning that prevents layout shifts */
+nav {
+  /* Performance optimizations to prevent layout shifts */
+  will-change: transform;
+  backface-visibility: hidden;
+  contain: layout style paint;
+  
+  /* Let Tailwind classes handle positioning */
+}
+
+/* Mobile-first responsive navigation positioning */
+@media (max-width: 639px) {
+  nav > div {
+    /* Mobile navigation container optimizations */
+    max-width: 95vw;
+    min-width: 320px;
+    /* Prevent horizontal overflow on small screens */
+    overflow: hidden;
+    /* Ensure proper touch targets on mobile */
+    min-height: 44px;
+  }
+  
+  /* Mobile-specific spacing adjustments */
+  nav button {
+    /* Ensure adequate touch targets */
+    min-height: 32px;
+    min-width: 32px;
+  }
+}
+
+/* Small mobile devices (iPhone SE, etc.) */
+@media (max-width: 374px) {
+  nav > div {
+    /* Compact navigation for very small screens */
+    max-width: 92vw;
+    min-width: 280px;
+  }
+}
+
+/* Tablet positioning */
+@media (min-width: 640px) and (max-width: 1023px) {
+  nav > div {
+    /* Tablet navigation container */
+    max-width: 90vw;
+    min-width: 480px;
+  }
+}
+
+/* Desktop and larger screens */
+@media (min-width: 1024px) {
+  nav > div {
+    /* Desktop navigation container */
+    max-width: 700px;
+    min-width: 600px;
+  }
+}
+
+/* Let Tailwind classes handle all nav positioning */
+
+/* ========================================
+   Main Content Responsive Spacing System
+   ======================================== */
+
+/* Ensure main content has proper spacing relative to navigation */
+main {
+  /* Base content positioning */
+  position: relative;
+  z-index: 1;
+  
+  /* Performance optimizations */
+  contain: layout style;
+  will-change: transform;
+  
+  /* Let Tailwind classes handle padding-top */
+}
+
+/* ========================================
+   Navigation Clearance and Visual Hierarchy
+   ======================================== */
+
+/* Ensure navigation never overlaps content */
+nav + main,
+nav ~ main {
+  /* Minimum clearance to prevent overlap */
+  min-height: calc(100vh - 4rem);
+  
+  /* Ensure content starts below navigation */
+  margin-top: 0;
+  
+  /* Let Tailwind classes handle padding-top */
+}
+
+/* Dynamic navigation height calculation */
+:root {
+  --nav-height: 48px;
+  --nav-top-offset: 1rem;
+  --content-clearance: calc(var(--nav-height) + var(--nav-top-offset) + 0.5rem);
+}
+
+/* Responsive navigation height variables */
+@media (max-width: 639px) {
+  :root {
+    --nav-height: 44px;
+    --nav-top-offset: 0.5rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --nav-height: 46px;
+    --nav-top-offset: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --nav-height: 48px;
+    --nav-top-offset: 1rem;
+  }
+}
+
+/* ========================================
+   Mobile-Specific Optimizations
+   ======================================== */
+
+/* iOS Safari viewport handling */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 639px) {
+    nav {
+      /* Let Tailwind classes handle iOS Safari positioning */
+    }
+    
+    main {
+      /* Let Tailwind classes handle padding-top for iOS safe areas */
+    }
+  }
+}
+
+/* Android Chrome address bar handling */
+@media (max-width: 639px) {
+  @supports (height: 100dvh) {
+    main {
+      /* Use dynamic viewport height when available */
+      min-height: calc(100dvh - var(--content-clearance));
+    }
+  }
+}
+
+/* Landscape mobile orientation */
+@media (max-width: 1023px) and (orientation: landscape) {
+  nav {
+    /* Reduce top spacing in landscape mode */
+    top: 0.25rem;
+  }
+  
+  main {
+    /* Let Tailwind classes handle padding-top for landscape */
+  }
+}
+
+/* ========================================
+   Accessibility and Performance
+   ======================================== */
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  nav {
+    /* Ensure navigation is clearly visible */
+    border: 2px solid currentColor;
+  }
+  
+  main {
+    /* Let Tailwind classes handle padding-top for high contrast */
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  nav {
+    /* Disable transform animations */
+    transition: none !important;
+  }
+  
+  nav * {
+    /* Disable all navigation animations */
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Focus management for keyboard navigation */
+nav:focus-within {
+  /* Ensure focused navigation is clearly visible */
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Print media adjustments */
+@media print {
+  nav {
+    /* Hide navigation in print */
+    display: none !important;
+  }
+  
+  main {
+    /* Let Tailwind classes handle padding for print */
+  }
+}
+
+/* Reduce layout thrashing during scroll and animations */
+.motion-div {
+  contain: layout style paint;
+  /* Prevent layout shifts during motion animations */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Ensure motion elements don't affect document flow */
+  position: absolute;
+}
+
+/* Math rendering styles */
+.math-display {
+  margin: 1.5em 0;
+  text-align: center;
+  font-family: serif;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+.math-inline {
+  font-family: serif;
+  font-style: italic;
+}
+
+/* Markdown content styling */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  line-height: 1.2;
+}
+
+.markdown-content h1 {
+  border-bottom: 2px solid rgba(106, 90, 205, 0.2);
+  padding-bottom: 0.5em;
+}
+
+.markdown-content h2 {
+  border-bottom: 1px solid rgba(106, 90, 205, 0.15);
+  padding-bottom: 0.3em;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.markdown-content li {
+  margin: 0.5em 0;
+}
+
+.markdown-content code {
+  background: rgba(106, 90, 205, 0.08);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+.markdown-content pre {
+  background: #1a1a1a;
+  color: #00ff00;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid rgba(106, 90, 205, 0.3);
+  padding-left: 1em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #666;
+}
+
+/* ========================================
+   Background Texture System
+   ======================================== */
+
+/* Base texture container that will be applied to body or app container */
+.texture-background {
+  position: relative;
+  isolation: isolate;
+  /* Prevent texture from affecting content layout */
+  contain: layout style paint;
+  /* Ensure texture doesn't cause layout shifts */
+  overflow: hidden;
+}
+
+/* Primary noise texture using layered radial gradients */
+.texture-background::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--texture-opacity);
+  mix-blend-mode: var(--texture-blend-mode);
+  
+  /* Multi-layered noise pattern using radial gradients */
+  background-image: 
+    /* Fine grain layer */
+    radial-gradient(circle at 25% 25%, var(--texture-color) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, var(--texture-color) 1px, transparent 1px),
+    radial-gradient(circle at 50% 10%, var(--texture-color) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 10% 50%, var(--texture-color) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 90% 30%, var(--texture-color) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 30% 90%, var(--texture-color) 0.5px, transparent 0.5px),
+    /* Medium grain layer */
+    radial-gradient(circle at 20% 80%, var(--texture-color) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 80% 20%, var(--texture-color) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 40% 40%, var(--texture-color) 1px, transparent 1px),
+    radial-gradient(circle at 60% 60%, var(--texture-color) 1px, transparent 1px);
+  
+  background-size: 
+    /* Fine grain sizes */
+    4px 4px, 6px 6px, 3px 3px, 5px 5px, 7px 7px, 4px 4px,
+    /* Medium grain sizes */
+    12px 12px, 14px 14px, 8px 8px, 10px 10px;
+  
+  background-position:
+    /* Fine grain positions */
+    0 0, 2px 2px, 1px 3px, 3px 1px, 4px 4px, 2px 5px,
+    /* Medium grain positions */
+    0 0, 6px 6px, 4px 2px, 2px 4px;
+  
+  /* Performance optimizations - prevent layout shifts */
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Ensure texture doesn't affect document flow */
+  contain: strict;
+  
+  /* Subtle animation for organic feel */
+  animation: textureShift var(--texture-animation-duration) infinite linear;
+}
+
+/* Secondary texture layer for additional depth */
+.texture-background::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: calc(var(--texture-opacity) * 0.6);
+  mix-blend-mode: var(--texture-blend-mode);
+  
+  /* Larger, more sparse noise pattern */
+  background-image: 
+    radial-gradient(circle at 15% 35%, var(--texture-color) 2px, transparent 2px),
+    radial-gradient(circle at 85% 65%, var(--texture-color) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 45% 15%, var(--texture-color) 1px, transparent 1px),
+    radial-gradient(circle at 65% 85%, var(--texture-color) 1px, transparent 1px);
+  
+  background-size: 20px 20px, 24px 24px, 16px 16px, 18px 18px;
+  background-position: 0 0, 10px 10px, 8px 4px, 4px 8px;
+  
+  /* Performance optimizations - prevent layout shifts */
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Ensure texture doesn't affect document flow */
+  contain: strict;
+  
+  /* Counter-animation for subtle movement */
+  animation: textureShiftReverse calc(var(--texture-animation-duration) * 1.5) infinite linear;
+}
+
+/* Keyframes for subtle texture animation - optimized to prevent layout shifts */
+@keyframes textureShift {
+  0% {
+    transform: translate(0, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+  25% {
+    transform: translate(0.5px, 0.5px) scale(var(--texture-scale)) translateZ(0);
+  }
+  50% {
+    transform: translate(1px, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+  75% {
+    transform: translate(0.5px, -0.5px) scale(var(--texture-scale)) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+}
+
+@keyframes textureShiftReverse {
+  0% {
+    transform: translate(0, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+  25% {
+    transform: translate(-0.5px, 0.5px) scale(var(--texture-scale)) translateZ(0);
+  }
+  50% {
+    transform: translate(-1px, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+  75% {
+    transform: translate(-0.5px, -0.5px) scale(var(--texture-scale)) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) scale(var(--texture-scale)) translateZ(0);
+  }
+}
+
+/* Alternative texture patterns for theming */
+.texture-pattern-grain .texture-background::before {
+  background-image: 
+    /* Grain pattern using smaller, denser dots */
+    radial-gradient(circle at 20% 30%, var(--texture-color) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 70% 70%, var(--texture-color) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 40% 10%, var(--texture-color) 0.3px, transparent 0.3px),
+    radial-gradient(circle at 10% 60%, var(--texture-color) 0.3px, transparent 0.3px),
+    radial-gradient(circle at 90% 40%, var(--texture-color) 0.3px, transparent 0.3px),
+    radial-gradient(circle at 60% 90%, var(--texture-color) 0.3px, transparent 0.3px);
+  
+  background-size: 3px 3px, 4px 4px, 2px 2px, 3px 3px, 4px 4px, 3px 3px;
+}
+
+.texture-pattern-dots .texture-background::before {
+  background-image: 
+    /* Dot pattern using regular spacing */
+    radial-gradient(circle at 50% 50%, var(--texture-color) 1px, transparent 1px);
+  
+  background-size: 8px 8px;
+  background-position: 0 0;
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .texture-background::before,
+  .texture-background::after {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  .texture-background::before,
+  .texture-background::after {
+    opacity: calc(var(--texture-opacity) * 0.5);
+  }
+}
+
+/* Performance optimization for low-end devices */
+@media (max-width: 768px) {
+  .texture-background::after {
+    display: none; /* Remove secondary layer on mobile for performance */
+  }
+  
+  .texture-background::before {
+    background-image: 
+      /* Simplified pattern for mobile */
+      radial-gradient(circle at 25% 25%, var(--texture-color) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, var(--texture-color) 0.5px, transparent 0.5px);
+    
+    background-size: 6px 6px, 4px 4px;
+    animation-duration: calc(var(--texture-animation-duration) * 2); /* Slower animation */
+  }
+  
+  /* Optimize animated elements for mobile */
+  .motion-div {
+    will-change: auto; /* Reduce GPU usage on mobile */
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .texture-background::before {
+    background-size: 
+      /* Slightly reduced complexity for tablets */
+      5px 5px, 7px 7px, 4px 4px, 6px 6px, 8px 8px, 5px 5px,
+      14px 14px, 16px 16px, 10px 10px, 12px 12px;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .texture-background::before,
+  .texture-background::after {
+    /* Adjust texture for high DPI displays */
+    background-size: 
+      /* Scale down patterns for crisp rendering on retina displays */
+      3px 3px, 4px 4px, 2px 2px, 3px 3px, 4px 4px, 3px 3px,
+      8px 8px, 10px 10px, 6px 6px, 7px 7px;
+  }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+  .texture-background::before {
+    background-size: 
+      /* Larger patterns for ultra-wide screens */
+      6px 6px, 8px 8px, 5px 5px, 7px 7px, 9px 9px, 6px 6px,
+      16px 16px, 18px 18px, 12px 12px, 14px 14px;
+  }
+}
+
+/* Utility classes for easy texture configuration */
+.texture-subtle {
+  --texture-opacity: 0.02;
+}
+
+.texture-normal {
+  --texture-opacity: 0.03;
+}
+
+.texture-prominent {
+  --texture-opacity: 0.05;
+}
+
+.texture-scale-small {
+  --texture-scale: 0.8;
+}
+
+.texture-scale-large {
+  --texture-scale: 1.2;
+}
+
+.texture-static {
+  --texture-animation-duration: 0s;
+}
+
+/* ========================================
+   Accessibility Enhancements
+   ======================================== */
+
+/* Skip Links Styles */
+.skip-links {
+  /* Ensure skip links are accessible but hidden by default */
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-links:focus-within {
+  /* Show skip links when focused */
+  position: fixed;
+  left: 6px;
+  top: 6px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  z-index: 999999;
+  background: white;
+  border: 2px solid #005fcc;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced Focus Styles for Better Keyboard Navigation */
+*:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Specific focus styles for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 95, 204, 0.1);
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --academic-text-primary: #000000;
+    --academic-text-secondary: #333333;
+    --academic-text-accent: #0066cc;
+    --academic-border-subtle: #666666;
+    --academic-background-subtle: #f5f5f5;
+  }
+  
+  .dark {
+    --academic-text-primary: #ffffff;
+    --academic-text-secondary: #cccccc;
+    --academic-text-accent: #66b3ff;
+    --academic-border-subtle: #999999;
+    --academic-background-subtle: #1a1a1a;
+  }
+  
+  /* Ensure sufficient contrast for all text elements */
+  .academic-list-item-title,
+  .academic-section-header {
+    color: var(--academic-text-primary) !important;
+  }
+  
+  .academic-list-item-metadata,
+  .academic-inline-metadata {
+    color: var(--academic-text-secondary) !important;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus,
+.sr-only:active {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ========================================
+   Academic List Responsive Components
+   ======================================== */
+
+/* Base Academic List Container */
+.academic-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--academic-list-item-spacing);
+  width: 100%;
+  max-width: 100%;
+  
+  /* Performance optimizations */
+  contain: layout style;
+  will-change: transform;
+  
+  /* Prevent layout shifts */
+  min-height: 0;
+  
+  /* Accessibility enhancements */
+  scroll-margin-top: 2rem;
+}
+
+/* Academic List Item Base Styles */
+.academic-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--academic-metadata-spacing);
+  padding: var(--academic-spacing-md) 0;
+  border-bottom: 1px solid var(--academic-border-subtle);
+  
+  /* Performance optimizations */
+  contain: layout style;
+  
+  /* Prevent layout shifts */
+  min-height: 0;
+  
+  /* Accessibility enhancements */
+  scroll-margin-top: 2rem;
+  position: relative;
+}
+
+.academic-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Enhanced focus styles for list items */
+.academic-list-item:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+  background-color: rgba(0, 95, 204, 0.05);
+  border-radius: 4px;
+}
+
+/* Keyboard navigation enhancement */
+.academic-list-item[tabindex="0"] {
+  cursor: pointer;
+}
+
+.academic-list-item[tabindex="0"]:hover {
+  background-color: rgba(0, 95, 204, 0.02);
+  border-radius: 4px;
+}
+
+/* Academic List Item Title */
+.academic-list-item-title {
+  font-size: var(--academic-font-size-entry-title);
+  font-weight: var(--academic-font-weight-entry-title);
+  line-height: var(--academic-line-height-tight);
+  color: var(--academic-text-primary);
+  margin: 0;
+  
+  /* Hanging indent for academic citations */
+  text-indent: calc(-1 * var(--academic-hanging-indent));
+  padding-left: var(--academic-hanging-indent);
+}
+
+/* Academic List Item Content */
+.academic-list-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--academic-spacing-sm);
+  padding-left: var(--academic-hanging-indent);
+}
+
+/* Academic List Item Metadata */
+.academic-list-item-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--academic-spacing-sm);
+  font-size: var(--academic-font-size-metadata);
+  font-weight: var(--academic-font-weight-metadata);
+  color: var(--academic-text-secondary);
+  line-height: var(--academic-line-height-normal);
+}
+
+/* Academic List Item Actions */
+.academic-list-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--academic-spacing-sm);
+  padding-left: var(--academic-hanging-indent);
+  margin-top: var(--academic-spacing-sm);
+}
+
+/* Academic Section Headers */
+.academic-section-header {
+  font-size: var(--academic-font-size-section-header);
+  font-weight: var(--academic-font-weight-section-header);
+  line-height: var(--academic-line-height-tight);
+  color: var(--academic-text-primary);
+  margin: var(--academic-list-section-spacing) 0 var(--academic-spacing-lg) 0;
+  padding-bottom: var(--academic-spacing-sm);
+  border-bottom: 2px solid var(--academic-border-subtle);
+}
+
+.academic-section-header:first-child {
+  margin-top: 0;
+}
+
+/* Academic Nested Lists */
+.academic-nested-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--academic-spacing-sm);
+  padding-left: var(--academic-nested-indent);
+  margin-top: var(--academic-spacing-sm);
+}
+
+.academic-nested-list-item {
+  font-size: var(--academic-font-size-body);
+  font-weight: var(--academic-font-weight-body);
+  line-height: var(--academic-line-height-normal);
+  color: var(--academic-text-primary);
+}
+
+/* Academic Inline Metadata */
+.academic-inline-metadata {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--academic-spacing-xs);
+  font-size: var(--academic-font-size-metadata);
+  color: var(--academic-text-secondary);
+}
+
+.academic-inline-metadata::before {
+  content: "•";
+  color: var(--academic-text-secondary);
+  margin: 0 var(--academic-spacing-xs);
+}
+
+.academic-inline-metadata:first-child::before {
+  display: none;
+}
+
+/* Academic Badges */
+.academic-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--academic-spacing-xs) / 2) var(--academic-spacing-sm);
+  font-size: var(--academic-font-size-caption);
+  font-weight: var(--academic-font-weight-caption);
+  background: var(--academic-background-subtle);
+  color: var(--academic-text-secondary);
+  border: 1px solid var(--academic-border-subtle);
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* ========================================
+   Responsive Breakpoints for Academic Lists
+   ======================================== */
+
+/* Mobile First (320px - 639px) */
+@media (max-width: 639px) {
+  :root {
+    /* Adjust spacing for mobile */
+    --academic-list-item-spacing: var(--academic-spacing-md);
+    --academic-list-section-spacing: var(--academic-spacing-xl);
+    --academic-hanging-indent: 1rem;
+    --academic-nested-indent: 1rem;
+    
+    /* Adjust typography for mobile readability */
+    --academic-font-size-page-title: 2rem;
+    --academic-font-size-section-header: 1.5rem;
+    --academic-font-size-entry-title: 1.125rem;
+  }
+  
+  .academic-list {
+    gap: var(--academic-spacing-md);
+    padding: 0 var(--academic-spacing-sm);
+  }
+  
+  .academic-list-item {
+    padding: var(--academic-spacing-sm) 0;
+  }
+  
+  .academic-list-item-title {
+    /* Reduce hanging indent on mobile */
+    text-indent: calc(-1 * var(--academic-hanging-indent));
+    padding-left: var(--academic-hanging-indent);
+    font-size: var(--academic-font-size-entry-title);
+  }
+  
+  .academic-list-item-content {
+    padding-left: var(--academic-hanging-indent);
+  }
+  
+  .academic-list-item-metadata {
+    flex-direction: column;
+    gap: var(--academic-spacing-xs);
+  }
+  
+  .academic-list-item-actions {
+    flex-direction: column;
+    padding-left: var(--academic-hanging-indent);
+  }
+  
+  .academic-section-header {
+    font-size: var(--academic-font-size-section-header);
+    margin: var(--academic-spacing-xl) 0 var(--academic-spacing-md) 0;
+  }
+  
+  .academic-nested-list {
+    padding-left: var(--academic-nested-indent);
+  }
+  
+  /* Stack inline metadata vertically on mobile */
+  .academic-inline-metadata {
+    display: block;
+    margin-bottom: var(--academic-spacing-xs);
+  }
+  
+  .academic-inline-metadata::before {
+    display: none;
+  }
+}
+
+/* Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+  :root {
+    --academic-hanging-indent: 0.75rem;
+    --academic-nested-indent: 0.75rem;
+    --academic-font-size-entry-title: 1rem;
+  }
+  
+  .academic-list {
+    padding: 0 var(--academic-spacing-xs);
+  }
+  
+  .academic-list-item-title {
+    text-indent: calc(-1 * var(--academic-hanging-indent));
+    padding-left: var(--academic-hanging-indent);
+  }
+  
+  .academic-list-item-content {
+    padding-left: var(--academic-hanging-indent);
+  }
+  
+  .academic-list-item-actions {
+    padding-left: var(--academic-hanging-indent);
+  }
+}
+
+/* Tablet (640px - 1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --academic-list-item-spacing: var(--academic-spacing-lg);
+    --academic-list-section-spacing: var(--academic-spacing-2xl);
+    --academic-hanging-indent: 1.5rem;
+    --academic-nested-indent: 1.25rem;
+  }
+  
+  .academic-list {
+    gap: var(--academic-spacing-lg);
+    padding: 0 var(--academic-spacing-md);
+  }
+  
+  .academic-list-item-metadata {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .academic-list-item-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  /* Show inline metadata horizontally on tablet */
+  .academic-inline-metadata {
+    display: inline-flex;
+  }
+  
+  .academic-inline-metadata::before {
+    display: inline;
+  }
+  
+  .academic-inline-metadata:first-child::before {
+    display: none;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  :root {
+    --academic-list-item-spacing: var(--academic-spacing-lg);
+    --academic-list-section-spacing: var(--academic-spacing-2xl);
+    --academic-hanging-indent: 2rem;
+    --academic-nested-indent: 1.5rem;
+  }
+  
+  .academic-list {
+    gap: var(--academic-spacing-lg);
+    padding: 0 var(--academic-spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .academic-list-item {
+    padding: var(--academic-spacing-md) 0;
+  }
+  
+  .academic-list-item-actions {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  /* Optimize for larger screens */
+  .academic-section-header {
+    margin: var(--academic-spacing-3xl) 0 var(--academic-spacing-xl) 0;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .academic-list {
+    max-width: 1400px;
+    padding: 0 var(--academic-spacing-xl);
+  }
+  
+  :root {
+    --academic-hanging-indent: 2.5rem;
+  }
+}
+
+/* ========================================
+   Academic List Layout Variants
+   ======================================== */
+
+/* Compact List Variant */
+.academic-list-compact {
+  gap: var(--academic-spacing-sm);
+}
+
+.academic-list-compact .academic-list-item {
+  padding: var(--academic-spacing-sm) 0;
+}
+
+.academic-list-compact .academic-section-header {
+  margin: var(--academic-spacing-xl) 0 var(--academic-spacing-md) 0;
+}
+
+/* Dense List Variant for Information-Heavy Content */
+.academic-list-dense {
+  gap: var(--academic-spacing-xs);
+}
+
+.academic-list-dense .academic-list-item {
+  padding: var(--academic-spacing-xs) 0;
+}
+
+.academic-list-dense .academic-list-item-title {
+  font-size: var(--academic-font-size-body);
+  line-height: var(--academic-line-height-normal);
+}
+
+/* Spaced List Variant for Better Readability */
+.academic-list-spaced {
+  gap: var(--academic-spacing-xl);
+}
+
+.academic-list-spaced .academic-list-item {
+  padding: var(--academic-spacing-lg) 0;
+}
+
+/* ========================================
+   Academic List Accessibility Enhancements
+   ======================================== */
+
+/* Focus Management */
+.academic-list-item:focus-within {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .academic-list-item {
+    border-bottom: 2px solid var(--academic-text-primary);
+  }
+  
+  .academic-section-header {
+    border-bottom: 3px solid var(--academic-text-primary);
+  }
+  
+  .academic-badge {
+    border: 2px solid var(--academic-text-primary);
+    background: transparent;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .academic-list,
+  .academic-list-item,
+  .academic-list-item * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .academic-list {
+    gap: 0.5rem;
+    padding: 0;
+  }
+  
+  .academic-list-item {
+    break-inside: avoid;
+    padding: 0.25rem 0;
+  }
+  
+  .academic-list-item-actions {
+    display: none;
+  }
+  
+  .academic-section-header {
+    break-after: avoid;
+    margin: 1rem 0 0.5rem 0;
+  }
+}
+
+/* ========================================
+   Academic List Performance Optimizations
+   ======================================== */
+
+/* Optimize for large lists */
+.academic-list-virtualized {
+  contain: strict;
+  overflow: hidden;
+}
+
+.academic-list-virtualized .academic-list-item {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Optimize scrolling performance */
+.academic-list-scrollable {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 639px) {
+  .academic-list-scrollable {
+    /* Optimize mobile scrolling */
+    overscroll-behavior: contain;
+  }
+}
+
+/* Ensure texture doesn't interfere with content readability */
+.texture-background * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Content container for elements that sit on top of texture */
+.texture-content {
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
+  
+  /* Ensure content has proper backdrop for readability */
+  background: transparent;
+  
+  /* Performance optimization for content rendering - prevent layout shifts */
+  contain: layout style paint;
+  will-change: transform;
+  
+  /* Ensure proper content positioning without layout shifts */
+  min-height: 0; /* Prevent flex/grid layout issues */
+  
+  /* Prevent content from being affected by texture animations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ========================================
+   Layout Stability and Anti-Shift Rules
+   ======================================== */
+
+/* Prevent layout shifts from image loading */
+img {
+  /* Reserve space for images to prevent layout shifts */
+  height: auto;
+  max-width: 100%;
+  /* Prevent broken image icons from causing layout shifts */
+  font-size: 0;
+}
+
+/* Prevent layout shifts from font loading */
+@font-face {
+  font-display: swap;
+}
+
+/* Ensure consistent line heights to prevent text layout shifts */
+p, h1, h2, h3, h4, h5, h6, span, div {
+  /* Prevent layout shifts from font rendering differences */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent layout shifts from scrollbar appearance/disappearance */
+html {
+  /* Force scrollbar to always be visible to prevent layout shifts */
+  overflow-y: scroll;
+}
+
+/* Prevent layout shifts from focus outlines */
+:focus-visible {
+  outline-offset: 2px;
+  /* Ensure outline doesn't affect layout */
+  outline: 2px solid var(--ring);
+}
+
+/* Prevent layout shifts from hover states */
+button, a, [role="button"] {
+  /* Ensure hover states don't change dimensions */
+  transition: color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+  /* Prevent layout shifts from transform changes */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts from loading states */
+.loading, [aria-busy="true"] {
+  /* Reserve minimum height for loading states */
+  min-height: 2rem;
+  /* Prevent content jumping during loading */
+  contain: layout;
+}
+
+/* Ensure main content area has stable positioning */
+main {
+  /* Prevent layout shifts from content changes */
+  contain: layout style;
+  /* Ensure consistent positioning */
+  position: relative;
+  z-index: 1;
+  /* Let Tailwind classes handle all padding including margin collapse prevention */
+}
+
+/* Prevent layout shifts from dynamic content insertion */
+[data-dynamic-content] {
+  /* Reserve space for dynamic content */
+  min-height: 1px;
+  /* Prevent layout recalculations */
+  contain: layout;
+}
+
+/* Responsive layout stability */
+@media (max-width: 767px) {
+  /* Prevent horizontal scrolling that can cause layout shifts */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure mobile navigation doesn't cause layout shifts */
+  nav {
+    /* Prevent navigation from affecting document flow */
+    position: fixed;
+    contain: layout style paint;
+  }
+}
+
+/* Prevent layout shifts from CSS custom property changes */
+:root {
+  /* Ensure smooth transitions for CSS custom property changes */
+  transition: none;
+}
+
+/* High contrast mode layout stability */
+@media (prefers-contrast: high) {
+  /* Ensure high contrast mode doesn't cause layout shifts */
+  * {
+    transition: none !important;
+  }
+}
+
+/* Print media layout stability */
+@media print {
+  /* Prevent layout shifts in print mode */
+  .texture-background::before,
+  .texture-background::after,
+  .motion-div {
+    display: none !important;
+  }
+  
+  /* Ensure content is properly positioned for printing */
+  main {
+    position: static !important;
+    transform: none !important;
+  }
+}
+/* =
+=======================================
+   Academic Typography and Formatting System
+   ======================================== */
+
+/* Academic Typography Classes */
+.academic-page-title {
+  font-size: var(--academic-font-size-page-title);
+  font-weight: var(--academic-font-weight-page-title);
+  line-height: var(--academic-line-height-tight);
+  color: var(--academic-text-primary);
+  margin-bottom: var(--academic-spacing-xl);
+}
+
+.academic-section-header {
+  font-size: var(--academic-font-size-section-header);
+  font-weight: var(--academic-font-weight-section-header);
+  line-height: var(--academic-line-height-tight);
+  color: var(--academic-text-primary);
+  margin-top: var(--academic-spacing-2xl);
+  margin-bottom: var(--academic-spacing-lg);
+  border-bottom: 1px solid var(--academic-border-subtle);
+  padding-bottom: var(--academic-spacing-sm);
+}
+
+.academic-entry-title {
+  font-size: var(--academic-font-size-entry-title);
+  font-weight: var(--academic-font-weight-entry-title);
+  line-height: var(--academic-line-height-normal);
+  color: var(--academic-text-primary);
+  margin-bottom: var(--academic-spacing-sm);
+}
+
+.academic-body-text {
+  font-size: var(--academic-font-size-body);
+  font-weight: var(--academic-font-weight-body);
+  line-height: var(--academic-line-height-normal);
+  color: var(--academic-text-primary);
+}
+
+.academic-metadata {
+  font-size: var(--academic-font-size-metadata);
+  font-weight: var(--academic-font-weight-metadata);
+  line-height: var(--academic-line-height-normal);
+  color: var(--academic-text-secondary);
+}
+
+.academic-caption {
+  font-size: var(--academic-font-size-caption);
+  font-weight: var(--academic-font-weight-caption);
+  line-height: var(--academic-line-height-normal);
+  color: var(--academic-text-secondary);
+}
+
+/* Academic List Formatting */
+.academic-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.academic-list-item {
+  margin-bottom: var(--academic-list-item-spacing);
+  padding: 0;
+  position: relative;
+}
+
+.academic-list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Academic Bibliography/Citation Formatting */
+.academic-citation {
+  padding-left: var(--academic-hanging-indent);
+  text-indent: calc(-1 * var(--academic-hanging-indent));
+  margin-bottom: var(--academic-list-item-spacing);
+}
+
+.academic-citation-number {
+  display: inline-block;
+  width: var(--academic-hanging-indent);
+  text-align: left;
+  font-weight: var(--academic-font-weight-metadata);
+  color: var(--academic-text-secondary);
+}
+
+/* Academic Course/Entry Formatting */
+.academic-entry {
+  border-bottom: 1px solid var(--academic-border-subtle);
+  padding-bottom: var(--academic-spacing-lg);
+  margin-bottom: var(--academic-list-item-spacing);
+}
+
+.academic-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.academic-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--academic-spacing-sm);
+  gap: var(--academic-spacing-md);
+}
+
+.academic-entry-content {
+  margin-bottom: var(--academic-spacing-sm);
+}
+
+.academic-entry-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--academic-metadata-spacing);
+  margin-bottom: var(--academic-spacing-sm);
+}
+
+.academic-entry-actions {
+  display: flex;
+  gap: var(--academic-spacing-sm);
+  justify-content: flex-end;
+}
+
+/* Academic Nested Lists */
+.academic-nested-list {
+  margin-left: var(--academic-nested-indent);
+  margin-top: var(--academic-spacing-sm);
+  list-style: none;
+  padding: 0;
+}
+
+.academic-nested-item {
+  margin-bottom: var(--academic-spacing-sm);
+  position: relative;
+}
+
+.academic-nested-item::before {
+  content: "•";
+  position: absolute;
+  left: calc(-1 * var(--academic-spacing-md));
+  color: var(--academic-text-secondary);
+}
+
+/* Academic Tabular Information */
+.academic-table-info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--academic-spacing-sm) var(--academic-spacing-lg);
+  margin: var(--academic-spacing-md) 0;
+}
+
+.academic-table-label {
+  font-weight: var(--academic-font-weight-metadata);
+  color: var(--academic-text-secondary);
+  white-space: nowrap;
+}
+
+.academic-table-value {
+  color: var(--academic-text-primary);
+}
+
+/* Academic Inline Metadata */
+.academic-inline-metadata {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--academic-spacing-sm);
+  font-size: var(--academic-font-size-metadata);
+  color: var(--academic-text-secondary);
+}
+
+.academic-inline-metadata > * {
+  display: inline-flex;
+  align-items: center;
+}
+
+.academic-metadata-separator::before {
+  content: "•";
+  margin: 0 var(--academic-spacing-xs);
+  color: var(--academic-text-secondary);
+}
+
+/* Academic Badges and Tags */
+.academic-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--academic-spacing-xs) / 2) var(--academic-spacing-sm);
+  font-size: var(--academic-font-size-caption);
+  font-weight: var(--academic-font-weight-metadata);
+  background: var(--academic-background-subtle);
+  border: 1px solid var(--academic-border-subtle);
+  border-radius: 3px;
+  color: var(--academic-text-secondary);
+}
+
+.academic-badge-accent {
+  background: rgba(106, 90, 205, 0.08);
+  border-color: rgba(106, 90, 205, 0.2);
+  color: var(--academic-text-accent);
+}
+
+/* Academic Section Grouping */
+.academic-section {
+  margin-bottom: var(--academic-list-section-spacing);
+}
+
+.academic-section:last-child {
+  margin-bottom: 0;
+}
+
+.academic-year-group {
+  margin-bottom: var(--academic-spacing-2xl);
+}
+
+.academic-year-header {
+  font-size: var(--academic-font-size-section-header);
+  font-weight: var(--academic-font-weight-section-header);
+  color: var(--academic-text-primary);
+  margin-bottom: var(--academic-spacing-lg);
+  padding-bottom: var(--academic-spacing-xs);
+  border-bottom: 2px solid var(--academic-border-subtle);
+}
+
+/* Academic Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --academic-font-size-page-title: 2rem;
+    --academic-font-size-section-header: 1.5rem;
+    --academic-hanging-indent: 1.5rem;
+    --academic-nested-indent: 1rem;
+  }
+  
+  .academic-entry-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--academic-spacing-sm);
+  }
+  
+  .academic-entry-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  
+  .academic-table-info {
+    grid-template-columns: 1fr;
+    gap: var(--academic-spacing-xs);
+  }
+  
+  .academic-table-label {
+    font-weight: var(--academic-font-weight-entry-title);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --academic-font-size-page-title: 1.75rem;
+    --academic-font-size-section-header: 1.25rem;
+    --academic-hanging-indent: 1rem;
+    --academic-list-item-spacing: var(--academic-spacing-md);
+  }
+  
+  .academic-inline-metadata {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--academic-spacing-xs);
+  }
+  
+  .academic-metadata-separator::before {
+    display: none;
+  }
+}
+
+/* Academic Print Styles */
+@media print {
+  .academic-page-title,
+  .academic-section-header,
+  .academic-entry-title {
+    color: black !important;
+    break-after: avoid;
+  }
+  
+  .academic-entry {
+    break-inside: avoid;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .academic-badge {
+    border: 1px solid #666;
+    background: transparent;
+  }
+  
+  .academic-entry-actions {
+    display: none;
+  }
+}
+
+/* Academic Accessibility Enhancements */
+@media (prefers-contrast: high) {
+  .academic-badge {
+    border-width: 2px;
+  }
+  
+  .academic-border-subtle {
+    border-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .academic-list-item,
+  .academic-entry {
+    transition: none !important;
+  }
+}
+
+/* Academic Focus States */
+.academic-entry:focus-within {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.academic-list-item:focus-within {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Academic Utility Classes */
+.academic-text-primary {
+  color: var(--academic-text-primary);
+}
+
+.academic-text-secondary {
+  color: var(--academic-text-secondary);
+}
+
+.academic-text-accent {
+  color: var(--academic-text-accent);
+}
+
+.academic-spacing-xs {
+  margin: var(--academic-spacing-xs);
+}
+
+.academic-spacing-sm {
+  margin: var(--academic-spacing-sm);
+}
+
+.academic-spacing-md {
+  margin: var(--academic-spacing-md);
+}
+
+.academic-spacing-lg {
+  margin: var(--academic-spacing-lg);
+}
+
+.academic-spacing-xl {
+  margin: var(--academic-spacing-xl);
+}
+
+.academic-spacing-2xl {
+  margin: var(--academic-spacing-2xl);
+}
+
+.academic-mb-xs {
+  margin-bottom: var(--academic-spacing-xs);
+}
+
+.academic-mb-sm {
+  margin-bottom: var(--academic-spacing-sm);
+}
+
+.academic-mb-md {
+  margin-bottom: var(--academic-spacing-md);
+}
+
+.academic-mb-lg {
+  margin-bottom: var(--academic-spacing-lg);
+}
+
+.academic-mb-xl {
+  margin-bottom: var(--academic-spacing-xl);
+}
+
+.academic-mb-2xl {
+  margin-bottom: var(--academic-spacing-2xl);
+}
+
+.academic-mt-xs {
+  margin-top: var(--academic-spacing-xs);
+}
+
+.academic-mt-sm {
+  margin-top: var(--academic-spacing-sm);
+}
+
+.academic-mt-md {
+  margin-top: var(--academic-spacing-md);
+}
+
+.academic-mt-lg {
+  margin-top: var(--academic-spacing-lg);
+}
+
+.academic-mt-xl {
+  margin-top: var(--academic-spacing-xl);
+}
+
+.academic-mt-2xl {
+  margin-top: var(--academic-spacing-2xl);
+}

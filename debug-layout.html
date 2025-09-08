@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Debug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Debug styles */
+        .debug-nav {
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid red;
+        }
+        .debug-main {
+            background: rgba(0, 255, 0, 0.3);
+            border: 2px solid green;
+        }
+        .debug-content {
+            background: rgba(0, 0, 255, 0.3);
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation (mimicking your Navigation component) -->
+    <nav class="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 debug-nav">
+        <div class="relative backdrop-blur-xl rounded-full shadow-2xl overflow-hidden" 
+             style="background: rgba(255,255,255,0.95); padding: 8px 16px; height: 48px; width: 700px;">
+            <div class="flex relative items-center h-8">
+                <button class="px-4 py-2 text-sm">Home</button>
+                <button class="px-4 py-2 text-sm">Stack</button>
+                <button class="px-4 py-2 text-sm">Publications</button>
+                <button class="px-4 py-2 text-sm">Resume</button>
+                <button class="px-4 py-2 text-sm">Teaching</button>
+                <button class="px-4 py-2 text-sm">Blog</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content (mimicking your App.tsx main) -->
+    <main class="relative z-10 pt-14 sm:pt-16 debug-main">
+        <div class="min-h-screen pb-12 px-6 debug-content">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-5xl text-black mb-6">Content Should Be Visible Here</h1>
+                <p class="text-xl text-black mb-8">
+                    This content should be immediately visible without scrolling.
+                    If you need to scroll down to see this text, there's still a spacing issue.
+                </p>
+                <div class="bg-yellow-200 p-4 rounded">
+                    <p><strong>Debug Info:</strong></p>
+                    <p>Navigation height: 48px</p>
+                    <p>Navigation top position: 8px (mobile) / 16px (desktop)</p>
+                    <p>Main padding-top: 56px (pt-14) / 64px (pt-16)</p>
+                    <p>Expected total clearance: 56px (mobile) / 64px (desktop)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Debug script to measure actual positions
+        window.addEventListener('load', function() {
+            const nav = document.querySelector('nav');
+            const main = document.querySelector('main');
+            const content = document.querySelector('.debug-content');
+            
+            console.log('Navigation position:', {
+                top: nav.offsetTop,
+                height: nav.offsetHeight,
+                bottom: nav.offsetTop + nav.offsetHeight
+            });
+            
+            console.log('Main content position:', {
+                top: main.offsetTop,
+                paddingTop: window.getComputedStyle(main).paddingTop
+            });
+            
+            console.log('Content position:', {
+                top: content.offsetTop,
+                rect: content.getBoundingClientRect()
+            });
+            
+            // Check if content is visible in viewport
+            const contentRect = content.getBoundingClientRect();
+            const isVisible = contentRect.top < window.innerHeight;
+            console.log('Content visible without scrolling:', isVisible);
+            
+            // Add visual indicator
+            if (!isVisible) {
+                document.body.style.border = '5px solid red';
+                document.body.insertAdjacentHTML('afterbegin', 
+                    '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: red; color: white; padding: 20px; z-index: 9999;">CONTENT NOT VISIBLE - SCROLL REQUIRED</div>'
+                );
+            } else {
+                document.body.style.border = '5px solid green';
+                document.body.insertAdjacentHTML('afterbegin', 
+                    '<div style="position: fixed; top: 10px; right: 10px; background: green; color: white; padding: 10px; z-index: 9999;">✓ CONTENT VISIBLE</div>'
+                );
+            }
+        });
+    </script>
+</body>
+</html>

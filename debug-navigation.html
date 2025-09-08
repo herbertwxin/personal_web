@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Debug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simulate the current CSS rules */
+        nav {
+            will-change: transform;
+            backface-visibility: hidden;
+            contain: layout style paint;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+            contain: layout style;
+            will-change: transform;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="debug-info">
+        <div>Nav Top: <span id="nav-top"></span>px</div>
+        <div>Nav Height: <span id="nav-height"></span>px</div>
+        <div>Main Padding Top: <span id="main-padding"></span>px</div>
+        <div>Content Start: <span id="content-start"></span>px</div>
+        <div>Viewport Height: <span id="viewport-height"></span>px</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50">
+        <div class="relative backdrop-blur-xl rounded-full shadow-2xl overflow-hidden bg-white/95 h-12 px-4 flex items-center">
+            <span class="text-black">Navigation Menu</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-14 sm:pt-15 md:pt-16">
+        <div class="min-h-screen pb-12 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-5xl text-black mb-6">Content Title</h1>
+                <p class="text-xl text-black mb-8">This content should be visible immediately without scrolling.</p>
+                <div class="bg-blue-100 p-4 rounded">
+                    <p>If you have to scroll down to see this blue box, there's still a positioning issue.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function updateDebugInfo() {
+            const nav = document.querySelector('nav');
+            const main = document.querySelector('main');
+            
+            if (nav && main) {
+                const navRect = nav.getBoundingClientRect();
+                const mainRect = main.getBoundingClientRect();
+                const mainStyles = window.getComputedStyle(main);
+                
+                document.getElementById('nav-top').textContent = navRect.top;
+                document.getElementById('nav-height').textContent = navRect.height;
+                document.getElementById('main-padding').textContent = mainStyles.paddingTop;
+                document.getElementById('content-start').textContent = mainRect.top;
+                document.getElementById('viewport-height').textContent = window.innerHeight;
+            }
+        }
+        
+        // Update debug info on load and resize
+        window.addEventListener('load', updateDebugInfo);
+        window.addEventListener('resize', updateDebugInfo);
+        
+        // Update every second to catch any changes
+        setInterval(updateDebugInfo, 1000);
+    </script>
+</body>
+</html>
