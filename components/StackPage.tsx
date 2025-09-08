@@ -304,8 +304,8 @@ export function StackPage({ onViewModel }: StackPageProps) {
                     </Button>
                     <Button
                       size='sm'
-                      variant='ghost'
-                      className='text-gray-600 hover:text-gray-800'
+                      variant='outline'
+                      className='text-gray-600 border-gray-300 hover:bg-gray-100 hover:text-gray-800'
                       onClick={() => {
                         const link = document.createElement('a');
                         link.href = model.pdfPath;
