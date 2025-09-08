@@ -1,0 +1,328 @@
+    %-------------------------
+% Resume in Latex
+% Author
+% License : MIT
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+% Adjust margins
+%\addtolength{\oddsidemargin}{-0.5in}
+%\addtolength{\evensidemargin}{-0.5in}
+%\addtolength{\textwidth}{1in}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+% \renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{list}{}{\leftmargin=0pt \itemindent=0pt}}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+\newcommand{\resumeSubHeadingListEnd}{\end{list}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Wei (Herbert) Xin} % Your Name
+\newcommand{\course}{Master of Economics Analysis} % Your Program
+
+\newcommand{\phone}{0431173921} % Your Phone Number
+\newcommand{\emaila}{hxin@uoregon.edu} %Email 1
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+%----------HEADING-----------------
+
+{
+\begin{tabularx}{\linewidth}{L r} \\
+  \textbf{\Large \name} & {\raisebox{0.0\height}{\footnotesize \faPhone}\ +61-\phone}\\
+  {} & \href{mailto:\emaila}{\raisebox{0.0\height}{\footnotesize \faEnvelope}\ {\emaila}} \\
+  & \href{www.linkedin.com/in/xxxx/}{\raisebox{0.0\height}{\footnotesize \faLinkedin}\ {https://www.linkedin.com/in/herbert-xin-24170aa3/}}\\
+	& {https://herbertwxin.github.io/}
+
+\end{tabularx}
+}
+
+
+%-----------EDUCATION-----------
+\section{\textbf{Education}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+    {Doctor of Philosophy (Economics)}{United States}
+    {University of Oregon, Eugene}{Sep 2024 - Jun 2029}
+    \item {Research field in Macroeconomics}
+  \resumeSubHeadingListEnd
+
+\vspace{-4.0mm}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+    {Master of Economic Analysis}{83 WAM - 3.8 GPA}
+    {The University of Sydney, Sydney}{Jun 2022 - Dec 2023}
+    \item {Relevant courses: Empirical Macroeconomics Modelling (D), Topics in Bus. Cycle and Mon. Policy (D), Advanced Macroeconomics (HD), Advanced Microeconomics (D), Econometric Application (D), Economic History (HD)}
+    \vspace{-2.2mm} \item Thesis on Monetary, Fiscal Policy and Disinflation (Supervisor: Prof. Christopher G. Gibbs)
+  \resumeSubHeadingListEnd
+
+\vspace{-4.0mm}
+
+  \resumeSubHeadingListStart
+    \resumeSubheading
+    {Bachelor of Economics (Economics) \& Bachelor of Science (Statistics)}{Distinction}
+      {University of New South Wales, Sydney}{Feb 2018 - Dec 2021}
+      \item {Relevant courses: Microeconomics II (HD), Theory of Statistics (D), Several Variable Calculus (D), Industry Consulting Project (D), Probability and Stochastic Process, Statistical Inference, Statistical Modeling and Computing, Statistical Model in Social and Market Research}
+  \resumeSubHeadingListEnd
+
+\vspace{-5.5mm}
+%-----------Publication-----------------
+\section{\textbf{Publication}}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+	{The sacrifice ratio and active fiscal policy}{2024}
+	{with Christopher G. Gibbs (The University of Sydney)}{Economic Letters}
+	\vspace{-2.0mm}
+
+
+	\resumeSubHeadingListEnd
+\vspace{-2.5mm}
+
+%-----------EXPERIENCE-----------------
+\section{\textbf{Professional Experience}}
+  \resumeSubHeadingListStart
+  
+  	\resumeSubheading
+	  {Graduate Employee}{ Eugene, United States}
+	  {University of Oregon}{Sep 2024 - Present}
+	  \vspace{-2.0mm}
+	  \resumeItemListStart
+	    \item {Class taught: EC101 - Intro. Econ; EC201 - Intro. Micro}
+	  \resumeItemListEnd
+
+	\resumeSubheading
+	  {Causual Academic}{ Camperdown, Australia}
+	  {The University of Sydney}{Feb 2024 - Present}
+	  \vspace{-2.0mm}
+	  \resumeItemListStart
+	    \item {Teaching tutorials for ECON1002 Introductory Macroeconomics}
+	    \item {Hold consultation hours to answer questions from students}
+	    \item {Teaching Assistant for Prof. Marinao Kulish}
+	  \resumeItemListEnd
+
+\vspace{-3.0mm}
+
+\resumeSubheading
+  {Research Assistant}{ Camperdown, Australia}
+  {The University of Sydney}{Dec 2023 - July 2024}
+  \vspace{-2.0mm}
+  \resumeItemListStart
+		\item{Research assistant for Dr. Jordi Vidal-Robert}
+    \item {Use STATA to clean up the raw data gathered from various sources.}
+    \item {Use R to plot relevant informations on maps.}
+		\item {Produce plots and tables working papers}
+  \resumeItemListEnd
+
+
+\vspace{-3.0mm}
+
+\resumeSubheading
+  {Commercial Operation}{ Suzhou, China}
+  {Albaugh LLC}{January 2022 - April 2022}
+  \vspace{-2.0mm}
+  \resumeItemListStart
+    \item {Managed order requests from the globe and prepared documentations for customs and transportation.}
+    \item {Managed order forecast and sent purchasing request to central planning.}
+    \item {Analyzed the flaws in current order processing system.}
+    \item {Streamlined the order fulfillment process by reducing process steps by 30\%.}
+  \resumeItemListEnd
+
+\vspace{-3.0mm}
+
+\resumeSubheading
+{Industry Project Consultant}{ Barangaroo, Australia}
+{Accenture Australia}{September 2019 - November 2019}
+\vspace{-2.0mm}
+\resumeItemListStart
+  \item {Winner of Industry Consulting Project Pitch Fest 2019.}
+  \item {Given the requirement of the current client of Accenture in the telecommunication industry, helped the client to find a new business model to cater disruptive technologies.}
+  \item {Conducted broad background researches on the telecommunication industry and built a smart MU-MIMO antenna system, allowing the client to fully utilize the new business model.}
+  \item {Analyzed and predicted the potential financial impact of the solution by utilizing data collected during researches and built data visualization for the presentation.}
+  \item {Demonstrated great problem solving, data analysis, research, and communication skills during the project.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+
+%-----------PROJECTS-----------------
+\section{\textbf{Personal Projects}}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+	{Macromim}{}
+	{}{}
+	\vspace{-6.0mm}
+	\resumeItemListStart
+		\item {https://www.youtube.com/channel/UC-yDi0dCtK-pceROXmp5pyg}
+		\item {Creating animated introductory macroeconomics courses with animination engine Manim (The engined used by 3B1B).}
+		\item {The goal is to give students an intuitive way to understand macroeconomics with a set of animations showing the moving of lines and equilibriums.}
+		\item {Written in Python and LaTeX}
+	\resumeItemListEnd
+
+\vspace{-3.0mm}
+
+    \resumeSubheading
+      {Water Restriction Project}{}
+      {}{UNSW, Sydney}
+      \vspace{-6.0mm}
+      \resumeItemListStart
+        \item {Description: Given the data of water usage, temperature, rainfall, water prices and restriction detail from 1996 to 2011 to analyze the impact of current water restriction and justify whether a new restriction is needed.}
+        \item {Exploratory data analysis: Built a regression model which predicted the impact of temperature, rainfall, water prices and previous restrictions across different districts using Stata.}
+        \item {Policy prediction: Predicted the possible economical impact of various water restriction policies using the model constructed.}
+        \item {Presentation: Built comprehensive data visualization to help client understand the impact of current and future policies.}
+      \resumeItemListEnd
+
+    \vspace{-3.0mm}
+
+    \resumeSubheading
+      {Physician's Advice on Alcohol Consumption}{}
+      {}{UNSW, Sydney}
+      \vspace{-6.0mm}
+      \resumeItemListStart
+        \item {Description: Given the data from the 1990 National Health Interview Survey core questionnaire and special supplements containing alcohol consumption, age, racial, and health data to estimate the effect of physician's advice on alcohol consumption.}
+        \item {Model Construction: Constructed CF-Tobit model to predict the effect of physician's advice, individual and socioeconomic factors on alcohol consumption using Stata.}
+        \item {Policy prediction: Estimated the result where physician's advice lowers alcohol consumption by 14.35 drinks on average, which suggests physician's advice could be a better policy than alcohol taxes, considering it is much cheaper to implement.}
+      \resumeItemListEnd
+
+    \vspace{-3.0mm}
+
+  \resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+
+
+%-----------Technical skills-----------------
+\section{\textbf{Technical Skills and Interests}}
+ \begin{itemize}[leftmargin=0.05in, label={}]
+    \small{\item{
+     \textbf{Languages}{: English, Chinese, Japanese} \\
+     \textbf{Programming Languages}{: R, Dynare, MATLAB, STATA, Python, Julia, LaTeX, Mathematica, Linux, Markdown, Fortran} \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+ \section{\textbf{Additional}}
+ \resumeItemListStart
+   \item {Visa status: Graduate Working Visa (485)}
+ \resumeItemListEnd
+
+\section{\textbf{Referees}}
+ \textbf{Ash Marwah} \\
+ Manager, Strategy and Consulting \\
+ Accenture Australia \\
+ Email: \href{mailto:ashwinmarwah125@hotmail.com}{ashwinmarwah125@hotmail.com} \\
+ \vspace{3mm}
+
+
+
+
+
+%-------------------------------------------
+\end{document}

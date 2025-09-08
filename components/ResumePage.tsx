@@ -6,114 +6,105 @@ export function ResumePage() {
 
   const education = [
     {
-      degree: 'Ph.D. in Economics',
-      institution: 'Harvard University',
-      year: '2015-2020',
-      details: "Dissertation: 'Dynamic Models in Macroeconomic Analysis'",
-      advisor: 'Prof. Jane Smith',
+      degree: 'Doctor of Philosophy (Economics)',
+      institution: 'University of Oregon, Eugene',
+      year: 'Sep 2024 - Jun 2029',
+      details: 'Research field in Macroeconomics',
     },
     {
-      degree: 'M.A. in Economics',
-      institution: 'Stanford University',
-      year: '2013-2015',
-      details: 'Concentration in Mathematical Economics',
+      degree: 'Master of Economic Analysis',
+      institution: 'The University of Sydney, Sydney',
+      year: 'Jun 2022 - Dec 2023',
+      details: 'Thesis on Monetary, Fiscal Policy and Disinflation',
+      advisor: 'Prof. Christopher G. Gibbs',
     },
     {
-      degree: 'B.A. in Economics & Mathematics',
-      institution: 'MIT',
-      year: '2009-2013',
-      details: 'Summa Cum Laude, Phi Beta Kappa',
+      degree: 'Bachelor of Economics (Economics) & Bachelor of Science (Statistics)',
+      institution: 'University of New South Wales, Sydney',
+      year: 'Feb 2018 - Dec 2021',
+      details: 'Distinction',
     },
   ]
 
   const experience = [
     {
-      position: 'Professor of Economics',
-      institution: 'University of Excellence',
-      period: '2023-Present',
+      position: 'Graduate Employee',
+      institution: 'University of Oregon',
+      period: 'Sep 2024 - Present',
       details: [
-        'Teaching graduate and undergraduate courses in macroeconomics',
-        'Conducting research in mathematical macroeconomics and DSGE modeling',
-        'Supervising PhD students and postdoctoral researchers',
-        'Serving on university committees and editorial boards',
+        'Class taught: EC101 - Intro. Econ; EC201 - Intro. Micro',
       ],
     },
     {
-      position: 'Associate Professor',
-      institution: 'Economic Research Institute',
-      period: '2020-2023',
+      position: 'Casual Academic',
+      institution: 'The University of Sydney',
+      period: 'Feb 2024 - Present',
       details: [
-        'Led research initiatives in monetary policy and financial stability',
-        'Published 8 peer-reviewed articles in top economics journals',
-        'Received teaching excellence award for innovative course design',
-        'Collaborated with central banks on policy analysis projects',
+        'Teaching tutorials for ECON1002 Introductory Macroeconomics',
+        'Hold consultation hours to answer questions from students',
+        'Teaching Assistant for Prof. Marinao Kulish',
       ],
     },
     {
-      position: 'Assistant Professor',
-      institution: 'State University Economics Department',
-      period: '2020-2022',
+      position: 'Research Assistant',
+      institution: 'The University of Sydney',
+      period: 'Dec 2023 - July 2024',
       details: [
-        'Taught principles of macroeconomics and advanced econometrics',
-        'Developed new curriculum for mathematical economics courses',
-        'Secured $150,000 in research funding from NSF',
-        'Mentored undergraduate research students',
+        'Research assistant for Dr. Jordi Vidal-Robert',
+        'Use STATA to clean up the raw data gathered from various sources',
+        'Use R to plot relevant informations on maps',
+        'Produce plots and tables working papers',
+      ],
+    },
+    {
+      position: 'Commercial Operation',
+      institution: 'Albaugh LLC',
+      period: 'January 2022 - April 2022',
+      details: [
+        'Managed order requests from the globe and prepared documentations for customs and transportation',
+        'Managed order forecast and sent purchasing request to central planning',
+        'Analyzed the flaws in current order processing system',
+        'Streamlined the order fulfillment process by reducing process steps by 30%',
+      ],
+    },
+    {
+      position: 'Industry Project Consultant',
+      institution: 'Accenture Australia',
+      period: 'September 2019 - November 2019',
+      details: [
+        'Winner of Industry Consulting Project Pitch Fest 2019',
+        'Given the requirement of the current client of Accenture in the telecommunication industry, helped the client to find a new business model to cater disruptive technologies',
+        'Conducted broad background researches on the telecommunication industry and built a smart MU-MIMO antenna system',
+        'Analyzed and predicted the potential financial impact of the solution by utilizing data collected during researches',
+        'Demonstrated great problem solving, data analysis, research, and communication skills during the project',
       ],
     },
   ]
 
   const skills = [
     {
-      category: 'Programming',
-      items: ['MATLAB', 'Python', 'R', 'Stata', 'Dynare'],
-    },
-    {
-      category: 'Modeling',
-      items: [
-        'DSGE Models',
-        'VAR Analysis',
-        'Bayesian Estimation',
-        'Machine Learning',
-      ],
-    },
-    {
-      category: 'Software',
-      items: ['LaTeX', 'Mathematica', 'EViews', 'GAUSS', 'Git'],
+      category: 'Programming Languages',
+      items: ['R', 'Dynare', 'MATLAB', 'STATA', 'Python', 'Julia', 'LaTeX', 'Mathematica', 'Linux', 'Markdown', 'Fortran'],
     },
     {
       category: 'Languages',
-      items: ['English (Native)', 'Spanish (Fluent)', 'French (Intermediate)'],
+      items: ['English', 'Chinese', 'Japanese'],
     },
   ]
 
-  const awards = [
+  const projects = [
     {
-      title: 'Excellence in Teaching Award',
-      institution: 'University of Excellence',
-      year: '2023',
-      description:
-        'Recognized for innovative teaching methods in advanced macroeconomics',
-    },
-    {
-      title: 'Best Paper Award',
-      institution: 'Economic Theory Conference',
-      year: '2022',
-      description: 'Outstanding contribution to dynamic equilibrium theory',
-    },
-    {
-      title: 'Young Economist Award',
-      institution: 'American Economic Association',
-      year: '2021',
-      description:
-        'Recognizing promising early-career research in macroeconomics',
-    },
-    {
-      title: 'Dissertation Fellowship',
-      institution: 'Harvard University',
-      year: '2019',
-      description: 'Competitive fellowship for outstanding doctoral research',
+      title: 'Macromim',
+      description: 'Creating animated introductory macroeconomics courses with animation engine Manim (The engine used by 3B1B)',
+      details: [
+        'https://www.youtube.com/channel/UC-yDi0dCtK-pceROXmp5pyg',
+        'The goal is to give students an intuitive way to understand macroeconomics with a set of animations showing the moving of lines and equilibriums',
+        'Written in Python and LaTeX',
+      ],
     },
   ]
+
+
 
   return (
     <motion.div
@@ -127,8 +118,12 @@ export function ResumePage() {
         <div className='mb-12'>
           <h1 className='text-3xl font-normal text-black mb-2'>Curriculum Vitae</h1>
           <p className='text-lg text-black mb-6'>
-            Dr. Academic Researcher, Professor of Economics
+            Wei (Herbert) Xin
           </p>
+          <div className='text-sm text-gray-600 mb-6 space-y-1'>
+            <div>📧 hxin@uoregon.edu</div>
+            <div>🔗 <a href="https://www.linkedin.com/in/herbert-xin-24170aa3/" className="text-blue-600 hover:underline">LinkedIn Profile</a></div>
+          </div>
           <Button 
             variant="outline" 
             className='border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -210,33 +205,42 @@ export function ResumePage() {
           </div>
         </section>
 
-        {/* Awards Section */}
+
+
+        {/* Projects Section */}
         <section className='mb-12'>
           <h2 className='text-xl font-medium text-black mb-6 pb-2 border-b border-gray-200'>
-            Awards & Recognition
+            Personal Projects
           </h2>
-          <div className='space-y-4'>
-            {awards.map((award, index) => (
-              <div key={index} className='flex justify-between items-start'>
-                <div className='flex-1'>
-                  <div className='font-medium text-black'>{award.title}</div>
-                  <div className='text-black'>{award.institution}</div>
-                  <div className='text-sm text-gray-600 mt-1'>{award.description}</div>
+          <div className='space-y-6'>
+            {projects.map((project, index) => (
+              <div key={index}>
+                <div className='flex justify-between items-start mb-2'>
+                  <div className='flex-1'>
+                    <div className='font-medium text-black'>{project.title}</div>
+                    <div className='text-black'>{project.description}</div>
+                  </div>
                 </div>
-                <div className='text-sm text-gray-600 ml-4 flex-shrink-0'>
-                  {award.year}
-                </div>
+                <ul className='mt-2 space-y-1 text-sm text-gray-700'>
+                  {project.details.map((detail, detailIndex) => (
+                    <li key={detailIndex} className='ml-4'>
+                      • {detail}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </section>
 
+
+
         {/* Contact CTA */}
         <div className='pt-8 border-t border-gray-200'>
           <h3 className='text-lg font-medium text-black mb-3'>Contact</h3>
           <p className='text-gray-700 mb-4 max-w-2xl'>
-            Interested in collaboration, speaking engagements, or consulting
-            opportunities? I'd love to hear from you.
+            Interested in collaboration, research opportunities, or academic discussions? 
+            I'd love to hear from you.
           </p>
           <Button
             variant='outline'
