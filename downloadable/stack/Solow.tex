@@ -1,0 +1,372 @@
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro I}
+\chead{Solow Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+	\title{Solow Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+
+	\section{Kaldor's Facts}
+		There are six stylized ``facts'' in Kaldor's statement, whereas the 7th one is often added.
+		\begin{itemize}
+			\item Output per worker ($Y/L$) -- or labor productivity -- grows at a sustained rate
+			\item Capital per worker ($K/L$) grows at a sustained rate
+			\item Capital-output rati ($K/Y$) stays roughly constant
+			\item Shares of labor and capital in national income remain nearly constant
+			\item Real interest rate is very stable
+			\item Wide difference in the rate of growth between different countries
+			\item Output per capita ($y/L$) varies greatly across countries
+		\end{itemize}
+		At the time, economists are trying to figure out a model to fit the Kaldor's facts.
+		The conclusion we draw from Solow model fits very well indeed with Kaldor's facts.
+		However, since the 21th century, many of the Kaldor's has fallen apart, especially the share of labor and
+		capital in national income has not remain constant.
+		Capital, in fact, now occupies a higher share of the total income.
+
+	\section{Assumptions}
+		There are some assumptions we impose on the model.
+
+		\subsection{Basic assumptions}
+			\begin{itemize}
+				\item Single consumption good produced, can be converted to capital one-for-one.
+				\item The good is produced using 2 inputs: capital ($K$) and labor ($L$)
+				\item Capital ($K$) depreciates at rate $0<\delta<1$
+				\item Closed economy and no government -- all investment that happens is out of domestic saving
+				\item Aggregate saving: $S=sY, 0<s<1$
+				\item Markets are perfectly competitive -- this leads to indeterminate firm size
+			\end{itemize}
+
+		\subsection{Production function}
+			The reason Solow model is classified as a Neoclassical model is because it uses a Neoclassical
+			production function, which includes capital, labor and labor augmenting capital as input.
+			Mathematically, this is
+			\begin{equation}
+				Y_t = F(K_t, A_t L_t)\label{eq:neoclassical_production}
+			\end{equation}
+			This means $F$ itself does not depend on time and time effect only comes through $K, A, L$.
+			Also, as we stated earlier, $A$ is labor augmenting.
+
+			\subsubsection{Assumptions about $F$}
+				We assume positive and diminishing marginal product
+				\begin{align*}
+					\frac{\partial F}{\partial K} &\equiv F_k >0, \frac{\partial^2 F}{\partial K^2} <0\\[4pt]
+					\frac{\partial F}{\partial L} &\equiv F_k >0, \frac{\partial^2 F}{\partial L^2} <0
+				\end{align*}
+				Also, $F_{K,L}>0$ ensures profit maximization leads to an optimal solution.
+
+				On the other hand, $F$ satisfies constant return to scale, i.e.
+				\begin{equation*}
+					F(\lambda K, \lambda AL) = \lambda F(K, AL), \forall \lambda >0, \text{ i.e. } HD1
+				\end{equation*}
+
+				Suppose we set $\lambda = \frac{1}{AL}$, an effective unit of labor, gives
+				\begin{align*}
+					F(\underbrace{\frac{1}{AL}K}_{\text{capital per effective labor}}, \frac{1}{AL}AL) = F(k,1) \\
+					\equiv f(k) = \frac{Y}{AL} = y
+				\end{align*}
+
+				The production function expressed in capital per effective is also called intensive form production as it is expressed of labor/factor intensity.
+
+			\subsubsection{Inada conditions}
+				The production function needs a strictly positive amount of both inputs produce any output, i.e
+				\begin{equation*}
+					F(0,AL) = 0 = F(K,0)
+				\end{equation*}
+				We also have $f(0)=0, f' >0, f''<0$
+
+				Inada conditions also limit the asymptotic behavior
+				\begin{align*}
+					\lim_{K \rightarrow 0} F_K &= \infty, \lim_{K \rightarrow \infty} F_K= 0\\
+					\lim_{L \rightarrow 0} F_L &= \infty, \lim_{L \rightarrow \infty} F_L = 0\\
+					\lim_{k \rightarrow 0} f &= \infty, \lim_{k \rightarrow \infty} f= 0
+				\end{align*}
+
+			\subsubsection{Cobb-Douglas production function}
+				For the majority of time, we use Cobb-Douglas production function, which satisfies Inada condition
+				and constant return to scale.
+				\begin{align*}
+					Y &= B K^{\alpha}(AL)^{1-\alpha}, 0<\alpha<1
+				\end{align*}
+
+	\section{Solving the model}
+		\subsection{Income shares}
+			Let the rent rate of capital be $Q$, wage per worker be $W$, then capital's share of income is $\frac{QK}{Y}$, labor's share of income is $\frac{WL}{Y}$
+
+			Now we try to solve for firm's profit maximization condition
+			\begin{equation*}
+				\max_{K_t,L_t} \Pi_t = P_t Y_t - W_t L_t - Q_t K_t
+			\end{equation*}
+			We normalize the price $P_t = 1, \forall t$, this allows us to express $W_t$ and $Q_t$ in the price
+			of final goods, which simplifies the calculation and interpretation.
+
+			First order condition gives
+			\begin{align*}
+				\frac{\partial \Pi_t}{\partial L_t} &= 0\\
+				\implies \frac{\partial Y_t}{\partial L_t}-W_t&=0\\
+				\implies \frac{\partial F(K_t,A_t L_t)}{\partial L_t}-W_t&=0\\
+				\implies F_L(K_t,A_t L_t) &=W_t
+			\end{align*}
+
+			Similarily, \[Q_t = F_W(K_t,A_t L_t) \implies f'(k_t)=Q_t\]
+
+			Now, if we express the wage function in terms of intensive labor:
+			\begin{align*}
+				W &= \frac{\partial A_t L_t f(k_t)}{\partial L_t}\\
+				W &= A_t f(k_t) + A_t L_t \frac{\partial f(k_t)}{\partial k_t}\frac{\partial k_t}{L_t}\\
+				&= A_t f(k_t) + f'(k_t) \frac{K_t}{L_t}\\
+				&= A_t f(k_t) - A_t k_t f'(k_t)\\[4pt]
+				&= A_t [f(k_t)-k_t f'(k_t)]
+			\end{align*}
+
+			Now suppose we also have a TFP term ($B$) in the production function, i.e.
+			\[Y_t = B K_t^\alpha (A_t L_t)^{1-\alpha}\]
+			Then the derived return to capital and wage would be
+			\begin{align*}
+				Q_t &= f'(k_t) = \alpha B_t ^{\alpha-1}\\[4pt]
+				W_t &= A_t [f(k_t)-k_t f'(k_t)]\\
+				&= A_t [B k_t^\alpha - \alpha B k_t^\alpha]\\
+				&= (1-\alpha)A_t B k_t^{\alpha}
+			\end{align*}
+
+			With this, we are able to calculate the capital and wage share of income
+			\begin{align*}
+				\frac{Q_t K_t}{Y_t} &= \frac{Q_t \frac{K_t}{A_t L_t}}{Y_t \frac{1}{A_t L_t}}\\
+				\frac{Q_t k_t}{y_t} &= \frac{\alpha B k_t^\alpha}{B k_t^\alpha} =\alpha\\[4pt]
+				\frac{W_t L_t}{Y_t} &= 1-\alpha\
+			\end{align*}
+			From above, this is exactly why we call $\alpha$ the capital share of income and this aligns with
+			Kaldor's facts.
+
+		\subsection{Evolution of inputs}
+			In the Solow model, only $K$ is endogenous, $A_t, L_t$ are both exogenous variables.
+			In fact, $L$ grows exponentially at the rate $n\geq 0$, i.e.
+			\[L_{t+1} = (1+n)L_t \implies L_t (1+n)^t L_0\]
+			If take natural log,
+			\[\ln L_t = t \ln(1+n)+\ln L_0 \approxeq nt + \ln L_0\],
+			or small value of $n$
+			$A_t$ grows at rate $g\geq 0$.
+			\[A_{t+1}= (1+g)A_t \implies A_t = (1+g)^t A_0\]
+
+		\subsection{Capital accumulation \& dynamics}
+			The so-called ``Solow Growth Equation'' describes the capital accumulation process:
+			\[K_{t+1} = s Y_t + (1-\delta)K_t \equiv K_t + (I_t -\delta K_t)\]
+
+			Also, in a closed economy: $I_t = S_t = s Y_t$, we also have the initial condition $K_0 >0$ is
+			given, while $K_t$ is determined by past investment.\\
+
+			\[
+			\begin{cases}
+				A_{t+1} = (1+g)A_t, & A_0 >0\\
+				L_{t+1} = (1+n)L_t, & L_0 >1
+			\end{cases}\]\\
+
+			Now we write $Y_t$ as production function
+			\[K_{t+1} = s F(K_t, A_t L_t)+(1-\delta)K_t\]
+			and we divide both side by $A_t L_t$
+			\begin{align*}
+				\frac{K_{t+1}}{A_t L_t} &= s f(k_t) + (1-\delta)k_t\\[4pt]
+				\frac{K_{t+1}}{A_{t+1} L_{t+1}} \frac{A_{t+1} L_{t+1}}{A_t K_t} &=  f(k_t) + (1-\delta)k_t\\[4pt]
+				(1+g)(1+n)k_{t+1} &=  f(k_t) + (1-\delta)k_t\\[4pt]
+				k_{t+1} &= \frac{ f(k_t) + (1-\delta)k_t}{(1+g)(1+n)}
+			\end{align*}
+
+			For small value of $g, n$, $ng$ is very small and we can reasonably ignore it and we can define
+			$z = n+g$ to simplify.
+
+			\begin{equation}
+				k_t = \frac{s f(k_t)+(1-\delta)k_t}{1+z}\label{eq:solowss}
+			\end{equation}
+
+			This meant $K_t$ does not have a steady state but a balanced growth path, but $k_t$ has a steady state.
+
+			Now we can also denote $k_{t+1}$ as function of $k_t$
+			\[k_t = \frac{s f(k_t)+(1-\delta)k_t}{1+z} \equiv G(k_t)\]
+
+			To find the local stability of $G(k_t)$ we can take the first order Taylor expansion around the
+			steady state and it depend on $G'(k_t)$
+			For our standard Solow model, we have two steady states $0, k^\ast$.
+
+			Since $G(k_t) = \frac{s f(k_t)+(1-\delta)k_t}{1+z}$,
+			This implies \[G'(k_t) = \frac{1}{1+z}[sf'(0)+(1-\delta)]\]
+
+			We first test the stability of $0$,
+			\[G'(0) = \frac{1}{1+z}[sf'(0)+(1-\delta)] = \infty\]
+			As from Inada condition, $f'(0) = \infty$ $G'(0)=\infty$, which implies $0$ is not a stable steady
+			state.
+
+			Now we check the local stability for $k^\ast$
+			\[G'(k^\ast) = \frac{1}{1+z}[s f'(k^\ast)+(1-\delta)]\]
+			We know from our steady state condition
+			\begin{align*}
+			(1+z)k^{\ast} &= s f(k^\ast) + (1-\delta)k^{\ast}\\
+			\implies (1-\delta) &= (1+z) - s \frac{f(k^\ast)}{k^\ast}\\
+			\implies G'(k^\ast) &= \frac{1}{1+z}\left[s f'(k^\ast)+(1+z) - s \frac{f(k^\ast)}{k^\ast}\right]\\[4pt]
+			G'(k^\ast) &= 1+\frac{1}{1+z}\underbrace{\left[s f'(k^\ast) - s \frac{f(k^\ast)}{k^\ast}\right]}_{<0}<1
+			\end{align*}
+
+	\section{Steady State}
+		\subsection{Balanced growth path}
+			The steady state of Neo-classical model, including Solow, often characterized by ``balanced growth
+			path''.
+
+			Balanced Growth Path of the Solow model is a path along which all quantities
+				${Y_t, C_t, S_t, L_t, K_t}$ grow at constant exponential rate can be 0 Balanced Growth Path of Solow
+
+			In fact, under steady state, all variables expressed in per capita term is constant
+			\begin{align*}
+				k_t &= k^{\ast}, \forall t\\
+				y_t &= f(k_t) = f(k^\ast)=y^{\ast}, \forall t\\
+				s_t &= sy_t = sy^{\ast}, \forall t\\
+				c_t &= (1-s)y_t = (1-s)y^{\ast}, \forall t
+			\end{align*}
+
+			On the other hand, all the per labor term growths at $g$, as the only growing part is $A_t$
+			\begin{align*}
+				\frac{K_t}{L_t} &= A_t k_t = A_t k^{\ast}\\
+				\frac{Y_t}{L_t} &= A_t y_t = A_t y^{\ast}\\
+				\frac{C_t}{L_t} &= A_t (1-s)y_t = A_t (1-s)y^{\ast}\\
+				\frac{S_t}{L_t} &= A_t sy_t = A_t s y^{\ast}
+			\end{align*}
+
+			Finally, most of the aggregate term grows at $z$
+			\begin{align*}
+				K_t &= A_t L_t k_t = \underbrace{A_t L_t}_{\text{grows at } z} k^{\ast}\\
+				Y_t &= A_t L_t y_t = \underbrace{A_t L_t}_{\text{grows at } z} y^{\ast}\\
+				C_t &= (1-s)Y_t\\
+				S_t &= sY_t
+			\end{align*}
+			while $L_t$ grows at $n$
+
+			Since both $K_t$ and $Y_t$ grow at $z$, ratio $\frac{K_t}{Y_t}$ will remain constant, which again,
+			corresponds to the Kaldor's facts.
+
+		\subsection{Factor prices in a steady state}
+			\begin{align*}
+				W_t & = A_t [f(k_t)-k_t f'(k_t)]\\
+				&= A_t [f(k^\ast)-k^\ast f'(k^\ast)]\\
+				Q_t &= f'(k_t) = f'(k^\ast) = Q^{\ast}
+			\end{align*}
+			Since the only growing part in $W_t$ is $A_t$ so naturally it will grow at $g$, while $Q$ is just a
+			constant.
+
+			Now, interest rate (return from capital net of depreciation) is also a constant as
+			\[r_t = Q_t -\delta \]
+
+			Wage per effective worker is also a constant
+			\begin{align*}
+				w_t &=\frac{W_t}{A_t}=f(k_t)-k_t f'(k_t)\\
+				w^{\ast} &= f(k^\ast) - k^{\ast} f'(k^\ast)
+			\end{align*}
+
+			We can see from our previous discussion Solow model satisfies Kaldor's facts 1--5.
+			Below are some interesting further readings.
+
+			\textit{Uzawa}(1961) -- \textbf{The steady-state growth theorem}\\
+				Any neo-classical model that exhibit steady state must have labor augmenting technology.\\
+
+			3-types of technological progress
+			\[
+			\begin{cases}
+				Y_t = F(K_t, A_tL_t) \leftarrow \text{labor augmenting}\\
+				Y_t = F(A_tK_t, L_t) \leftarrow \text{capital augmenting}\\
+				Y_t = A_tF(K_t, L_t) \leftarrow \text{factor neutral}
+			\end{cases}\]\\
+
+			In fact, Acemouglu has shown that any technology selected by people will eventually become labor augmenting in the long-run.
+
+			However, an interesting fact is that Cobb-Douglas production function does not belong to the
+			3-types, as any kind of technology progress can be expressed in labor augmenting technology in
+			Cobb-Douglas.
+
+			\begin{align*}
+				Y_t &= B K_t^{\alpha}(A_t L_t )^{1-\alpha}\\
+				Y_t &= B (A_t K_t)^{\alpha}(L_t )^{1-\alpha}\\
+				&= B A_t^{\alpha} K_t^{\alpha}(L_t )^{1-\alpha}\\
+				&= B K_t^{\alpha} (\underbrace{A_t^{\frac{\alpha}{1-\alpha}}}_{\Gamma_t}L_t)^{1-\alpha}
+			\end{align*}
+			If $A_t$ grows at $g$ then $\Gamma_t$ grows at $\frac{\alpha}{1-\alpha}g$
+
+			Similarily
+			\begin{align*}
+				Y_t &= B A_t K_t^{\alpha}L_t^{1-\alpha}\\
+				&= B K_t^{\alpha}(\underbrace{A_t^{\frac{1}{1-\alpha}}}_{\Phi_t}L_t)^{1-\alpha}
+			\end{align*}
+			$\Phi_t$ grows at $\frac{1}{1-\alpha}g$
+
+	\section{Transitional Dynamics}
+		We can find the growth rate of $k_t$ using our Solow growth equation
+		\[(1+z)k_{t+1}=s f(k_t)+(1-\delta)k_t\]
+		subtract $(1+z)k_t$ from both side
+		\begin{align*}
+		(1+z)(k_{t+1}-k_t) &= s f(k_t)+(1-\delta-1-z)k_t\\[4pt]
+		\frac{k_{t+1}-k_t}{k_t}&=\frac{s f(k_t)/k_t - (z+\delta)}{1+z}
+		\end{align*}
+
+		\subsection{Comparative statics \& dynamics}
+			Suppose $s$ increases, since we know from steady state $sf(k^\ast)=(z+\delta)k^\ast$:
+			\[s = (z+\delta)\frac{k^\ast}{f(k^\ast)}\]
+			So $s\uparrow \implies \frac{k^\ast}{f(k^\ast)} \implies k^\ast \uparrow \implies y^\ast, c^\ast, s^\ast \uparrow$.\\
+
+			However, this will have no effect on the long-run growth.
+			In fact, policy (permanent increases in saving or investment rate) has no effect on long-run growth,
+			only a level of output per worker.
+			Thus, we say policy only has a level effect, not a growth effect.
+
+		\subsection{Golden Rule}
+			A natural question to ask, however, is when this economy reaches efficiency.
+			Here we borrow the definition of Pareto efficiency, i.e. the economy is efficient if we cannot change it
+			a way without making everyone worse off.
+
+			In particular, we want to find an economy where everyone consumes the maximum possible.
+			\[\max_{s} (1-s)f(k^\ast) \implies f(k^\ast)-sf(k^\ast)\]
+			Since we know $sf(k^\ast)=(z+g)k^\ast$,
+			\[\implies \max_{s} f(k^\ast) - (z+g)k^\ast\]
+
+			FOC gives
+			\begin{align*}
+				f'(k^\ast) \frac{\partial k^\ast}{\partial s}-(z+\delta) \frac{\partial k^\ast}{\partial s}&=0\\
+				[f'(k^\ast)-(1+\delta)] \frac{\partial k^\ast}{\partial s}&=0\\
+				\implies f'(k^\ast)-(1+\delta) &=0
+			\end{align*}
+
+			The condition above is the golden rule condition for capital stock.
+
+			Thus, economists can use the equation below to measure an economy's efficiency.
+			\[f'(k_{GR})-\delta = z \simeq n+g\]
+
+			Back to our steady state condition
+			\begin{align*}
+				S_{GR} f(k_{GR}) &= (z+\delta)k_{GR}\\
+				\implies S_{GR} &= \frac{(z +\delta)K_{GR}}{f(k_{GR})}
+			\end{align*}
+			Back to our steady state condition
+			\begin{align*}
+				S_{GR} f(k_{GR}) &= (z+\delta)k_{GR}\\
+				\implies S_{GR} &= \frac{(z +\delta)K_{GR}}{f(k_{GR})}
+			\end{align*}
+
+\end{document}

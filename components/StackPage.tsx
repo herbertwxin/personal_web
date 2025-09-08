@@ -9,14 +9,8 @@ interface StackModel {
   description: string
   difficulty: string
   topics: string[]
-  pages: number
-  downloads: number
+  pdfPath: string
   lastUpdated: string
-  demoContent: {
-    equations: string[]
-    codeExample: string
-    keyFeatures: string[]
-  }
 }
 
 interface StackPageProps {
@@ -36,149 +30,93 @@ export function StackPage({ onViewModel }: StackPageProps) {
   const models = [
     {
       id: 0,
-      title: 'DSGE Model Framework',
-      description:
-        'A comprehensive Dynamic Stochastic General Equilibrium model for analyzing monetary policy effects in small open economies.',
+      title: 'Complete Markets',
+      description: 'Comprehensive analysis of complete markets with social planner solutions, competitive equilibrium, and Arrow-Debreu market structures.',
       difficulty: 'Advanced',
-      topics: ['Monetary Policy', 'Open Economy', 'Bayesian Estimation'],
-      pages: 45,
-      downloads: 234,
-      lastUpdated: 'Nov 2024',
-      demoContent: {
-        equations: [
-          'Y(t) = A(t)K(t)^α L(t)^(1-α)',
-          'dA/dt = σA dW(t)',
-          'C(t) + I(t) = Y(t)',
-        ],
-        codeExample:
-          '// DSGE Model Simulation\nfunction solveDSGE(params) {\n  const {alpha, beta, sigma} = params;\n  // Solve equilibrium conditions...\n  return solution;\n}',
-        keyFeatures: [
-          'Bayesian Estimation',
-          'Impulse Response Functions',
-          'Policy Simulation',
-        ],
-      },
+      topics: ['Complete Markets', 'Arrow-Debreu', 'General Equilibrium'],
+      pdfPath: 'downloadable/stack/Complete_markets.pdf',
+      lastUpdated: 'Dec 2024',
     },
     {
       id: 1,
-      title: 'Growth Theory Toolkit',
-      description:
-        'Mathematical foundations and computational tools for endogenous growth models with human capital accumulation.',
+      title: 'Differential Equations in Economics',
+      description: 'Mathematical foundations of differential equations applied to economic modeling and dynamic systems.',
       difficulty: 'Intermediate',
-      topics: ['Growth Theory', 'Human Capital', 'Optimization'],
-      pages: 38,
-      downloads: 178,
-      lastUpdated: 'Oct 2024',
-      demoContent: {
-        equations: [
-          'g = sA - δ',
-          'A(t+1) = A(t)(1 + g)',
-          'h(t+1) = h(t)(1 + φ(u))',
-        ],
-        codeExample:
-          '// Growth Model Implementation\nconst growthModel = {\n  savings_rate: 0.2,\n  depreciation: 0.05,\n  technology_growth: 0.03\n};',
-        keyFeatures: [
-          'Human Capital Accumulation',
-          'Endogenous Growth',
-          'Productivity Analysis',
-        ],
-      },
+      topics: ['Differential Equations', 'Dynamic Systems', 'Mathematical Methods'],
+      pdfPath: 'downloadable/stack/Differential.pdf',
+      lastUpdated: 'Dec 2024',
     },
     {
       id: 2,
-      title: 'New Keynesian Basics',
-      description:
-        'Introduction to New Keynesian macroeconomics with practical examples and step-by-step derivations.',
-      difficulty: 'Beginner',
-      topics: ['New Keynesian', 'Price Rigidity', 'Welfare Analysis'],
-      pages: 52,
-      downloads: 412,
-      lastUpdated: 'Sep 2024',
-      demoContent: {
-        equations: [
-          'π(t) = βE[π(t+1)] + κx(t)',
-          'x(t) = E[x(t+1)] - σ(i(t) - E[π(t+1)])',
-          'i(t) = φ_π π(t) + φ_x x(t)',
-        ],
-        codeExample:
-          '// NK Phillips Curve\nfunction phillipsCurve(inflation, output_gap) {\n  return beta * expected_inflation + \n         kappa * output_gap;\n}',
-        keyFeatures: ['Price Rigidities', 'Welfare Analysis', 'Policy Rules'],
-      },
+      title: 'Endogenous Growth Theory',
+      description: 'Advanced treatment of endogenous growth models with human capital, R&D, and technological progress.',
+      difficulty: 'Advanced',
+      topics: ['Endogenous Growth', 'Human Capital', 'Innovation'],
+      pdfPath: 'downloadable/stack/End_Growth.pdf',
+      lastUpdated: 'Dec 2024',
     },
     {
       id: 3,
-      title: 'Real Business Cycles',
-      description:
-        'Classical RBC models with productivity shocks, including calibration techniques and empirical validation methods.',
+      title: 'Monetary Economics',
+      description: 'Theoretical foundations of monetary economics including money demand, inflation, and monetary policy transmission.',
       difficulty: 'Intermediate',
-      topics: ['RBC', 'Productivity', 'Calibration'],
-      pages: 41,
-      downloads: 156,
-      lastUpdated: 'Aug 2024',
-      demoContent: {
-        equations: [
-          'Z(t+1) = ρZ(t) + ε(t+1)',
-          'Y(t) = Z(t)K(t)^α N(t)^(1-α)',
-          'K(t+1) = (1-δ)K(t) + I(t)',
-        ],
-        codeExample:
-          '// RBC Model Calibration\nconst params = {\n  alpha: 0.33,\n  beta: 0.99,\n  delta: 0.025,\n  rho: 0.95\n};',
-        keyFeatures: [
-          'Technology Shocks',
-          'Calibration Methods',
-          'Business Cycle Analysis',
-        ],
-      },
+      topics: ['Monetary Theory', 'Inflation', 'Central Banking'],
+      pdfPath: 'downloadable/stack/Monetary.pdf',
+      lastUpdated: 'Dec 2024',
     },
     {
       id: 4,
-      title: 'Financial Frictions',
-      description:
-        'Models incorporating banking sector and financial intermediation in macroeconomic analysis.',
-      difficulty: 'Advanced',
-      topics: ['Financial Frictions', 'Banking', 'Credit'],
-      pages: 48,
-      downloads: 89,
-      lastUpdated: 'Jul 2024',
-      demoContent: {
-        equations: [
-          'Q(t+1) = θ[S(t) - D(t)] + (1-θ)Q(t)',
-          'R(t+1) = R* + ω[Q(t) - Q*]',
-          'Y(t) = min(K(t), Q(t)L(t))',
-        ],
-        codeExample:
-          '// Financial Accelerator\nfunction creditSpread(net_worth, leverage) {\n  return base_spread + \n         premium * Math.pow(leverage, elasticity);\n}',
-        keyFeatures: [
-          'Credit Constraints',
-          'Financial Accelerator',
-          'Banking Sector',
-        ],
-      },
+      title: 'Neoclassical Growth Model',
+      description: 'Classical treatment of the Solow-Swan growth model with extensions and empirical applications.',
+      difficulty: 'Beginner',
+      topics: ['Solow Model', 'Growth Theory', 'Capital Accumulation'],
+      pdfPath: 'downloadable/stack/Neo_classical.pdf',
+      lastUpdated: 'Dec 2024',
     },
     {
       id: 5,
-      title: 'Labor Market Dynamics',
-      description:
-        'Search and matching models for understanding unemployment and labor market fluctuations.',
+      title: 'New Keynesian Model',
+      description: 'Modern New Keynesian framework with price rigidities, monopolistic competition, and monetary policy analysis.',
+      difficulty: 'Advanced',
+      topics: ['New Keynesian', 'Price Rigidity', 'Monetary Policy'],
+      pdfPath: 'downloadable/stack/NK.pdf',
+      lastUpdated: 'Dec 2024',
+    },
+    {
+      id: 6,
+      title: 'Overlapping Generations Model',
+      description: 'Dynamic general equilibrium model with overlapping generations, lifecycle behavior, and intergenerational transfers.',
+      difficulty: 'Advanced',
+      topics: ['OLG Model', 'Lifecycle', 'Intergenerational'],
+      pdfPath: 'downloadable/stack/OLG.pdf',
+      lastUpdated: 'Dec 2024',
+    },
+    {
+      id: 7,
+      title: 'Ramsey Growth Model',
+      description: 'Optimal growth theory with intertemporal choice, dynamic optimization, and welfare analysis.',
       difficulty: 'Intermediate',
-      topics: ['Search Models', 'Unemployment', 'Matching'],
-      pages: 35,
-      downloads: 203,
-      lastUpdated: 'Jun 2024',
-      demoContent: {
-        equations: [
-          'U(t) = M(u(t), v(t))',
-          'u̇(t) = s - δu(t) - f(θ(t))u(t)',
-          'v̇(t) = λ - f(θ(t))u(t)',
-        ],
-        codeExample:
-          '// Matching Function\nfunction matchingRate(unemployment, vacancies) {\n  const theta = vacancies / unemployment;\n  return A * Math.pow(theta, alpha);\n}',
-        keyFeatures: [
-          'Search and Matching',
-          'Job Creation',
-          'Labor Market Frictions',
-        ],
-      },
+      topics: ['Ramsey Model', 'Optimal Growth', 'Dynamic Optimization'],
+      pdfPath: 'downloadable/stack/Ramsey.pdf',
+      lastUpdated: 'Dec 2024',
+    },
+    {
+      id: 8,
+      title: 'Real Business Cycle Model',
+      description: 'Classical RBC framework with technology shocks, calibration methods, and business cycle analysis.',
+      difficulty: 'Intermediate',
+      topics: ['RBC Model', 'Technology Shocks', 'Business Cycles'],
+      pdfPath: 'downloadable/stack/RBC.pdf',
+      lastUpdated: 'Dec 2024',
+    },
+    {
+      id: 9,
+      title: 'Solow Growth Model',
+      description: 'Fundamental growth model covering Kaldor facts, steady state analysis, and transitional dynamics.',
+      difficulty: 'Beginner',
+      topics: ['Solow Model', 'Growth Theory', 'Steady State'],
+      pdfPath: 'downloadable/stack/Solow.pdf',
+      lastUpdated: 'Dec 2024',
     },
   ]
 
@@ -186,23 +124,30 @@ export function StackPage({ onViewModel }: StackPageProps) {
   useEffect(() => {
     let filtered = models
 
-    if (selectedFilter === 'DSGE') {
-      filtered = models.filter(
-        model =>
-          model.topics.some(topic => topic.includes('DSGE')) ||
-          model.title.toLowerCase().includes('dsge')
-      )
-    } else if (selectedFilter === 'Growth Theory') {
+    if (selectedFilter === 'Growth Theory') {
       filtered = models.filter(
         model =>
           model.topics.some(topic => topic.includes('Growth')) ||
-          model.title.toLowerCase().includes('growth')
+          model.title.toLowerCase().includes('growth') ||
+          model.title.toLowerCase().includes('solow') ||
+          model.title.toLowerCase().includes('ramsey')
       )
     } else if (selectedFilter === 'New Keynesian') {
       filtered = models.filter(
         model =>
           model.topics.some(topic => topic.includes('Keynesian')) ||
           model.title.toLowerCase().includes('keynesian')
+      )
+    } else if (selectedFilter === 'Monetary') {
+      filtered = models.filter(
+        model =>
+          model.topics.some(topic => topic.includes('Monetary')) ||
+          model.title.toLowerCase().includes('monetary')
+      )
+    } else if (selectedFilter === 'Advanced Models') {
+      filtered = models.filter(
+        model =>
+          model.difficulty === 'Advanced'
       )
     }
 
@@ -222,7 +167,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
     }
   }
 
-  const filterOptions = ['All Models', 'DSGE', 'Growth Theory', 'New Keynesian']
+  const filterOptions = ['All Models', 'Growth Theory', 'New Keynesian', 'Monetary', 'Advanced Models']
 
   return (
     <motion.div
@@ -247,8 +192,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
             Mathematical Macroeconomics Stack
           </h1>
           <p className='text-lg text-gray-700 mb-6 max-w-4xl'>
-            A curated collection of mathematical models, frameworks, and
-            computational tools for advanced macroeconomic analysis.
+            A comprehensive collection of mathematical notes and derivations covering fundamental and advanced topics in macroeconomic theory.
           </p>
         </motion.div>
 
@@ -263,11 +207,10 @@ export function StackPage({ onViewModel }: StackPageProps) {
           {filterOptions.map(option => (
             <button
               key={option}
-              className={`text-sm px-3 py-1 rounded transition-colors ${
-                selectedFilter === option
+              className={`text-sm px-3 py-1 rounded transition-colors ${selectedFilter === option
                   ? 'bg-gray-100 text-black'
                   : 'text-gray-600 hover:text-black'
-              }`}
+                }`}
               onClick={() => setSelectedFilter(option)}
             >
               {option}
@@ -313,7 +256,6 @@ export function StackPage({ onViewModel }: StackPageProps) {
                       <span className={`font-medium ${getDifficultyColor(model.difficulty)}`}>
                         {model.difficulty}
                       </span>
-                      <span>{model.lastUpdated}</span>
                     </div>
                   </div>
 
@@ -323,7 +265,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
                   </p>
 
                   {/* Tabular metadata */}
-                  <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-3 text-sm'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-3 text-sm'>
                     <div>
                       <span className='font-medium text-gray-600'>Topics:</span>{' '}
                       <span className='text-gray-700'>
@@ -331,12 +273,8 @@ export function StackPage({ onViewModel }: StackPageProps) {
                       </span>
                     </div>
                     <div>
-                      <span className='font-medium text-gray-600'>Pages:</span>{' '}
-                      <span className='text-gray-700'>{model.pages}</span>
-                    </div>
-                    <div>
-                      <span className='font-medium text-gray-600'>Downloads:</span>{' '}
-                      <span className='text-gray-700'>{model.downloads}</span>
+                      <span className='font-medium text-gray-600'>Last Updated:</span>{' '}
+                      <span className='text-gray-700'>{model.lastUpdated}</span>
                     </div>
                   </div>
 
@@ -346,10 +284,17 @@ export function StackPage({ onViewModel }: StackPageProps) {
                       size='sm'
                       variant='outline'
                       className='text-[#6A5ACD] border-[#6A5ACD] hover:bg-[#6A5ACD] hover:text-white'
-                      onClick={() => onViewModel(model.id)}
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = model.pdfPath;
+                        link.download = model.pdfPath.split('/').pop() || 'document.pdf';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
                     >
                       <Play className='w-3 h-3 mr-1' />
-                      View Model
+                      Download PDF
                     </Button>
                   </div>
                 </div>

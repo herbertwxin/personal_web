@@ -1,0 +1,931 @@
+%! Author = herbertxin
+%! Date = 1/20/25
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{float}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Micro II}
+\chead{Producer Theory}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=NOTE,               % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+\newcommand{\argmax}{\operatorname*{arg\,max}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+
+\begin{document}
+
+	\title{Producer Theory}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Technology}
+		A \textbf{production technology} can be described as a function that maps multiple inputs into single outputs.
+		\[ y = f(\bold x)\]
+		where $\bold x$ is a vector of inputs and $y$ is the single output.
+		
+		
+		A \textbf{production plan} $(y, x)$, on the other hand, is a technologically efficient allocation where there does not exist a production plan $(y', x') \neq (y, x)$ such that $y' \geq y, x_i' \leq x_i, \forall i$.
+		
+		An \textbf{isoquant} is the set of all positive input bundles that allow the firm to produce exactly $y$.
+		\[Q(y) = \lbrace x \in \mathbb R_+^h | f(x)=y \rbrace \]
+		
+		Now, the return to scale of a production function can be easily defined using degrees of homogeneity 
+		\begin{itemize}
+			\item IRS when homogeneous of degree greater than one
+			\item CRS when homogeneous of degree one
+			\item DRS when homogeneous of degree less than one
+		\end{itemize}
+		
+		The \textbf{marginal product} and \textbf{average product} of input $x_i$ are 
+		\[ MP = \frac{\partial f(x)}{\partial x_i}, AP = \frac{f(x)}{x_i}\]
+		
+		Now, an important concept here is \textbf{marginal rate of transformation} (MRT), or marginal rate of technical substitution (MRTS). I follow the notation of MWG here. 
+		MRT measures the tradeoff between two goods while keeping output constant, i.e. 
+		\[MRT_{ij}(\bar y) = \frac{\partial f(\bar y) / \partial x_i}{\partial f(\bar y) / \partial x_j}\]
+		
+		To see this, we observe 
+		\[\frac{\partial f(\bar y)}{\partial x_i} d y_i + \frac{\partial f(\bar y)}{\partial x_j}dy_j=0\] 
+		is the change in $x_i$ and $x_j$ such that $\bar y$ stays constant, which is precisely 
+		\[\left|\frac{d x_j}{d x_i}\right| = \frac{\partial f(\bar y) / \partial x_i}{\partial f(\bar y) / \partial x_j} = MRT_{ij}\]
+		
+		The \textbf{elasticity of substitution} is 
+		\[\sigma = \frac{\partial \ln(x_j/x_i)}{\partial \ln MRT(x_i, x_j)}= \frac{\partial \ln(x_j/x_i)}{\partial \ln (\frac{\partial f}{\partial x_i}/\frac{\partial f}{\partial x_j})}\]
+		which represents the change in input ratio given a change in MRT. High $\sigma$ thus represents the two inputs are highly substitutable given a small change in MRT.
+		
+		Graphically, MRT represents the slope of the isoquant while elasticity represents the curvature. When $\sigma=0$, we have perfect complement, i.e. inputs cannot be substitute for each other, and we have Leontieff isoquant. When $\sigma = \infty$ we have perfect substitute and the isoquant is a straight. 
+		
+	\section{Profit Maximization}
+		The \textbf{unconditional factor demand} is calculated as 
+		\[x(p,w) = \argmax _x \left[ p \cdot f(x)-wx \right]\]
+		where $\argmax$ outputs the arguments that maximizes the function.
+		
+		The \textbf{supply function} is then 
+		\[y(p,w) = f(x(p,w))\]
+		
+		Now the \textbf{law of suppply} says: $\frac{\partial y}{\partial p} \geq 0$, more formally,
+		\[(p''-p')[y(p'', w)-y(p',w)]\geq 0\]
+		
+		Similarly, the \textbf{law of demand} gives $\frac{\partial x}{\partial p} \leq 0$, which is 
+		\[(w''-w')[x(p, w'')-x(p,w'')]\leq 0\]
+		
+		The supply function $y(p,w)$ and factor demand $x(p,w)$ are homogeneous of degree 0, as 
+		\[pf(x) - wx \geq pf(x')-wx'\]
+		scaling the inequality by $\lambda$, i.e. both price and factor price got scaled by $\lambda$, the inequality still holds
+		\[\lambda pf(x) - \lambda wx \geq \lambda pf(x')- \lambda wx'\]
+		meaning the terms related to $x$ has not changed, otherwise it would become $\lambda x$, and this implies HD0. Since the factor demand is HD0, then the supply function is also HD0, as $y(x(p,w))$.
+		
+		The profit function $\pi (p,w)$, on the other hand, is homogeneous of degree 1, as
+		\[\pi(\lambda p,\lambda w)=\lambda pf(x) - \lambda wx = \lambda \pi(p,w)\]
+		
+		The profit function is also convex in $(p,w)$.
+		
+		\subsection{Envelope theorem}
+		
+			In short, the \textbf{envelope theorem} says changing the parameter only causes direct effect, not indirect effect through the argument at optimal.
+			
+			Consider the maximization problem 
+			\[V(\alpha) = \max_x u(x,\alpha)\]
+			Let $x^\ast (\alpha) = \argmax_x u(x,\alpha)$, since we know $x^\ast(\alpha)$ is the optimal, it must be true that 
+			\[\frac{\partial u(x^\ast(\alpha), \alpha)}{\partial x}=\frac{\partial u^\ast}{\partial x}=0\]
+			To see the envelope theorem, take the derivate of $V(\alpha)=u(x^\ast (\alpha), \alpha)$, i.e. at the optimal.
+			\[\frac{\partial V}{\partial \alpha}=\frac{\partial u^\ast}{\partial x} \frac{\partial x^\ast}{\partial \alpha}+\frac{\partial u}{\partial \alpha}=\frac{\partial u}{\partial \alpha}\] 
+			
+			
+			Now, the profit function at optimal is 
+			\[\pi^\ast (p,w) = pf(x^\ast(p,w)) - wx^\ast(p,w) \]
+			and by optimality condition
+			\[\frac{\partial x^\ast(p,w)}{\partial p}=0\]
+			Thus, applying the envelope theorem to the profit function gives the hotelling's lemma:
+			\[\frac{\partial \pi^\ast (p,w)}{p}= f(x^\ast(p,w)) = y(p,w) \geq 0\]
+			Similarly, 
+			\[\frac{\partial \pi^\ast (p,w)}{w_i}=-x^\ast_i(p,w) \leq 0\]
+			
+			
+	\section{Cost Minimization}
+	
+		With cost minimization problem we solve
+		\[ \min_{x} w x, \text{ subject to } f(x) \geq y \]
+		
+		The resulting first-order necessary conditions are
+		\begin{align*}
+			y &= f(x^\ast)\\
+			w_i &\geq \lambda \frac{\partial f(x^\ast)}{\partial x_i}
+		\end{align*}
+		with equality if $x_i^\ast >0$, these first order conditions are sufficient if $f(x)$ is quasi-concave.
+		
+		In the case of no corner solutions, the necessary conditions can be written as 
+		\begin{align*}
+			MRTS = \left| \frac{dx_i}{dx_j}\right| = \frac{\partial f(x^\ast)/\partial x_j}{\partial f(x^\ast)/\partial x_i} = \frac{w_j}{w_i}
+		\end{align*}
+		and 
+		\[y = f(x^\ast)\]
+		which is the exactly the tangency of isoquant and isocost line.
+		
+		We define the resulting factor demand as conditional factor demand
+		\[z(w,y) = \argmin_x (w)x \ \text{ subject to } f(x) = y\]
+		
+		The conditional factor demand is \textbf{HD0}
+		
+		The corresponding cost function is 
+		\[c(w,y) = \sum_{i=1}^{h} w_i z_i (w,y) = w z(w,y)\]
+		
+		\subsection{Shepard's Lemma}
+		If $z(w,y)$ is single valued and $c(w,y)$ differentiable w.r.t $w$, then 
+		\[\frac{\partial c(w,y)}{\partial w_i} = z_i (w,y)\]
+		
+		To proof it, notice that the cost function is 
+		\[c(w,y) = \sum_{i=1}^{h} w_i z_i (w,y) \]
+		differentiate w.r.t. $w_i$ and apply the envelope theorem yields the result.
+		
+		Similarily, the Lagrangian multiplier of the cost minimization problem is the marginal cost of output
+		\[\frac{\partial c(w,y)}{\partial y} = \lambda(w,y)\]
+		Again, this results from taking derivate w.r.t $y$ and apply envelope theorem on the cost function.
+		\[c(w,y) = \min_x wx - \lambda(w,y)(f(x)-y)\]
+		
+		The cost function is also 
+		\begin{enumerate}
+			\item non-decreasing in y
+			\item HD1 in $w$
+			\item concave in $W$
+		\end{enumerate}
+		
+		\subsection{Properties of technology}
+		Some other properties includes
+		\begin{itemize}
+			\item If $f(x)$ is homogenous of degree 1 (CRS), then conditional factor demands $z(w,y)$ are also homogenous of degree 1 in $y$.
+			\item If $f(x)$ is homogenous of degree 1 (CRS), then conditional factor demands $c(w,y)$ are also homogenous of degree 1 in $y$.
+			\item If $f(x)$ exhibits IRS, then the cost function $c(w,y)$ is concave in $y$.
+			\item $f(x)$ with IRS has decreasing marginal cost function and average cost function such that \[\frac{\partial c(w,y)}{\partial y}\leq \frac{c(w,y)}{y}\]
+			\item If $f(x)$ exhibits DRS, then cost function $c(w,y)$ is convex in $y$
+			\item $f(x)$ with IRS has increasing marginal cost function and average cost function such that \[\frac{\partial c(w,y)}{\partial y}\geq \frac{c(w,y)}{y}\]
+		\end{itemize}
+		
+		\subsection{Profit maximization with Cost function}
+		The maximization problem is now 
+		\begin{align*}
+			\max_y py-c(w,y)
+		\end{align*}
+		
+		Necessary FOCs are
+		\[p \leq \frac{\partial c(w,y^\ast)}{\partial y}\]
+		with equality if output is positive
+		
+		Sufficient SOC for local maximum is 
+		\[\frac{\partial^2 c(w,y^\ast)}{\partial y^2}>0\]
+		
+		For all inputs $i,j$ such that $x_i>0, x_j>0$,
+		\[\frac{w_i}{MP_i} = \frac{w_j}{MP_j} = MC\]
+		holds at equilibrium.
+		
+		\section{Equilibrium}
+		\subsection{Aggregation}
+		The total production is the sum of production from each firm
+		\begin{align*}
+			y(p,w) = \sum_{j=1}^{J} y^j(p,w)
+		\end{align*}
+		
+		The aggregate producer then solves
+		\begin{align*}
+			&\max_{x^1, \ldots,x^J} \sum_{j=1}^J p f^j(x_j) - \sum_{j=1}^J w x_j \\
+			=&\sum_{j=1}^{J} \max_{x_j} (pf^j(x_j)-wx_j)
+		\end{align*}
+		
+		where $f(x)$ is the production technology.\\
+		
+		An allocation is feasible if 
+		\begin{align*}
+			\sum_i x_l^i \leq w_l + \sum_j y_l^j - \sum_j z_l^j
+		\end{align*}
+		where $x_l^i$ is the consumption of good $l$ by $i$. $w_l$ is the endowment of good $l$. $y_l^j$ is the production of $l$ by firm $j$, and $z_l^j$ is the input $l$ used by firm $j$.
+		
+		\subsection{Equilibrium}
+		The condition for competitive equilibrium is 
+		\begin{itemize}
+			\item Firms maximize profits
+			\item Consumer maximize utility
+			\item Market clears
+		\end{itemize}
+		Note both firms and consumers take price $p^\ast$ as given\\
+		
+		\subsubsection{Firm's problem}
+		Firm solves the profit maximization problem
+		\begin{align*}
+			\max_{y^j, z^j} p^\ast y^j - p^\ast z^j
+		\end{align*}
+		subject to technological feasibility
+		
+		where $\pi^{j \ast}$ denotes the maximum profit of $j$
+		
+		\subsubsection{Consumer's problem}
+		The consumer solves the problem of 
+		\begin{align*}
+			\max_{x^i} u^i(x^i)
+		\end{align*}
+		subject to the budget constraint
+		\[p^\ast x^i \leq p^\ast w^i +\sum_j \theta_j^i \pi^{j\ast}\]
+		where $\theta_j^i$ is $i$'s share of firm $j$
+		
+		\subsubsection{Market clearing}
+		for each good $l = 1, \ldots, L$
+		\begin{align*}
+			\sum_i x_l^{i\ast} + \sum_j z_l^{j \ast} = w_l + \sum_j y_l^{j \ast}
+		\end{align*}
+		
+		\subsection{First Welfare Theorem}
+		Assume preferences are locally non-satiated. If \((x^*, y^*, z^*, p^*)\) is a competitive equilibrium, then the associated allocation \((x^*, y^*, z^*)\) is \textcolor{orange}{\textbf{Pareto optimal}}.
+		
+		To state this mathematically, Pareto efficient means there does not exist any feasible allocation $(x', y', z')$ such that 
+		\[ u^{\hat{i}}(x^{\hat{i}'}) > u^{\hat{i}}(x^{\hat{i}\ast}) \tag{4.3.1}\]
+		for at least one $hat{i}$ and
+		\[ u^i(x^{i'}) \geq u^i(x^{i\ast}) \tag{4.3.2}\]
+		for all $i$, which can be proved by contradiction.
+		
+		For (4.3.1), if such feasible allocation exits, then $x^{\hat{i}\ast}$ is violates the utility maximization condition.
+		
+		Thus, it must be the case 
+		\[p^\ast x^{\hat{i}'}> p^\ast w^{\hat{i}} +\sum_j \theta_j^{\hat{i}} \pi^{j\ast} \tag{4.3.3}\]
+		
+		For (4.3.2), it must the case that 
+		\[p^\ast x^{i'} \geq p^\ast w^{i} +\sum_j \theta_j^{i} \pi^{j\ast}\tag{4.3.4}\]
+		Otherwise, by local non-satiated there is another bundle that is also feasible and preferred to $x^{i'}$.
+		
+		Sum (4.3.3) and (4.3.4), i.e. over all $i$, we get 
+		\[
+		p^* \sum_i x^{i'} > p^* \omega + \sum_j \pi^{j*}\]
+		
+		Also, we know that 
+		\[
+		\pi^{j*} = p^* y^{j*} - p^* z^{j*} \geq p^* y^{j'} - p^* z^{j'}
+		\]
+		This implies 
+		\[
+		p^* \sum_i x^{i'} > p^* \omega + \sum_j \pi^{j*} \geq p^* \omega + \sum_j \big(p^* y^{j'} - p^* z^{j'}\big)
+		\]
+		
+		Now we can rewrite it in terms of each good 
+		\[
+		\sum_{\ell} p^*_{\ell} \sum_i x^{i'}_{\ell} > \sum_{\ell} p^*_{\ell} \omega_{\ell} + \sum_{\ell} \sum_j \big(p^*_{\ell} y^{j'}_{\ell} - p^*_{\ell} z^{j'}_{\ell}\big)
+		\]
+		
+		Sum across all goods 
+		\[
+		p^* \sum_i x^{i'} > p^* \omega + \sum_j \big(p^* y^{j'} - p^* z^{j'}\big) \tag{4.3.5}
+		\]
+		
+		
+		Now, by the feasibility condition, we have 
+		\[
+		\sum_i x^{i'}_{\ell} \leq \omega_{\ell} + \sum_j y^{j'}_{\ell} - \sum_j z^{j'}_{\ell}
+		\]
+		
+		Multiply by $p^\ast_l$ and sum across goods gives
+		\[
+		p^* \sum_i x^{i'} \leq p^* \omega + \sum_j \big(p^* y^{j'} - p^* z^{j'}\big) \tag{4.3.6}
+		\]
+		
+		Now clearly (4.3.5) and (4.3.6) violates each other and completes the proof.
+		
+		\section{Partial Equilibrium Analysis}
+		\subsection{Consumer's optimization}
+		In this section, we uses a quasi-linear utility function:
+		\begin{align*}
+			u^i(m^i,x^i)&=m^i + \phi^i (x^i)\\
+			\phi' >0,  \quad \phi''<0, &\quad \phi' \rightarrow 0, \text{ as } x^i \rightarrow \infty
+		\end{align*}		
+		where $x$ is the consumption good and $m$ is the numeraire, money, in this case.
+		
+		The quasi-linear preference meant there is no wealth effect and agent can consume negative amount of numeraire. 
+		
+		We take $p$ to be the price of good $x$ and normalized price of $m$ to 1. Consumers haver endowment $\omega^i$ in numeraire and own shares $\theta_j^i$ of firm $j$.
+		
+		So the consumer solves 
+		\begin{align*}
+			\max_{x^i, m^i} m^i + \phi^i(x^i)
+		\end{align*}
+		subject to 
+		\begin{align*}
+			m^i + p^\ast x^i \leq \omega^i + \sum_j \theta^i_j \pi^{j\ast}
+		\end{align*}
+		
+		At optimal, the budget constrain holds with equality, i.e. 
+		\begin{align*}
+			m^i = \omega^i + \sum_j \theta^i_j \pi^{j\ast} - p^\ast x^i
+		\end{align*}
+		Substitute this into the maximization problem 
+		\begin{align*}
+			\max_{x^i} \phi^i (x^i) - p^\ast x^i + \omega^i + \sum_j \theta^i_j \pi^{j\ast}
+		\end{align*}
+		The necessary and sufficient FOC is then 
+		\begin{align*}
+			\phi^{i \prime}(x^{i\ast})\leq p^\ast
+		\end{align*}
+		
+		\subsection{Firm's optimization}
+		The firm's profit maximization is given by
+		\begin{align*}
+			\pi^{j\ast} = \max_{q^j} p^\ast q^j - c^j (q^j)
+		\end{align*}
+		where $p^\ast$ is given and $c^j(q^j)$ is the firm's cost function. The necessary and sufficient FOC is 
+		\begin{align*}
+			p^\ast \leq c^{j\prime} (q^{j\ast})
+		\end{align*}
+		
+		\subsection{Market clearing}
+		The consumption market clears when 
+		\begin{align*}
+			\sum_i x^{i \ast} = \sum_j q^{j^\ast}
+		\end{align*}
+		
+		Now consumption market clearing, combined with consumer and firm's maximization problem implies to the numeraire clearing. From the consumer's budget constraint
+		\begin{align*}
+			m^i + p^\ast x^i \leq \omega^i + \sum_j \theta^i_j \pi^{j\ast}
+		\end{align*}
+		summing over individuals and plugging in the definition of profits 
+		\begin{align*}
+			\sum_i m^i + p^\ast \sum_i x^i = \omega + \sum_j (p^\ast q^{j \ast}-c^j (q^{j\ast}))
+		\end{align*}
+		With the consumption market clearing condition, we get
+		\begin{align*}
+			\sum_i m^{i\ast} + \sum_j c^j (q^{j \ast})=\omega
+		\end{align*}
+		which is the market clearing for numeraire.
+		
+		The aggregate market clearing condition is then 
+		\begin{align}
+			p^\ast &\leq c^{j\prime} (q^{j\ast})\\
+			\phi^{i \prime}(x^{i\ast})&\leq p^\ast\\
+			\sum_i x^{i \ast} &= \sum_j q^{j^\ast}
+		\end{align}
+		This aligns with the competitive equilibrium condition discussed earlier. Also, note that these equilibrium condition don't depend on endowments $w^i$ or $\theta_j^i$.
+		
+		\subsection{Aggregation}
+		
+		The aggregation of Marshallian gives the aggregate demand
+		\[ x(p) = \sum_i x^i(p)\]
+		
+		Graphically, it is the sum of individual demand curve
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{AD.png}
+		\end{figure}
+		
+		
+		Now the aggregate supply function for firms is 
+		\[ q(p) = \sum_j q^j(p_j)\]
+		graphically, this is 
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{AS.png}
+		\end{figure}	
+		
+		The equilibrium is therefore characterized by a price $p^\ast$ such that 
+		\[x(p^\ast) = q(p^\ast)\]
+		
+		Since this is the aggregation of individual supply and demand, given the price $p^\ast$, we can back out the individual demand and supply.
+		
+		\subsubsection{Inverse of supply and demand}
+		
+		The inverse of aggregate supply is 
+		\[q^{-1}(\tilde{q})=\tilde{p}\]
+		which simply says given the price $\tilde{p}$, the quantity supplied is $\tilde{q}$
+		
+		Similarly, the inverse aggregate demand is given by 
+		\[x^{-1}(\tilde{x})=\tilde{p}\]
+		which gives the quantity demanded given the price. 
+		Since the demand curve is the individual marginal benefit, or willingness to pay, the inverse aggregate demand is the marginal social benefit.
+		\[P(\tilde{x})=x^{-1}(\tilde{x})\]
+		
+		In equilibrium we have
+		\[P(\cdot) = p^\ast = C'(\cdot)\]
+		
+		\subsubsection{Tax example}
+		Suppose we now have a sales tax on good $x$ such that consumer pays $p+t$ for each unit of $x$ while the firm receives $p$.
+		
+		The consumer's problem is the same as before but with the addition of tax
+		\begin{align*}
+			\max_{x^i, m^i} m^i + \phi^i(x^i)
+		\end{align*}
+		subject to 
+		\begin{align*}
+			m^i + (p^\ast+t) x^i \leq \omega^i + \sum_j \theta^i_j \pi^{j\ast}
+		\end{align*}
+		
+		Thus, the optimal solution is merely
+		\[ \hat{x}^i(p) = x^i (p+t)\]
+		Thus, the equilibrium is 
+		\[ x(p^\ast +t ) = q(p^\ast)\]
+		Since the tax has changed the equilibrium price, we have
+		\[ x(p^\ast(t) +t ) = q(p^\ast(t))\]
+		Assuming $x(\cdot)$ and $q(\cdot)$ are differentiable, take derivative wrt $t$ gives
+		\[ x' (p'+1) = q' p^{\ast \prime}\]
+		Rearrange gives
+		\[ p^{\ast \prime} (t) = \frac{x'(p^\ast +t)}{q'(p^\ast) - x'(p^\ast +t)}\]
+		
+		Since $x'(\cdot) <0$, $q'(\cdot)\geq 0$
+		\[ -1\leq p^{\ast \prime} (t) <0\] 
+		i.e. the price received by producer falls.
+		
+		Consumer pays $p^\ast(t) +t$, which means 
+		\[ \frac{\partial [p^\ast(t) +t]}{\partial t} = p^{\ast \prime}(t) +t\]
+		where $0 \leq  p^{\ast \prime}(t) +t <1$, so price for consumer weakly rises.
+		
+		\begin{itemize}
+    	\item \( q'(\cdot) \rightarrow \infty \) (elastic supply) implies \( p^{*'}(t) \rightarrow 0 \).
+    	\item \( q'(\cdot) = 0 \) (inelastic supply) implies \( p^{*'}(t) = -1 \).
+    	\item \( x'(\cdot) \rightarrow -\infty \) (elastic demand) implies \( p^{*'}(t) \rightarrow -1 \).
+    	\item \( x'(\cdot) \rightarrow 0 \) (inelastic demand) implies \( p^{*'}(t) \rightarrow 0 \).
+		\end{itemize}
+		
+		\subsection{First welfare theorem}
+				
+		With quasi-linear utility, any Pareto optimal outcome must maximize the sum of individual utilities, i.e. any Pareto optimal allocation must solve.
+		
+		\[
+		\bar{U}^* = \max_{(x_1, \dots, x_I, q_1, \dots, q_J, m_1, \dots, m_I)} \sum_i u^i(x^i, m^i)
+		\]
+		subject to feasibility
+		\[
+		\sum_i x^i \leq \sum_j q^j
+		\]
+		and
+		\[
+		\sum_i m^{i*} + \sum_j c^j(q^{j*}) \leq w
+		\]
+		
+		Since we are dealing with utility maximization, both constraint must hold with equality, so the problem becomes 
+		\[
+		\bar{U}^* = \max_{(x_1, \dots, x_I, q_1, \dots, q_I)} \underbrace{\sum_i \phi^i(x^i) - \sum_j c^j(q^j)}_{\text{Marshallian surplus}} + w
+		\]
+		subject to
+		\[
+		\sum_i x^i = \sum_j q^j
+		\]
+		Where Marshallian aggregate surplus is exactly the utility incurred from $x$ minus of cost of producing it.
+		
+		Thus, the necessary and sufficient condition for Pareto optimal (given convexity assumptions) are 
+		\begin{enumerate}
+    	\item \(\lambda \leq c^{j'}(q^{j*})\) for all \(j\)
+   		 with equality for positive output.
+    	\item \(\phi^{i''}(x^{i*}) \leq \lambda\) for all \(i\)
+   		with equality for positive consumption of \(x\).
+    	\item \(\sum_i x^{i*} = \sum_j q^{j*}\)
+		\end{enumerate}
+		which is the same as competitive equilibrium, the we have proved the first welfare theorem implicitly.
+		
+		\subsection{Second welfare theorem}
+		
+		The \textbf{Second Welfare Theorem} says Pareto optimal allocation is achievable can be achievable via competitive equilibrium with transfers, more formally:
+		
+		If there exist a feasible allocation such that 
+		\[\sum_i u^i (m^i, x^i) = \bar{U}\]
+		Then there exists a feasible allocation that yields any set of individual utility level such that 
+		\[\sum_i u^i (\hat{m}^i, \hat{x}^i) = \bar{U}\]
+		which can be achieved by holding consumption and production of $x$ constant and redistribute the numeraire good $m$. This can be achieved by redistribution of the endowment of numeraire good $\omega^i$ via transfers $(T^1, \ldots, T^l$ such that $\sum_i T^i = 0$, where an competitive equilibrium with endowments \((\omega^1 + T^1, \dots, \omega^I + T^I)\) yields the utilities \((u^{1*}, \dots, u^{I*})\).
+		
+		Further, this implies any allocation that cannot be implemented with a competitive equilibrium with transfers cannot be Pareto optimal.
+		
+		\subsection{Distortionary policies}
+		In any competitive equilibrium with interior solution, we have 
+		\begin{enumerate}
+    	\item For firms: \( p^* = MC^j \)
+   		\item For consumers: \( p^* = MB^i \)
+    	\item Which implies \( MC^j = MB^i \)
+		\end{enumerate}
+		
+		If we have a tax such that firms receive $p(1-\tau)$ for output good, but consumers pay $p$. Now the condition becomes 
+		\begin{enumerate}
+    	\item For firms: \( (1-\tau)p^* = MC^j \)
+   		\item For consumers: \( p^* = MB^i \)
+    	\item Which implies \( MC^j \neq MB^i \)
+		\end{enumerate}
+		
+		Or if a firm has market power so that they know that their output will have an effect on equilibrium price, meaning now the firm solves 
+		\[ \max_y p(q)q -c(q)\]
+		Now the condition becomes
+		\begin{enumerate}
+    	\item For firms: \(\frac{\partial p(q^*)}{\partial q} q^* + p^* = MC^j\)
+    	\item For consumers: \( p^* = MB^i \)
+    	\item Which implies \( MC^j \neq MB^i \)\\[4pt]
+    	if \(\frac{\partial p(q^*)}{\partial q} \neq 0\)
+		\end{enumerate}
+		
+		An allocation is optimal must maximize aggregate surplus 
+		\[S(x^1, \dots, x^I, q^1, \dots, q^J) = \sum_i \phi^i(x^i) - \sum_j c^j(q^j)\]
+		Let $x=\sum_i x^i$ be the aggregate consumption of $x$, we must have $\phi^{i \prime}(x^i) = P(x)$, as the marginal benefit of consumption must equal to the marginal cost of the good. 
+		
+		Let $q=\sum_j q^j$ be the aggregate production of good. The marginal cost must equalized across producers, since marginal cost equals price. Thus we have \(c^{j\prime} = C'(q)\) for all $j$.
+		
+		\subsection{Surplus}
+						
+		Assume a change in quantities consumed and produced that satisfies 
+		\[ \sum_i dx^i = \sum_j dq^j = dx\]
+		
+		Take total differential gives the change in surplus
+		\[
+		dS = \sum_i \phi^{i'}(x^i) dx^i - \sum_j c^{j'}(q^j) dq^j
+		\]
+		Replacing with $\phi^{i \prime}(x^i) = P(x)$ and \(c^{j\prime} = C'(q)\) gives
+		\[
+		dS = P(x) \sum_i dx^i - C'(q) \sum_j dq^j
+		\]
+		Plugging in $dx$
+		\[
+		dS = [P(x) - C'(x)] dx
+		\]
+		
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{Ds.png}
+		\end{figure}
+		
+		The total surplus can then be written as 
+		\[
+		S(x) = S_0 + \int_0^x [P(s) - C'(s)] ds
+		\]
+		which is maximized at the competitive equilibrium level $x^\ast$ where 
+		\[ P(x^\ast) = C'(x^\ast)\]
+		
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{TS.png}
+		\end{figure}
+		
+		\subsubsection{Welfare effect of distortionary tax}
+		Let \((x^{1*}(t), \dots, x^{I*}(t), q^{1*}(t), \dots, q^{J*}(t))\) denote equilibrium quantities and \(p^*(t)\) given tax rate \(t\).
+		
+		For all consumers we have 
+		\[
+		\phi^{i'}(x^{i*}(t)) = p^*(t) + t
+		\]
+		
+		For all producers we have 
+		\[
+		c^{j'}(q^{j*}(t)) = p^*(t)
+		\]
+		
+		The effect on welfare of change
+		\[
+		S(x^*(t)) - S(x^*(0)) = \int_{x^*(0)}^{x^*(t)} [P(s) - C'(s)] ds
+		\]
+		Since we know $x^\ast(t) < x^\ast (0)$, so we know $[P(x) - C'(x)]\geq 0$ for $x < x^\ast(0)$. So there is a positive decrease in surplus, which is called deadweight loss. 
+		
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{DWL.png}
+		\end{figure}
+		
+		This deadweight loss can be approximated with Harberger triangle, and $x^\ast (t) - x^\ast (0)$ is a sufficient statistic for the deadweight loss. \\
+		
+		\hrule\
+		
+		\textbf{Aggregate consumer surplus} is the gross consumer benefit from consumption minus the total expenditure.
+		\[
+		CS(\hat{p}) = \sum_i \phi^i(x^i(\hat{p})) - \hat{p} x(\hat{p})
+		\]
+		where $\hat{p}$ is the effective price faced by consumer. Since
+		\[
+		\sum_i \phi^{i'}(x^i) = \int_0^x P(s) ds
+		\]
+		gives
+		\[
+		CS(\hat{p}) = \int_0^{x(\hat{p})} [P(s) - \hat{p}] ds = \int_{\hat{p}}^{\infty} x(s)ds
+		\]
+		
+		Now the aggregate producer surplus is 
+		\[
+		\Pi(\hat{p}) = \hat{p} q(\hat{p}) - \sum_j c^j(q^j(\hat{p}))
+		\]
+		If we again denote $hat{p}$ as the price faced by producer
+		\[
+		\Pi(\hat{p}) = \Pi_0 + \int_0^{q(\hat{p})} [\hat{p} - C'(s)] ds = \Pi_0 + \int_0^{\hat{p}} q(s) ds
+		\]
+		
+		Therefore, change in consumer surplus from imposition of tax:
+		\[
+		\Pi(p^*(t)) - \Pi(p^*(0)) = -\int_{p^*(t)}^{p^*(0)} q(s) ds
+		\]
+		
+		\section{Externality}
+		\subsection{Simple example}
+		Externalities are production and utility directly affected by other agents in the economy.
+		
+		With externalities, competitive equilibrium is not Pareto optimal, as marginal cost no longer equals to marginal benefit when agent choose with externality.
+		
+		We use a very simple example to illustrate this idea. Take the quasi-linear utility function for 2 agents.
+		\[u^i (h,m^i) = \phi^i(h^1) +m^i\]
+		where we assume $\phi^i$ is twice differentiable and strictly concave.
+		
+		Now, with externality, $h^1$ chosen by consumer 1 but affects consumer 2's utility, i.e. \(\frac{\partial \phi^2}{h^1}\neq0\).
+		In this setting $\phi^1$ measures the benefit of $h^1$ to consumer 1, while $\phi^2$ measures the externality of $h^1$ consumed by consumer 1. 
+		
+		Without any restriction, consumer 1 solves 
+		\[ \max_h \phi^1 (h^1) \implies \phi^{\prime 1}(h^\ast)=0\]
+		given interior solution $h^\ast>0$
+		
+		Now, a Pareto optimal allocation $h^o$ must satisfy 
+		\[ \max_h \phi^1 (h^1) + \phi^2(h^1)\]
+		given interior solution $h^o>0$, this is 
+		\[\phi^{\prime 1}(h^o) + \phi^{\prime 2}(h^o)=0\]
+		 
+		\begin{itemize}
+    	\item Negative externality:
+    	\[
+    	\phi^{\prime2}(h^1) < 0 \implies h^* > h^0.
+    	\]
+    	\item Positive externality:
+    	\[
+    	\phi^{\prime2}(h^1) > 0 \implies h^* < h^0.
+    	\]
+		\end{itemize}
+
+		\subsection{Solutions to externality}
+		Solutions to externality includes 
+		\begin{enumerate}
+			\item Quotas
+			\item Taxes
+			\item Property rights
+		\end{enumerate}
+		
+		\subsubsection{Quota}
+		Quota basically works if the government knows $h^o$, it can simply mandate that consumer 1 must produce $h^o$.
+		
+		\subsubsection{Pigouvian Taxes}
+		Assume we have a negative externality $\phi^{\prime2}(h^1) < 0$
+		We let consumer 1 pay a tax of $t_h$ per unit of $h$, so his maximization problem is now
+		\[ \max_h \phi^1 (h^1) - t_h h\]
+		and the FOC condition is 
+		\[ \phi^{\prime 1} (h^1) - t_h =0\]
+		Now if we institute a tax that is just $t_h = -\phi^{\prime 2}(h^o)$, then we can recover the sufficient condition for Pareto optimal
+		\[\phi^{\prime 1}(h^o) + \phi^{\prime 2}(h^o)=0\]
+		which is satisfied when $h= h^o$, i.e. optimality restoring tax equals to marginal externality at $h^o$.
+		
+		\begin{figure}[h]
+			\center
+			\includegraphics[width=0.45\textwidth]{Op_tax.png}
+		\end{figure}
+		
+		Alternatively, we are essentially instituting a tax $t = -\phi^2(h^1)$, since $\phi^2(h^1)$ is the negative externality, $-\phi^2(h^1)$ is positive, and we just levy the tax that is just equal to the amount of externality faced by consumer 2, which changes the problem of consumer 1 to 
+		\[ \max_h \phi^1 (h^1) +\phi^2(h^1)\]
+		which is exactly the problem for Pareto optimality.
+		\vspace{4pt}
+		
+		\hrule\
+		
+		We can also subsidies the reduction of $h$, i.e. now consumer 1 receives a subsidy of $s_h$ for every unit of $h$ they produce below some amount $\bar h > h^o$. Now the maximization problem of consumer 1 is 
+		\[ \max_h u^1 (h,m^1)=\phi^1 (h) + s_h(\bar h - h)\]
+		FOC is then 
+		\[ \phi^{\prime 1}h - s_h =0\]
+		Again, if we set $s_h = -\phi^{\prime 2}(h^o)$, we recover the condition for Pareto optimality.
+		
+		Both method requires fair amount of information. 
+		
+		\subsubsection{Property right}
+
+		Suppose property rights are well defined and enforceable and a
+		competitive market for the right to produce externalities
+		exists.
+		
+		We assume the consumer 2 has property rights to the backyard.
+		If he chooses, he can sell the right at $p_h$ for the power plant to
+		“use” area in his/her backyard. For now we assume both consumer 1 and 2 are price taker, but this can be relaxed.
+		
+		The demand $h^1$ from consumer 1 must equal to $h^2$, the supply from consumer 2, in equilibrium.
+		
+		Now, consumer 1's problem is 
+		\[
+		\max_{h^1} \phi^1(h^1) - p_h h^1
+		\]	
+		Given interior solution, the FOC is 	
+		\[
+		\phi'^1(h^1) = p_h
+		\]	
+		Consumer 2's problem is 
+		\[
+		\max_{h^2} \phi^2(h^2) + p_h h^2
+		\]
+		Given interior solution, the FOC is 
+		\[
+		\phi'^2(h^2) = -p_h
+		\]
+		
+		In equilibrium, we have $h^1 = h^2 =h^o$, which implies 
+		\[\phi'^1(h^1) = - \phi'^2(h^2) = p_h\]
+		
+		\hrule\
+		
+		Similar to the relationship between tax and subsidy, with property right, consumer 1 can sell the right to reducing pollution $h^1 < \bar{h}$ to consumer 2. So consumer 1's problem is then
+		\[
+		\max_{h^1} \phi^1(h^1) + p_h (\bar{h} - h^1)
+		\]
+		FOC for interior solution is then
+		\[
+		\phi'^1(h^1) = p_h
+		\]
+		Consumer 2 then solves
+		\[
+		\max_{R} \phi^2 (\bar{h} - R) - p_h R
+		\]
+		where $R$ is the amount of reductions purchased by consumer 2. We can rewrite this as 
+		\[
+		\max_{h^2} \phi^2 (h^2) - p_h (\bar{h} - h^2)
+		\]
+		given interior solution, we yield a FOC of 
+		\[
+		\phi'^2(h^2) = -p_h
+		\]
+		In equilibrium, we have $h^1 = h^2 =h^o$, which implies 
+		\begin{align*}
+			\phi'^1(h^1) &= - \phi'^2(h^2) = p_h\\
+			\implies \phi'^1(h^o) &+ \phi'^2(h^o)=0
+		\end{align*}
+		Again, we recover the condition for Pareto optimality
+		
+		The optimal level of \( h \) does not depend on who holds property rights, but different property rights yield different ex-post utilities. If consumer 2 has property rights, they receive \( p^{**} h^o \) from consumer 1, whereas if consumer 1 has property rights, they receive \( p^{**} (\bar{h} - h^o) \) from consumer 2. This illustrates externalities as a case of ``missing markets''—if markets existed for these goods, the First Welfare Theorem would hold. Thus, well-defined and enforceable property rights are crucial, but challenges arise when \( h \) is difficult to measure.
+		
+		\subsection{Multilateral externality}
+		Now we discuss some more general casts of externality that involves multiple parties. There are 2 types of multilateral externalities. 
+		\begin{itemize}
+			\item Rivalrous externality (private, depletable) - experience of externality by one agent reduced the amount felt by other agents
+			\item Non-rivalrous externality (public, nondepletable) - experience of externality does not affect amount felt by other agents
+		\end{itemize}
+		
+		\subsubsection{Rivalrous externality}
+		Assume there are $I$ consumers who produce the externality and $K$ consumers that experience the externality.
+		
+		The Pareto optimal allocation satisfies 
+		\begin{align*}
+    	\max_{h^1, \dots, h^J, \tilde{h}^1, \dots, \tilde{h}^K} &\quad 
+    	\sum_{i \in I} \phi^i(h^i) + \sum_{k \in K} \tilde{\phi}^k (\tilde{h}^k) \\[10pt]
+    	&\text{s.t.} \quad \sum_{i \in I} h^i = \sum_{k \in K} \tilde{h}^k
+		\end{align*}
+		where $\phi^i$ is the utility from producing the externality, and $\tilde{\phi}^k$ is the utility from experiencing the externality. 
+		
+		\subsection{Non-rivalrous externality}
+		The Pareto optimal allocation satisfies 
+		\begin{align*}
+    	\max_{h^1, \dots, h^J, \tilde{h}^1, \dots, \tilde{h}^K} &\quad 
+    	\sum_{i \in I} \phi^i(h^i) + \sum_{k \in K} \tilde{\phi}^k (\tilde{h}) \\[10pt]
+    	&\text{s.t.} \quad \sum_{i \in I} h^i =  \tilde{h}
+		\end{align*}
+		 
+		 Plugging in gives
+		 \[\max_{h^1, \dots, h^J, \tilde{h}^1, \dots, \tilde{h}^K} \quad \sum_{i \in I} \phi^i(h^i) + \sum_{k \in K} \tilde{\phi}^k (\sum_{i \in I} h^i)\]
+		 which gives the FOC
+		 \[\phi^{i\prime}(h^{io})\leq - \sum_{k\in K} \tilde{\phi}^{k \prime} \left(\sum_{i \in I} h^{io}\right)\]
+		 
+		 Again, we can set the tax or subsidy to be
+		 \[ \tau_h = - \sum_{k\in K} \tilde{\phi}^{k \prime} \left(\sum_{i \in I} h^{io}\right)\]
+		 So the externality producers solve
+		 \[ \max_{h^i} \phi^i (h^i) - \tau_h h^i\]
+		 which yields the FOC
+		 \[\phi^{i \prime} (h^{io}) \leq \tau_h\]
+		 Using the optimal tax recovers the Pareto optimality
+		 \[\phi^{i\prime}(h^{io})\leq - \sum_{k\in K} \tilde{\phi}^{k \prime} \left(\sum_{i \in I} h^{io}\right)\]
+		 
+		 \subsection{Some comments}
+		 In general, solving externalities requires a lot of information.
+		 \begin{itemize}
+		 	\item Quotes - need to know $h^{io}$ for all producers of externality
+		 	\item Taxes/subsidy - need to know marginal social cost of externality at optimum
+		 	\item Cap and trade - requires only $\sum_i h^{io}$, as it put quotea on $\sum_{i\in I} h^i$ and distribute permits to produce externality while prices are determined endogenously.
+		 \end{itemize}
+		
+		
+		
+		
+		
+		\section{Public Goods}	
+		
+		A public good must satisfy 
+		\begin{itemize}
+			\item Non-rivalrous - nondepletable 
+			\item Non-excludable
+		\end{itemize}	
+		The discussion follow on focuses on ``pure public good'', where it is totally nondepletable. But could have congestion effect.
+		
+		\subsection{Setup}
+		$I$ consumers have quasi-linear utility function over public good $x$ and money $m^i$.
+		\[ u^i(x, m^i)= \phi^i(x) +m^i\]
+		where $\phi^i$ is increasing and concave, and the cost of producing public good is  \(c(q) \).
+		
+		So the Pareto optimal allocation must satisfy
+		\begin{align*}
+			&\max_{x,q,m^i} \sum_i^I u^i (x,m^i) = \sum_i u^i(x) +\sum_i m^i \\
+			&s.t. \quad x \leq q\\
+			&\quad c(q) +\sum_i m^i \leq \omega
+		\end{align*}
+		
+		Plugging in the constraints gives 
+		\[ \max_{q} \sum_i^I \phi^i(q)-c(q)\]
+		which is maximizing Marshallian surplus. 
+		
+		\subsection{Private provision of public goods}
+		Consumers choose how many public goods to purchase, but they benefit from the total amount of public goods, and they are non-excludable and non-rivalrous. So the individual maximization problem is 
+		\[ \max_{x^i} \phi^i(x^i + \sum_{k\neq i} x^{k \ast})-p^\ast x^i\]
+		Take derivate wrt to $x^i$ gives 
+		\[\phi^{\prime i}(x^i + \sum_{k\neq i} x^{k \ast})=p^\ast\]
+		
+		\hrule\
+		
+		Now the firm sets 
+		\[p^\ast = c'(q)\]
+		i.e. marginal benefit equals marginal cost, so 
+		\[\phi^{\prime i}(x^i + \sum_{k\neq i} x^{k \ast}) = c'(q)\]
+		So each individual demand public goods until marginal benefit equals to marginal cost, if we sum up the LHS:
+		\[\sum_i \phi^{\prime i}(x^i + \sum_{k\neq i} x^{k \ast}) =\sum_i \phi^{\prime i}(q)> c'(q)\]
+		But the optimal level should be
+		\[\sum_i \phi^{\prime i}(q)= c'(q)\]
+		Since $\phi^i$ is concave, $q^\ast<q^o$
+		
+		This is exactly the free-rider problem, consumers incentivized to enjoy benefits of
+		public good but under-provide. Can be remedied via quantity-based intervention (direct government intervention) or price based intervention (subsidies)
+		
+		
+		\subsection{Hedonics}
+		This discussion is based on \emph{Rosen 1974}. 
+		We consider a good that can be described by a vector of its characteristics 
+		\[\mathbf{C} = (c_1, c_2, \ldots, c_n)\]
+		and the market price is a function of all the characteristics
+		\[ P(\mathbf{C}) = P(c_j, \mathbf{C}_{-j})\]
+		if we want to separate the effect of $c_j$, where $\mathbf{C}_{-j}$ is all the other characteristics except $c_j$.
+		
+		Now suppose a household wants to consume this good with characteristic vector $\mathbf{C}$, then his utility function is 		
+		\[
+		\max_{\mathbf C, m} u^i (\mathbf C, m)
+		\]
+		subject to \(P(\mathbf C) + m = I\).\\[6pt]
+		Plugging in the constraint
+		\[
+		\max_{\mathbf{C}} u^i (\mathbf{C}, I - P(\mathbf{C}))
+		\]
+		If we hold $\mathbf{C_{-j}}$ constant:
+		\[
+		\max_{c_j} u^i (c_j, \mathbf{C_{-j}}, I - P(\mathbf{C}))
+		\]
+		 
+		\begin{figure}[H]
+			\center
+			\includegraphics[width= 0.5\textwidth]{hedonic.png}
+		\end{figure}
+		An example is given here in house prices and air quality. Different consumers will choose different tangency points along Hedonic price schedule, which gives the willingness to pay for that household. 
+		
+		\subsection{Optimal Need Based Financial Aid}
+		We denote $s$ to be the financial aid schedule, 
+		
+		$E_i(s_i)$ to be  share of students going to college at income level $i$, 
+		
+		$TR(s)$ to be the total tax revenue given schedule $s$ and 
+		
+		$cost(s)= \sum_i E_i (s_i)s_i$ to be the total cost of financial aid 
+		
+		If we maximize the social welfare 
+		\[\max_{s} W(s)\]
+		subject to \( TR(s) \geq cost(s)\), Lagrangian gives
+		\[ W(s_i) - \lambda [TR(s_i)- cost(s_i)]\]
+		Take FOC gives 
+		\[ \frac{\partial E_i}{\partial s_i} \Delta T_i^E - E_i (1-W_i^E)=0\]
+		
+		
+		
+\end{document}

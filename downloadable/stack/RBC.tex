@@ -1,0 +1,239 @@
+%! Author = herbertxin
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Course}
+\chead{Real Business Cycle}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Real Business Cycle}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Hodrick-Prescott Filter}
+	
+	In analyzing real world datas, it is often useful to separate the trend data from business cycle variation. In essence, we want 
+	\[\ln(Y_t) = \ln (Y_t^{\text{trend}})+\ln (Y_t^{\text{cycle}})\]
+	
+	To simplify the expression, we can rewrite this as 
+	\[y_t = y_t^{\text{trend}}+y_t^\text{cycle}\]
+	
+	Now, the HP-filter makes the decomposition by solving the minimization problem of 
+	\begin{align*}
+		&\min_{y_t^{\text{trend}}}\sum_{t=1}^{T} (y_t-y_t^{\text{trend}})^2 \\
+		&+\lambda \sum_{t=1}^{T} \left[ (y_{t+1}^{\text{trend}}- y_{t}^{\text{trend}})-(y_{t}^{\text{trend}}-y_{t-1}^{\text{trend}})\right]^2
+	\end{align*}
+	subject to 
+	\[y_t = y_t^{\text{trend}}+y_t^\text{cycle}\]
+	
+	The first term measures the difference between trend and the actual data, while the second term measures the difference between changes in trend.
+	
+	Thus, the parameter $\lambda$ measures the trade off between fit of the data and movement in trends. The higher the $\lambda$, the more weight we put on the smoothness of the trend. 
+	
+	If $\lambda=0$ then all the weight are put on the first term, so to minimize the difference we would just set trend equals to $y_t$
+	
+	\section{The Model}
+	\subsection{Households}
+	Household solves the utility maximization problem of 
+	\begin{align*}
+		\max_{c_t} u(c_t) &= \sum_{t=0}^{T} \beta^t U(c_t)
+	\end{align*}
+	subject to 
+	\begin{align*}
+	c_t + a_{t+1} &= w_t + (1 + r_t) a_t \\
+	c_t &\geq 0 \\
+	a_{T+1} &= 0
+	\end{align*}
+	
+	The usual Inada conditions and restriction applies here.
+	
+	Set up the Lagrangian gives 
+	\[
+	L = \sum_{t=0}^T \beta^t U(c_t) + \sum_{t=0}^T \lambda_t \big(w_t + (1 + r_t)a_t - c_t - a_{t+1}\big)
+	\]
+	Solving for FOCs give
+	\begin{align*}
+	\beta^t U'(c_t) &= \lambda_t \\
+	\beta^{t+1} U'(c_{t+1}) &= \lambda_{t+1} \\
+	\lambda_t &= \lambda_{t+1} (1 + r_{t+1}) \\
+	U'(c_t) &= \beta (1 + r_{t+1}) U'(c_{t+1})
+	\end{align*}
+	where the last equation is our familiar Euler equation.
+	
+	In steady state, we have
+	\[1 = \beta (1+r)\]
+	
+	Using the budget constraint
+	\begin{align*}
+	c_t &= w_t + (1 + r_t)a_t - a_{t+1} \\
+	c_{t+1} &= w_{t+1} + (1 + r_{t+1})a_{t+1} - a_{t+2} 
+	\end{align*}
+	
+	We can rewrite the Euler equation as 
+	\begin{align*}
+			&U'(w_t + (1 + r_t)a_t - a_{t+1}) \\
+			&= \beta (1 + r_{t+1}) U'(w_{t+1} + (1 + r_{t+1})a_{t+1} - a_{t+2})
+	\end{align*}
+	
+	\subsection{Firms}
+	The production technology is standard neoclassical Cobb-Douglas production function
+	\[y_t = A_t k_t^\alpha n_t^{\alpha-1}\]
+	For now, we assume $A_t =A$
+	\[y_t = A k_t^\alpha n_t^{\alpha-1}\]
+	
+	We denote the rental price per unit of capital as $\mu_t$, so the return rate is 
+	\[r_t = \mu_t -\delta\]
+	
+	Then the firms solves the profit maximization problem
+	\begin{align*}
+		\max_{n_t, k_t} (y_t - w_t n_t -\mu_t k_t)
+	\end{align*}
+	subject to 
+	\begin{align*}
+		y_t &= Ak_t^\alpha n_t^{1-\alpha}\\
+		&k_t, n_t \geq 0
+	\end{align*}
+	
+	The FOC yields 
+	\begin{align*}
+		w_t &= (1 - \alpha)A \left(\frac{k_t}{n_t}\right)^\alpha \\
+		\mu_t &= \alpha A \left(\frac{k_t}{n_t}\right)^{\alpha-1} 
+	\end{align*}
+	
+	So the profit function becomes 
+	\begin{align*}
+		\pi_t &= Ak_t^\alpha n_t^{1-\alpha} - w_t n_t - \mu_t k_t \\
+	&= Ak_t^\alpha n_t^{1-\alpha} - (1 - \alpha)A \left(\frac{k_t}{n_t}\right)^\alpha n_t \\
+	&- \alpha A \left(\frac{k_t}{n_t}\right)^{\alpha-1} k_t = 0
+	\end{align*}
+	
+	\subsection{Competitive Equilibrium}
+	Since the economy resource constraint is 
+	\begin{align*}
+		y_t &= c_t + I_t\\
+		I_t &= k_{t+1} - (1-\delta)k_t\\
+		c_t &+ k_{t+1} - (1-\delta)k_t = Ak_t^\alpha n_t^{1-\alpha}
+	\end{align*}
+	The last equation is then the exact market clearing condition. We would also have $n_t=1, a_t = k_t$.
+	
+	Since we know the wage and capital return from the firm's profit maximization problem, we can substitute those into the Euler's equation, which gives
+	\begin{align*}
+	&U'\big((1 - \alpha)A k_t^\alpha + (1 + \alpha A(k_t)^{\alpha-1} - \delta)k_t - k_{t+1}\big) \\
+	&= \beta (1 + \alpha A(k_{t+1})^{\alpha-1} - \delta) A(k_{t+1})^{\alpha-1} - \delta)k_{t+1}\\& - k_{t+2}\big) \\[10pt]
+	&U'(A k_t^\alpha + (1 - \delta)k_t - k_{t+1}) 
+	= \beta (1 + \alpha A(k_{t+1})^{\alpha-1} - \delta) \\
+	&\quad \cdot U'(A k_{t+1}^\alpha + (1 - \delta)k_{t+1} - k_{t+2})
+	\end{align*}
+	
+	Given the boundary condition $k_0 = a_0, \text{ and } k_{T+1}=a_{T+1} = 0$, we can solve for the problem.
+	
+	\subsection{Social Planner Problem}
+	The social planner solves the problem of 
+	\begin{align*}
+	\max_{\{c_t, k_{t+1}\}_{t=0}^T} &\sum_{t=0}^T \beta^t U(c_t) \\
+	&\text{s.t.} \quad c_t + k_{t+1} - (1 - \delta)k_t = A k_t^\alpha \\
+	c_t &\geq 0, \quad k_0 > 0 \, \text{given}
+	\end{align*}
+	
+	Set up the Lagrangian and solve for the FOC gives
+	\begin{align*}
+	L &= \sum_{t=0}^T \beta^t U(c_t) + \sum_{t=0}^T \lambda_t \big[A k_t^\alpha - c_t - k_{t+1} + (1 - \delta)k_t\big] \\
+	\frac{\partial L}{\partial c_t} &= \beta^t U'(c_t) - \lambda_t = 0 \\
+	\frac{\partial L}{\partial c_{t+1}} &= \beta^{t+1} U'(c_{t+1}) - \lambda_{t+1} = 0 \\
+	\frac{\partial L}{\partial k_{t+1}} &= -\lambda_t + \lambda_{t+1} \big[\alpha A k_{t+1}^{\alpha - 1} + (1 - \delta)\big] = 0
+	\end{align*}
+	
+	
+	Combining the FOCs give the Euler equation
+	\begin{align*}
+	\beta^t U'(c_t) &= \lambda_t = \lambda_{t+1} \big[\alpha A k_{t+1}^{\alpha - 1} + (1 - \delta)\big] \\
+	&= \beta^{t+1} U'(c_{t+1}) \big[\alpha A k_{t+1}^{\alpha - 1} + (1 - \delta)\big] \\[5pt]
+	U'(c_t) &= \beta U'(c_{t+1}) \big[\alpha A k_{t+1}^{\alpha - 1} + (1 - \delta)\big]
+	\end{align*}
+	
+	Using the resource constraints 
+	\begin{align*}
+	c_t &= A k_t^\alpha - k_{t+1} + (1 - \delta)k_t \\
+	c_{t+1} &= A k_{t+1}^\alpha - k_{t+2} + (1 - \delta)k_{t+1} \\
+	U'(A k_t^\alpha - &k_{t+1} + (1 - \delta)k_t) = \beta U'(A k_{t+1}^\alpha - k_{t+2} +\\& (1 - \delta)k_{t+1}) \cdot \big[\alpha A k_{t+1}^{\alpha - 1} + (1 - \delta)\big]
+	\end{align*}
+	
+	which is exactly the same as the Euler equation from the competitive equilibrium.
+	
+	\subsection{Steady State}
+	In steady state, we set $c_{t} = c_{t+1} = c^\ast$ and $k_t = k_{t+1} =k^\ast$, which changes the Euler equation to 
+	\[
+	1 = \beta \big[\alpha A (k^*)^{\alpha - 1} + (1 - \delta)\big]
+	\]
+	
+	Solving for $k^\ast$ gives
+	\[
+	k^* = \left[\frac{\alpha A \beta}{1 - (1 - \delta)\beta}	\right]^{\frac{1}{1 - \alpha}}
+	\]
+	
+	and the steady state consumption is 
+	\[ c^\ast = A(k^\ast)^\alpha - \delta k^\ast\]
+	
+	\section{Dynamic Analysis}
+	
+	Since we have the Euler equation
+	\begin{align*}
+		&U'(A k_t^\alpha + (1 - \delta)k_t - k_{t+1}) 
+	= \beta (1 + \\
+	&\alpha A(k_{t+1})^{\alpha-1} - \delta) 
+	U'(A k_{t+1}^\alpha + (1 - \delta)k_{t+1} - k_{t+2})
+	\end{align*}
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

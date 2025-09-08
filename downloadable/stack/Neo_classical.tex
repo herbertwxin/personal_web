@@ -1,0 +1,411 @@
+%! Author = herbertxin
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro II}
+\chead{Neo-Classical Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Neo-Classical Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Introduction}
+	Neo-Classical production functions, which served as the basis for many models, Solow-Swan, Romer, Ramsey, can be solved in three ways. 
+	\begin{enumerate}
+		\item Sequential formulation
+		\item Recursive formulation
+		\item Arrow-Debreu method
+	\end{enumerate}
+	The sequential method is the most basic way of solving decentralized household problem by using the Lagrangian. Recursive method, on the other hand, solves the social planner problem with dynamic programming, while Arrow-Debreu solves the problem in a completely different way.
+	
+	\section{Setup}
+	\subsection{Technology}
+	
+	Final output is produced using labor and capital as input, and can be either consumed or invested:
+	\[y_t=F(k_t, n_t)=c_t + I_t\]
+	This could be simplified as 
+	\begin{align*}
+		f(k_t) &= F(k_t, n_t) + (1-\delta)k_t\\
+		&= c_t + k_{t+1}
+	\end{align*}
+	More assumptions are imposed on $F$
+	\begin{itemize}
+		\item $F$ is continuously differentiable and homogeneous of degree 1, strictly increasing and strictly concave.
+		\item $F(0,n) = F(k,0)=0, \ \forall k, n >0$
+		\item $F$ satisfies Inada condition $\lim_{k \rightarrow 0} F_k (k,1) = \infty, \lim_{k \rightarrow \infty} F_k (k,1) = 0$
+		\item $\delta \in [0,1]$
+	\end{itemize}
+	Capital law of motion follows intuitively
+	\[k_{t+1} = (1-\delta)k_t + I_t\]
+	which can be rewritten as 
+	\[I_t = k_{t+1} - k_t + \delta k_t\]
+	Note we impose that $k_{t}\geq 0 \ \forall t$.
+	
+	\subsection{Preference}
+	
+	We assume there are a large number of identical, infinitely lived households, which can be generalized to one single representative household and it's preference is assumed to be a time-separable utility function:
+	\begin{equation*}
+		u(\{c_t\}_{t=0}^{\infty} = \sum_{t=0}^{\infty} \beta^t U(c_t)
+	\end{equation*}
+	
+	Household is born with $\bar{k}_0$ of initial capital; and gets 1 unit of productive time each period for leisure or work. We assume household has perfect foresight.
+	
+	Some assumptions are imposed on $U$
+	\begin{itemize}
+		\item $U$ is continuously differentiable, strictly increasing, strictly concave and bounded.
+		\item Satisfies Inada condition $\lim_{c \rightarrow 0} U'(c)= \infty, \ \lim_{c \rightarrow \infty} U'(c) = 0$
+		\item $\beta \in (0,1)$
+	\end{itemize}
+	
+	The immediate consequences of assumptions imposed on $F$ and $U$ meant \(n_t =1, \ \forall t\) and \(k_0 =\bar{k}_0\).
+	
+	\section{Recursive Formulation}
+	
+	The social planners problem can be written as 
+	\[
+	w(k_0) = \max_{\substack{\{k_{t+1}\}_{t=0}^{\infty} \\ 0 \leq k_{t+1} \leq f(k_t) \\ k_0 \text{ given}}} \sum_{t=0}^{\infty} \beta^t U(f(k_t)-k_{t+1}) \tag{1}
+	\]
+	
+	Now, if we pull out $t=0$ (and just write $\max$ for simplicity.
+	\begin{align*}
+    	=\max_{\{k_{t+1}\}_{t=0}^\infty} 
+    	\lbrace 
+        &U(f(k_0) - k_1)
+        \\
+        &+ \beta \sum_{t=1}^\infty \beta^{t-1} U(f(k_t) - k_{t+1}) 
+    	\rbrace
+	\end{align*}
+	Now this is equivalent to 
+	\begin{align*}
+    	=\max_{k_{1}} 
+    	\lbrace 
+        &U(f(k_0) - k_1)
+        \\
+        &+ \beta \max_{\{k_{t+1}\}_{t=1}^\infty} \sum_{t=1}^\infty \beta^{t-1} U(f(k_t) - k_{t+1}) 
+    	\rbrace
+	\end{align*}	
+	Move the second term one period forward, which means we need move the $t$ under sum 1 period backwards.
+		\begin{align*}
+    	=\max_{k_{1}} 
+    	\lbrace 
+        &U(f(k_0) - k_1)
+        \\
+        &+ \beta \max_{\{k_{t+2}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^{t} U(f(k_{t+1}) - k_{t+2}) 
+    	\rbrace
+	\end{align*}
+	If we look at the second term, it is essentially (1) but one period forward. Thus, we can write it as 
+	\[
+		w(k_0) = \max_{\substack{\{k_{t+1}\}_{t=0}^{\infty}}} \left\lbrace U(f(k_0) - k_1) + \beta w(k_1) \right\rbrace
+	\]
+	
+	Now, if we can establish the $w(k)$ from the sequential formulation is the same as $v(k)$ (value function) in recursive formation, then we can rewrite this into Bellman equation
+	\[
+	v(k) = \max_{0\leq k'\leq f(k)} \{U(f(k)-k'+\beta v(k')\}
+	\]
+	where $k$ is the state variable decided in last period and $k'$ is the choice variable which decides the capital stock next period.
+	
+	Solution to the Bellman equation relies on \textbf{Contraction mapping theorem} and \textbf{Richard Bellman's principle of optimality}
+	
+		For the illustration of the three methods, we take the example of 
+	\begin{align*}
+		U(c) &= \ln(c)\\
+		F(k,n) &= k^\alpha n^{1-\alpha} \implies f(k)  = k^\alpha\\
+		\delta &= 1
+	\end{align*}
+	
+	So the value function becomes 
+	\[v(k) = \max_{0\leq k' \leq k^\alpha} \{ \ln (k^\alpha - k') + \beta v(k')\}\]
+	
+	\subsection{Method of Undetermined Coefficient}
+	
+	Let us guess an explicit form for $v(k)$
+	\[ v(k) = A + B \ln(k)\]
+	
+	Plug the guess into the right hand side (maximization problem) of the value function gives:
+	\[v(k) = \max_{0\leq k' \leq k^\alpha} \{ \ln (k^\alpha - k') + \beta [A + B \ln(k')]\}\]
+	
+	FOC gives
+	\begin{align*}
+		\frac{1}{k^\alpha - k'} &= \frac{\beta B}{k'}\\
+		g(k) = k' &= \frac{\beta B k^\alpha}{1+\beta B}
+	\end{align*}
+
+	Now we substitute this into the RHS:
+	\begin{align*}
+		RHS &= \ln \left(\frac{k^\alpha}{1+\beta B}\right) + \beta A + \beta B \ln \left( \frac{\beta B k^\alpha}{1+\beta B}\right)\\
+		&=-\ln\left(1 + \beta B\right)+ \alpha \ln\left(k\right)+ \beta A\\
+		&+ \beta B \ln\left(\frac{\beta B}{1 + \beta B}\right)+ \alpha \beta B \ln\left(k\right)\\
+		&= LHS = A + B \ln(k)
+	\end{align*}
+
+	In the last two lines we added that RHS needs to equal to LHS in order to solve the equation. Rearrange gives
+	\begin{align*}
+			(B - \alpha(1 + \beta B))\ln\left(k\right)
+	= -A - \ln\left(1 + \beta B\right)
+	+ \beta A\\
+	+ \beta B \ln\left(\frac{\beta B}{1 + \beta B}\right)
+	\end{align*}
+	Now the RHS is a constant, for this equation to hold for every $k$, LHS also needs to be a constant. The only way to do so if to let $(B - \alpha(1 + \beta B))=0$, solving it gives
+	\begin{align*}
+		B &= \frac{\alpha}{1-\alpha\beta}\\
+		A &= \frac{1}{1-\beta}\left[\frac{\alpha \beta}{1-\alpha \beta}\ln (\alpha \beta) + \ln(1-\alpha \beta)\right]
+	\end{align*}
+
+	Plug this into $g(k) = \frac{\beta B k^\alpha}{1+\beta B}$ yields
+	\[g(k) = \alpha \beta k^\alpha\]
+	
+	Thus, given a known $k_0$ we can extrapolate the sequence of $k$
+	\[k_t = (\alpha \beta)^{\sum_{j=0}^{t-1} \alpha^j}k_0^{\alpha^t}\]
+	So in steady state
+	\[k^\ast = \lim_{t\rightarrow \infty} k_t = (\alpha \beta)^{\frac{1}{1-\alpha}}\]
+	
+	\subsection{Value Function Iteration: Analytical Approach}
+	
+	The key idea of value function iteration is that we use the previous value function to approximate the value function next period, i.e. 
+	
+	\[v_t(k) = \max_{0\leq k' \leq k^\alpha} \{\ln(k^\alpha - k')+\beta v_{t-1}(k')\}\]
+	
+	We should discount the value function from next period, but since we don't know the value next period, we use $v_{t-1}(k')$ to approximate for it.
+	
+	For VIT we guess an arbitrary function $v_0(k)$, the example here is $v_0(k)=0$, but any number should work just fine.
+	
+	Now $v_1(k)$ becomes 
+	\[v_1(k)= \max_{0\leq k' \leq k^\alpha}{\ln(k^\alpha - k')}\]
+	Solving the maximization problem yields
+	\[k'=g_1(k)=0\]
+	so $v_1(k)$ is 
+	\[v_1(k)=a\ln(k)\]
+	
+	We then solve 
+	\[v_2(k)= \max_{0\leq k' \leq k^\alpha}{\ln(k^\alpha - k')}+\beta a\ln(k')\]
+	
+	After getting an expression for $v_2(k)$ we keep solving for $v_3(k)$, keep iterating until the difference between value function falls within a tolerance value. 
+	
+	\subsection{Value Function Iteration: Numerical Approach}
+	
+	For the numerical approach we basically follow a similar process. But, in order for the computer to process it, we have to specify a grid of choice variable $k\in \kappa=\{c_1, c_2, \ldots, c_n\}$ to for the computer to choose from. 
+	
+	We also need to specify the value for parameters like $\alpha$ and $\beta$
+	
+	Then we still take a guess for the initial function, say $v_0(k)=0$. Now we need to calculate 
+		\[v_1(k)= \max_{0\leq k' \leq k^\alpha}{\ln(k^\alpha - k')}\]
+		for all $k\in \{c_1, c_2, \ldots, c_n\}$
+		
+	This would result in an array of $v_1(k)$ and $g_1(k)$ with different starting $k_0$, each $v_1(k)$ represents the optimal solution given $k_0$ and $v_0(k)=0$.
+	
+	Now we solve for the second period
+	\[v_2(k)= \max_{0\leq k' \leq k^\alpha}{\ln[(g_1(k))^\alpha - k']}+\beta v_1(k')\]
+	Again, this gives an array of $v_2(k)$ and $g_2(k)$, which we can then solve for $v_3(k)$ and $g_3(k)$ 
+	
+	We repeat the iteration until
+	\[\max_{k\in \kappa} \left(\frac{v_{n+1}-v_n}{v_n}\right)^2 \leq \epsilon\]
+	
+	Note this is the maximum difference between values in two periods for all starting point.
+	
+	\section{Finite Horizon Problem}
+	
+	In the finite horizon problem, the social planner solves the problem
+	\[w^T(\bar{k}_0) = \max_{\{k_{t+1}\}_{t=0}^{T}} \sum_{t=0}^{T} \beta^t U(f(k_t)-k_{t+1})\]
+	subject to 
+	\begin{align*}
+		0 &\leq k_{t+1} \leq f(k_t)\\
+		k_0 &= \bar{k}_0 >0 \text{ as given}
+	\end{align*}
+	
+	Set up for the Lagrangian gives
+	\[\mathcal L = \beta^t U(f(k_t)-k_{t+1}) + \beta^{t+1}U(f(k_{t+1})-k_{t+2})\]
+	
+	FOC w.r.t $k_{t+1}$ gives 
+	\[
+	U'\bigl(f(k_t) - k_{t+1}\bigr) = \beta\,U'\bigl(f(k_{t+1}) - k_{t+2}\bigr)\,f'(k_{t+1})
+	\]
+	This reads the utility cost for saving one more unit for $t+1$ must equals to the discounted added utility from one more unit of consumption times the added production possibility with one more unit of capital.
+	
+	To see an analytical solution we need the exact formulation for utility and production. Take the previous specification gives 
+	\[
+	\frac{1}{k_t^\alpha - k_{t+1}} = \frac{\beta \alpha k_{t+1}^{\alpha-1}}{k_{t+1}^\alpha - k_{t+2}}
+	\]
+	given $k_{T+1}=0$, rearrange gives
+	\[
+	k_{t+1}^\alpha - k_{t+2} = \alpha \beta k_{t+1}^{\alpha-1} \left( k_t^\alpha - k_{t+1} \right)
+	\]
+	
+	Now we define $z_t = \frac{k_{t+1}}{k_t^\alpha}$, which implies $z_T=0$ given the terminating condition.
+	
+	Substitute $z_t$ in gives 
+	\[
+	1 - z_{t+1} = \frac{\alpha \beta (k_t^\alpha - k_{t+1})}{k_{t+1}}\]
+	
+	Rearrange gives
+	\begin{align*}
+		z_{t+1} &= 1 + \alpha \beta - \frac{\alpha \beta}{z_t}\\
+		z_t &= \frac{\alpha \beta}{1 + \alpha \beta - z_{t+1}}
+	\end{align*}
+	
+	Since we know $z_T=0$, this implies all other $z_t$ are
+	\begin{align*}
+	z_t &= \alpha \beta \frac{1 - (\alpha \beta)^{T-t}}{1 - (\alpha \beta)^{T-t+1}} \\
+	k_{t+1} &= \alpha \beta \frac{1 - (\alpha \beta)^{T-t}}{1 - (\alpha \beta)^{T-t+1}} k_t^\alpha \\
+	c_t &= \frac{1 - \alpha \beta}{1 - (\alpha \beta)^{T-t+1}} k_t^\alpha
+	\end{align*}
+	
+	The steady state is this case is easy to find if we let $c_t = c_{t+1} =c^\ast$ and we will find 
+	\[f'(k^\ast) = \frac{1}{\beta}\]
+	given that $f'(k)=F_k (k,1)+1-\delta$, we have
+	\[F_k (k,1)=\frac{1}{\beta} -(1-\delta)\]
+	
+	\section{Arrow-Debreu Competitive Equilibrium}
+	
+	\subsection{Setup}
+	The distinct feature of the Arrow-Debreu setup are 
+	\begin{itemize}
+		\item The agreement of trade get decided in period 0. Agents then trade according to the agreement in each period. Because of this, the profit maximization problem is actually static.
+		\item wages and rental rate uses final good as numeraire, i.e. wage and rental tell how much final good they can buy, not the monetary value. The monetary values are $p_t w_t$ and $p_t r_t$
+	\end{itemize}
+	
+	There are three markets in the Arrow-Debreu
+	\begin{itemize}
+		\item Final good, $y_t$, which can be used for consumption $c_t$ or investment $I_t$. $p_t$ is the final good price at time $t$ and $p_0$ is normalized to 0.
+		\item Labor services, $n_t$, again, $w_t$ is the wage paid on the labor services at time $t$ and is in terms of the number of final goods.
+		\item Capital services, $k_t$, the rental price $r_t$, again, is also in terms of the number of final goods
+	\end{itemize}
+	
+	\subsection{Competitive Equilibrium}
+	Just like the definition in microeconomics, the condition for competitive equilibrium is 
+	\begin{itemize}
+		\item Given prices $\{ p_t, w_t , r_t \}_{t=0}^{\infty}$ the allocation $\{k_t^d, n_t^d, y_t\}_{t=0}^\infty$ solves the firm's maximization problem
+		\item Given prices $\{ p_t, w_t , r_t \}_{t=0}^{\infty}$ the allocation $\{c_t, I_t, x_{t+1}, k_t^s, n_t^s\}_{t=0}^\infty$ solves the consumer's maximization problem
+		\item Market clearing \begin{align*}
+			y_t &=c_t + I_t\\
+			n_t^d &= n_t^s\\
+			k_t^d &= k_t^s
+		\end{align*}
+	\end{itemize}
+	
+	\subsubsection{Firm's profit maximization}
+	The firm's profit maximization problem is 
+	\[
+	\pi_t = \max_{k_t, n_t \geq 0} p_t \big(F(k_t, n_t) - r_t k_t - w_t n_t\big)
+	\]
+	The factor prices under perfect competition is then 
+	\begin{align*}
+		r_t &= F_k(k_t, n_t)\\
+		w_t &= F_n(k_t, n_t)
+	\end{align*}
+	
+	Now the Euler's theorem says: for any function that is homogeneous of degree $k$ and differentiable at $x\in \mathbb{R}^L$
+	\[k \cdot f(x) = \sum_{i=1}^{L} x_i \frac{\partial f(x)}{\partial x_i}\]
+	
+	Thus, the profit 
+	\[
+	\pi_t = p_t \big(F(k_t, n_t) - F_k(k_t, n_t) k_t - F_n(k_t, n_t) n_t\big) = 0
+	\]
+	
+	\subsubsection{Household's utility maximization}
+	
+	If household does not derive disutility from working, then 
+	\begin{align*}
+		n_t &=1, k_t = x_t \\
+		I_t &= k_{t+1} - (1-\delta)k_t
+	\end{align*}
+	
+	then household's utility maximization problem is
+	\begin{align*}
+	&\max_{\{c_t, k_{t+1}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^t U(c_t) \\
+	\text{s.t.} \quad \sum_{t=0}^\infty &p_t \big(c_t + k_{t+1} - (1 - \delta)k_t\big)\\
+	&= \sum_{t=0}^\infty p_t \big(r_t k_t + w_t\big) \\
+	\text{with }& c_t, k_{t+1} \geq 0 \quad \text{for all } t \geq 0 \\
+	&k_0 \text{ given}
+	\end{align*}
+	
+	Set up the Lagrangian and solve for the FOCs would give 
+	\begin{align*}
+	\beta^t U'(c_t) &= \mu p_t \\
+	\beta^{t+1} U'(c_{t+1}) &= \mu p_{t+1} \\
+	\mu p_t &= \mu \big(1 - \delta + r_{t+1}\big) p_{t+1}
+	\end{align*}
+	
+	Combining yields the Euler equation
+	\begin{align*}
+	\frac{\beta U'(c_{t+1})}{U'(c_t)} = \frac{p_{t+1}}{p_t} &= \frac{1}{1 + r_{t+1} - \delta} \\
+	\frac{(1 - \delta + r_{t+1}) \beta U'(c_{t+1})}{U'(c_t)} &= 1
+	\end{align*}
+	
+	Now, since we know the factor price for capital is 
+	\[r_t = F_k(k,1) = f'(k_t)-(1-\delta)\]
+	and the market clearing condition for final goods market 
+	\[c_t = f(k_t)-k_{t+1}\]
+	We can rewrite the Euler equation as 
+	\[
+	\frac{f'(k_{t+1}) \beta U'(f(k_{t+1}) - k_{t+2})}{U'(f(k_t) - k_{t+1})} = 1
+	\]
+	which is exactly the same as the social planner's problem.
+	
+	
+	\subsubsection{Equilibrium}
+	With the Euler's equation and firm's zero profit condition, we are able to determine the equilibrium sequence of capital stock $\{k_{t+1}\}_{t=0}^{\infty}$ and back out the equilibrium allocations of all other variables.
+	\begin{align*}
+	c_t &= f(k_t) - k_{t+1} \\
+	y_t &= F(k_t, 1) \\
+	l_t &= y_t - c_t \\
+	n_t &= 1 \\
+	r_t &= F_k(k_t, 1) \\
+	w_t &= F_n(k_t, 1)
+	\end{align*}
+	
+	With the sequence of all the variables on hand, we can then determine the price that clears the market. 
+	
+	\begin{align*}
+	p_{t+1} &= \frac{\beta U'(c_{t+1})}{U'(c_t)} p_t \\
+	\frac{p_{t+1}}{p_t} &= \frac{\beta U'(c_{t+1})}{U'(c_t)} = \frac{1}{1 + r_{t+1} - \delta} \\
+	p_{t+1} &= \frac{\beta^{t+1} U'(c_{t+1})}{U'(c_0)} = \prod_{\tau=0}^t \frac{1}{1 + r_{\tau+1} - \delta}
+	\end{align*}
+	
+	
+\end{document}
