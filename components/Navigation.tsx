@@ -103,7 +103,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           transition: { duration: 0.2 },
         }}
         style={{
-          background: 'rgba(255,255,255,0.3)',
+          background: 'rgba(255,255,255,0.1)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           willChange: 'transform, width',
