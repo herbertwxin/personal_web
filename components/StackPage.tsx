@@ -35,6 +35,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Advanced',
       topics: ['Complete Markets', 'Arrow-Debreu', 'General Equilibrium'],
       pdfPath: 'downloadable/stack/Complete_markets.pdf',
+      latexFile: 'Complete_markets.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -44,6 +45,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Intermediate',
       topics: ['Differential Equations', 'Dynamic Systems', 'Mathematical Methods'],
       pdfPath: 'downloadable/stack/Differential.pdf',
+      latexFile: 'Differential.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -53,6 +55,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Advanced',
       topics: ['Endogenous Growth', 'Human Capital', 'Innovation'],
       pdfPath: 'downloadable/stack/End_Growth.pdf',
+      latexFile: 'End_Growth.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -62,6 +65,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Intermediate',
       topics: ['Monetary Theory', 'Inflation', 'Central Banking'],
       pdfPath: 'downloadable/stack/Monetary.pdf',
+      latexFile: 'Monetary.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -71,6 +75,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Beginner',
       topics: ['Solow Model', 'Growth Theory', 'Capital Accumulation'],
       pdfPath: 'downloadable/stack/Neo_classical.pdf',
+      latexFile: 'Neo_classical.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -80,6 +85,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Advanced',
       topics: ['New Keynesian', 'Price Rigidity', 'Monetary Policy'],
       pdfPath: 'downloadable/stack/NK.pdf',
+      latexFile: 'NK.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -89,6 +95,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Advanced',
       topics: ['OLG Model', 'Lifecycle', 'Intergenerational'],
       pdfPath: 'downloadable/stack/OLG.pdf',
+      latexFile: 'OLG.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -98,6 +105,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Intermediate',
       topics: ['Ramsey Model', 'Optimal Growth', 'Dynamic Optimization'],
       pdfPath: 'downloadable/stack/Ramsey.pdf',
+      latexFile: 'Ramsey.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -107,6 +115,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Intermediate',
       topics: ['RBC Model', 'Technology Shocks', 'Business Cycles'],
       pdfPath: 'downloadable/stack/RBC.pdf',
+      latexFile: 'RBC.tex',
       lastUpdated: 'Dec 2024',
     },
     {
@@ -116,6 +125,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       difficulty: 'Beginner',
       topics: ['Solow Model', 'Growth Theory', 'Steady State'],
       pdfPath: 'downloadable/stack/Solow.pdf',
+      latexFile: 'Solow.tex',
       lastUpdated: 'Dec 2024',
     },
   ]
@@ -208,8 +218,8 @@ export function StackPage({ onViewModel }: StackPageProps) {
             <button
               key={option}
               className={`text-sm px-3 py-1 rounded transition-colors ${selectedFilter === option
-                  ? 'bg-gray-100 text-black'
-                  : 'text-gray-600 hover:text-black'
+                ? 'bg-gray-100 text-black'
+                : 'text-gray-600 hover:text-black'
                 }`}
               onClick={() => setSelectedFilter(option)}
             >
@@ -249,7 +259,10 @@ export function StackPage({ onViewModel }: StackPageProps) {
                 <div className='flex-1'>
                   {/* Title and metadata row */}
                   <div className='flex items-start justify-between mb-2'>
-                    <h3 className='text-lg font-medium text-black group-hover:text-[#6A5ACD] transition-colors cursor-pointer'>
+                    <h3
+                      className='text-lg font-medium text-black group-hover:text-[#6A5ACD] transition-colors cursor-pointer'
+                      onClick={() => onViewModel(model.id)}
+                    >
                       {model.title}
                     </h3>
                     <div className='flex items-center gap-4 text-sm text-gray-600 ml-4'>
@@ -278,12 +291,21 @@ export function StackPage({ onViewModel }: StackPageProps) {
                     </div>
                   </div>
 
-                  {/* Action button */}
-                  <div className='flex justify-end'>
+                  {/* Action buttons */}
+                  <div className='flex justify-end gap-2'>
                     <Button
                       size='sm'
                       variant='outline'
                       className='text-[#6A5ACD] border-[#6A5ACD] hover:bg-[#6A5ACD] hover:text-white'
+                      onClick={() => onViewModel(model.id)}
+                    >
+                      <Play className='w-3 h-3 mr-1' />
+                      View Online
+                    </Button>
+                    <Button
+                      size='sm'
+                      variant='ghost'
+                      className='text-gray-600 hover:text-gray-800'
                       onClick={() => {
                         const link = document.createElement('a');
                         link.href = model.pdfPath;
@@ -293,7 +315,6 @@ export function StackPage({ onViewModel }: StackPageProps) {
                         document.body.removeChild(link);
                       }}
                     >
-                      <Play className='w-3 h-3 mr-1' />
                       Download PDF
                     </Button>
                   </div>

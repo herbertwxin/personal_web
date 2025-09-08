@@ -1,0 +1,463 @@
+%! Author = herbertxin
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Macro II}
+\chead{New Keynesian Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{New Keynesian Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Introduction}
+	The Real Business Cycle model has stress out three basic claims. 
+	\begin{enumerate}
+		\item \textbf{Efficiency of business cycles}  - In standard RBC models, cyclical fluctuations are fully optimal, as they results from economy's response to exogenous variation in real forces. Thus, stabilization policies may not be necessary nor desirable. 
+		\item \textbf{Importance of technology shock} - In contrast with the traditional view of technological change as a source of long-term growth, RBC model claimed that technological change is also a source of business cycle and fluctuations. 
+		\item \textbf{Limited role of monetary factors} - RBC theory sought to explain economic fluctuations with no reference to monetary factors, even abstracting from the existence of a monetary sector.
+	\end{enumerate}
+	
+	Due to this limited role of monetary factors, RBC models were not well perceived among policy makers. However, after the famous \emph{Lucas Critique} (1976), large scale macroeconometric models seem to be lackluster. The attempts by Colley and Hansen (1989) and others to introduce a monetary sector in an otherwise conventional RBC model, however, results in monetary neutrality. That finding is at odds with the widely held belief (certainly among central bankers) in the power of that policy to influence output and employment developments, at least in the short run.
+	
+	Thus, the New Keynesian model modifies the assumption of classical monetary models 
+	\begin{itemize}
+		\item Monopolistic competition: Prices and wages are set, in particular, by intermediate producers, rather than taken as given
+		\item Nominal rigidities: Not all firms are able to adjust their price when they wanted to do so, same kind of friction applies to workers in the sense of sticky wages
+		\item Short-run non-neutrality of monetary policy: The corollary of nominal rigidities is that changes in short-term nominal interest rate are not matched one-for-one by changes in expected inflation, leading to changes in real interest rate.  
+	\end{itemize}
+	
+	It is important to note that the three ingredients above were already central to the New Keynesian literature that emerged in the late 1970s and 1980s, and which developed in parallel with RBC theory. The models used in that literature, however, were often static or used reduced form equilibrium conditions that were not derived from explicit dynamic optimization problems facing firms and households. The emphasis of much of that work was instead on providing microfoundations, based on the presence of small menu costs, for the stickiness of prices and the resulting monetary non-neutralities. Other papers emphasized the persistent effects of monetary policy on output, and the role that staggered contracts played in generating that persistence. The novelty of the new generation of monetary models has been to embed those features in a fully specified DSGE framework, thus adopting the formal modeling approach that has been the hallmark of RBC theory.
+	
+	Below, we present a simple version of New Keynesian model. 
+	\section{Household}
+	The households solves the problem 
+	\begin{align*}
+	\hspace{-36pt}\max_{C_t, N_t, B_{t+1}, M_t} & E_0 \sum_{t=0}^{\infty} \beta^t \left( \frac{C_t^{1-\sigma}}{1-\sigma} - \psi \frac{N_t^{1+\eta}}{1+\eta} + \theta \ln \left( \frac{M_t}{P_t} \right) \right)	
+	\end{align*}
+	subject to the nominal budget constraint 
+	\[\hspace{-36pt} P_t C_t + B_{t+1} + M_t = M_{t-1} + W_t N_t + \Pi_t - P_t T_t + (1 + i_{t-1}) B_t\]
+	where  $\Pi_t$ is the nominal profit remitted by firms, $T_t$ is the lump-sum tax paid to government, or lump-sum transfer from government. Note the household enters the period with cash holding $M_{t-1}$
+	
+	Setting up the Lagrangian gives
+	\begin{align*}
+		&L = E_0 \sum_{t=0}^{\infty} \beta^t [ \frac{C_t^{1-\sigma}}{1-\sigma} - \psi \frac{N_t^{1+\eta}}{1+\eta} + \theta \ln \left( \frac{M_t}{P_t} \right)\\
+		 &+ \lambda_t ( M_{t-1} + W_t N_t + \Pi_t - P_t T_t + (1 + i_{t-1}) B_t\\
+		 &- P_t C_t - B_{t+1} - M_t ) ]
+	\end{align*}
+	Note this setup is mathematically equivalent to 
+	\begin{align*}
+		\hspace{-36pt}&L = E_0 \sum_{t=0}^{\infty} \beta^t \left[ \frac{C_t^{1-\sigma}}{1-\sigma} - \psi \frac{N_t^{1+\eta}}{1+\eta} + \theta \ln \left( \frac{M_t}{P_t} \right)\right]\\
+		 \hspace{-36pt}&+ E_0 \sum_{t=0}^{\infty} [\lambda_t ( M_{t-1} + W_t N_t + \Pi_t - P_t T_t + (1 + i_{t-1}) B_t\\
+		 \hspace{-36pt}&- P_t C_t - B_{t+1} - M_t ) ]
+	\end{align*}
+
+	Taking the FOCs give
+	\begin{align*}
+		\frac{\partial L}{\partial C_t} &= 0 \iff C_t^{-\sigma} = \lambda_t P_t \\
+		\frac{\partial L}{\partial N_t} &= 0 \iff \psi N_t^{\eta} = \lambda_t W_t \\
+		\frac{\partial L}{\partial B_{t+1}} &= 0 \iff \lambda_t = \beta E_t \lambda_{t+1} (1 + i_t) \\
+		\frac{\partial L}{\partial M_t} &= 0 \iff \frac{\theta}{M_t} = \lambda_t - \beta E_t \lambda_{t+1}
+	\end{align*}
+	
+	Rewriting and combining FOCs give
+	\begin{align}
+		\psi N_t^\eta &= C_t^{-\sigma}w_t\\
+		C_t^{\sigma} &= \beta E_t C_{t+1}^{-\sigma}(1+i_t) \frac{P_t}{P_{t+1}}\\
+		\theta \left( \frac{M_t}{P_t}\right)^{-1} &= \frac{i_t}{1+i_t}C_t^{-\sigma}
+	\end{align}
+	
+	All in all, the household side does not contain anything special, the true difference lies in the production side. 
+	
+	\section{Production}
+	In the simple New Keynesian model, there will be one final goods producer that aggregates intermediate inputs according to a CES technology. 
+	
+	The intermediate inputs are imperfect substitutes of each other such that the demand for each intermediate variety is downward sloping. This also gives the continuum intermediate goods producers monopolistic right to set the price, which is a crucial assumption for nominal rigidity to happen.
+	
+	
+	\subsection{Final Good Producer}
+	\subsubsection{Demand for intermediate goods}
+	The final goods producer aggregates a continuum of intermediates with CES technology
+	\begin{align}
+		Y_t = \left( \int_{0}^{1} Y_t(j)^{\frac{\epsilon-1}{\epsilon}}dj\right)^{\frac{\epsilon}{\epsilon-1}}
+	\end{align}
+	Then the profit maximization problem is 
+	\[\max_{Y_t(j)} P_t \left( \int_0^1 Y_t(j)^{\frac{\epsilon-1}{\epsilon}} dj \right)^{\frac{\epsilon}{\epsilon-1}} - \int_0^1 P_t(j) Y_t(j) dj\]	
+	Take derivate w.r.t. $Y_t(j)$ gives
+	\[P_t \frac{\epsilon}{\epsilon-1} \left( \int_0^1 Y_t(j)^{\frac{\epsilon-1}{\epsilon}} dj \right)^{\frac{\epsilon-1}{\epsilon}-1} \frac{\epsilon-1}{\epsilon} Y_t(j)^{\frac{\epsilon-1}{\epsilon}-1} = P_t(j)\]
+	Rearrange gives
+	\begin{align*}
+		\left( \int_0^1 Y_t(j)^{\frac{\epsilon-1}{\epsilon}} dj \right)^{\frac{1}{\epsilon-1}} Y_t(j)^{- \frac{1}{\epsilon}} &= \frac{P_t(j)}{P_t} \\
+	\left( \int_0^1 Y_t(j)^{\frac{\epsilon-1}{\epsilon}} dj \right)^{-\frac{\epsilon}{\epsilon-1}} Y_t(j) &= \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon}
+	\end{align*}
+	Since $Y_t = \left( \int_{0}^{1} Y_t(j)^{\frac{\epsilon-1}{\epsilon}}dj\right)^{\frac{\epsilon}{\epsilon-1}}$, we have
+	\begin{align}
+		Y_t(j) = \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t
+	\end{align}
+	as the demand for intermediate goods. 
+	
+	\subsubsection{Price index}
+	From the zero profit condition, we have
+	\[P_t Y_t = \int_0^1 P_t(j) Y_t(j) dj\]
+	Plugging in the optimal demand
+	\begin{align}
+		P_t Y_t &= \int_0^1 P_t(j)^{1-\epsilon} P_t^\epsilon Y_t dj \notag\\
+		P_t Y_t &= P_t^\epsilon Y_t \int_0^1 P_t(j)^{1-\epsilon} \notag		\\
+		P_t &= \left( \int_0^1 P_t(j)^{1-\epsilon}  dj \right)^{\frac{1}{1-\epsilon}}
+	\end{align}
+	
+	\subsection{Intermediate Producer}
+	\subsubsection{Profit of intermediate producer}
+	The intermediate goods producer produces output according to a constant returns to scale technology.
+	\begin{align}
+		Y_t(j) = A_t N_t(j)
+	\end{align}
+	The intermediate producers solve the cost minimization problem such  that it produces at least the demand amount.
+	\begin{align*}
+		\min_{N_t(j)} W_t N_t(j)
+	\end{align*}
+	subject to 
+	\begin{align*}
+		A_t N_t(j) \geq \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t
+	\end{align*}
+	The multiplier on this constraint has the same interpretation as marginal cost, i.e. how much the costs will change if choose to  produce an extra unit. 
+	
+	Setting up the Lagrangian, 
+	\[\mathcal L = W_t N_t(j) + \mu_t(j)\left[\left(\frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t-A_t N_t(j)\right]\]
+	Taking FOC gives
+	\begin{align}
+		\frac{\partial L}{\partial N_t(j)}&=0 \implies W_t =\mu_t(j) A_t \notag\\
+		\mu_t &= \frac{W_t}{A_t}
+	\end{align}
+	
+	The real flow for profit of producer $j$ is 
+	\[\Pi_t(j) = \frac{P_t(j)}{P_t}Y_t(j) - \frac{W_t}{P_t}N_t(j)\]
+	By plugging in (8)
+	\begin{align*}
+		\Pi_t(j) &= \frac{P_t(j)}{P_t}Y_t(j) - \frac{\mu_t(j)}{P_t}A_t N_t(j)\\
+		\Pi_t(j) &= \frac{P_t(j)}{P_t}Y_t(j) - mc_t Y_t(j)
+		\end{align*}
+	where $mc_t \equiv \frac{\mu_t}{P_t}$ is the real marginal cost.
+	
+	\subsubsection{Optimal resetting price}
+	One of the most important feature of New Keynesian model is the rigidity in price, here we introduce the Calvo pricing, where the probability of firms stuck with price from the last period is $\phi$, and the probability of resetting the price is $1-\phi$. Firms, as they are owned by households, discount future profit by $\tilde{M}_{t+s} = \beta^s \frac{u'(C_{t+s})}{u'(C_{t})}$.
+	
+	The dynamic problem of an updating firm is 
+	\begin{align*}
+		\hspace{-28pt}&\max_{P_t(j)} E_t \sum_{s=0}^{\infty} (\beta \phi)^s \frac{u'(C_{t+s})}{u'(C_t)} \left( \frac{P_t(j)}{P_{t+s}} Y_{t+s}(j)  - mc_{t+s} Y_{t+s}(j) \right) \notag 
+	\end{align*}
+	This is intrinsically saying firms that are able to reset their price in period $t$ will set the price as if they are never going to reset the price again. Now if we impose output equals demand, we get
+	\begin{align*}
+		&\max_{P_t(j)} E_t \sum_{s=0}^{\infty} (\beta \phi)^s \frac{u'(C_{t+s})}{u'(C_t)} \\
+		&\cdot\left( \frac{P_t(j)}{P_{t+s}} \left( \frac{P_t(j)}{P_{t+s}} \right)^{-\epsilon} Y_{t+s} - mc_{t+s} \left( \frac{P_t(j)}{P_{t+s}} \right)^{-\epsilon} Y_{t+s} \right) \notag 
+	\end{align*}
+	Take derivate w.r.t. to $P_t(j)$
+	\begin{align*}
+		&(1 - \epsilon) P_t(j)^{-\epsilon} E_t \sum_{s=0}^{\infty} (\beta \phi)^s u'(C_{t+s}) P_{t+s}^{\epsilon-1} Y_{t+s} \\
+		&+ \epsilon P_t(j)^{-\epsilon-1} E_t \sum_{s=0}^{\infty} (\beta \phi)^s u'(C_{t+s}) mc_{t+s} P_{t+s}^{\epsilon} Y_{t+s} = 0
+	\end{align*}
+	Simplifying gives 
+	\begin{align*}
+		\hspace{-28pt}P_t^\#(j) &= \frac{\epsilon}{\epsilon - 1} \frac{E_t \sum_{s=0}^{\infty} (\beta \phi)^s u'(C_{t+s}) mc_{t+s} P_{t+s}^{\epsilon} Y_{t+s}}{E_t \sum_{s=0}^{\infty} (\beta \phi)^s u'(C_{t+s}) P_{t+s}^{\epsilon-1} Y_{t+s}}
+	\end{align*}
+	Now we can write the equation more compactly using recursive terms
+	\begin{equation}
+		P_t^\#(j) = P_t^\# = \frac{\epsilon}{1-\epsilon}\frac{X_{1,t}}{X_{2,t}}
+	\end{equation}
+	where 
+	\begin{align}
+		X_{1,t} &= u'(C_t) mc_t P_t^{\epsilon} Y_t + \phi \beta E_t X_{1,t+1}  \\
+		X_{2,t} &= u'(C_t) P_t^{\epsilon-1} Y_t + \phi \beta E_t X_{2,t+1}
+	\end{align}
+	If firms are able to adjust price freely, i.e. $\phi=0$, then we have
+	\begin{align*}
+		P_t^\# &= \frac{\epsilon}{1-\epsilon} mc_t P_t = \frac{\epsilon}{1-\epsilon} \mu_t\\
+		\implies mc_t &= \frac{\epsilon-1}{\epsilon}
+	\end{align*}
+	As $P_t = P_t^\#$, now if we plug this into the profit equation
+	\begin{align*}
+		\Pi_t(j) &= \frac{P_t(j)}{P_t}Y_t(j) - mc_t Y_t(j)\\
+		\Pi_t(j) &= Y_t(j)(1-mc_t)\\
+		\Pi_t(j) &= \left(1- \frac{\epsilon-1}{\epsilon}\right)Y_t(j)>0
+	\end{align*}
+	Since $\epsilon>1$, this means that even when there is no price rigidity, intermediate producers earn a positive profit, which is sub-optimal.
+	
+	\section{Equilibrium and Aggregation}
+	To close the model we need to specify an exogenous process for $A_t$ and some kind of monetary policy rule to determine $M_t$
+	\begin{align}
+		\ln A_t &= \rho_a \ln A_{t-1} +\epsilon_{a,t}\\
+		\Delta \ln M_t &= (1-\rho_m)\pi + \rho_m \Delta \ln M_{t-1}+\epsilon_{m,t}
+	\end{align}
+	where $\Delta \ln M_t = \ln M_t - \ln M_{t-1}$
+	
+	The government's budget constraint is 
+	\[P_t T_t + M_t - M_{t-1} \geq 0\]
+	i.e. government does not borrow so the flow of budget must be positive, note that $T_t$ can be negative and $M_t-M_{t-1}$ is the seignorage, so at no spending, we see a lump-sum transfer of 
+	\[T_t = - \frac{M_t - M_{t-1}}{P_t} \]
+	
+	\subsection{Equilibrium condition}
+	In equilibrium with representative household, $B_t=0$, as they all make the same decision, meaning if one lend then all lend, if one borrow, all borrow, so the bond market cannot be established. 
+	Combining this with the lump-sum tax, household's budget constraint becomes 
+	\[C_t = w_t N_t + \frac{\Pi_t}{P_t}\]
+	
+	Now the real dividend is just the aggregation of real profits from intermediate goods firms, as final goods firm make zero profit.
+	\begin{align*}
+		\frac{\Pi_t}{P_t} &= \int_0^1 \left( \frac{P_t(j)}{P_t} Y_t(j) - \frac{W_t}{P_t} N_t(j) \right) dj\\
+		\frac{\Pi_t}{P_t} &= \int_0^1 \frac{P_t(j)}{P_t} Y_t(j) dj - w_t \int_0^1 N_t(j) dj
+	\end{align*}
+	Now at equilibrium, labor supply equals labor demand, i.e. $\int_0^1 N_t(j)dj =N_t$, thus 
+	\begin{align*}
+		\frac{\Pi_t}{P_t} &= \int_0^1 \frac{P_t(j)}{P_t} Y_t(j) dj - w_t N_t\\[5pt]
+		\implies C_t &= \int_0^1 \frac{P_t(j)}{P_t} Y_t(j) dj
+	\end{align*}
+	Now we plug in the demand for intermediate goods $Y_t(j) = \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t$, we get
+	\begin{align}
+		C_t &= \int_0^1 P_t(j)^{1-\epsilon} P_t^{\epsilon-1} Y_t dj \notag\\
+		C_t &= P_t^{\epsilon-1} Y_t \int_0^1 P_t(j)^{1-\epsilon} dj \notag\\[5pt]
+		\implies C_t &= Y_t
+	\end{align}
+	
+	\subsection{Output and price dispersion}
+	Using the demand for intermediate variety $j$, we have 
+	\[Y_t(j) = \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t\]
+	Plug in the production for intermediate good 
+	\[A_t N_t(j) = \left( \frac{P_t(j)}{P_t}\right)^{-\epsilon} Y_t\]
+	Integrate over $j$
+	\begin{align*}
+		\int_0^1 A_t N_t(j) dj &= \int_0^1 \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} Y_t dj\\
+		A_t \int_0^1 N_t(j) dj &= Y_t \int_0^1 \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} dj
+	\end{align*}
+	Now we define a variable as the price dispersion
+	\begin{equation}
+		v_t^{\rho} = \int_0^1 \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} dj
+	\end{equation}
+	This is a measure of price dispersion, as if there is no pricing frictions, all firms will charge the same price, so $v_t^p =1$.
+	So we can write output as 
+	\begin{equation}
+		Y_t = \frac{A_t N_t}{v_t^{\rho}}
+	\end{equation}
+	Now with pricing dispersion, we have $v_t^p >1$ and there is a loss in output.
+	
+	\subsection{Equilibrium characterization equations}
+	Hence the full set of equilibrium condition is:
+	\begin{align}
+	C_t^{-\sigma} &= \beta E_t C_{t+1}^{-\sigma} (1 + i_t) \frac{P_t}{P_{t+1}} \\
+	\psi N_t^\eta &= C_t^{-\sigma} w_t \\
+	\frac{M_t}{P_t} &= \theta \frac{1 + i_t}{i_t} C_t^\sigma \\
+	mc_t &= \frac{w_t}{A_t} \\
+	C_t &= Y_t \\
+	Y_t &= \frac{A_t N_t}{v_t^\rho} \\
+	v_t^\rho &= \int_0^1 \left( \frac{P_t(j)}{P_t} \right)^{-\epsilon} dj \\
+	P_t^{1-\epsilon} &= \int_0^1 P_t(j)^{1-\epsilon} dj \\
+	P_t^{\#} &= \frac{\epsilon}{\epsilon - 1} \frac{X_{1,t}}{X_{2,t}} \\
+	X_{1,t} &= u'(C_t) mc_t P_t^\epsilon Y_t + \phi \beta E_t X_{1,t+1} \\
+	X_{2,t} &= u'(C_t) P_t^{\epsilon-1} Y_t + \phi \beta E_t X_{2,t+1} \\
+	\ln A_t &= \rho_a \ln A_{t-1} + \epsilon_{a,t} \\
+	\Delta \ln M_t &= (1 - \rho_m) \pi + \rho_m \Delta \ln M_{t-1} + \epsilon_{m,t} \\
+	\Delta \ln M_t &= \ln M_t - \ln M_{t-1}
+	\end{align}
+	
+	\subsection{Rewriting Equilibrium}
+	However, there are several problems with the equilibrium conditions above:
+	\begin{itemize}
+        \item We haven't gotten rid of the heterogeneity: we still have $j$ indexes showing up.
+        \item We have the price level showing up, which may not be stationary.
+        \item We have the nominal money supply showing up, which is not stationary the way we have written the process in terms of money growth.
+    \end{itemize}
+
+    Hence, we want to re-write these conditions:
+    \begin{itemize}
+        \item Only in terms of inflation, eliminating the price level.
+        \item Getting rid of the heterogeneity, which the Calvo (1983) assumption allows us to do.
+        \item In terms of real money balances, $m_t = \dfrac{M_t}{P_t}$, instead of nominal money balances.
+    \end{itemize}
+    
+    Now, we define inflation $1+\pi_t = \frac{P_{t}}{P_{t-1}}$, the Euler equation (17) becomes 
+    \begin{equation}
+    	 C_t^{-\sigma} = \beta E_t C_{t+1}^{-\sigma} (1 + i_t) \dfrac{1}{1 + \pi_{t+1}}
+    \end{equation}
+	The real money balance (19) becomes 
+	\begin{equation}
+		m_t = \theta{\frac{1 + i_t}{i_t}} C_t^\sigma
+	\end{equation}
+	
+	We can remove the heterogeneity using the Calvo assumption. Since we know $1-\phi$ of the firms update their prices while $\phi$ firms got stuck, the aggregate price can be written as
+	\[P_t^{1-\epsilon} = \int_{0}^{1-\phi} P_t^{\#,1-\epsilon} \, dj + \int_{1-\phi}^{1} P_{t-1}(j)^{1-\epsilon} dj\]
+	Now, since the firms who update the price have the same optimal price, we can simplify the equation above to be
+	\[P_t^{1-\epsilon} = (1-\phi) P_t^{\#,1-\epsilon} + \int_{1-\phi}^{1} P_{t-1}(j)^{1-\epsilon}  dj\]
+	The beauty of Calvo assumption allows us to further simplify the second term. Since Calvo assumes firms that got stuck with old price are randomly draw from the population, and there is a continuum of firms, so the weak law of large number then suggest, the average price of those stuck firms is just the expected value of their price, which is the price in the last period. So we have 
+	\begin{align*}
+		P_t^{1-\epsilon} &= (1-\phi) P_t^{\#,1-\epsilon} + \phi \int_{0}^{1} P_{t-1}(j)^{1-\epsilon}  dj\\
+		P_t^{1-\epsilon} &= (1-\phi) P_t^{\#,1-\epsilon} + \phi P_{t-1}^{1-\epsilon}
+	\end{align*}
+	Now we have get rid of the heterogeneity. Divide both sides by $P_{t-1}^{1-\epsilon}$ gives the change in price (inflation):
+	\begin{equation}
+	(1 + \pi_t)^{1-\epsilon} = (1-\phi) (1 + \pi_t^{\#})^{1-\epsilon} + \phi
+	\end{equation}
+
+	We can do the same thing for price dispersion
+	\begin{align*}
+	\hspace{-28pt} v_t^p &= \int_0^{1-\phi} \left( \frac{P_t^{\#}}{P_t} \right)^{-\epsilon} \, dj + \int_{1-\phi}^1 \left( \frac{P_{t-1}(j)}{P_t} \right)^{-\epsilon} dj \\
+	\hspace{-28pt} v_t^p &= \int_0^{1-\phi} \left( \frac{P_t^{\#}}{P_{t-1}} \right)^{-\epsilon} \left( \frac{P_{t-1}}{P_t} \right)^{-\epsilon}  dj\\
+	 &+ \int_{1-\phi}^1 \left( \frac{P_{t-1}(j)}{P_{t-1}} \right)^{-\epsilon} \left( \frac{P_{t-1}}{P_t} \right)^{-\epsilon}  dj \\[10pt]
+	\hspace{-28pt} v_t^p &= (1-\phi) (1 + \pi_t^{\#})^{-\epsilon} (1 + \pi_t)^\epsilon\\
+	& + (1 + \pi_t)^\epsilon \int_{1-\phi}^1 \left( \frac{P_{t-1}(j)}{P_{t-1}} \right)^{-\epsilon}  dj 
+	\end{align*}
+	Again, with Calvo assumption, we have 
+	\begin{equation}
+			v_t^p = (1-\phi) (1 + \pi_t^{\#})^{-\epsilon} (1 + \pi_t)^\epsilon + (1 + \pi_t)^\epsilon \phi v_{t-1}^p
+	\end{equation}
+	
+	Next, we can write the optimal reset price in real terms 
+	\begin{align*}
+		x_{1,t} &\equiv \frac{X_{1,t}}{P_t^\epsilon} \implies X_{1,t} = P_t^\epsilon x_{1,t}\\
+		x_{2,t} &\equiv \frac{X_{2,t}}{P_t^{\epsilon-1}} \implies X_{2,t} = P_t^{\epsilon-1} x_{2,t}\\
+		&\implies \frac{X_{1,t}}{X_{2,t}} = P_t \frac{x_{1,t}}{x_{2,t}} \tag{37A}
+	\end{align*}
+	We divide the auxiliary term by the appropriate power of $P_t$, which gives 
+	\begin{align*}
+		x_{1,t} &= C_t^{-\sigma} m_C Y_t + \phi \beta E_t \frac{X_{1,t+1}}{P_t^\epsilon} \\
+		x_{2,t} &= C_t^{-\sigma} Y_t + \phi \beta E_t \frac{X_{2,t+1}}{P_t^{\epsilon-1}}
+	\end{align*}
+	So now we have
+	\begin{align*}
+		x_{1,t} &= C_t^{-\sigma} m_C Y_t + \phi \beta E_t \frac{X_{1,t+1}}{P_{t+1}^\epsilon} \left( \frac{P_{t+1}}{P_t} \right)^\epsilon \\
+		x_{2,t} &= C_t^{-\sigma} Y_t + \phi \beta E_t \frac{X_{2,t+1}}{P_{t+1}^{\epsilon-1}} \left( \frac{P_{t+1}}{P_t} \right)^{\epsilon-1}
+	\end{align*}
+	We can write this in terms of inflation
+	\begin{align}
+		x_{1,t} &= C_t^{-\sigma} m_C Y_t + \phi \beta E_t (1 + \pi_{t+1})^{\epsilon} x_{1,t+1} \\
+		x_{2,t} &= C_t^{-\sigma} Y_t + \phi \beta E_t (1 + \pi_{t+1})^{\epsilon-1} x_{2,t+1}
+	\end{align}
+	Now, using (37A) we get 
+	\begin{align}
+	1 + \pi_t^{\#} = \frac{\epsilon}{\epsilon - 1} (1 + \pi_t) \frac{x_{1,t}}{x_{2,t}}
+	\end{align}
+	
+	We also need to rewrite the money supply 
+	\begin{align}
+    \Delta \ln m_t &\equiv \ln m_t - \ln m_{t-1} \notag\\
+    \Delta \ln m_t &\equiv \ln m_t - \ln m_{t-1} \notag\\
+    &= \ln M_t - \ln P_t - \ln M_{t-1} + \ln P_{t-1} \notag\\
+    &= \ln M_t - \ln M_{t-1} - \pi_t \notag\\
+    \Delta \ln M_t &= \Delta \ln m_t + \pi_t \notag\\
+    \Delta \ln m_t &= (1 - \rho_m) \pi - \pi_t + \rho_m \Delta \ln m_{t-1}\notag\\
+    &+ \rho_m \pi_{t-1} + \epsilon_{m,t}
+	\end{align}
+	This means the re-written full set of equilibrium conditions is
+	\begin{align}
+    	\hspace{-30pt} C_t^{-\sigma} &= \beta E_t C_{t+1}^{-\sigma} (1 + i_t) \frac{1}{1 + \pi_{t+1}} \\
+    	\hspace{-30pt} \psi N_t^{\#} &= C_t^{-\sigma} w_t \\
+    	\hspace{-30pt} m_t &= \theta^{\frac{1 + i_t}{i_t}} C_t^{\sigma} \\
+    	\hspace{-30pt} mc_t &= \frac{w_t}{A_t} \\
+    	\hspace{-30pt} C_t &= Y_t \\
+    	\hspace{-30pt} Y_t &= \frac{A_t N_t}{v_t^p} \\
+    	\hspace{-30pt} v_t^p &= (1 - \phi) (1 + \pi_t^{\#})^{-\epsilon} (1 + \pi_t)^{\epsilon}\notag \\
+    	& + (1 + \pi_t)^{\epsilon} \phi v_{t-1}^p \\
+    	\hspace{-30pt} (1 + \pi_t)^{1-\epsilon} &= (1 - \phi) (1 + \pi_t^{\#})^{1-\epsilon} + \phi \\
+    	\hspace{-30pt} 1 + \pi_t^{\#} &= \frac{\epsilon}{\epsilon - 1} (1 + \pi_t) \frac{x_{1,t}}{x_{2,t}} \\
+    	\hspace{-30pt} x_{1,t} &= C_t^{-\sigma} m_C Y_t + \phi \beta E_t (1 + \pi_{t+1})^{\epsilon} x_{1,t+1} \\
+    	\hspace{-30pt} x_{2,t} &= C_t^{-\sigma} Y_t + \phi \beta E_t (1 + \pi_{t+1})^{\epsilon-1} x_{2,t+1} \\
+    	\hspace{-30pt} \ln A_t &= \rho_A \ln A_{t-1} + \epsilon_{A,t} \\
+    	\hspace{-30pt} \Delta \ln m_t &= (1 - \rho_m) \pi - \pi_t + \rho_m \Delta \ln m_{t-1}\notag \\
+    	& + \rho_m \pi_{t-1} + \epsilon_{m,t} \\
+    	\hspace{-30pt} \Delta \ln m_t &\equiv \ln m_t - \ln m_{t-1}
+	\end{align}
+	
+	\subsection{Steady State}
+	Now we try to solve for a non-stochastic steady state. We impose $A=1$, so $Y=C$ and steady state inflation is equal to the exogenous target $\pi$.
+	\begin{align*}
+    \hspace{-30pt} \Delta \ln m &= (1 - \rho_m) \pi - (1 - \rho_m) \pi + \rho_m \Delta \ln m \\
+    \hspace{-30pt} (1 - \rho_m) \Delta \ln m &= 0 \\
+    \hspace{-30pt} \Delta \ln m &= 0
+	\end{align*}
+	
+	From the Euler equation, we have
+	\[1+i =\frac{1}{\beta}(1+\pi)\]
+	From the price evolution equation, we have the steady state expression for rest price inflation
+	\[1 + \pi_t^{\#} = \left( \frac{(1 + \pi_t)^{1-\epsilon} - \phi}{1 - \phi} \right)^{\frac{1}{1-\epsilon}}\]
+	So the steady state price dispersion
+	\[ (1-(1+\pi)^{\epsilon} \phi)v^p = (1-\phi) \left( \frac{1+\pi}{1+\pi^\#}\right)^{\epsilon}\]
+	Given all this, we can solve for the steady state ratio of $x_1/x_2$ as
+	\begin{align}
+    	\frac{x_1}{x_2} &= \frac{1 + \pi^{\#}}{1 + \pi} \frac{\epsilon - 1}{\epsilon} \notag\\
+    	\frac{x_1}{x_2} &= mc \frac{1 - \phi \beta (1 + \pi)^{\epsilon-1}}{1 - \phi \beta (1 + \pi)^{\epsilon}} \notag \\
+    	mc &= \frac{1 - \phi \beta (1 + \pi)^{\epsilon}}{1 - \phi \beta (1 + \pi)^{\epsilon-1}} \frac{1 + \pi^{\#}}{1 + \pi} \frac{\epsilon - 1}{\epsilon}
+	\end{align}
+	Once we know the steady state marginal cost, then we know the steady state real wage $w= mc$, and since we know $Y=C$ and $A=1$
+	\begin{align*}
+    	\psi N^m &= Y^{-\sigma} m_C \\
+    	\psi N^m &= N^{-\sigma} (v^p)^{\sigma} m_C \\
+    	N &= \left( \frac{1}{\psi} (v^p)^{\sigma} m_C \right)^{\frac{1}{\eta + \sigma}} \\
+    	m &= \theta \frac{1 + i}{i} Y^{\sigma}
+	\end{align*}
+	
+	\subsection{Flexible Price Equilibrium}
+	When we have flexible price equilibrium, where $\phi=0$, then since firms are able to adjust price as needed, there is no price dispersion, which then implies on marginal cost and wage.
+	\begin{align*}
+		 v_t^{f,p} &= \left( \frac{1 + \pi^{\#}}{1 + \pi} \right)^{-\epsilon} = 1\\
+		 mc_t^f &= \frac{\epsilon-1}{\epsilon}\\
+		 w_t^f &= \frac{\epsilon-1}{\epsilon	}A_t
+	\end{align*}
+	So now we can also derive for flexible price output and labor equilibrium.
+	\begin{align}
+    \psi (N_t^f)^{\eta} &= (Y_t^f)^{-\sigma} \frac{\epsilon-1}{\epsilon} A_t \notag\\
+    \psi (N_t^f)^{\eta} &= A_t^{-\sigma} (N_t^f)^{-\sigma} \frac{\epsilon-1}{\epsilon} A_t \notag\\
+    N_t^f &= \left( \frac{1}{\psi} \frac{\epsilon-1}{\epsilon} A_t^{1-\sigma} \right)^{\frac{1}{\sigma + \eta}} \notag\\
+    Y_t^f &= \left( \frac{1}{\psi} \frac{\epsilon-1}{\epsilon} \right)^{\frac{1}{\sigma + \eta}} A_t^{\frac{1 + \eta}{\sigma + \eta}}
+	\end{align}
+	Note also that flexible price output does not depend on anything nominal. This is because, with flexible prices, nominal shocks have no real effects.
+	
+	
+	
+	
+	
+	
+	
+	
+	\end{document}

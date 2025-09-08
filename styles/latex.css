@@ -1,0 +1,205 @@
+/* LaTeX Document Styling */
+.latex-document {
+  font-family: 'Computer Modern', 'Latin Modern', 'Times New Roman', serif;
+  line-height: 1.6;
+  color: #2d3748;
+}
+
+.latex-academic-content {
+  max-width: none;
+}
+
+/* Math expressions */
+.latex-document .math-display {
+  display: block;
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 1.1em;
+  font-style: italic;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #e2e8f0;
+  border-radius: 0 4px 4px 0;
+}
+
+.latex-document .math-inline {
+  font-style: italic;
+  font-family: 'Computer Modern', 'Latin Modern', serif;
+}
+
+/* Headings */
+.latex-document h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+  color: #1a202c;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.latex-document h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  margin-top: 2rem;
+  color: #2d3748;
+}
+
+.latex-document h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  color: #4a5568;
+}
+
+.latex-document h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
+  color: #4a5568;
+}
+
+/* Paragraphs */
+.latex-document p {
+  margin-bottom: 1rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Lists */
+.latex-document ul, .latex-document ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.latex-document li {
+  margin-bottom: 0.5rem;
+}
+
+/* Emphasis */
+.latex-document strong {
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.latex-document em {
+  font-style: italic;
+}
+
+/* Code and monospace */
+.latex-document code {
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  background-color: #f7fafc;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* Special environments */
+.latex-document .theorem,
+.latex-document .definition,
+.latex-document .proof,
+.latex-document .proposition {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.latex-document .theorem {
+  background-color: #ebf8ff;
+  border-left: 4px solid #3182ce;
+}
+
+.latex-document .definition {
+  background-color: #f0fff4;
+  border-left: 4px solid #38a169;
+}
+
+.latex-document .proof {
+  background-color: #f7fafc;
+  border-left: 4px solid #718096;
+}
+
+.latex-document .proposition {
+  background-color: #faf5ff;
+  border-left: 4px solid #805ad5;
+}
+
+/* Table of contents */
+.latex-document nav {
+  background-color: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.latex-document nav h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #2d3748;
+}
+
+.latex-document nav ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.latex-document nav li {
+  margin-bottom: 0.25rem;
+}
+
+.latex-document nav a {
+  color: #3182ce;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.latex-document nav a:hover {
+  color: #2c5282;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .latex-document {
+    font-size: 0.9rem;
+  }
+  
+  .latex-document h1 {
+    font-size: 1.875rem;
+  }
+  
+  .latex-document h2 {
+    font-size: 1.5rem;
+  }
+  
+  .latex-document h3 {
+    font-size: 1.25rem;
+  }
+  
+  .latex-document .math-display {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .latex-document {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  .latex-document h1, .latex-document h2, .latex-document h3 {
+    page-break-after: avoid;
+  }
+  
+  .latex-document .math-display {
+    page-break-inside: avoid;
+  }
+}

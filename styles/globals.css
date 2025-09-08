@@ -1,3 +1,6 @@
+/* Import LaTeX document styling */
+@import './latex.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

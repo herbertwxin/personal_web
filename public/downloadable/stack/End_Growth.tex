@@ -1,0 +1,494 @@
+%! Author = herbertxin
+%! Date = 11/28/24
+
+% Preamble
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro I}
+\chead{Endogenous Growth}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Endogenous Growth}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+
+	So far our discussion on output assumes technology is an exogenous process, i.e. $Y = \tilde{F}(A,K,L) = F(K,AL)$ where $F$ is CRS in $K$ and $L$.
+
+	If $A$ increases endogenously, it is unrealistic to assume $F$ is CRS in $K,L$ and $A$.
+
+	In perfectly competitive models, all factors $(A,K,L)$ paid their marginal products, which not enough income is
+	generated to do that.
+	To see this, consider the \textbf{Euler's Theorem}: If $F(A,K,L)$ is a homogeneous function of degree $\lambda>1$, then \[\tilde{F}_A A + \tilde{F}_K K + \tilde{F}_L L = \lambda \tilde{F} > \tilde{F} \]
+
+	Four models and two solutions have been proposed to resolve this issue:
+	\begin{enumerate}
+		\item \textit{Romer (1986)} --- $A$ grows externally (not exogenously) to economic activity
+		\item \textit{Romer (1990)} --- $A$ grows purposefully and markets are not competitive.
+	\end{enumerate}
+
+	\section{AK Model --- \textit{Romer (1986)}}\label{sec:ak-model}
+		The \textit{Romer (1986)} model is so called ``AK Model'' because the aggregate technology is effectively
+		linear in capital.
+		This model introduces learning-by-doing (LBD) externality, which can be concluded in two points:
+		\begin{itemize}
+			\item production process generates knowledge externalities as a by-product
+			\item since knowledge creation is accidental, no one needs to be compensated for it.
+		\end{itemize}
+
+		\subsection{Assumptions}\label{subsec:assumptions}
+			There are two basic assumptions in this model:
+			\begin{enumerate}
+				\item \textbf{Learning-by-doing} works through each firm's investment. An increase in a firm's
+				capital stock leads to an increase in its stock of knowledge $A_i$. The idea is supported more
+				broadly by evidence that patents --- a proxy for learning --- closely follow investment in physical
+				capital.
+				\item \textbf{Knowledge is a public good} that any other firm can access at zero cost. This assumption
+				implies that the change in each firm's technology $A_i$ corresponds to the economy's overall
+				learning and is therefore proportional to the change in economy's average capital intensity.
+			\end{enumerate}
+
+		\subsection{Setup}\label{subsec:setup}
+			The economy has a large number of small identical firms.
+
+			$\bullet$ Firm $j$'s production function is CRS w.r.t its choice of capital and labor.
+			\[Y_t^j = (K_t^{j})^\alpha (A_t L_t^j)^{1-\alpha} \implies y_t^j = A_t^{1-\alpha}(k_t^j)^\alpha\]
+			where $y^j \equiv Y^j / L^j, k^j \equiv K^j / L^j$\\
+
+			$\bullet$ At the aggregate level:
+			\[A_t = \hat{A} k_t\]
+			which embodies LBD externalities\\
+
+			$\bullet$ Each $j$'s private marginal product:
+			\begin{align*}
+				\frac{\partial y_t^j}{\partial k_t^j}&=\alpha A_t^{1-\alpha} (k_t^j)^{\alpha-1}
+				= \alpha (\hat{A} k_t)^{1-\alpha} (k_t^j)^{\alpha-1}\\
+				&=\alpha A\left(\frac{k_t}{k_t^j}
+				\right)^{1-\alpha}
+			\end{align*}
+			where $A \equiv \hat{A}^{1-\alpha}$\\
+
+		\subsection{Equilibrium}\label{subsec:equilibrium}
+			In a symmetric equilibrium $k_t^j = k_t \forall j$, then the private marginal product becomes
+			\[\frac{\partial y_t^j}{\partial k_t^j}=\alpha A\]
+			The symmetric equilibrium makes sense as all firms are small, identical firms, which should result in
+			homogeneous solutions.
+			If the solution is homogeneous, then individual solution is the same as the average.
+
+			Social production function is
+			\[y_t = (\hat{A}k_t)^{1-\alpha}k_t^\alpha=Ak_t\]
+
+			Social marginal product of capital
+			\[\frac{\partial y_t}{\partial k_t}= A\]
+
+			The return to capital
+			\[r_t = \frac{\partial y_t^j}{\partial k_t^j}\Big|_{k_t^j=k_t}-\delta=\alpha A -\delta\]
+
+			Embed this production side in a Ramsey economy with CES utility function yields:
+			\begin{align*}
+				\left( \frac{C_{t+1}}{C_t} \right)^{\sigma} &= \beta (1+ r_{t+1})=\beta (1+\alpha A -\delta)\\
+				\underbrace{\frac{c_{t+1}}{c_t}}_{1+g} &= \left[\beta (1+\alpha A -\delta)\right]^{1/\sigma}
+			\end{align*}
+			Now, as long as $\beta (1+\alpha A -\delta)>1 \implies g>0$, the economy grows forever.
+			This requires $\beta$ and $A$ to be sufficiently large.
+			Also, note that $C_{t+1}, C_t$ are both consumption per worker and $1+g$ is now endogenous.
+
+			Contrast this to Neo-classical model, where
+			\[1+g_t \equiv \frac{C_{t+1}}{C_t} =[\beta(1+f'(k_{t+1})-\delta)]^{1/\sigma} \]
+			$g_t >0$ is not feasible since $\lim_{k\rightarrow \infty}f'(k)=0$ and $\beta(1-\delta)<1$.
+
+			This means if we have a BGP with endogenous/unbounded growth, then $k_t$ needs to grow unboundedly, i.e. $\lim_{t \rightarrow \infty} k_t = \infty$, which contradicts with the initial assumption.
+
+
+		\subsection{Takeaways}\label{subsec:takeaways}
+			\begin{enumerate}
+				\item The key to producing endogenous growth is the absence of diminishing return with respect to
+				reproducible inputs, which is capital here (see next model for a more subtle take).
+				\item The possibility of endogenous growth opens the door for policy to have a permanent effect on the
+				growth rate
+				\item Competitive equilibrium in this economy is not Pareto-optimal.
+				\begin{itemize}
+					\item Each $j$ ignores the effect of their choice of $k^j$ on $k$.
+					\item Subsidy to increase private return on investment form $\alpha A$ to $A$.
+				\end{itemize}
+			\end{enumerate}
+
+			To see the last point, suppose for every unit of $y^j$, the government provides a subsidy
+				$(\frac{1-\alpha}{\alpha})$, which increases the net revenue to
+				\[\left( 1+\frac{1-\alpha}{\alpha} \right)y^j = \frac{1}{\alpha}y^j\]
+
+			These result $r = $ social return in competitive equilibrium.
+			This subsidy can be funded through lump sum taxes on households, which meant Euler equation is unaffected
+			but consumption growth increases to the optimal level.
+			Thus, policy has a permanent effect on the growth rate. 
+	
+	\section{Jones-Mannelli Model --- \textit{Jones (1995)}}
+		Jones model is also known as the semi-endogenous growth model.
+
+		Suppose we break some of the Inada conditions in the production function:
+		\[Y=F(K,L)=BK^\alpha L^{1-\alpha}+bK, \text{ where } b > \delta >0\]
+		This implies
+		\begin{align*}
+			F(0,L) &=0, \text{ but } F(K,0)>0\\
+			\lim_{K\rightarrow \infty}F_K &= \lim_{K\rightarrow \infty} (\alpha B K^{\alpha-1}L^{1-\alpha}+b)=b>0
+		\end{align*}
+		The underlining idea is that capital is vital for production and more productive than labor in a very
+		specific way.
+
+		Output per labor now becomes
+		\[y \equiv \frac{Y}{L} = f(k) = Bk^\alpha + b K\]
+
+		Embed this into the Ramsey economy with CES utility function yields
+		\[r_t = f'(k_t)-\delta = \alpha B k_t^{\alpha-1}+b-\delta\]
+		So the Euler equation becomes
+		\[\frac{C_{t+1}}{C_{t}}= [\beta(1+\alpha B k_t^{\alpha-1}+b-\delta-\delta)]^{1/\sigma}\]
+
+		If there is endogenous growth
+		\[\frac{C_{t+1}}{C_{t}} \rightarrow [\beta(1+\alpha B +b-\delta-\delta)]^{1/\sigma}>1\]
+		as long as $\beta (1+\beta -\delta)>1$, which happens with high $\beta$ and/or high $b$.
+
+		\begin{note}
+			Since endogenous growth is usually about the production side, the consumption/preference side is often
+			not too relevant.
+		\end{note}
+
+	\section{Endogenous Growth with Human Capital --- \textit{Lucas (1988)}}
+		The basic idea behind \textit{Lucas (1988)} model is that if the $Y$ is CRS in 2 reproducible inputs like
+		physical and human capital, then the production function behaves like an AK technology.
+
+		For example, if $h$ is humand capital per worker such that the production function becomes
+		\[Y_t = BK_t^\alpha (h_t L_t)^{1-\alpha}\implies y_t \equiv \frac{Y_t}{L_t}=Bk_t^\alpha h_t^{1-\alpha} \]
+		where $h$ grows via investment (net of depreciation)
+
+		Embed this into a Solow economy
+		\begin{align*}
+			K_{t+1} &= s_K Y_t + (1-\delta_{k})K_t\\
+			(1+n)k_{t+1} &= s_K y_t + (1-\delta_k)k_t
+		\end{align*}
+
+		Each worker augments their humand capital recording to
+		\[h_{t+1} = s_H y_t + (1-\delta_H)h_t\]
+		where the given initial conditions are $k_0>0, h_0>0$
+
+		The two difference equations that determine the dynamic of the system are
+		\begin{align*}
+		(1+n)k_{t+1} &= s_K B k_t^{\alpha}h_t^{1-\alpha}+(1-\delta)k_t \tag{3.1}\\
+			h_{t+1} &= s_H B k_t^{\alpha} h_t^{1-\alpha}+(1-\delta)h_t \tag{3.2}
+		\end{align*}
+
+		In the steady state (BGP) $k$ and $h$ are not constant, in fact, both grow at the same rate $g$, but $
+		\frac{k}{h}$ is.
+
+		Let $x_t \equiv \frac{k_t}{h_t}$, now if we divide (3.1) by $h_t$ gives
+		\begin{align*}
+		(1+n)\frac{k_{t+1}}{h_t} \frac{h_{t+1}}{h_{t+1}} &= s_K B \left(\frac{k_t}{h_t}\right)^{\alpha} + (1-\delta)\left( \frac{k_t}{h_t} \right)\\
+		(1+n) x_{t+1} \frac{h_{t+1}}{h_t} &= s_K B x_{t}^{\alpha} + (1-\delta)x_t \tag{3.3}
+		\end{align*}
+
+		Repeat the same procedure for (3.2)
+		\begin{align*}
+			\frac{h_{t+1}}{h_t} = s_H Bx_t^{\alpha} +(1-\delta) \tag{3.4}
+		\end{align*}
+
+		Suppose $\frac{h_{t+1}}{h_t}=1+g = \frac{k_{t+1}}{k_t}, x_t = x \forall t$ in the BGP.
+		Then from (3.3) we have
+		\begin{align*}
+		(1+n)(1+g)x &= s_K B x_^{\alpha} + (1-\delta)x\\
+		(1+n)(1+g) &= s_K B x_^{\alpha-1} + (1-\delta) \tag{3.3a}
+		\end{align*}
+
+		From (3.4) we have
+		\begin{align*}
+		(1+g) &= s_K B x^{\alpha} + (1-\delta)x \tag{3.4a}
+		\end{align*}
+
+		Now, we have two equations and two unknowns in (3.3a) and (3.4a).
+		Suppose we have $\delta=1$, then
+		\begin{align*}
+		(1+n)(1+g) &= s_K B x_^{\alpha-1}\\
+		(1+g) &= s_H B x^{\alpha}
+		\end{align*}
+
+		Divide first by the second
+		\begin{equation*}
+			1+n = \frac{s_K}{s_H} \frac{1}{x} \implies x = \frac{s_K}{s_H} \frac{1}{1+n}
+		\end{equation*}
+
+		Substitute this into the second equation
+		\begin{align*}
+			1+g = \frac{B}{(1+n)^\alpha} s_K^{\alpha} s_H^{1-\alpha}>1
+		\end{align*}
+		Thus, this exhibits infinte growth under suitable restrictions, for example, large enough $B$ .
+
+		Since in BGP, we have
+		\[x = \frac{s_K}{s_H} \frac{1}{1+n} \implies h_t = \frac{s_H}{s_K}(1+n)k_t\]
+
+		Substitute this into the production function
+		\begin{align*}
+			y_t &= B k_t^{\alpha}\left[ \frac{s_H}{s_K}(1+n)k_t \right]^{1-\alpha}\\
+			 &= B \left( \frac{s_H}{s_K} \right)^{1-\alpha}(1+n)^{1-\alpha}k_t
+		\end{align*}
+
+	\section{Comparasion}
+		To give a clear comparison between the first two models we discussed and the Ramsey, here we drop down the Euler
+		equation for the three models.
+
+		\begin{align*}
+			&\text{Ramsey Model} (\sigma=1)\\
+			&\frac{c_{t+1}}{c_t} = \beta (1+\alpha B k_{t+1}^{\alpha-1}-\delta)
+			\tag{a}\\
+			&\text{AK Model}\\
+			&\frac{c_{t+1}}{c_t} = \beta (1+\alpha A -\delta) \tag{b}\\
+			&\text{Jones-Mannelli Model}\\
+			&\frac{c_{t+1}}{c_t} =
+			\beta (1+\alpha B k_{t+1}^{\alpha-1}+b-\delta) \tag{c}
+		\end{align*}
+
+		\begin{figure}[htb]
+			\center
+			\includegraphics[width=0.5\textwidth]{_images/compare}
+			\caption{Comparasion Chart}
+		\end{figure}
+
+	\section{Endogenous Growth through innovation}
+		There are two approches to model technological progress:
+		\begin{enumerate}
+			\item Horizontal innovation --- \textit{Romer (1990)}: continuous expansion of input varieties used to
+			manufacture the consumption good.
+			\item Vertical innovation --- \textit{Aghion \& Howitt (1992)}: progressive imporvement in the quality of a
+			limited number of intermediate goods.
+		\end{enumerate}
+
+		Here, we are going to focus on the \textit{Romer (1990)} model.
+
+		\subsection{Setup}
+			There are four sectors in \textit{Romer (1990)} model, but the household sector is trivial as it follows
+			the setup of Ramsey, so the discussion below focuses on the rest three production sectors.
+
+			\subsubsection{Final goods sector}
+				The production function of the final good section is
+				\begin{equation*}
+				Y_t = L_{yt}^{1-\alpha}\left( \sum_{j=1}^{A_t} K_{jt}^\alpha  \right) \tag{5.1}
+				\end{equation*}
+				where $A_t$ is the number of intermediate input variesties $\{K_{jt}\}$ available at time $t$.
+				$L_y$ is labor used in final goods production.
+				The production function exhibits CRS and the final goods sector is perfectly competitive.
+
+				Note $K_j$ are not perfect substitutes.
+				Elasticity of substitution between any pair of $K_j$ is $\frac{1}{1-\alpha}$.
+				$K_i$ dos not affect the marginal product of $K_j, j\neq i$, i.e.
+				\[\frac{\partial Y_t}{\partial K_{jt}}= \alpha L_{yt}^{1-\alpha}K_{jt}^{\alpha-1}\]
+
+				Also, there is diminishing marginal product for any $K_j$ that has already been invented.
+
+			\subsubsection{R\&D Sector}
+				The R\&D sector invents blueprints (``ideas'') for the production of new types of intermediate inputs.
+				\begin{equation*}
+					A_{t+1}-A_t = \theta A_t L_{At}, \theta>0, L_{At} = L_t - L_{yt} \tag{5.2}
+				\end{equation*}
+				$A_{t+1}-A_t$ is the flow of new blueprints, $A_t$ is the dynamc externality, i.e. accumulated
+				knowledge makes it easier to invet new ideas.
+
+				A new blueprint can be put into production with 1-period lag, i.e. ideas inveted in $t$ will lead to
+				new $k$ varieties from $t+1$.
+
+				R\&D firms sell blueprints to intermediate goods/input producers.
+
+			\subsubsection{Intermediate Goods}
+				A blueprint produced at $t$ leads to production of that $K_j$ from $t+1$ onwards.
+				The sale of blueprints give the producer perpetual monopoly rights to produce that $K_{j}$.
+				The market power comes from imperfect substitutability.
+
+				Each $K_j$ produced 1 for 1 using the final and depreciates fully upon use (5.3)
+
+		\subsection{Solving the Model}
+
+		To solve the model, we assume Ramsey with CES utility, which gives the household side as
+		\begin{equation*}
+			\frac{c_{t+1}}{c_t} &= \left( \beta R_{t+1} \right)^{1/\sigma} \tag{5.4}
+		\end{equation*}
+
+		Now final goods producers produce $Y_t$ using $L_{yt}$ (hired at $W_t$) and $\{K_{jt}\}$ (produced at
+			$\{P_{jt}\}$).
+		Solving final goods producers profit maximization problem yields
+		\begin{gather*}
+			\max_{L_{yt}, \{K_{jt}\}} \Pi_t = L_{yt}^{1-\alpha}(\sum_{j=1}^{A_t}K_{jt}^\alpha )-W_t L_{yt}\\
+			-\sum_{j=1}
+			^{A_t}P_{jt}K_{jt} \\
+			\implies (1-\alpha)L_{yt}^{-\alpha}(\sum_{j=1}^{A_t}K_{jt}^\alpha) = W_t \tag{5.5a}\\
+			\implies \alpha L_{yt}^{1-\alpha}K_{jt}^{\alpha-1}=P_{jt}, \forall j \in \{1, \ldots, A_t\} \tag{5.5b}
+		\end{gather*}
+
+		The producer of $K_{jt}$ is a monopolist who understand the demand for their product is given by (5.5b).
+		This gives the profit maximization problem below
+		\begin{align*}
+			\max_{K_{jt}} \pi_{jt} &= \underbrace{P(K_{jt})K_{jt}}_{(5.5b)}-\underbrace{K_{jt}}_{(5.3)}, \delta=1\\
+			&= \alpha L_{yt}^{1-\alpha} K_{jt}^{\alpha}-K_{jt}
+		\end{align*}
+
+		FOC gives
+		\[\alpha^2 L_{yt}^{1-\alpha}K_{jt}^{\alpha-1}= 1 \implies K_{jt}^\ast = \alpha^{\frac{2}{1-\alpha}}L_{yt}, \forall j \tag{5.6}\]
+
+		Substitute this into (5.5b) gives
+		\[P_{jt}^\ast = \frac{1}{\alpha} \tag{5.7}\]
+		Since $\alpha<1$, this means $P_{jt}>1$, but the cost of producing $K_{tj}$ is 1, meaning there is a
+			constant markup, so the maximized profit for intermediate firms are
+		\begin{align*}
+			\pi_{jt}^{\ast} &= P_{jt}^{\ast}K_{jt}^{\ast}-K_{jt}^{\ast}\\
+			&= \frac{1-\alpha}{\alpha}\alpha^{2/(1-\alpha)} L_{yt} \tag{5.8}
+		\end{align*}
+
+		So there is a perpetual monopolist profit flow of $\{\pi_{jt}^\ast, \pi_{jt+1}^\ast, \pi_{jt+2}^\ast, \ldots\}$
+
+		\begin{note}
+			To simplify the assumption (and to get analytical solutions), suppose $L_t=L, \forall t$.
+			We conjecture that in equilibrium
+			\[L_{yt}=L_y, L_{At}=L_A = L-L_y, r_t = r, \forall t \]
+		\end{note}
+
+		Now the steam of profit becomes $\{\pi_{j}^\ast, \pi_{j}^\ast, \pi_{j}^\ast, \ldots\}$.
+
+		However, recall the timing assumption, to earn this profit flow, i.e. monoply rents, the producer would have
+			to pruchase the blueprint fro $K_j$ one peirod in advance.
+
+		Let the price of a new blueprint at $t$ be $P_{At}$.
+		Anyone can bid for such a blueprint.
+		If there is free entry, then $P_{At}$ is the maximum bid someone makes.
+
+		Note, the maximum bid equals to the PV of monopoly profits $t+1$ onwards, i.e.
+		\begin{align*}
+			P_{At}^j = P_A^j &= \frac{\pi_j^\ast}{1+r}\left[ 1+\frac{1}{1+r}+ \frac{1}{(1+r)^2} \right]\\
+			&= \frac{\pi_j^\ast}{1+r} \frac{1}{1-\frac{1}{1+r}}= \frac{\pi_j^\ast}{r}
+		\end{align*}
+
+		From (5.8), we can see that we have a symmetric equilibrium, i.e. $\pi_j^\ast$ is the same $\forall j =\pi^\ast$.
+		\begin{align*}
+			\implies P_A^j = P_A &= \frac{\pi^\ast}{r} \forall j\\
+			&= \frac{1}{r} \left( \frac{1-\alpha}{\alpha} \right) \alpha^{2/(1-\alpha)} L_y \tag{5.9}
+		\end{align*}
+
+		\begin{note}
+			Even though $k$ producers earn monopoly profits, the PV of the net profit equals to 0 because of 9.
+			This is because of the competitive aspect of the monopolistically competitive intermediate inputs
+			sector, which also means zero equilibrium profits.
+			Thus, the household budget constraint is unaffected by profits earned in this sector
+		\end{note}
+
+		We need to determine $L_y$ and $L_A$.
+		Note first, labor is perfectly mobile across the two sectors, which implies equilibrium wages have to be the
+			same.
+		Both sectors hire in perfectly competitive labor markets
+		\begin{gather*}
+			VMP_L^Y = VMP_L^A\\
+			\frac{\partial Y_t}{\partial L_t^Y} = P_{At} \frac{\partial (A_{t+1}-A_t)}{\partial L_t^A}\\
+			(1-\alpha)L_{yt}^{-\alpha} \underbrace{(\sum_{j=1}^{A_t}K_{jt}^\alpha )}_{A_t \bar{K}_t^\alpha} = P_{At}\theta A_t\\
+			(1-\alpha)L_{yt}^{-\alpha} \bar{K}_t^\alpha = \frac{1}{r}\left( \frac{1-\alpha}{\alpha} \right) \alpha^{
+				2/(1-\alpha)}L_{yt}\theta\\
+			L_y^{\alpha} \alpha^{\frac{2\alpha}{1-\alpha}}L_y^{\alpha} = \frac{\theta}{\alpha r}\alpha^{
+				\frac{2}{1-\alpha}}L_y\\
+			L_y = \frac{\alpha r}{\theta}\alpha^{-2}= \frac{r}{\alpha \theta} \tag{5.10}
+		\end{gather*}
+		Now if $r$ is constant, so is $L_y$ as conjectured.
+
+		The last step is to determine $r$ and the economy's growth rate.
+		From (5.4), we have
+		\[1+g = \frac{c_{t+1}}{c_t}= (\beta R)^{1/\sigma}= [\beta(1+r)]^{1/\sigma} \tag{5.4'}\]
+		From (5.2), we have
+		\begin{align*}
+			\frac{A_{t+1}-A_t}{A_t} &= \theta L_{At} = \theta(L-Ly)\\
+			&= \theta(L -\frac{r}{\alpha \theta})\\
+			\implies g &= \theta(L-\frac{r}{\alpha \theta}) \tag{5.2'}
+		\end{align*}
+
+		Solve (5.2') and (5.4') for $(r,g)$, neither equation depends on $t$, thus our conjecture of constant $(r,g)$ and $(L_y, L_A)$ verified.
+
+
+		\subsection{Closed-Form Solution}
+		Suppose $\sigma = 1$, i.e. log utility
+		\begin{align*}
+			r &= \frac{\alpha(1+\theta L -\beta)}{1+\alpha \beta}\\
+			g &= \frac{\alpha \beta \theta L - (1-\beta)}{1+\alpha \beta}
+		\end{align*}
+		Note that $g>0$ only if $\theta L > \frac{1-\beta}{\alpha \beta}$, which can be interpreted as market size
+			effect.
+		Also, $\frac{\partial g}{\partial L}>0, \frac{\partial g}{\partial \beta}>0$.
+
+		However, $g$ in efficiently low because of the two market failures
+		\begin{enumerate}
+			\item imperfect competition
+			\item dynamic externality
+		\end{enumerate}
+
+		\subsection{Social Planner's Problem}
+		To maximize the lifetime utility of the representative households efficiently, we try to solve the social
+		planner's problem, subject to
+		\begin{gather*}
+			A_{t+1}- A_t = \theta A_t L_{At}\\
+			Y_t = (L_t - L_{At})^{1-\alpha}(\sum_{j=1}^{A_t}K_{jt}^{\alpha})\\
+			Y_t = C_t + A_{t+1} K_{t+1}
+		\end{gather*}
+
+		The result symmetric equilibrium
+		\[g^P = \beta \theta L -(1-\beta) > \frac{\alpha \beta \theta L - (1-\beta)}{1+\alpha \beta}\]
+
+		To counter the market failures,
+		\begin{enumerate}
+			\item Fixing the static inefficiency (imperfect competition)
+			\begin{itemize}
+				\item subsidize intermediate capital good production
+				\item $K_j$ increases leads to $Y$ increase, but does not affect growth rate
+			\end{itemize}
+			\item Fixing the dynamic inefficiency (externality in knowledge production)
+			\begin{itemize}
+				\item tax labor in final goods production to allow more worker in R\&D sector
+				\item resulting growth higher but less than $g^P$
+			\end{itemize}
+		\end{enumerate}
+		We need the combination of both to achieve $g^P$
+
+
+\end{document}

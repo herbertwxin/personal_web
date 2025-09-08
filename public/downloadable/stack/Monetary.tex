@@ -1,0 +1,155 @@
+%! Author = herbertxin
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Macro II}
+\chead{Simple Monetary Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Simple Monetary Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Money-in-utility Model}
+	As suggested by the name, agents in money-in-utility model values not only consumption, but money, in particular, real money. Households now solve 
+	\begin{align*}
+		\max_{\{c_t, m_t\}_{t=0}^{\infty}} \beta^t u(c_t, m_t)
+	\end{align*}
+	subject to 
+	\begin{align*}
+		P_t c_t + B_t + M_t &= W_t + M_{t-1} + (1+ i_{t-1})B_{t-1}\\
+		c_t \geq 0, m_t \geq 0\\
+		\lim_{t\rightarrow \infty} \beta^t b_t =0
+	\end{align*}
+	where $B_t$ is the nominal bond holding. The budget constraint is in nominal term, i.e. $c_t$ is in real term and all other variables are in nominal term. By dividing the constraint by $P_t$, we get the ``real'' budget constraint
+	\begin{align*}
+		\hspace{-36pt} c_t + b_t + m_t &= w_t + \frac{M_{t-1}}{P_t}\frac{P_{t-1}}{P_{t-1}} + \frac{(1+ i_{t-1})B_{t-1}}{P_t}\frac{P_{t-1}}{P_{t-1}}\\
+		\hspace{-36pt} c_t + b_t + m_t &= w_t + \frac{m_{t-1}}{1+\pi_t} + \frac{(1+ i_{t-1})b_{t-1}}{1+\pi_t}
+	\end{align*}
+	The key difference between bond and cash $M_t$ is that bond gives interest as return while cash does not. However, since household values cash, there is a trade off between immediate utility from holding cash and extra return by holding bond. 
+	
+	Setting up the Lagrangian gives
+	\begin{align*}
+	\hspace{-36pt}	\mathcal L &= \sum_{t=0}^{\infty} \beta^t u(c_t, m_t) \\
+	\hspace{-36pt} &+ \sum_{t=0}^{\infty} \lambda_t \left[w_t + \frac{m_{t+1}}{1+\pi_t}+ \frac{(1+i_{t-1})b_{t-1}}{1+\pi_t}-c_t - b_t- m_t \right]
+	\end{align*}
+	Taking the FOC gives
+	\begin{align}
+		\frac{\partial \mathcal L}{c_t}&: \ \beta^t u_c(c_t, m_t)=\lambda_t\\
+		\frac{\partial \mathcal L}{b_t}&: \ \lambda_t = \lambda_{t+1} \frac{1+i_t}{1+\pi_{t+1}}\\
+		\frac{\partial \mathcal L}{m_t}&: \ \beta^t u_m(c_t, m_t) = \lambda_t - \lambda_{t+1} \frac{1}{1+\pi_{t+1}}
+	\end{align}
+	Combining (1) and (2) gives the Euler equation
+	\begin{align*}
+		u_c(c_t,m_t) &= \beta u_c (c_{t+1}, m_{t+1})\frac{1+i_t}{1+\pi_{t+1}}
+	\end{align*}
+	The interpretation is basically the same, the marginal utility between 2 periods must equal to each other. However, since we have inflation now, the extra return in the next period is discounted by the real interest rate. 
+	
+	This closes the consumer side, and the firm side stays the same.
+	
+	\section{Cash-in-Advance Model}
+	In the previous model, we assume that money only yields utility from holding it, but it is not useful otherwise. However, in modern society, goods buy money, and money buy goods, but goods don't buy goods, so money has direct uses. 
+	
+	Clower (1967) and developed formally by Grandmont and Younes (1972) and Lucas (1980), captures the role of money as a medium of exchange by requiring explicitly that money be used to purchase goods. In these models, household must have some cash on hand for them to buy any goods. Thus, we have an extra constraint:
+	\begin{align*}
+		P_t c_t \leq M_{t-1}, \text{ or } c_t \leq \frac{m_{t-1}}{1+\pi_t} \text{ in real terms}
+	\end{align*}
+	Now, the timing of the money plays a great role in determine household's behavior
+	\begin{itemize}
+		\item In Lucas (1982), agents are able to allocate their portfolios between cash and other assets at the start of each period, after observing any current shocks but prior to purchasing goods
+		\item In Svensson (1985), the goods market opens first. This implies that agents have available
+			for spending only the cash carried over from the previous period, and so cash balances
+			must be chosen before agents know how much spending they will wish to undertake.
+	\end{itemize}
+	
+	Our discussion focuses on Svensson (1985), where agent enters period $t$ with $M_{t-1}$, meaning the household now solves 
+	\begin{align*}
+		\sum_{t=0}^\infty \beta^t u(c_t)
+	\end{align*}
+	subject to 
+	\begin{align*}
+		P_t c_t + B_t + M_t &= W_t + M_{t-1} + (1+ i_{t-1})B_{t-1}\\
+		c_t \geq 0, m_t \geq 0\\
+		c_t \leq \frac{m_{t-1}}{1+\pi_t}\\
+		\lim_{t\rightarrow \infty} \beta^t b_t =0
+	\end{align*}
+	Putting the constraint into real terms
+	\[c_t + b_t + m_t = w_t + \frac{m_{t-1}}{1+\pi_t} + \frac{(1+i_{t-1})b_{t-1}}{1+\pi_t}\]
+	Now, optimality requires that the CIA constraint must hold with equality in all periods, conditional to $i_t>0$, i.e. 
+	\[c_t =\frac{m_{t-1}}{1+\pi_t}\] 
+	This is true as if the constraint does not hold with equality, then we can increase consumption and decreases money holding a little bit such that the household has a higher utility, which proves the claim by contradiction. 
+	
+	Setting up the Lagrangian gives 
+	\begin{align*}
+	\hspace{-36pt}	\mathcal L &= \sum_{t=0}^{\infty} \beta^t u(c_t) \\
+	\hspace{-36pt} &+ \sum_{t=0}^{\infty} \lambda_t \left[w_t + \frac{m_{t+1}}{1+\pi_t}+ \frac{(1+i_{t-1})b_{t-1}}{1+\pi_t}-c_t - b_t- m_t \right]\\
+	\hspace{-36pt} &+\sum_{t=0}^{\infty} \mu_t \left[ \frac{m_{t-1}}{1+\pi_t}-c_t\right]
+	\end{align*}
+	Taking the FOC gives
+	\begin{align}
+		\frac{\partial \mathcal L}{c_t}&: \ \beta^t u'(c_t)=\lambda_t+\mu_t\\
+		\frac{\partial \mathcal L}{b_t}&: \ \lambda_t = \lambda_{t+1} \frac{1+i_t}{1+\pi_{t+1}}\\
+		\frac{\partial \mathcal L}{m_t}&: \ \frac{1}{1+\pi_{t+1}}(\mu_{t+1} + \lambda_{t+1} )= \lambda_t 
+	\end{align}
+	Combining (4) and (6) gives 
+	\[ \lambda_t = \frac{\beta^{t+1}u'(c_{t+1})}{1+\pi_{t+1}}\]
+	Plug this into the Euler equation 
+	\begin{align*}
+		\frac{u'(c_{t+1})}{1+\pi_{t+1}} &= \beta \frac{u'(c_{t+1})}{1+\pi_{t+1}}\frac{1+i_t}{1+\pi_{t+1}}
+	\end{align*}
+	
+	The rest of the model 
+	
+	
+	
+	
+	
+	
+	 
+
+	\end{document}

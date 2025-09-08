@@ -1,0 +1,483 @@
+%! Author = herbertxin
+%! Date = 11/16/24
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro I}
+\chead{Ramsey Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Ramsey Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+
+	\section{Assumptions}\label{sec:assumptions}
+		\begin{enumerate}
+			\item Household are identical and live forever, closed economy.
+			\item Unique final goods produced by a large number of identical firms $Y = F(K,AL)$, which follows the
+			neoclassical assumptions:
+				\begin{enumerate}
+					\item $F$ is CRS in $K \& L$
+					\item $F_K, F_L>0, F_{KK}, F_{LL}<0, F_{KL}>0$
+					\item Inada conditions
+				\end{enumerate}
+			\item Markets are perfectly competitive, and firms solve the profit maximization problem
+				\begin{enumerate}
+					\item $\frac{\partial F}{\partial L}=W \implies W_t = A_t [f(k_t)-f'(k_t)k_t]$
+					\item $\frac{\partial F}{\partial K}=Q \implies Q_t = f'(k_t), r_t = Q_t -\delta=f'(k_t)-\delta$
+				\end{enumerate}
+			\item Technology and labor grow at a constant rate
+			    \begin{enumerate}
+					\item $A_{t+1} = (1+g)A_t$
+					\item $L_{t+1} = (1+n)L_t$
+			    \end{enumerate}
+			\item There is one representative household that work for $t = 0,1,2,\ldots,\infty$, which contains $L_t$ members each having 1 unit of time that they work for (no labor-leisure choice). So, $L_t$ is the labor supply of the household.
+			\item \textbf{Notation:} $C_t$ in the Ramsey model stands for consumption per labor, so $c_t = \frac{C_t}{A_t}$ is the
+			consumption per effective labor. $k_t = \frac{K_t}{A_t L_t}$ is the capital per effective labor.
+		\end{enumerate}
+
+		\begin{note}
+			The economy has no externalities, market frictions, policy distortions, or the ``double infinity''
+			problem of OLG.
+			The resulting competitive equilibrium in Pareto Optimal, and we can solve for it from either the \textbf{social
+			planner} problem or the market-based \textbf{decentralized} problem.
+			The straight forward way of solving these problems is using the Lagrangian method, but with more
+			complicated problem, dynamic programming is a more elegant way.
+		\end{note}
+
+	\section{Finite horizon problem and transversality condition}
+		\label{sec:finite-time-problem-and-transversality-condition}
+		This section demonstrates an important assumption of the Ramsey model, or any infinite time horizon model
+		hereafter, which is the transversality condition.
+
+		The transversality condition ensures the UMP has a defined solution, which is achieved by placing
+		restrictions on household's budget constraint.
+		If the budget constraint is not bounded, then UMP cannot be solved nor it has an economic meaning.
+
+		The strip-down version of the transversality condition is the No-Ponzi Game (NPG) condition, which prohibits
+		household from borrowing infinitely from the future.
+		If the NPG is violated, then the household essentially has infinite wealth and UMP cannot be solved.
+
+		\subsection{Setup}\label{subsec:setup}
+			Suppose the economy solves a finite horizon decentralized problem
+			\[\max \sum_{t=0}^{T} \beta^t u(C_t)L_t \]
+
+			s.t. $C_t L_t + K_{t+1}= W_t L_t + Q_t K_t + (1-\delta)K_t, \forall t \in [0,T]$.
+
+			Note we can rewrite $Q_t K_t + (1-\delta)K_t = (1+Q_t -\delta)K_t = R_t K_t$.
+
+			Now the NPG condition, \[\frac{K_{T+1}}{\bar{R_t}}\geq 0, \forall k_0 >0\]
+			where $\bar{R}_T = \prod_{s=1}^T R_s$
+
+			The NPG condition ensures household cannot hold debt at the terminal period, if they do, the budget
+			constraint is not bounded.
+
+		\subsection{NPG to budget set}\label{subsec:npg-to-budget-set}
+			Given the budget constraint, rearrange gives
+			\begin{gather*}
+			    K_t R_t =(C_t - W_t)L_t+K_{t+1}\\
+			    \implies K_t =\frac{(C_t - W_t)L_t}{R_t}+\frac{K_{t+1}}{R_t}\\
+			\end{gather*}
+
+			Iterate from $t=0$:
+			\begin{gather*}
+				(C_0-W_0)L_0 = R_0 K_0 - K_1 \\
+				= R_0 K_0 - \frac{(C_1 - W_1)L_1}{R_1} - \frac{K_2}{R_1}\\
+				(C_0 -W_0)L_0 + \frac{(C_1-W_1)L_1}{R_1} = R_{0} K_0 - \frac{K_2}{R_1}
+			\end{gather*}
+
+			Interate infinitely gives
+			\[
+				\sum_{t=0}^{T}\frac{(C_t-W_t)L_t}{\bar{R}_t} = R_0 K_0 - \frac{K_{T+1}}{R_T}
+			\]
+
+			Then the combination of NPG condition and budget constraints gives
+			\[
+				0 \leq \frac{K_{T+1}}{R_T} \leq R_0 K_0
+			\]
+
+			This is equivalent of saying
+			\[
+				\sum_{t=0}^{T} \frac{(C_t-W_t)L_t}{\bar{R}_t} \leq R_0 K_0
+			\]
+
+			Rearrange gives
+			\[
+				\sum_{t=0}^{T} \frac{C_t L_t}{\bar{R}_t} \leq \sum_{t=0}^{T} \frac{W_t L_t}{\bar{R}_t} R_0 K_0
+			\]
+
+			The equation above basically says the PV of lifetime consumption needs to be less than equal to the PV
+			of lifetime labor income plus non-labor income (financial wealth)
+
+	\subsection{Optimal Choice}\label{subsec:optimal-choice}
+		Now we set up the lagrangian
+		\[
+			\mathcal{L} = \sum_{t=0}^{T} \beta^t u(C_t)L_t + \sum_{t=0}^{T} \lambda_t [W_t L_t + R_t K_t - C_t L_t - K_{t+1}] + \mu \frac{K_{T+1}}{\bar{R}_T}
+		\]
+
+		F.O.C gives
+		\begin{align*}
+			\beta^t u'(C_t)L_t - \lambda_t L_t &= 0, \ \forall t \in [0,T] \tag{2.1}\\
+			- \lambda_t + \lambda_{t+1} R_{t+1} &= 0, \ \forall t \in [0, T-1] \tag{2.2}\\
+			- \lambda_t + \frac{\mu}{\bar{R}_T} &= 0, \ \text{ for } t =T \tag{2.3}\\
+			\mu \frac{K_{T+1}}{\bar{R}_T} &= 0 \tag{C.S.}
+		\end{align*}
+
+		Combine (2.1) and (2.2) gives
+		\begin{align*}
+			\beta^t u'(C_t) &= \lambda_t \\
+			\lambda_t &= \lambda_{t+1} R_{t+1}
+		\end{align*}
+
+		This gives the Euler equation
+		\[u'(C_t) = \beta R_{t+1} u'(C_{t+1}) \tag{Euler Equation}\]
+
+		Combine (2.3) and complementary slackness gives
+		\begin{align*}
+			\mu \frac{K_{T+1}}{\bar{R}_T} &= \lambda_T K_{T+1}\\
+			&= \beta^t u'(C_t)K_{T+1} = 0 \tag{Transversality}
+		\end{align*}
+		where $\beta^t u'(C_t)$ means the shadow value of terminal capital stock or wealth equals $\mu$ from
+			consumption, which is satisfied with $K_{T+1}=0$ as long as $u'(C)>0, \forall C \geq 0$
+
+		As $T \rightarrow \infty$, NPG implies \[\lim_{T\rightarrow \infty} \frac{K_{T+1}}{\bar{R}_T}\geq 0\]
+			and TVC implies \[\lim_{T\rightarrow \infty} \beta^T u'(C_T)K_{T+1} = 0\]
+
+	\section{Decentralized Optimization}\label{sec:decentralized-optimization}
+		There are two ways to solve the Ramsey model, the first one is to solve households utility maximization
+		problem, i.e. the decentralized optimization problem.
+		The second way is to solve the social planner's optimization problem, which should yield the same result as
+		the decentralized version.
+
+		In the decentralized problem, household optimization FOC gives the Euler equation, combined with the TVC and
+		budget constraint allows us to solve for the equlibrium.
+		\begin{align}
+			u'(C_t) &= \beta R_{t+1}u'(C_{t+1})\\
+			\lim_{t \rightarrow \infty} \beta^t &u'(C_t)K_{t+1} = 0\\
+			C_t L_t + K_{t+1} &= W_t L_t + Q_t K_t + (1-\delta)K_t
+		\end{align}
+
+		The household take factor prices as given
+		\begin{align}
+			W_t &= A_t [f(k_t)-f'(k_t)k_t]\\
+			Q_t &= f'(k_t), r_t = Q_t -\delta=f'(k_t)-\delta
+		\end{align}
+
+		To obtain an analytical solution, we assume a CES utility function
+		\begin{equation}\label{eq:equation}
+			u(C_t) &= \frac{C_t^{1-\sigma}}{1-\sigma}, \sigma >0
+		\end{equation}
+
+		Substitute this into (1) gives
+		\begin{align*}
+			C_t^{-\sigma} &= \beta R_{t+1} C_{t+1}^{-\sigma}\\
+			(c_t A_t)^{-\sigma} &= \beta R_{t+1}(c_{t+1}A_{t+1})^{-\sigma}\\
+			c_t^{-\sigma} &= \frac{\beta R_{t+1}}{(1+g)^\sigma}c_{t+1}^{-\sigma} \tag{8a}\\
+			\text{As } A_{t+1}&= (1+g)A_t
+		\end{align*}
+
+		This gives the k locus, as when $c_t = c_{t+1}$, it depicts the steady state level of capital.
+
+		In general
+		\begin{equation}
+			u'(c_t) = \frac{\beta R_{t+1}}{(1+g)^\sigma} u'(c_{t+1})
+		\end{equation}
+
+		Now we take the budget constraint,
+		\begin{align*}
+			C_t L_t + K_{t+1} &= W_t L_t + Q_t K_t + (1-\delta)K_t\\
+			c_t + \frac{K_{t+1}}{A_t L_t} &= \frac{W_t}{A_t} + Q_t \frac{K_t}{A_t L_t} + (1-\delta)\frac{K_t}{A_t L_t}\\
+			c_t + (1+z)k_{t+1} &= w_t + Q_t k_t + (1-\delta) \frac{K_t}{A_t L_t}\\
+			c_t + (1+z)k_{t+1} &=f(k_t) - k_t f'(k_t) + k_t f'(k_t)\\
+			&+(1-\delta)k_t\\
+			(1+z)k_{t+1}&= f(k_t) + (1-\delta)k_t - c_t \tag{8b}
+		\end{align*}
+
+		Now, CES utility function implies
+		\[u'(C_t) = C_t^{-\sigma}=(c_t A_t)^{-\sigma}=\frac{u'(c_t)}{[(1+g)^t A_0]^\sigma}\]
+
+		Substitute this into equation 2 gives
+		\begin{gather*}
+		    \lim_{t \rightarrow \infty} \beta^t \frac{u'(c_t)}{[(1+g)^t A_0]^\sigma} \underbrace{\left[(1+g)^{t+1}A_0(1+n)^{t+1}L_0 k_{t+1}\right]}_{K_{t+1}} =0\\
+		    \lim_{t \rightarrow \infty} \underbrace{\beta^t (1+n)^t (1+g)^{(1-\sigma)t}}_{\theta^t} \underbrace{\left[(A_0^{1-\sigma}L_0(1+g)(1+n)\right]}_{\text{all positive constant}}\\
+		    \cdot u'(c_t)k_{t+1} =0\\[4pt]
+			\implies \lim_{t \rightarrow \infty} \theta^t u'(c_t)k_{t+1} =0 \tag{9}
+		\end{gather*}
+
+		Now, equation 8a and 8b describes a non-linear difference equation system in $(k_t, c_t)$ that decribes the
+		dynamic general equilibrium of the Ramsey economy.
+		Equation 9 and the initial condition $k_0 \equiv \frac{K_0}{A_0L_0}>0$ serve as the two boundary conditions.
+
+		The dynamics of Ramsey model needs to be analyzed with the asistance of a phase diagram.
+		(See ``Stability'' file for a more rigorous discussion on stability of non-linear systems)
+
+		\section{Equilibrium Dynamics}\label{sec:equilibrium-dynamics}
+		The two characterizing equations are
+		\begin{align}
+			c_{t+1}^{\sigma} &= \frac{\beta [1+f'(k_{t+1})-\delta)]}{(1+g)^\sigma}c_{t}^{\sigma} \label{c-locus}\\
+			(1+z)k_{t+1} &= f(k_t) + (1-\delta) k_t - c_t \label{k-locus}
+		\end{align}
+
+		Now $\Delta k_t \geq 0$ implies
+		\begin{align*}
+			k_{t+1} &\geq k_{t} \\
+			(1+z)k_t &\leq (1+z)k_{t+1} = f(k_t) + (1-\delta) k_t - c_t\\
+			c_t &\leq f(k_t) - (z+\delta)k_t
+		\end{align*}
+
+		and $\Delta c_t \geq 0$ implies
+		\begin{align*}
+			c_{t+1} &\geq c_t \\
+			c_{t+1}^{\sigma} &\geq c_t^{\sigma}\\
+			\frac{\beta [1+f'(k_{t+1})-\delta)]}{(1+g)^\sigma} &\geq 1\\
+			f'(k_{t+1}) &\geq \frac{(1+g)^\sigma}{\beta} - (1-\delta) \\
+			&\equiv f'(\bar k)
+		\end{align*}
+
+		\begin{gather*}
+			\implies k_{t+1} \leq \bar{k}\\
+			\text{where } \bar k \equiv \frac{(1+g)^\sigma}{\beta} - (1-\delta)\\
+			(1+z)k_{t+1} \leq (1+z)\bar{k}\\
+			f(k_t)+(1-\delta)k_t - c_t \leq (1+z)\bar{k}\\[4pt]
+			\implies c_t \geq f(k_t)+(1-\delta)k_t - (1+z)\bar{k}
+		\end{gather*}
+
+		The comparative dynamics based on the two equation are depicted on \eqref{fig:phase}.
+		Note, the c-locus is a curve rather than a straight line as in continuous time version.
+
+		\section{Steady State Analysis}\label{sec:steady-state-analysis}
+		At steady state $k_{t+1} = k_t = k, c_{t+1}=c_t = c$
+
+		Substitute into \eqref{c-locus} and \eqref{k-locus} gives the ``non-trivial'' pairwise steady state $(\bar{k}, \bar{c})$
+		\begin{align}
+			f'(\bar{k}) &= \frac{(1+g)^\sigma}{\beta} - (1-\delta)\\
+			\bar{c} &= f(\bar{k}) - (z+\delta)\bar{k}
+		\end{align}
+
+		\subsection{Golden Rule}\label{subsec:golden-rule}
+			Again, golden rule maximizes the steady state consumption per effective labor.
+
+			$\bar{c}$ is maximized of $k_{\text{GR}}: f'(k_{\text{GR}})= z +\delta$
+
+			An natural question is ask is, when is $k_{\text{GR}}>\bar k$, note this implies
+			\begin{align*}
+				f'(k_{\text{GR}}) &<f'(\bar{k})\\
+				z+\delta &< \frac{(1+g)^\sigma}{\beta} - (1-\delta)\\
+				(1+z) &< \frac{(1+g)^\sigma}{\beta}\\
+				\beta(1+n)(1+g)^{1-\sigma} &<1
+			\end{align*}
+
+			Note from equation (9), $\beta(1+n)(1+g)^{1-\sigma}$ is $\theta$, so $k_{\text{GR}}>\bar k$ when $\theta<1$
+
+			$\bar{k}$ is also called the modified Golden Rule capital stock.
+
+		\subsection{The zero steady state}\label{subsec:the-zero-steady-state}
+
+			Another steady state for the Ramsey economy is $(k^\ast, 0)$, however, this steady state violates the
+			transversality condition and thus cannot be optimal.
+
+			Note the transversality condition implies
+			\[\lim_{t \rightarrow \infty} \theta^t u'(c_t)k_{t+1} =0 \tag{9}\]
+
+			and the Euler equation implies
+			\begin{align*}
+				u'(c_t) &= \frac{\beta R_{t+1}}{(1+g)^\sigma} u'(c_{t+1})\\
+				u'(c_{t+1}) &= \frac{u'(c_t)(1+g)^\sigma}{\beta R_{t+1}}
+			\end{align*}
+
+			Thus, we can write $\theta^t u'(c_t)$ as
+			\begin{align*}
+				\theta^t u'(c_t) &= \theta^t \frac{u'(c_{t-1})(1+g)^{2\sigma}}{\beta R_{t}}\\
+				&= \theta^t \frac{u'(c_0)(1+g)^{\sigma t}}{\beta^t(R_t R_{t-1} R_{t-2}\ldots R_1)}
+			\end{align*}
+
+			Note $\theta^t \frac{(1+g)^{\sigma t}}{\beta^t}= (1+z)^t$, this means the transversality condition becomes
+			\[\lim_{t \rightarrow \infty} u'(c_0) \frac{(1+z)^t}{\bar{R}_t}k_{t+1}=0\]
+			However, $\frac{(1+z)^t}{\bar{R}_t}$ goes to infinity while $k_{t+1}$ converges to $k^\ast$, thus, the
+			whole term goes to infinity, violating the transversality condition.
+
+			Along the path converging to $(k^\ast, 0)$, at some point $k_t > k_{\text{GR}}$, same as the OLG model,
+			when the economy saves more than the golden rule, it is Pareto inefficient.
+			This also implies
+			\begin{align*}
+				f'(k_t)&<f'(k_{\text{GR}})\\
+				f'(k_t)-\delta &<f'(k_{\text{GR}}) -\delta\\
+				r_t &< z\\
+				\implies R_t &< 1+z
+			\end{align*}
+
+			\subsection{Analytical example}\label{subsec:analytical-example}
+			In many cases, the Ramsey model cannot be solved analytically.
+			Here we provide an example that is simply
+			enough to obtain an analytical solution to illustrate the idea of saddle path.
+
+			Suppose $u(C)= \ln(C), f(k)=Bk^\alpha, \delta = 1$, solving households UMP gives the Euler equation
+			\begin{align*}
+				u'(C_t ) &= \frac{\beta}{1+g}u'(C_{t+1})R_{t+1}\\
+				\frac{C_{t+1}}{C_t} &= \frac{\beta}{1+g}[\alpha B k_{t+1}^{\alpha-1}]
+			\end{align*}
+
+			The budget constraint follows
+			\[(1+z)k_{t+1} = Bk_t^\alpha -C_t\]
+
+			Now we guess and verify that saving is a fraction of output
+			\begin{align*}
+				k_{t+1} &= \eta y_t \\
+				&= \eta B k_t^{\alpha}
+			\end{align*}
+			where $\eta$ is unkown.
+
+			Substitute this into the budget constraint
+			\[C_t = Bk_t^\alpha - (1+z)k_{t+1}= B[1-(1+z)\eta]k_t^\alpha\]
+
+			Substitute above into the Euler equation
+			\[\frac{B[1-(1+z)\eta]k_{t+1}^\alpha}{B[1-(1+z)\eta]k_{t}^\alpha}= \frac{\beta}{1+g}[\alpha B k_{t+1}^{\alpha -1}]\]
+
+			This implies
+			\[k_{t+1}= \frac{\alpha \beta B}{1+g}k_t^\alpha\]
+			which exhibits the same form as our guess, and we can infer that
+			\[\eta = \frac{\alpha \beta B}{1+g}\]
+
+			Now, the optimal choices for households are
+			\begin{align*}
+				c_t &= [1-\alpha \beta(1+n)]Bk_t^{\alpha} \equiv g(k_t)\\
+				k_{t+1} &= s_t = \frac{\alpha \beta B}{1+g}k_t^\alpha \equiv h(k_t)
+			\end{align*}
+			where the first equation is exactly the saddle path.
+
+
+	\section{Comparative Dynamics}\label{sec:comparative-dynamics}
+		\subsection{Unexpected permanent increase in $\beta$}\label{subsec:unexpected}
+			Suppose $\beta$ increases unexpectedly and permanently at $T$, note that
+			\begin{align*}
+				\Delta c_t &= 0 \impies c_t = f(k_t) + (1-\delta)k_t - (1+z)\bar{k}\\
+				\Delta k_t &= 0 \implies c_t = f(k_t) - (z+\delta)k_t
+			\end{align*}
+
+			Since $f'(\bar k)=\frac{(1+g)^\sigma}{\beta} - (1-\delta)$, which decreases as $\beta$ increases, which
+			means $\bar k$ increases.
+
+			The exact dynamics are depicted in phase diagram in figure \eqref{fig:ex1}
+
+		\subsection{Unexpected permanent increase in aggregate productivity}
+			Suppose $f(k) = Bk^\alpha$, and $B \rightarrow B'$ at $T$, we have
+			\begin{align*}
+				\Delta c_t &= 0 \impies c_t = Bk_t^\alpha + (1-\delta)k_t - (1+z)\bar{k}\\
+				\Delta k_t &= 0 \implies c_t = Bk_t^\alpha - (z+\delta)k_t
+			\end{align*}
+
+			When $B$ goes up, we can see that k-locus clearly goes up.
+			For c-locus, note again $f'(\bar k)=\frac{(1+g)^\sigma}{\beta} - (1-\delta)$, which implies
+			\[\bar{k} = \left[ \frac{\alpha B}{(1+g)^\alpha/\beta - (1-\delta)} \right]^{1/(1-\alpha)}\]
+
+			So $B$ goes up implies $\bar{k}$ goes up.
+			However, this obscures the movement of the c-locus.
+			To determine the movement of c-locus, we can analyze the movement of $\bar c$
+			\begin{align*}
+				\bar{c} &= B \bar{k}^{\alpha} - (z+\delta)\bar{k}\\
+				\implies \frac{\partial \bar c}{\partial B}&= \bar{k}^{\alpha} + \underbrace{[\alpha B \bar{k}^{\alpha
+				-1}-(z+\delta)]}_{f'(\bar{k})-f'(k_{\text{GR}})>0} \frac{\partial \bar{k}}{\partial B}>0
+			\end{align*}
+
+			Thus, the c-locus will shift up.
+			The phase diagram of this move is outlined in figure \eqref{fig:ex2}.
+
+	\section{Competitive Equilibrium}\label{sec:competitive-equilibrium}
+		A competitive equilibrium of the (normalized) Ramsey economy consists of a time path of allocations
+		$\{k_t, c_t\}_{t=0}^{\infty}$ and price $\{w_t, r_t\}_{t=0}^{\infty}$, subject to
+
+		(i) the representative household maximizes its utility given $k_0>0$ and taking the time path of prices as
+		given, i.e. the conditions below are satisfied
+
+		\begin{align*}
+			u'(c_t) &= \frac{\beta}{(1+g)^\sigma}u'(c_{t+1})(1+r_{t+1})\\
+			(1+z)k_{t+1} &= f(k_t) + (1-\delta)k_t - c_t \\
+			\lim_{t\rightarrow \infty} &\theta^t \frac{k_{t+1}}{\bar{R}_t}=0
+		\end{align*}
+
+		(ii) firms maximize profits taking the time path of prices as given, i.e. the conditions below are satisfied.
+
+		\begin{align*}
+			w_t &= f(k_t) - k_t f'(k_t)\\
+			r_t &= \theta_t -\delta = f'(k_t) -\delta
+		\end{align*}
+
+		(iii) factor prices clear all markets
+
+		\begin{note}
+			The steady state is a specific outome $k_t = \bar{k}, c_t = \bar{c} \forall t$ and the competitive
+			equilibrium is the saddle path that satisfies the path $\{k_t, c_t\}_{t=0}^{\infty}$ converging toward $(\bar{k}, \bar{c})$ starting from $k_0 >0$.
+			Also, the steady state is a balanced growth path.
+		\end{note}
+
+		\newpage
+
+		\onecolumn
+
+
+		\begin{figure}
+			\center
+			\includegraphics[width=\textwidth]{_images/phase}
+			\caption{Ramsey Phase Diagram}\label{fig:phase}
+		\end{figure}
+
+			\begin{figure}
+				\center
+				\includegraphics[width=\textwidth]{_images/ex1}
+				\caption{Example 1}\label{fig:ex1}
+			\end{figure}
+
+			\begin{figure}
+				\center
+				\includegraphics[width=\textwidth]{_images/ex2}
+				\caption{Example 2}\label{fig:ex2}
+			\end{figure}
+		\twocolumn
+
+
+\end{document}

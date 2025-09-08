@@ -1,0 +1,436 @@
+%! Author = herbertxin
+%! Date = 10/8/24
+
+% Preamble
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro I}
+\chead{Difference Equation}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+% Document
+
+\begin{document}
+	\title{Difference Equation}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+
+	\section{Simple Difference Equation}
+
+	In this section, we will try to develop a simple difference equation to demonstrate the property of difference
+	equation.
+	Now, consider a simple linear difference equation:
+	\begin{equation}
+		x_{t+1} = a x_t + b_t, \text{ where } t = 1, 2, 3, \ldotp, \infty \label{eq:1}
+	\end{equation}
+	We call $x_t$ endogenous variable and $b_t$ as exogenous variable.
+	Then a solution of $x$ is the process of finding sequence of $x_t$ that satisfies this equation.
+
+	\vspace{6pt}
+	Now,
+	\begin{cases}
+		\text{if } b_t = b, \forall t \implies\\
+		 \eqref{eq:1} \text{ is a autonomous difference equation}\\
+		\text{if } b_t = 0, \forall t \implies\\
+		 \eqref{eq:1} \text{ is a homogenous difference equation}
+	\end{cases}
+
+	\Example{
+		A example of solving autonomous difference equation is to use backwards substitution.
+		Suppose at $t=0, x_t = x_0 \ \& \ b_t = b \ \forall t$. \\[4pt]
+		At $t=0$\\
+		$x_1 = ax_0 +b$ \\[6pt]
+		At $t=1$\\
+		$x_2 = ax_1 +b \\
+		\implies x_2 = a(a_0 +b)+b$\\
+		$\implies x_2 = a^2 x_0 + ab +b$\\[6pt]
+		At $t=2$\\
+		$x_3 = ax_2 +b \\
+		\implies x_3 = a(a^2 x_0 +ab +b)+b$\\
+		$\implies x_3 = a^3 x_0 + a^2 b +ab +b$\\[10pt]
+		$\implies x_t = a^t x_0 + b\sum_{i=0}^{t-1}a^i$ =
+		\begin{cases}
+			a^t x_0 + \frac{1-a^t}{1-a}b & \text{ if } a \neq 1\\
+			a^t x_0 + bt & \text{ if } a = 1
+		\end{cases}\\[6pt]
+		Note, if $a \neq 1$, we can use the geometric sum formula to calculate its limiting value, which is exactly what
+		we have above.
+	}
+
+	The general solution to \eqref{eq:1} consist of the sum of the complementary solution (i.e. the solution to
+	homogeneous part) and a particular solution (usually the steady state).
+
+	The \textbf{complementary solution} takes this form
+	\begin{equation*}
+		x_{t+1} = a x_t \implies x_t = a_0^t x_0
+	\end{equation*}
+	which is obtained from recursive substitution, where the second element is true if \eqref{eq:1} is homogeneous,
+	i.e. $b_t =0, \ \forall t$
+
+	The \textbf{particular solution} takes the following from
+	\begin{equation*}
+		x_t = \bar{x}, \forall t \implies x_{t+1}=\bar{x}
+	\end{equation*}
+
+	A particular solution for \eqref{eq:1} can be computed as following
+	\begin{align*}
+		\bar{x} &= a \bar{x} +b \\
+		(1-a)\bar{x} &= b\\
+		\bar{x} &= \frac{b}{1-a}, \text{ where } a \neq 1
+	\end{align*}
+
+	Thus, the \textbf{general solution} always take the form of
+	\begin{equation}
+		\underbrace{x^g}_{\text{General}} = \underbrace{x^c}_{\text{Complementary}} + \underbrace{x^p}_{
+			\text{Particular}}\label{eq:1.2}
+	\end{equation}
+
+	To put this into context, \eqref{eq:1} often leads to a general solution like this:
+	\begin{equation*}
+		x_t = a^t c +\bar{x}
+	\end{equation*}
+	where $c$ is the boundry condition, and very often it is the initial value of $x$, i.e. $x_0$.
+
+	For example, at $t =0$, $x_t$ takes the value of $x_0$,
+	\begin{align*}
+		x_0 &= c + \bar{x} \implies c = x_0 - \bar{x}\\
+		\text{general solution: } x_t &= (x_0 - \bar{x})a^t + \bar{x}\\
+		\because \bar{x} &= \frac{b}{1-a}\\
+		x_t &= a^t(x_0 - \frac{b}{1-a}) + \frac{b}{1-a}
+	\end{align*}
+	Above is the exact solution to \eqref{eq:1} given the initial value of $x_t$, $x_0$ is given, which is exactly
+	the boundary condition we discussed earlier.
+	To be more specific, $x_0$ restricts the timeframe to
+	$t = 1, 2, \dots, \infty$.
+	We can also think of the above equation as the deviation from steady state\footnote{Now, if $b_t =0$, i.e. \eqref{eq:1} is homogeneous, the solution becomes $x_{t} = x_0 a^t, \bar{x}=0$}.
+
+	The dynamics of this simple linear system is governed by the parameter $a$\\[4pt]
+	\begin{cases}
+		\forall a <|1| & (x_t - \bar{x}) \rightarrow 0 \text{ as } t \rightarrow \infty\\
+		\forall a > |1| & (x_t - \bar{x}) \rightarrow \infty \text{ as } t \rightarrow \infty\\
+		\text{If } a = 1, &  b = 0, \text{ any point is steady state}\\
+		\text{If } a = 1, &  b  \neq 0, \text{ the system explodes to infinity}\\
+	\end{cases}\\[4pt]
+	Thus, when $0<a <1$, we say the system is convergent and the convergence is monotonic, while the convergence is
+	oscillating if $-1 < a<0$.
+	On the other hand, the system is monotonically divergent if $a>1$ and oscillating if $a<-1$.
+	In fact, when $|a|<1$, we describe the system as asymptotically stable.
+
+	The above analysis is extremely helpful when we want to study the effect of a change in parameters
+	\Remark{We call the study of immediate change in the system \textbf{Comparative statics}, and the sequence fo
+	change after a parameter change \textbf{Comparative dynamics}.}
+
+	\section{Non-linear Difference Equation}
+		The dynamics of non-linear difference equations are generally less intuitive to see, and often relies on
+		linear approximations.
+		Before we talk about the stability analysis of non-linear systems, I want to clarify two concepts,
+		\textbf{locally stable} and \textbf{gloablly stable}.
+
+		When we describe a system as \textbf{locally stable}, or more formally, locally asymptotic stable, we meant
+		\begin{equation*}
+			\lim_{t\rightarrow\infty} y_t =\bar{y}, \forall y_0 \text{ such that } |y_0-\bar{y}|<\epsilon, \text{ for
+			some } \epsilon >0
+		\end{equation*}
+		This means as long as the initial condition is within a certain range of the steady state value, it will
+		converge to it.
+
+		On the other hand, \textbf{globally stable} means
+		\begin{equation*}
+			\lim_{t\rightarrow\infty} y_t = \bar{y}, \forall y_0 \in \mathbb{R}
+		\end{equation*}
+		i.e. no matter where what the initial point is, it will always converge to the steady state.
+
+		Now we move on to the stability analysis of non-linear difference equations.
+		Consider a non-linear difference equation
+		\begin{equation*}
+			x_{t-1} = f(x_t), \ f: \mathbb{R} \rightarrow \mathbb{R}
+		\end{equation*}
+		where $f$ is a differentiable single variable function with $x_0$ given.
+
+		Similar to the linear equation, we solve for the steady state by setting $x_{t+1}=x_t=\bar{x}$
+		\begin{equation*}
+			\bar{x} = f(\bar{x})
+		\end{equation*}
+
+		\subsection{Linear approximation}
+			We use first order Taylor expansion to linearize $x_{t+1}=f(x_t)$ around its steady state, which gives
+			\begin{equation*}
+				x_{t+1} = f(\bar{x}) + f'(\bar{x})(x_t - \bar{x})
+			\end{equation*}
+			Rearrange gives
+			\begin{equation*}
+				x_{t+1} - \bar{x} = f'(\bar{x})(x_t - \bar{x})
+			\end{equation*}
+			$\bar{x}$ is locally stable if and only if $|f'(\bar{x})|<1$
+
+
+
+	\section{Simple Asset Pricing}
+		In this section, we use a simple asset pricing model to demonstrate the use of linear difference equation and
+		give an introduction to adaptive learning and rational expectation.
+
+		Imagine now the agent faces two assets; one is a stock that pays a dividend $d, \forall t \text{ at price } p_t$
+		.
+		Stock is risky as $p_t$ changes from time to time.
+		The other is a risk-free government bond that pays the return $r>0$.
+		The agent is risk-neutral.
+		The arbitrage condition tells us that the return from stock and government bonds should be equal at equilibrium.
+
+		We start first by calculating the return from stock.
+		\begin{align*}
+			r_t &= \frac{d+p_{t+1}^e - p_t}{p_t}\\
+			r_t &= \frac{d+p_{t+1}^e}{p_t} - 1\\
+			1+ r_t &= \frac{d+p_{t+1}^e}{p_t}\\[4pt]
+			R_t &= \frac{d+p_{t+1}^e}{p_t}\\[4pt]
+			p_t R_t &= d + p_{t+1}^e
+		\end{align*}
+		where $R_t \equiv 1+r_t$.
+		The equation simply says the return of holding a stock for one period is the
+		dividend plus the expected increase in the stock price.
+		Divide this by the price of stock today gives the return rate.
+		In equilibrium, this should just equal to the return of bond.
+		Note that $p_{t+1}^e$ is the expectation of the next period's price, which is not the same as $p_{t+1}$ and cannot be added together.
+
+		However, without determining how the expectation turn works, the equation has no exact solution, and we
+		cannot derive the time path of time.
+		Thus, we introduce two ways economists think how agents would behave in respond to further price fluctuations.
+
+		\subsection{Adaptive Learning}
+			The essence of adaptive learning can be described in this equation:
+			\begin{equation}
+				p_{t+1}^e = \lambda p_t + (1-\lambda)p_t^e, \text{ where } 0<\lambda<1
+			\end{equation}
+			which can be rewritten as
+			\begin{equation*}
+				p_{t+1}^e = p_t^e + \lambda(p_t - p_t^e)
+			\end{equation*}
+			This shows that the formation of expectation next period is the expected value of this period plus a
+			correcting term for the forecasting error this period, which intuitively suggests the agent is actively learning from the error.
+
+			Now, we try to solve for the exact solution using adaptive learning.
+			We first trace the arbitrage equation above one period backwards
+			\begin{align*}
+			(1+r)p_{t-1} -d &=  p_t^e\\
+		(1+r)p_{t-1} -d &= \lambda p_{t-1} + (1-\lambda)p_t^e\\
+		(1+r)p_{t-1} -d &= \lambda p_{t-1} + (1-\lambda)[(1+r)p_{t-1}-d]\\
+		(1+r-\lambda) p_t &= d + (1-\lambda)(1+r)p_{t-1} - (1-\lambda)d\\
+		(1+r-\lambda) p_t &= \lambda d + (1-\lambda)p_{t-1}
+			\end{align*}
+			Loop one period forward
+			\begin{align*}
+			(1+r-\lambda) p_{t+1} &= \lambda d + (1-\lambda)p_{t}\\[4pt]
+		p_{t+1}&= \underbrace{\frac{(1-\lambda)(1+r)}{1+r-\lambda}}_{\text{positive}} p_t + \frac{\lambda d}{1+r-\lambda}
+			\end{align*}
+			In fact, if we simplify the first coefficient term
+			\begin{equation*}
+				\frac{(1-\lambda)(1+r)}{1+r-\lambda} = 1-\frac{r \lambda}{1+r\lambda}<1
+			\end{equation*}
+			Thus, the process is stable.
+			\begin{equation}
+				p_{t+1} = \frac{(1-\lambda)(1+r)}{1+r-\lambda} p_t + \frac{\lambda d}{1+r-\lambda} \equiv a p_t+b
+				\label{eq:1.4}
+			\end{equation}
+			When \eqref{eq:1.4} is satisfied, the system is said to be in equilibrium (dynamic equilibrium).
+
+			\subsubsection{Solving for steady state}
+				We set $\bar{p} = p_{t+1}=p_t$ to solve for steady state
+				\begin{align*}
+						\bar{p} &= \frac{(1-\lambda)(1+r)}{1+r-\lambda} \bar{p} + \frac{\lambda d}{1+r-\lambda}\\
+						\bar{p} &= \frac{\lambda d}{1+r-\lambda} \frac{1+r-\lambda}{1+r-\lambda - (1-\lambda)(1+r)}\\
+						\bar{p} &=\frac{\lambda d}{\lambda r}\\[4pt]
+						\bar{p} &=\frac{d}{r}
+				\end{align*}
+				which is exactly the present value (PV) of all dividends,
+				\begin{equation*}
+						PV(r) = \sum_{t=0}^{\infty} \frac{d}{(1+r)^t} = \frac{d}{r}
+				\end{equation*}
+
+			\subsubsection{Solution}
+				Now we have all the components to derive the solution for this simple asset pricing problem under
+				adaptive learning.
+				\begin{align*}
+						p_t & = \bar{p} + a^t (p_0-\bar{p})\\[4pt]
+						p_t & = \frac{d}{r} +
+						\underbrace{\left[\frac{(1-\lambda)(1+r)}{1+r-\lambda}\right]^t (p_0 -\frac{d}{r})}_{\text{``Bubble''}}
+				\end{align*}
+
+				The entire second term is called ``bubble'' as it converges to 0 as t goes to infinity and not
+				related to the fundamental.
+				The term ``bubble'' draws on the fact the deviation from fundamental are asymptotically zero,
+				meaning any price different from fundamental will eventually fade away, the current high price is just a ``bubble''.
+
+			\subsubsection{Problems}
+				\Remark{This part need checking on how the expectation equation works}
+				The reason adaptive learning falls out of fashion has to attribute to the fact that, under adaptive learning, agent tends to make systematic error, i.e. agent does not adjust immediately for forecast error, which is an unrealistic scenario.
+
+				To illustrate this, take the system of equations from adaptive learning\\[4pt]
+				\begin{cases}
+						p_t^e = \bar{p} + a^t(p_0^e - \bar{p})\\
+						p_t = \bar{p} + a^t(p_0 - \bar{p})
+				\end{cases}\\[4pt]
+				subtract the first from the second gives
+				\begin{equation*}
+						\underbrace{p_t - p_t^e}_{\text{current forecast error}} = a^t \underbrace{(p_0-p_0^e)}_{
+						\text{initial
+						forcast error}}
+				\end{equation*}
+				This meant if agent predicts the initial price wrong, the following prices would also be predicted wrong in the same direction, i.e. agent makes systematic errors by not adjusting their prediction to the other direction, which is, again, inconsistent with how people behave.
+
+		\subsection{Rational Expectation}
+
+			Rational expectation in this setting boils down to a simple assumption, i.e. ``perfect foresight''.
+			\begin{equation*}
+				p_{t+1}^e = p_{t+1}
+			\end{equation*}
+			The equation suggests that people can perfectly predict the price tomorrow given the current set of
+			information, which gives
+			\begin{equation*}
+				p_{t+1} = \underbrace{(1+r)}_{>1}p_t -d
+			\end{equation*}
+			Thus, under rational expectation, the system is asymptotically unstable.
+			The steady state value, on the other hand, follows the same recipe.
+			\begin{align*}
+				\bar{p} &= (1+r)\bar{p}-d\\
+				\bar{p} &= \frac{d}{r}
+			\end{align*}
+			Using the general solution, we got
+			\begin{equation*}
+				p_t = \bar{p} + (1+r)^t(p_0-\bar{p})
+			\end{equation*}
+			As we have established before, the solution under rational expectation is unstable, thus, the only
+			possible steady state is when $p_0=\bar{p}$.
+
+			In fact, the assumption we make from rational expectation is ``perfect foresight'', i.e. the agent knows all the information possible and predicts accordingly.
+			This, in another way, means the agent knows the exploding exists and will apply the ``perfect
+			foresight'' to actively avoid such event, for example, agents will collectively select the entry point to the market where the price is just equal to $\bar{p}$.
+
+			\subsubsection{Rational expectation with dividend tax}
+				As agents with rational expectation are forward-looking, policies that are announced beforehand alter their behavior.
+				In this example, we continue the asset pricing example with dividend tax, both unanticipated and expected
+				\sn{\includegraphics[width=0.45\textwidth]{_images/sc1}\captionof{figure}{Two cases of policy changes}},
+				to illustrate the change in behavior given the forward-looking expectation.
+				The introduction of dividend tax changes the equation to
+
+				\begin{equation*}
+						p_{t+1} = (1+r)p_t - (1-\tau)d, \text{ where } 0<\tau<1
+				\end{equation*}
+				Solving for steady state gives
+				\begin{equation*}
+						\bar{p} = \frac{(1-\tau)d}{r}
+				\end{equation*}
+
+				Rewrite this into the general form gives
+				\begin{equation*}
+						p_t = \bar{p} + (1+r)^t(p_0-\bar{p}) \ \& \ p_0 = \bar{p}
+				\end{equation*}
+
+				Now, as we have stated earlier, the initial condition of this unstable systm must be $p_0$.
+
+
+	\section{General Comments on Rational Expectation}
+		In the previous section, we briefly mentioned that rational expectation is when agents have all the
+		information of the economy and make predictions based on that.
+		Unlike adaptive learning, this assumption does not lead to systematic error, which will be illustrated with
+		an example below.
+
+		Mathematically, we express rational expectation as
+		\begin{equation}
+			P_{t}^e = \mathbb{E}[P_t|\Omega_{t-1}] = \mathbb{E}_{t-1}P_t
+		\end{equation}
+		\sn{$P$ can be anything, here we use $P$ to denote price, which corresponds to the example below.}
+		where $\Omega_{t-1}$ contains all the information in the economy up to period $t-1$.
+
+		Now, imagine a market of some goods
+		\begin{align*}
+			Q_t^D &= a_0 -a_1 p_t, &a_1>0\\
+			Q_t^S &= b_0 + b_1 p_t^e +u_t, &b_1>0
+		\end{align*}
+		where $Q_t^D, Q_t^S$ are quantity demanded and supplied at price $p_t$ and $u_t$ is i.i.d error with
+		$u_t \sim N(0,\sigma^2)$.
+		In this case, $\Omega_{t-1} \equiv \{\mathbb{P}_{t-1}, \mathbb{Q}_{t-1}, a_0, a_1, b_0, b_1, u_t \sim N(0,\sigma^2)\}$, where $\mathbb{P}_{t-1}, \mathbb{Q}_{t-1}$ is the price and quantity vector containing all the information of price and quantity till time $t-1$.
+
+		Now we solve for the market equilibrium ($Q_t^D = Q_t^S$)
+		\begin{align*}
+			P_t & = \frac{a_0 - b_0 -b_1 P_t^e-u_t}{a_1} \\
+			Q_t &= b_0 + b_{1}P_t^e + u_t
+		\end{align*}
+
+		Now set $P_t^e = E_{t-1}P_t$, the system becomes
+		\begin{align*}
+			P_t & = \frac{a_0 - b_0 -b_1 E_{t-1}P_t-u_t}{a_1} \tag{1.3.1}\\
+			Q_t &= b_0 + b_{1}E_{t-1}P_t + u_t
+		\end{align*}
+
+		Take expectation of 1.3.1
+		\begin{align*}
+			E_{t-1} P_t & = E_{t-1} \left[  \frac{a_0 - b_0 -b_1 E_{t-1}P_t-u_t}{a_1}\right]\\
+			E_{t-1} P_t & = \frac{a_0 - b_0}{a_1} - \frac{b_1}{a_1}E_{t-1}[E_{t-1} P_t] - \frac{1}{a_1}E_{t-1} u_t\\
+			E_{t-1} P_t & = \frac{a_0 - b_0}{a_1} - \frac{b_1}{a_1}E_{t-1} P_t\\
+			\left( 1+ \frac{b_1}{a_1} \right)E_{t-1} P_t & =\frac{a_0 - b_0}{a_1}\\
+			E_{t-1} P_t & = \frac{a_0-b_0}{a_1 +b_1}\equiv \bar{p} \tag{1.3.2}
+		\end{align*}
+
+		Substitute 1.3.2 into 1.3.1
+		\begin{align*}
+			P_t & = \frac{a_0 - b_0 -b_1 \frac{a_0-b_0}{a_1 +b_1}-u_t}{a_1}\\
+			P_t & = \frac{ \frac{(a_0 - b_0)(a_1 +b_1)-a_0b_1+b_0b_1}{a_1 +b_1}}{a_1} -\frac{u_t}{a_1}\\
+			P_t & = \frac{1}{a_1} \frac{a_0a_1 + a_0b_1-a_1b_0-b_1b_0-a_0b_1+b_0b_1}{a_1 +b_1} -\frac{u_t}{a_1}\\
+			P_t & = \frac{1}{a_1} \frac{a_0a_1 -a_1b_0}{a_1 +b_1} -\frac{u_t}{a_1}\\
+			P_t & =  \frac{a_0 -b_0}{a_1 +b_1} -\frac{u_t}{a_1}\\
+			P_t & =  \bar{p} -\frac{u_t}{a_1}
+		\end{align*}
+
+		Now we can calculate the forecast error
+		\begin{align*}
+			p_t - p_t^e &=p_t - E_{t-1}P_t\\
+			p_t - p_t^e &= \bar{p} -\frac{u_t}{a_1} - \bar{p}= -\frac{u_t}{a_1}\\
+			\because E_{t-1}\frac{u_t}{a_1}&=0\\
+			E_{t-1}[p_t - p_t^e] &=0
+		\end{align*}
+		This meant people do not make systemic mistakes, i.e. although they do make some mistakes from time to time,
+		the average mistake is zero.
+
+\end{document}

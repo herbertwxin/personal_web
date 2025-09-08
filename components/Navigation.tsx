@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
-import { searchContent, getSearchSuggestions, SearchResult } from '../lib/search'
+import { searchContent, SearchResult } from '../lib/search'
 
 interface NavigationProps {
   currentPage: string
@@ -13,11 +13,11 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
   const [searchMode, setSearchMode] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [, setShowResults] = useState(false)
   const [selectedResultIndex, setSelectedResultIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [tempPosition, setTempPosition] = useState({ x: 0, width: 0 })
+  useState({ x: 0, width: 0 })
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const searchInputRef = useRef<HTMLInputElement>(null)
 
@@ -167,7 +167,7 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
 
   const { width: selectorWidth, xPosition } = getCurrentPageData()
 
-  const handlePageChange = (pageId: string, button: HTMLButtonElement) => {
+  const handlePageChange = (pageId: string, _button: HTMLButtonElement) => {
     // Start zoom animation immediately
     setIsAnimating(true);
     

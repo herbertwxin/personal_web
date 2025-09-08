@@ -1,0 +1,488 @@
+%! Author = herbertxin
+
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\numberwithin{equation}{section}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Macro III}
+\chead{Complete Markets}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Complete Markets}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+	
+	\section{Simple Model}
+	
+	\subsection{The very basic}
+	We initiate the discussion of complete markets with a very basic model. Suppose we have an economy with 2 goods $X,Y$ and 2 agents $i=1,2$, which share the same utility function \(u_i(x,y)\).
+	
+	Now the amount of good $X,Y$ are constant, i.e. 
+	\[x^1 + x^2 =X, \ y^1 + y^2 =Y\]
+	
+	The question to ask is then, how do we find out the optimal consumption?
+	
+	\subsubsection{Social Planner}
+	Well, as the social planner, we could allocate the goods according to the utility function and some Pareto weights ($\lambda$) we deemed suitable, which gives the maximization problem 
+	\[ \max_{x^i, y^i} \sum_i \lambda^i u_i(x^i, y^i)\]
+	s.t. \(x^1 + x^2 \leq X, \ y^1 + y^2 \leq Y\)
+	
+	\vspace{2mm}
+	Take FOCs give
+	\begin{align*}
+		\lambda^i u_{i,x} (x^i, y^i) &= \theta_x\\
+		\lambda^i u_{i,y} (x^i, y^i) &= \theta_y
+	\end{align*}
+	where $\theta_x$ is the Lagrange multiplier for good $X$'s constraint, and $\theta_y$ for good $Y$. 
+	Divide the optimality condition for the same agent across two goods gives
+	\[\frac{u_{1,x}}{u_{1,y}} = \frac{u_{2,x}}{u_{2,y}} = \frac{\theta_x}{\theta_y}=\frac{u_{i,x}}{u_{i,y}}\]
+	which is the optimality condition for allocation.
+	
+	\subsubsection{Competitive Equilibrium}
+	We could also let market do its job, where the maximization problem becomes
+	\[\max_{x, y}  u_i(x, y)\]
+	s.t. $p_x x +p_y y\leq I$, where $I$ is the income for agent.
+	
+	Take FOCs give 
+	\begin{align*}
+		u_{i,x}(x^i, y^i) &= \mu_i p_x\\
+		u_{i,y}(x^i, y^i) &= \mu_i p_y
+	\end{align*}
+	where $\mu_i$ is the multiplier for individual $i$.
+	So the optimality condition is then
+	\[ \frac{u_{i,x}}{u_{i,y}}= \frac{p_x}{p_y}\]
+	which we can see the two optimality condition is basically the same.
+	
+	\subsection{Time}
+	Now, we can extend this simple model to allow for consumption across time. We change $X, Y$ to be $c_1, c_2$, so we have a 2 period consumption model.
+	\subsubsection{Social Planner}
+	The discounted utility at period 1 for agent $i$ is then
+	\[U_1(c^i) = u(c_1^i) + \beta u(c_2^i)\]
+	So the problem is 
+	\[ \max_{c_t^i} u(c_1^i) + \beta u(c_2^i)\]
+	s.t. \(c^1_1 + c_1^2 \leq C_1, \ c_2^1 + c_2^2 \leq C_2\),
+	where $y_1, y_2$ are the endowments in 2 periods
+	
+	Taking FOCs give
+	\begin{align*}
+		\lambda_i u'(c_1^i) &= \theta_1, \ \lambda_i \beta u'(c_2^i) = \theta_2\\
+		\implies \frac{u'(c_1^i)}{\beta u'(c_2^i)} &= \frac{\theta_1}{\theta_2}
+	\end{align*}
+	where $\theta_1, \theta_2$ are the multiplier for period 1, 2 constraints.
+	
+	If we divide the optimality condition across 2 agents within the same period. 
+	\[\frac{\lambda_1}{\lambda_2} \frac{u'(c_t^1)}{u'(c_t^2)}=1 \implies \frac{u'(c_t^1)}{u'(c_t^2)}  = \frac{\lambda_2}{\lambda_1}\]
+	This means the ratios of MU are equalized across time.
+	
+	with CRRA, i.e. $u'(c) = c^{-\sigma}$, then we have 
+	\[\frac{(c_t^1)^{-\sigma}}{(c_t^2)^{-\sigma}} = \frac{\lambda_2}{\lambda_1} \implies c_t^1=\left(\frac{\lambda_1}{\lambda_2}\right)^{1/\sigma} c_t^2\]
+	plug this into the budget constraint gives
+	\begin{align*}
+		\left(\frac{\lambda_1}{\lambda_2}\right)^{1/\sigma} c_t^2+c_t^2 &= C_t\\
+		\implies c_t^2 &= \underbrace{\left[1+ \left(\frac{\lambda_1}{\lambda_2}\right)^{1/\sigma}\right]^{-1}}_{\alpha^2}C_t\\
+		c_t^1 &= \alpha^1 C_t, \text{ where } \alpha^1 = 1-\alpha^2
+	\end{align*}
+	This means each individual consumes a time-invariant proportion of the endowment each period.
+	
+	\subsubsection{Competitive Equilibrium}
+	In competitive equilibrium, the maximization problem becomes
+	\[ \max_{c1, c2}  u(c_1) + \beta u(c_2) \]
+	The budget constraint for individual is then 
+	\[p_1 c_1^i + p_2 c_2^i = I\]
+	We can normalized $p_1=1$, so $p_2$ is the amount of consumption in period 2 in terms of period 1's consumption, and we can further show $c_1^i +\frac{1}{R}c_2^i =I$. 
+	
+	Solving the FOC gives the optimality condition
+	\[R=\frac{p_1}{p_2} = \frac{(c_1^i)^{-\sigma}}{\beta(c_2^i)^{-\sigma}}= \frac{1}{\beta} \left(\frac{\alpha^i C_1}{\alpha^2 C_2} \right) =\frac{1}{\beta}\left( \frac{C_1}{C_2}\right)^{-\sigma}\]
+	
+	From above, we get 
+	\[ C_1^{-\sigma} = \beta R C_2^{-\sigma}\]
+	i.e. the aggregate consumption is independent of individual consumption.
+	
+	\subsection{Risk}
+	Now suppose we have two state of the world, i.e. $S\in \{1,2\}$ with the associated probability $\pi_1, \pi_2$.
+	\subsubsection{Social Planner}
+	Then the social planner's problem is 
+	\[ \max_{c^i(1), c^i(2)} \pi_1 u(c^i(1)) +\pi_2 u(c^i (2))\]
+	s.t. $c^1(s) +c^2(s) \leq C(s)$, where $c^i(s)$ is $i$'s consumption in state $s$.
+	
+	Planner's FOC gives
+	\begin{align*}
+		\lambda_i \pi_1 u'(c^i(1)) &= \theta(1)\\
+		\lambda_i \pi_2 u'(c^i(2)) &= \theta(2)\\
+		\implies \frac{u'(c^1(s))}{u'(c^2(s))} &= \frac{\lambda_2}{\lambda_1}
+	\end{align*}
+	If we assume CRRA utility, i.e. $u'(c) = c^{-\sigma}$, then
+	\[\implies c^i(s) = \alpha^i C(s)\]
+	
+	\subsubsection{Competitive Equilibrium}
+	The budget constraint for individual is then 
+	\[p(1) c^i(1) + p(2)c^i(2) \leq I\]
+	The optimality condition is 
+	\[ \frac{p(1)}{p(2)} = \frac{\pi_1(c^i(1))^{-\sigma}}{\pi_2(c^i(2))^{-\sigma}} = \frac{\pi_1(c_1)^{-\sigma}}{\pi_2(c_2)^{-\sigma}}\]
+	
+	\section{Equilibrium With Complete Markets}
+	The setup of the model is as follow
+	\begin{itemize}
+		\item Infinite horizon ($T=\infty$)
+		\item $s$ states of the world
+		\item $s^t = (s_t, s_{t-1}, s_{t-2}, \ldots, s_0)$ is the history of states
+		\item The probability follows Bayes rule $\pi_\tau (s^\tau) = \pi(s^\tau |s^t)\pi_t (s^t)$
+		\item $\pi_t (s^t)$ is the probability at history $s^t$ s.t. $\sum_{s^t}\pi_t (s^t)=1$
+		\item There exists $s_0$ such that $\pi_0 (s_0)=1$
+		\item Finite number of agents $i = 1,2, \ldots, I$
+		\item Agents own a stochastic endowment of consumption goods $y_t^i(s_t)$ at state $s_t$
+		\item Endowment is not storable
+		\item $c^i = \{ c_t^i(s^t) \}$ is the stochastic steam of consumption of agent $i$
+	\end{itemize}
+	Agents rank $c^i$ according to 
+	\begin{align*}
+		u_i(c^i) &= \sum_{t=0}^{\infty} \beta^t \sum_{s^t} \pi_t^i (s^t)u_i(c_t^i (s^t))\\
+		&= \sum_{t=0}^{\infty} \beta^t \mathbb E_0 [u_i(c_t^i)]\\
+		&= \mathbb E_0 \left[ \sum_{t=0}^{\infty} \beta^t u_i(c_t^i)\right]
+	\end{align*}
+	
+	\textbf{Definitions:} A feasible allocation $\{ c^i\}$ satisfies
+	\[\sum_i c_t^i(s^t) \leq \sum_i y_t^i(s^t) \equiv Y_t (s^t), \quad \forall s^t \]
+	as endowments are not storable. 
+
+	\subsection{Pareto optimal allocation}
+	The social planner solves 
+	\begin{equation}
+		\max_{\{c^i\}} \sum_i \lambda_i u_i (c^i)
+	\end{equation}
+	subject to 
+	\begin{equation}
+		\sum_i c_t^i (s^t) \leq \sum_i y_t^i(s^t) \equiv Y_t (s^t) \label{eq:feasibility}
+	\end{equation}
+	The Lagrangian is then 
+	\begin{align}
+	L &= \sum_{t=0}^{\infty} \sum_{s^t} \Bigg\{ \sum_{i=1}^{I} \lambda_i \beta^t u_i\left(c_t^i(s^t)\right) \pi_t(s^t) \notag \\
+		&+ \theta_t(s^t) \sum_{i=1}^{I} \left[ y_t^i(s^t) - c_t^i(s^t) \right] \Bigg\}
+	\end{align}
+	Solving the FOC gives
+	\begin{equation}
+		\beta^t u_i'\left(c_t^i(s^t)\right) \pi_t(s^t) = \lambda_i^{-1} \theta_t(s^t) \label{eq:simple_op}
+	\end{equation}
+	Now, notice that if we increase $\lambda_i$, then $\lambda_i^{-1} \theta_t(s^t)$ decreases, which implies $u_i'\left(c_t^i(s^t)\right) \pi_t(s^t)$ decreases, and $c_t^i(s^t)$ increases. 
+	
+	So, if we increase the Pareto weight, the consumption increases for that agent. 
+	
+	Divide (4) by agent 1 gives
+	\begin{equation}
+		\frac{u_i'\left(c_t^i(s^t)\right)}{u_1'\left(c_t^1(s^t)\right)} = \frac{\lambda_1}{\lambda_i}
+	\end{equation}
+	This means the ratio of marginal utilities is constant across time and history,
+	\begin{equation}
+		c_t^i(s^t) = {u_i'}^{-1} \left( \lambda_i^{-1} \lambda_1 u_1'\left(c_t^1(s^t)\right) \right) \label{eq:cons}
+	\end{equation}
+	Substitute \eqref{eq:cons} into the feasibility constraint \eqref{eq:feasibility} gives
+	\begin{equation}
+		\sum_i {u_i'}^{-1} \left( \lambda_i^{-1} \lambda_1 u_1'\left(c_t^1(s^t)\right) \right) = \sum_i y_t^i(s^t)\equiv Y_t (s^t)
+	\end{equation}
+	Thus, given Pareto weight $\lambda_i$, there exists a unique Pareto optimal allocation $\{c^i\}$, where $\{c_t^i(s^t)\}_i$ only depends on $Y_t(S^t)$.
+	
+	\section{Arrow-Debreu Market}
+	With Arrow-Debreu market structure, markets only open on period 0. Consumers trade claims to consumption for all histories $s^t$ at period 0. 
+	
+	We define
+	\begin{align*}
+		q_t^0(s^t) \leftarrow &\text{ price of consumption in history $s^t$ at $t$} \\
+		&\text{when evaluated at period 0}
+	\end{align*}	
+	
+	The budget constraint for agent $i$ is then
+	\begin{equation}
+		\sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, c_t^i(s^t) 
+	\leq \sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, y_t^i(s^t) + T_i \notag
+	\end{equation}
+	where $T_i$ is lump-sum transfer with $\sum_i T_i = 0$
+	
+	The household problem is then
+	\begin{equation}
+		\max_{\{c_t^i(s^t)\}} \sum_{t=0}^{\infty} \sum_{s^t} \beta^t \pi_t(s^t) u_i (c_t^i(s^t))
+	\end{equation}
+	subject to 
+	\begin{equation}
+		\sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, c_t^i(s^t) 
+	\leq \sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, y_t^i(s^t) \label{eq:AD_bc}
+	\end{equation}
+	The Lagrangian is then
+	\begin{align*}
+		\mathcal L &= \sum_{t=0}^{\infty} \sum_{s^t} \bigg[ \beta^t \pi_t(s^t) u_i (c_t^i(s^t)) \\
+		&+ \mu^i q_t^0(s^t) \, \big(y_t^i(s^t)-c_t^i(s^t)\big) \bigg]
+	\end{align*}
+	Take FOC wrt $c_t^i(s^t)$
+	\[\frac{\partial U_i(c^i)}{\partial c_t^i(s^t)} = \beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t), \quad \forall s^t\]
+	which implies 
+	\begin{equation}
+		\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t) = \mu^i q_t^0(s^t) \label{eq:AD_optimality}
+	\end{equation}
+	
+	Compare this to \eqref{eq:simple_op}
+	\begin{equation}
+		\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t) = \lambda_i^{-1} \theta_t(s^t) \tag{2.4}
+	\end{equation}
+	where the LHS is identical, and RHS is very similar. With \eqref{eq:AD_optimality} have the following definitions
+	\vspace{1em}
+	
+	\textbf{Definitions:} A \textit{price system} is a sequence of functions 
+		$\{q_t^0(s^t)\}_{t=0}^\infty$. An \textit{allocation} is a list of sequences of functions 
+		$c^i = \{c_t^i(s^t)\}_{t=0}^\infty$, one for each $i$.
+
+
+	\textbf{Definition:} A \textit{competitive equilibrium} is a feasible allocation and a price system 
+	such that, given the price system, the allocation solves each consumer’s problem.
+	\vspace{1em}
+	
+	\textbf{Proposition:} For any \textit{competitive equilibrium}, there exists a $\lambda_i$, such that the CE allocation is a solution to the planner's problem weight $\{\lambda_i\}$.
+	
+	\textbf{Poof:} Let $\lambda_i=\frac{1}{\mu_i}$, and $\theta_t(s^t) = q_t^0(s^t)$, then 
+	\begin{align*}
+		(1) \quad &\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t) = \mu^i q_t^0(s^t)= \lambda_i^{-1} \theta_t(s^t)\\[1em]
+		(2) \quad &\sum_i c_t^i (s^t) \leq \sum_i y_t^i(s^t) \equiv Y_t (s^t)
+	\end{align*}
+	
+	Using \eqref{eq:AD_optimality}, we can solve for the \textit{competitive equilibrium}
+	\begin{align*}
+		\frac{\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t)}{\beta^t u_1'\left[c_t^1(s^t)\right] \pi_t(s^t)} &= \frac{\mu^i q_t^0(s^t)}{\mu^1 q_t^0(s^t)}\\[1em]
+		\implies \frac{u_i'\left[ c_t^i(s^t) \right]}{u_j'\left[ c_t^j(s^t) \right]} &= \frac{\mu_i}{\mu_1}
+	\end{align*}
+	
+	So we get the expression for consumption 
+	\begin{equation}
+		c_t^i(s^t) = {u_i'}^{-1} \left\{ u_1'\left[ c_t^1(s^t) \right] \frac{\mu_i}{\mu_1} \right\} \label{eq:AD_cons}
+	\end{equation}
+	which is the optimality condition for households. In order for CE to hold, we need it to satisfy the \textbf{feasibility constraint}:
+	\[c_t^i(s^t) = {u_i'}^{-1} \left\{ u_1'\left[ c_t^1(s^t) \right] \frac{\mu_i}{\mu_1} \right\} = Y_t(s^t)\]
+	however, arbitrary $\frac{\mu_i}{\mu_1}$ may not be optimal, as we also need the budget constraint to hold with equality:
+	\[\sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, c_t^i(s^t) 
+	= \sum_{t=0}^{\infty} \sum_{s^t} q_t^0(s^t) \, y_t^i(s^t), \quad \forall i\]
+	
+	Now, we can find out $q_t^0(s^t)$ given $\frac{\mu^i}{\mu^1}$ by normalizing $q_0^0(s^0)=1$, so we get
+	\begin{align*}
+		 \mu^i q_0^0(s^0) &=\beta^0 u_i'\left[c_0^i(s^0)\right] \pi_t(s^0) \\
+		 \mu^i &=\beta^0 u_i'\left[c_0^i(s^0)\right]
+	\end{align*}
+	
+	Plugging this into the \eqref{eq:AD_optimality} gives
+	\begin{equation*}
+		\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t) =  u_i'\left[c_0^i(s^0)\right] q_t^0(s^t)
+	\end{equation*}
+	which gives the pricing system, which is also a standard asset pricing equation.
+	\begin{equation}
+		q_t^0(s^t) = \frac{\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t)}{u_i'\left[c_0^i(s^0)\right]}
+	\end{equation}
+	
+	\subsection{Special cases}
+	
+	\section{Sequential Trading}
+	\subsection{Asset pricing}
+	Now imagine a stream of dividend 
+	\begin{equation*}
+		\{ d(s^t)\}_{t=0}^{\infty}
+	\end{equation*}
+	with the associated price $q_t^0(s^t)$, which is the price of the dividend stream that pays 1 unit of consumption in history $s^t$ discounted to period 0
+	
+	The no-arbitrage pricing condition is 
+	\begin{equation}
+		p_0^0(s_0) = \sum_{t=0}^\infty \sum_{s^t} q_t^0(s^t) \, d_t(s^t)
+	\end{equation}
+	This means if an asset delivers state-contingent payouts $\{ d_t(s^t) \}$, and Arrow securities for all those $s^t$ are already traded with prices $q_t^0(s^t)$, then the only price at which this asset can trade at time 0 (given $s_0$) without allowing arbitrage is exactly that weighted sum.
+	
+	We can also find out the price of the tail of an asset following history $s^\tau$
+	\begin{equation}
+		p_\tau^0(s^\tau) = \sum_{t \geq \tau} \sum_{s^t \mid s^\tau} q_t^0(s^t) \, d_t(s^t)
+	\end{equation}
+	which is, again, in time 0 consumption.
+	
+	What if we want to convert this to be in units of consumption at $\tau$ in $s^\tau$. Notice that 
+	\begin{align*}
+		q_\tau^0(&s^\tau) \text{ is the price of consumption in }\\
+		&\text{history $s^\tau$ at $\tau$ when evaluated at period 0}
+	\end{align*}
+	So we can think of $q_\tau^0(s^\tau)$ as a deflator or discount factor, thus, by dividing $q_\tau^0(s^\tau)$, we can get back to the price at $\tau$ at $s^\tau$. 
+	
+	Thus, to get the price of the tail of an asset at $\tau$, we use 
+	\begin{equation}
+		p_\tau^\tau(s^\tau) \equiv \frac{p_\tau^0(s^\tau)}{q_\tau^0(s^\tau)} 
+	= \sum_{t \geq \tau} \sum_{s^t \mid s^\tau} \frac{q_t^0(s^t)}{q_\tau^0(s^\tau)} d_t(s^t)
+	\end{equation}
+	which we denote $ \frac{q_t^0(s^t)}{q_\tau^0(s^\tau)}\equiv q_t^\tau(s^t)$
+	\begin{align*}
+		q_t^\tau(s^t) \equiv \frac{q_t^0(s^t)}{q_\tau^0(s^\tau)} 
+	&= \frac{\beta^t u_i'\left[c_t^i(s^t)\right] \pi_t(s^t)}{\beta^\tau u_i'\left[c_\tau^i(s^\tau)\right] \pi_\tau(s^\tau)}
+	\end{align*}
+	Since we have $\pi_t(s^t) = \pi_t(s^t \mid s^\tau)\pi_\tau (s^\tau)$
+	\begin{align*}
+		q_t^\tau(s^t)= \beta^{t - \tau} \frac{u_i'\left[c_t^i(s^t)\right]}{u_i'\left[c_\tau^i(s^\tau)\right]} \pi_t(s^t \mid s^\tau)
+	\end{align*}
+	
+	\textbf{Proposition:} If market re-open at history $s^\tau$, then no trade occur (agents are happy with their consumption claims decided in period 0) and prices are given by $q_t^\tau(s^t)$.
+	
+	\textbf{Proof:} At any history $s^t$, agent have an endowment $y_t^i(s^t)$ and financial claim $c_t^i - y_t^i(s^t)$.
+	
+	The financial claim is written as $c_t^i - y_t^i(s^t)$ since agent sell claims when their endowment is high and buy claims when their endowment is low to keep the consumption constant.
+	
+	Total claim to consumption are $c_t^i (s^t)$, then the agent's problem is 
+	\begin{align*}
+		\max_{\tilde c^i} \sum_{t=\tau}^{\infty} \sum_{s^t \mid s^\tau}  \beta^{t-\tau} \pi_t(s^t|s^\tau) u_i (\tilde{c}_t^i(s^t))
+	\end{align*}
+	subject to 
+	\begin{align*}
+		\sum_{t=0}^{\infty} \sum_{s^t} \tilde q_t^\tau(s^t) \, \tilde c_t^i(s^t) 
+	\leq \sum_{t=0}^{\infty} \sum_{s^t} \tilde q_t^\tau(s^t) \, y_t^i(s^t)
+	\end{align*}
+	
+	Take FOCs give 
+	\[\beta^{t - \tau} \pi_t (s^t|s^\tau) u_i'(\tilde c_t^i (s^t))=\tilde q_t^\tau (s^t) \tilde \mu^i\]
+	Now, if we guess $\tilde c_t^i (s^t) =  c_t^i (s^t)$ and $\tilde q_t^\tau (s^t) = q_t^\tau (s^t)$, we recover the CE.
+	
+	In fact, we check 
+	\begin{enumerate}
+		\item given $\tilde q_t^\tau (s^t)$ household optimally choose $ c_t^i (s^t)$
+		\item budget constraint satisfied
+		\item optimality condition satisfied
+	\end{enumerate}
+	
+	\subsection{Financial wealth}
+	The financial wealth of agent is history $s^t$ is the value of their financial claims $d_t(s^t) = c_t^i(s^t) - y_t^i(s^t)$, i.e. 
+	\begin{equation}
+		\Upsilon_t^i(s^t) = \sum_{\tau = t}^{\infty} \sum_{s^\tau \mid s^t} q_\tau^t(s^\tau) \left[ c_\tau^i(s^\tau) - y_\tau^i(s^\tau) \right]
+	\end{equation}
+	This is the present value (at time $t$, given history $s^t$) of net future consumption relative to endowment. The idea is that extra consumption over endowment in the future has to be sustained by financial wealth.
+	
+	Now, we can describe the wealth distribution in history $s^\tau$ by $\{\Upsilon_t^i(s^t)\}_i$, so 
+	\begin{align*}
+		\sum_i \Upsilon_t^i(s^t) &= \sum_i \sum_{\tau = t}^{\infty} \sum_{s^\tau \mid s^t} q_\tau^t(s^\tau) \left[ c_\tau^i(s^\tau) - y_\tau^i(s^\tau) \right]\\
+		&= \sum_{\tau = t}^{\infty} \sum_{s^\tau \mid s^t} q_\tau^t(s^\tau) \underbrace{\sum_i\left[ c_\tau^i(s^\tau) - y_\tau^i(s^\tau) \right]}_{=0}\\
+		&= 0
+	\end{align*}
+	
+	\subsection{Debt limit}
+	Unlike Arrow-Debreu market, the limit of borrowing is built into the time 0 budget constraint. In sequential trading, we need to ensure agent do not borrow infinite amount. 
+	
+	The idea we use here is the \textit{natural debt limit}
+	\begin{equation}
+		A_t^i(s^t) = -                                                                                                                                        \sum_{\tau = t}^{\infty} \sum_{s^\tau \mid s^t} q_\tau^t(s^\tau) \, y_\tau^i(s^\tau).
+	\end{equation}	
+	which basically says the maximum about an agent can borrow is the sum of all its endowment, i.e. agent does not consume and spend all the endowment to repay the debt.
+	
+	\subsection{Sequential trading}
+	We first need to define our pricing kernel
+	\begin{align*}
+		&\tilde{Q}(s_{t+1} | s^t) \text{ is the price of a unit of}\\
+		&\text{consumption in state } s_{t+1} \text{ following history } s^t
+	\end{align*}
+	where $s_{t+1}$ stands for one period ahead, and $s^t$ is the history until $s^t$
+	
+	Now, the household maximization problem given the initial wealth at $t=0$, $\tilde a_0^i(s^0)$ is 
+	\begin{equation}
+		\max_{\{\tilde c_t^i(s^t), \tilde a_{t+1}^{i}(s_{t+1},s^t)\}} \sum_{t=0}^{\infty} \sum_{s^t} \beta^t \pi_t (s^t)u_i (\tilde c_t^i(s^t))
+	\end{equation}
+	subject to 
+	\begin{equation}
+		\tilde{c}_t^i(s^t) + \sum_{s_{t+1}} \tilde{a}_{t+1}^i(s_{t+1}, s^t) \tilde{Q}_t(s_{t+1}\mid s^t) 
+		\leq y_t^i(s^t) + \tilde{a}_t^i(s^t)
+	\end{equation}
+	and 
+	\begin{equation}
+		 \tilde{a}_{t+1}^i(s^{t+1}) \leq A_{t+1}^i(s^{t+1})
+	\end{equation}
+	
+	The corresponding Lagrangian is then 
+	\begin{align*}
+		\hspace{-6em} \mathcal L &= \sum_{t=0}^{\infty} \sum_{s^t} \bigg\{ \beta^t \pi_t (s^t)u_i (\tilde c_t^i(s^t)) \\
+		&\hspace{-8em}+ \eta_t^i(s^t)\big[y_t^i(s^t) + \tilde{a}_t^i(s^t)
+ 	-  \tilde{c}_t^i(s^t) + \sum_{s_{t+1}} \tilde{a}_{t+1}^i(s_{t+1}, s^t) \tilde{Q}_t(s_{t+1}\mid s^t)\big] \bigg\}\\
+ 	&\hspace{-2em}+ \sum_{s_{t+1}} \nu_{t+1}^i(s_{t+1}, s^{t})\big[ \tilde{a}_{t+1}^i(s_{t+1}, s^{t})- A_{t+1}^i(s^{t+1})\big]
+	\end{align*}
+	
+	The FOCs are
+	\begin{align*}
+		\hspace{-4em} \beta^t u_i'\left( \tilde{c}_t^i(s^t) \right) \pi_t(s^t) - \eta_t^i(s^t) &= 0\\
+		\hspace{-4em} - \eta_t^i(s^t) \tilde{Q}_t(s_{t+1} \mid s^t) 
+	+ \nu_t^i(s_{t+1}, s^{t}) + \eta_{t+1}^i(s_{t+1}, s^t) &= 0
+	\end{align*}
+
+	So we have 
+	\begin{align}
+		\eta_t^i(s^t) &=\beta^t u_i'\left( \tilde{c}_t^i(s^t) \right) \pi_t(s^t) \label{eq:sq_op1} \\
+		\eta_{t+1}^i(s_{t+1}, s^t)&=\eta_t^i(s^t) \tilde{Q}_t(s_{t+1} \mid s^t) 
+	+ \nu_t^i(s_{t+1}, s^{t})\label{eq:sq_op2} 
+	\end{align}
+	
+	We assume $\nu_t^i(s_{t+1}, s^{t})=0$, then we have 
+	\begin{equation}
+		\eta_{t+1}^i(s_{t+1}, s^t) =\eta_t^i(s^t) \tilde{Q}_t(s_{t+1} \mid s^t)
+	\end{equation}
+	
+	Combine this with \eqref{eq:sq_op1}, we get the pricing kernel
+	\begin{equation}
+		\tilde{Q}_t(s_{t+1} \mid s^t) 
+= \beta \frac{u_i'\left( \tilde{c}_{t+1}^i(s^{t+1}) \right)}{u_i'\left( \tilde{c}_t^i(s^t) \right)} \pi_t(s^{t+1} \mid s^t) \label{eq:se_pkernel}
+	\end{equation}
+	
+	Again, this is very similar to the example in the asset pricing section
+	\begin{align*}
+		q_t^\tau(s^t)= \beta^{t - \tau} \frac{u_i'\left[c_t^i(s^t)\right]}{u_i'\left[c_\tau^i(s^\tau)\right]} \pi_t(s^t \mid s^\tau)
+	\end{align*}
+	
+	\textbf{Definition:} A \textit{sequential trading equilibrium} given an initial distribution of wealth $\{\tilde a_0^i (s_0)\}$ is an allocation $\{\tilde c_t^i (s_t)\}$ and a pricing kernel $\tilde{Q}_t(s_{t+1} \mid s^t)$ subject to 
+	\begin{enumerate}
+		\item Given $\tilde a_0^i (s_0)$ and $\tilde Q$, $\tilde c_t^i (s_t)$ solves the household optimization problem with $\tilde a_t^i (s^{t+1})$.
+		\item Market clears/feasibility \[ \sum_i c_t^i(s^t) \leq Y_t(s^t),\quad \forall s^t\]
+	\end{enumerate}
+	
+	\textbf{Proposition:} If $\tilde a_0^i (s_0)=0$ then $\tilde c_t^i (s_t)=c_t^i(s^t)$ and $\tilde{Q}_t(s_{t+1} \mid s^t) = q_{t+1}^{t}(s^{t+1})$ is a sequential trading competitive equilibrium
+	
+	\textbf{Proof:} 	
+	
+	
+	
+	
+
+	\end{document}

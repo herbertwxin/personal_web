@@ -1,0 +1,771 @@
+% Preamble
+\documentclass[twocolumn, fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{stmaryrd}
+
+
+
+% Adjust column separation and add vertical rule
+\setlength{\columnsep}{25pt} % Increase space between columns
+\setlength{\columnseprule}{0.6pt}
+\setlength{\jot}{6pt} % Set the space between equation lines to 6pt
+\setlength{\parskip}{3pt}
+
+% Header and Footer Settings
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Core Macro I}
+\chead{OLG Model}
+\rhead{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newtcolorbox{note}[1][]{
+	enhanced,
+	colback=white,            % Background color of the box content
+	colframe=black,           % Border color
+	coltitle=white,           % Title text color
+	colbacktitle=black,       % Background color of the title area
+	fonttitle=\bfseries,      % Bold font for the title
+	boxrule=1pt,              % Border thickness
+	title=SIDENOTE,           % Title of the box
+	sharp corners,            % Square corners
+	before skip=10pt,         % Space before the box
+	after skip=10pt,          % Space after the box
+	left=5pt,                 % Left padding
+	right=5pt,                % Right padding
+	top=5pt,                  % Top padding
+	bottom=5pt,               % Bottom padding
+	width=\columnwidth,       % Box width matches column width
+	#1                        % Allows for optional parameters
+}
+
+\begin{document}
+
+	\title{Overlapping Generation Model}
+	\author{Herbert W. Xin}
+	\date{\today}
+	\maketitle
+
+	\tableofcontents
+	\thispagestyle{fancy}
+
+	\vspace{0.5cm}
+	\hline
+	\vspace{0.2cm}
+	Overlapping generation model divides the population into two segments—old and young generation.
+	Agents only live for two periods, young and old.
+	Young agents work and save, old agents can retire, but they do not save.
+	Non-zero labor income in old age disturbs the dynamics.
+
+	\section{Assumptions}\label{sec:assumptions}
+		\begin{itemize}
+			\item Number of young people at $t = N_t$
+			\item Growth of population $N_{t+1} = (1+n)N_t$
+			\item Work time endowment vector: $(1,e), e \leq 1$
+			\footnote{The first element is the working time for the young (
+				normalized to 1), the second is the working time for old}
+		\end{itemize}
+
+		In the baseline model, there is no cost of supplying labor, i.e. people do not value leisure, meaning they
+		will simply supply $(1,e)$.
+
+		The olds do not work ($e=0$), meaning they live off their savings from the young period.
+
+		Finally, the olds do not exhibit altruism, meaning they do not care about their children, and no
+		generational wealth transfer.
+		If the olds care about children enough, they are essentially infinitely forward-looking.
+		In a sense that they live forever, since they care about their children and their children care about their
+		children.
+		The preference passes back to the first generation and forms dynasty preference.
+
+	\section{Preference}\label{sec:preference}
+		The lifetime utility\footnote{This type of utility function is called additively seperatable, i.e. $u$ in stages do not depend on each other} can be expressed as
+		\begin{equation}
+			U_t = u(c_{1t})+\beta u(c_{2t+1}), \ 0<\beta<1\label{eq:preference}
+		\end{equation}
+		where $\beta = \frac{1}{1+\rho}$ is the subjective discount rate, i.e. how people discount future utility
+		subjectively.
+
+		In contract, the real interest rate $R_{t+1}$ is the objective discount rate.
+
+		$u$ is a homogenous utility function and $U$ is homothetic function, i.e. $MRS(C_1, C_2)= MRS(\lambda C_1, \lambda C_2)$, which implies the indifference curve will be parallel and the income expansion path is a straight line.
+
+		\subsection{Inada Condition}
+			This prefernece also follows the Inada condition as in the Solow model.\\
+			\(
+			\begin{array}{llll}
+				& w >0 & = & u''<0\\
+				\lim_{c\rightarrow 0} & u'(c) & = & \infty\\
+				\lim_{c\rightarrow 0} & u'(c) & = & 0
+			\end{array}
+			\)
+
+	\section{Production Function}\label{sec:production-function}
+		We use the same neoclassical production function, but now $t$ stands for generation time.
+		\begin{equation}
+			Y_t = F(K_t, A_t L_t), \forall t \label{eq:production}
+		\end{equation}
+		where technology grows at $g$, i.e.
+		\[A_{t+1}=(1+g)A_{t}, g \geq 0\]
+
+		Since the factor and output markets are perfectly competitive
+		\begin{align*}
+			W_t &= A_t [f(k_t)-k_t f''(k_t)]\\
+			Q_t &= f'(k_t) \\
+			r_t &= Q_t - \delta = f'(k_t)-\delta
+		\end{align*}
+		where the last equation is the return to capital, meaning the real interest is, in fact, marginal product of
+		capital minus depreciation rate.
+
+		\begin{note}
+			Many assume \(\delta = 1\) since most capital stocks lost their value given a generation of time, but we
+			do not consider this in our explaination.
+		\end{note}
+
+	\section{Solving the Model}\label{sec:solving-the-model}
+
+		We start with the simple case where the olds fully retire.
+
+		\subsection{Full retirement ($e=0$)}\label{subsec:full-retirement}
+			Since the olds fully retire, part of the income goes to consumption, and the other part goes to saving.
+			We write the young household's decision problem as follows:
+			\begin{equation}
+				\max_{c_{1t}, c_{2t+1},s_t} U_t=u(c_1t)+\beta u(c_{2t+1})\label{eq:UMP}
+			\end{equation}
+			subject to
+			\(
+			\begin{cases}
+				c_{1t}+s_{t} = W_t\\
+				c_{2t+1} = (1+r_{t+1})s_t \equiv R_{t+1}s_t
+			\end{cases}\)
+
+			Households take $W_t, r_{t+1}$ as given.
+
+			Note that $r_{t+1}$ is not realized until $t+1$, we assume rational expectation so agents have perfect
+			foresight.
+
+			In this simple version, $s\geq 0$ as the olds cannot repay in the second period, and since households
+			are identical, no one will lend.
+
+			\begin{note}
+				Time consistent decision arises from separable utility function and non-time-varying subjective
+				discount factor.
+			\end{note}
+
+			\subsubsection{Lifetime budget constraint}
+				If $s_t \neq 0$, then from the budget constraint:
+				\[s_t = \frac{c_{2t+1}}{R_{t+1}}\]
+				substitute this into the other equation
+				\[c_{1t}+\frac{1}{R_{t+1}}c_{2t+1}=W_t\]
+				where $\frac{1}{R_{t+1}}$ is the price of $c_{2t+1}$ in terms of $c_1$.
+				This is sometimes called intertemporal price, as if the agent gives up 1 unit of $c_1$, he can save
+				1 unit more and get $R_{t+1}>1$ unit of $c_{2t+1}$ in the next period.
+
+			\subsubsection{Optimization}
+				Now we express the UMP in terms of $s_t$:
+				\begin{equation}
+					\max_{s_t} U_t=u(W_t - s_t)+\beta u(R_{t+1}s_t) \label{eq:UMP_S}
+				\end{equation}
+
+				The first order condition gives
+				\begin{align*}
+					-u'(W_t - s_t)&+R_{t+1}\beta u'(R_{t+1}s_t)=0\\
+					R_{t+1}\beta u'(R_{t+1}s_t)&= u'(W_t - s_t)\\
+					u'(c_{1t})&= \beta R_{t+1}u'(c_{2t+1})\tag{Euler Equation}
+				\end{align*}
+				The last equation is known as the Euler equation of consumption, where it suggests the marginal loss
+				of utility from less consumption due to saving should equal to marginal utility gain from extra
+				wealth in the next period.
+
+				We can also calculate the MRS from $u'(c_{1t})dc_{1t}+\beta u'(c_{2t+1})dc_{2t+1}=0$
+				\begin{align*}
+					\frac{dc_{2t+1}}{dc_{1t}} &= -\frac{u'(c_{1t})}{u'(c_{2t+1})}\\
+					\frac{u'(c_{1t})}{u'(c_{2t+1})} &= R_{t+1}
+				\end{align*}
+
+	
+				Now if we replace consumption with saving in the Euler equation, we get
+				\begin{align*}
+					u'(W_t - s_t) &= \beta R_{t+1}u'(R_{t+1}s_t)\\
+					\implies s_t &= \Phi(W_t, R_t+1)
+				\end{align*}
+				In fact, we can express $s_t$ as a function of wage and real interest rate.
+
+				\begin{note}
+					We can divide the effect of real interest rate into income and substitution effect, when $R_{t+1}$ goes up, income effect suggests both consumptions should go up, as higher interest rate made agents wealthier.
+					So saving goes down.
+
+					Substitution effect suggests consumption in the second period should go up, as it becomes
+					cheaper, which means given $W_t$, $s_t$ goes up.
+
+					For log utility, income and substitution effects perfectly offset each other and $s$ is
+					independent of $R$, as long as $e=0$.
+
+					Observe the Euler equation with log utility:
+					\begin{align*}
+						\frac{1}{W_t - s_t} &= \frac{\beta R_{t+1}}{R_{t+1}s_t}\\
+						\implies s_t &= \frac{\beta}{1-\beta}W_t
+					\end{align*}
+					Saving does not depend on $R_{t+1}$ at all
+				\end{note}
+
+			\subsubsection{Equilibrium prerequisite}
+
+				Here are some known dynamics
+
+				\begin{array}{lllll}
+					L_t & = & N_t & = & (1+n)N_{t-1}\\[2pt]
+					& & A_t & = & (1+g) A_{t-1}\\[2pt]
+					& & s_t & = & \frac{\beta}{1+\beta}w_t A_t
+				\end{array}\\
+
+				Goods market clearing implies
+				\begin{align*}
+					w_t &= f(k_t) - k_t f'(k_t)\\
+					R_{t+1} &= 1+r_{t+1} = 1+f'(k_t)-\delta
+				\end{align*}
+
+				Thus, in equilibrium, we should see
+				\[s_t = \frac{\beta}{1+\beta}A_t[f(k_t) - k_t f'(k_t)]\]
+
+				Asset marking clearing implies \[K_{t+1}=s_t N_t\]
+				here $s_t$ is the saving level per young household,
+				not the saving rate as in Solow model.
+				Since the olds do not save, the aggregate saving level $S_t = s_t N_t$.
+				Note this is no different of saving \[K_{t+1} = I_t + (1-\delta)K_t = S_t + (1-\delta)K_t\]
+				because the current period capital is just the saving of the previous young (the current old), which will be consumed by the olds.
+
+				From this we can find out the \textbf{law of motion for capital}.
+
+				\begin{align*}
+					K_{t+1} &= s_t L_t\\
+					&= \frac{\beta}{1+\beta}A_t L_t[f(k_t) - k_t f'(k_t)]\\
+					\frac{K_{t+1}}{A_t L_t} &= \frac{\beta}{1+\beta}[f(k_t) - k_t f'(k_t)]\\
+					(1+z)k_{t+1} &= \frac{\beta}{1+\beta}[f(k_t) - k_t f'(k_t)] \tag{\text{Law of Motion of Capital}}
+				\end{align*}
+				given $k_0 = \frac{K_0}{A_0 L_0}>0$
+
+			\subsubsection{Cobb-Douglas production}
+				Suppose we have Cobb-Douglas production function.
+				\begin{equation}
+					f(k) = Bk^{\alpha}\label{eq:cobb-douglas}
+				\end{equation}
+				This implies \[f(k_t) - k_t f'(k_t) = (1-\alpha)Bk^\alpha\]
+
+				Substitute back into the law of motion of capital allows us to find the steady state.
+				\begin{align*}
+					(1+z)k_{t+1} &= \frac{\beta}{1+\beta}(1-\alpha)Bk^\alpha\\
+					k^{\alpha - 1} &= \frac{1+z}{1-\alpha} \frac{1+\beta}{\beta} \frac{1}{B}\\
+					k &= \left[ \frac{1+z}{1-\alpha} \frac{1+\beta}{\beta} \frac{1}{B} \right]^{\frac{1}{\alpha -1}}
+				\end{align*}
+				Similar to the Solow model, 0 is also a steady state, albeit an unstable one.
+
+		\subsection{Old age earning ($e\neq 0$ with log utility)}\label{subsec:old-age-earning}
+
+			In this section, we assume log utility, which put the household UMP as
+			\[\max_{c_{1t},c_{2t+1}}\ln(c_{1t})+\beta \ln (c_{2t+1})\]
+			subject to
+			\begin{cases}
+				c_{1t}+s_{t} = W_t\\
+				c_{2t+1} = (1+r_{t+1})s_t \equiv R_{t+1}s_t
+			\end{cases}
+			Again, rewrite this in terms of saving gives \[\max_{s_t} U_t=\ln(W_t - s_t) + \beta \ln(R_{t+1}s_t)\]
+
+			First order condition then implies
+			\begin{align*}
+				\frac{1}{W_t s_t} &= \frac{R_{t+1}\beta}{R_{t+1}s_t + e W_{t+1}}\\
+				(1+\beta)R_{t+1}s_t &= \beta R_{t+1}W_t - \beta R_{t+1}s_t\\
+				s_t &= \frac{\beta}{1+\beta}W_t - \frac{1}{1+\beta}\frac{e W_{t+1}}{R_{t+1}}
+			\end{align*}
+			Now we can see the effect of real interest rate is contained in the second term, which drops out if $e=0$, more specifically,
+			\[\frac{\partial s_t}{\partial R_{t+1}} = \frac{e W_{t+1}}{R_{t+1}^2}\frac{1}{1+\beta}>0\]
+
+			\begin{note}
+				The opportunity cost of leisure.
+				Suppose agents care about leisure, so the UMP is \[\max u(c,l), \ s.t. p_c c = w(1-l) \]
+				Rearrange gives \[c+wl = w\]
+				Here, $wl$ is the opportunity cost of leisure, the term also contains wealth effect, the sum of
+				wealth and income effect is called full income effct.
+			\end{note}
+
+			Put this into lifetime budget constraint gives
+			\[c_{1t}+\frac{c_{2t+1}}{R_{t+1}}=W_t + \frac{e W_{t+1}}{R_{t+1}}\]
+
+			Now, when $R_{t+1}$ goes up, we see three effects
+			\begin{enumerate}
+				\item Income effect -- total income goes up, so consume more -- $s_t \downarrow$
+				\item Substitution effect -- consumption tomorrow becomes cheaper -- $s_t \uparrow$
+				\item Wealth effect -- PV of lifetime income is lower, save more against that to balance out utility
+				-- $s_t \uparrow$
+			\end{enumerate}
+
+			With log utility and $e=0$, 1 and 2 cancel out and 3 does not exist, so the effect of real interest
+			rate on saving is 0.
+
+			With log utility and $e\neq 0$, however, 1 and 2 cancel out but 3 is present, so
+			$\frac{\partial s_t}{\partial R_{t+1}}>0$
+
+		\subsection{CES utility with $e=0$}\label{subsec:ces-utility}
+			For CES utility function, we have
+			\begin{equation}
+				u(c) =
+				\begin{cases}
+					\frac{c^{1-\sigma}-1}{1-\sigma}, & \sigma >0\\
+					\ln(c), & \sigma =1
+				\end{cases}
+				\label{eq:CES}
+			\end{equation}
+			For now, we use a simplified version of CES: \[u(c) = \frac{c^{1-\sigma}}{1-\sigma}\]
+
+			\subsubsection{Optimal saving}
+				We use the Euler equation again
+				\begin{align*}
+					u'(c_{1t}) &= \beta R_{t+1}u'(c{2t+1})\\
+					c_{1t}^{-\sigma} &= \beta R_{t+1} c_{2t+1}^{-\sigma}\\
+					\left( \frac{c_{2t+1}}{c_{1t}} \right)^{\sigma} &= \beta R_{t+1}\\
+					1 &= \frac{1}{\beta R_{t+1}}\left( \frac{c_{2t+1}}{c_{1t}} \right)^{\sigma}
+				\end{align*}
+
+				Now we use the period 2 budget constraint
+				\begin{align*}
+					c_{2t+1} &= R_{t+1}s_t + eW_{t+1}\\
+					s_t &= \frac{c_{2t+1}}{R_{t+1}} - \frac{eW_{t+1}}{R_{t+1}}\\
+					s_t &= \beta^{1/\sigma} R_{t+1}^{1/\sigma -1}c_{1t}- \frac{eW_{t+1}}{R_{t+1}}\\
+					s_t &= \beta^{1/\sigma} R_{t+1}^{1/\sigma -1}(W_t - s_t)- \frac{eW_{t+1}}{R_{t+1}}
+				\end{align*}
+
+				Since $e=0$
+				\[s_t = \frac{\beta^{1/\sigma}R_{t+1}^{1/\sigma-1}W_t}{1+\beta^{1/\sigma}R_{t+1}^{1/\sigma-1}}W_t\]
+
+				If $\sigma =1$
+				\[s_t = \frac{\beta}{1+\beta}W_t \implies \frac{\partial s_t}{\partial R_{t+1}=0}\]
+
+				If $\sigma <1$
+				\[\frac{\partial s_t}{\partial R_{t+1}}>0, \text{ as } \frac{1}{\sigma}>1\]
+
+				If $\sigma >1$
+				\[\frac{\partial s_t}{\partial R_{t+1}}<0, \text{ as } \frac{1}{\sigma}<1\]
+
+				The best part about CES utility function is that
+				\begin{cases}
+					\sigma \rightarrow 0  \implies & \text{ Leontieff}\\
+					\sigma \rightarrow \infty  \implies & \text{ Linear}
+				\end{cases}
+
+				Higher value of $\sigma$ corresponds to less welling to substituting between $c_1 \& \ c_2$, i.e.
+				lower intertemporal elasticity of substitution (IES $= \frac{1}{\sigma}$), while lower $\sigma
+				$ implies higher intertemporal elasticity of substitution.
+
+				We can write CES as \[u(c) = \frac{c^{1/\sigma-1}}{1/\sigma-1}\]
+				and $\frac{1}{\sigma}$ is the IES.
+
+	\section{General Equilibrium}\label{sec:general-equilibrium}
+
+		Equilibrium is called equilibrium as they follow a certain law of motion from the equilibrium condition.
+
+		A competitive equilirbium of an economy is a sequence of aggregate capital stocks, consumptions, and factor
+		prices $\{K_{t+1}, c_{1t}, c_{2t+1}, R_t, W_t\}_{t=0}^{\infty}$ such that factor prices are given by
+		$W_t = A_t[f(k_t)-f'(k_t)k_t]$ and $r_t = f'(k_t)-\delta$.
+		Individual consumption decisions are governed by $u'(c_{1t})=\beta R_{t+1}u'(c_{2t+1})$, and the aggregate
+		captal stock evolves according to $K_{t+1}=s_t N_t$.
+
+		The aggregate law of motion for capital is
+		\begin{equation*}
+			K_{t+1} = Y_t - C_t + (1-\delta)K_t
+		\end{equation*}
+		This could be rewritten as \[K_{t+1}=(s_t^y+s_t^0)+(1-\delta)K_t\]
+		where $s_t^y+s_t^0$ is the young plus old saving.
+
+		Now this is just \[s_t N_t - (1-\delta)K_t + (1-\delta)K_t\]
+		where the first term in saving of current young, the second term is the dissaving of current old, which
+		cancels out with the depreciated capital stock from the last period.
+
+		If we assume $e=0$ from now on, then we can express capital as 
+		\[K_{t+1}=s_t N_t = s_t L_t = s(w_t A_t, R_{t+1})L_t\]
+	
+		In general equilibrium
+		\begin{align*}
+			w_t &= w(k_t) \\
+			k_t &= 1 + \vartheta_{t+1} = R(k_{t+1})\\
+			\implies K_{t+1} &= s(w(k_t)A_t, R(k_{t+1}))L_t\\
+			\frac{K_{t+1}}{A_t L_t} &= \frac{s(w(k_t)A_t, R(k_{t+1}))}{A_t}\\
+			(1+z)k_{t+1} &= \Psi(w(k_t),R(k_{t+1}))
+		\end{align*}
+		where the last equation strictly holds if we assume homothetic preference.
+		Also, note this is just a difference equation in $k_t$, given $k_0 =\frac{K_0}{A_0L_0}$.
+
+		Suppose we also have CES utility function, we have
+		\[\Psi(w(k_t),R(k_{t+1}))=\frac{\beta^{1/\sigma}R_{t+1}^{1/\sigma-1}}{1+\beta^{1/\sigma}R_{t+1}^{1/\sigma-1}}w(k_t)\]
+		also, we know $R(k) = 1+r(k)= 1+f'(k)-\delta, R'(k)<0$ for diminishing $MPK$.
+
+		If $1/\sigma >1, \sigma <1$, then when $k_t$ goes up, $k_{t+1}$ does not go up by a lot, higher $k_{t+1} \implies R(k_{t+1})\downarrow
+		$, which decreases saving propensity, so the effect on $k_{t+1}$ is dampened.
+
+		If $1/\sigma >1, \sigma <1$, $k_t \uparrow \implies k_{t+1} \uparrow \implies k_{t+1} \uparrow \uparrow$.
+
+		We will rule out multiple positive steady state by assume $\sigma \leq 1 (IES \geq 1)$.
+
+		\subsection{The importance of IES and $e$}\label{subsec:importance-of-ies}
+
+			A crucial note to take in mind is that $IES = \frac{1}{\sigma}$ affects the equilibrium dynamics
+			dramatically.
+
+			If $IES>1$, substitution effect outweighs income effect, when $IES<1$, then income effect outweighs
+			substitution effect.
+
+			Again, higher $IES$ means agents are more willing to trade between consumption to maximize utility.
+			Thus, when $IES$ is high, the substitution effect outweighs as agents try to maximize utility with intertemporal
+			substitution.
+
+			When $IES$ is low, the incentive for intertemporal substitution is low, meaning substitution effect is low
+			and the income effect dominates.
+
+		\subsection{Equilibrium dynamics}\label{subsec:equilibrium-dynamics}
+
+			Recall with Cobb-Douglas production function and $e = 0$, the steady state capital stock is
+			\[k^\ast = \left[ \frac{1+z}{1-\alpha} \frac{1+\beta}{\beta} \frac{1}{B} \right]^{\frac{1}{\alpha -1}}\]
+
+			With some calculus, it is easy to show
+			\begin{align*}
+				\frac{\partial k^\ast}{\partial z} &< 0\\
+				\frac{\partial k^\ast}{\partial \beta} &> 0\\
+				\frac{\partial k^\ast}{\partial B} &> 0
+			\end{align*}
+
+		\subsection{Balanced growth path}\label{subsec:balanced-growth-path}
+			The steady state is only one type of equilibrium, not the only one.
+			In fact, the steady state of the OLG model follows a similar balanced growth path as the Solow model.
+			Recall in the assumption section we said $A_t$ grows at the rate of $g$ and $N_t=L_t$ growth at the rate
+			of $n$.
+
+			Thus, the aggregate level of output, consumption, and capital all grow at the level $z = n+g+ng$.
+			Wage per worker grows at the rate of technology growth $g$.
+			Whereas the output per effective work $y_t = f(k^\ast)$ remains constant.
+			The same holds true for wage per effective worker ($w_t = w^\ast = w(k^\ast)$) and real interest rate
+			$r_t = Q_t -\delta=Q(k^\ast)-r=r^\ast$.
+
+
+
+	\section{Golden Rule}\label{sec:golden-rule}
+		The economy resource constraint gives \[Y_t = C_t + I_t\], this can be rewrite as
+		\[C_t + K_{t+1} - (1-\delta)K_t = F(K_t, A_t L_t)\]
+		divide both side by $A_t L_t$ gives
+		\[c_t + (1+z)k_{t+1}-(1-\delta)k_t = f(k_t)\]
+		where $c_t$ is consumption per effective worker
+
+		In steady state this becomes:
+		\begin{align*}
+			c &= f(k) -(1+z)k+(1-\delta)k\\
+			c &= f(k) - (z+\delta)k
+		\end{align*}
+
+		Golden rule capital stock per effective worker maximizes $c$, so we take FOC w.r.t $k$
+		\begin{align*}
+			\frac{\partial c}{\partial k} &= 0\\
+			f'(k_{GR}) &= z+\delta\\
+			f'(k_{GR})-\delta &= z\\
+			\vartheta_{GR} &= z
+		\end{align*}
+
+		For Cobb-Douglas production function
+		\begin{align*}
+			f(k) &= Bk^{\ast}\\
+			f'(k_{GR}) &= \alpha B(k_{GR})^{\alpha-1}=z+\delta\\
+			k_{GR} &= \left( \frac{\alpha B}{z+\delta} \right)^{\frac{1}{1-\alpha}}
+		\end{align*}
+
+		In contrast, \[k^\ast = \left[ \frac{1+z}{1-\alpha} \frac{1+\beta}{\beta} \frac{1}{B} \right]^{\frac{1}{\alpha -1}}\]
+		In general, there is no reason for $k^\ast =k_{GR}$
+
+		Most importantly, $k^\ast > k_{GR}$ is dynamically inefficient.
+		Now, if we compare the two capital stock, for the economy to be dynamically inefficient, we need
+		\begin{align*}
+			\frac{1}{1+z} \frac{\beta}{1+\beta}(1-\alpha)B &> \frac{\alpha B}{z+\delta}\\
+			\implies \frac{z+\delta}{1+z} \frac{\beta}{1+\beta} > \frac{\alpha}{1-\alpha}
+		\end{align*}
+		where $\frac{z+\delta}{1+z}$ increases in $z$, $\frac{\beta}{1+\beta}$ increases in $\beta$ and
+		$\frac{\alpha}{1-\alpha}$ increases in $\alpha$.
+		This condition is more likely to hold for higher value of $z$, $\beta$ and lower value of
+		$\alpha$.
+
+		Higher $\beta$ suggests higher patient and thus more saving.
+		Lower value of $\alpha$ means higher proportion in $W_t$, as
+		$W_t = (1-\alpha)A+Bk^\alpha$, combining the two leads to a higher propensity to save too
+		much, i.e. more capital accumulation and higher $k$.
+
+	\section{Dynamic Inefficiency}\label{sec:dynamic-inefficiency}
+		The technology and population growth play an integral part of efficiency in OLG model.
+		To understand the role of $z$, take a simple example of $g=0$, i.e. $z=n$
+
+		In the steady state of competitive equilibrium, one unit of saving leads to $\vartheta$
+		\footnote{Recall $\vartheta$ is the marginal product of capital minus depreciation} unit of future consumption.
+
+		Now, if we switch to a social planner problem, where each young gives up one unit of consumption to the
+		planner, which the planner redistributes to the current olds.
+		This means current old gets $1+n$ units of consumption, and every young gets $1+n$ units of saving when they
+		are old.
+
+		The social planner scheme is better if $1+n > 1+r^\ast$, i.e. the wealth transfer provides more old age
+		consumption than saving by self.
+		Mathematically, this is \[r^\ast < n =z\]
+		If this condition holds, then the economy is dynamically inefficient as the social planner to provide higher
+		consumption for everyone.
+		This relates back to the previous discussion in section \ref{sec:golden-rule} where high $n$ leads to dynamic
+		inefficiency.
+
+		The reason behind this has to do with the infinite number of generations.
+		To see this, consider the economy's aggregate resources constraint.
+		\[Y_0 + \frac{Y_1}{R_1}+\frac{Y_2}{R_1 R_2}+\ldots+\frac{Y_n}{\prod_{i=1}^n R_i}\]
+
+		In steady state, we have
+		\begin{align*}
+			Y_t &= A_t L_t f(k^\ast)\\
+			\implies Y_{t+1} &= (1+z) Y_t
+		\end{align*}
+
+		So the resource constraint in steady state is
+		\[Y_0 + \frac{1+z}{1+r^\ast} Y_0 + \left( \frac{1+z}{1+r^\ast} \right)^2 Y_0+\ldots\]
+		collect the term gives
+		\[Y_0\left[ \frac{1+z}{1+r^\ast} + \left( \frac{1+z}{1+r^\ast} \right)^2 +\ldots \right]\]
+
+		In order for the resource constraint to be bounded, i.e.
+		\[Y_0\left[ \frac{1+z}{1+r^\ast} + \left( \frac{1+z}{1+r^\ast} \right)^2 +\ldots \right]\leq \infty\]
+
+		We need \[\frac{1+z}{1+r^\ast}<1 \implies r^\ast >z\]
+		which intrinsically implies dynamical efficiency.
+		This also implies the social planner cannot improve the economy by running a Ponzi scheme.
+
+	\section{Social Security}\label{sec:social-security}
+		There are two types of social security
+		\begin{itemize}
+			\item Pay as you go (PAYG) -- youngs pay money to the government, and the government redistributes the
+			money to the olds.
+			\item Fully funded (FF) -- force youngs to save, earns interest, and serve as the income source when old.
+		\end{itemize}
+
+		\subsection{Pay as you go (PAYG)}\label{subsec:pay-as-you-go-(payg)}
+			Suppose social security tax is lump sum and $T_t=T, \forall t$.
+			Then the young household's decision problem is \[\max \ln(c_t)+\beta \ln (c_{2t+1})\]
+			subject to
+			\begin{cases}
+				c_{1t}+s_t =W_t - T, & T \leq W_t\\
+				c_{2t+1} = R_{t+1}s_t + b
+			\end{cases}
+
+			where $b$ is the benefit paid from social security program.
+			$T$ is set to be less or equal to $W_t$ to ensure $c_{1t}\geq 0$.
+
+			Now, the government's budget constraint is \[TN_t = b N_{t-1}, \forall t\]
+			i.e. the social security contribution needs to be equal to social security payment at all $t$.
+			This implies
+			\begin{align*}
+				T(1+n)N_{t-1} &= b N_{t-1}\\
+				\implies b &= (1+n)T
+			\end{align*}
+
+			We can substitute this back into the budget constraint and solve household's UMP w.r.t $s_t$, which gives
+			\begin{align*}
+				s_t &= \frac{\beta}{1+\beta}W_t - \frac{T}{1+\beta}(\beta + \frac{1+n}{R_{t+1}})\\
+				&= \frac{\beta}{1+\beta}W_t - T \left( \frac{\frac{1+n}{1+r_{t+1}}+\beta}{1+\beta} \right)
+			\end{align*}
+
+			The effect of such social security system depends on the relationship between $n$ and $r_{t+1}$,
+
+			\begin{cases}
+				n = r_{t+1} & \frac{\partial s_t}{\partial T} = -1\\
+				n > r_{t+1} & \frac{\partial s_t}{\partial T} < -1\\
+				n < r_{t+1} & \frac{\partial s_t}{\partial T} > -1
+			\end{cases}
+
+			In the first case, saving fall one-for-one with extra $T$.
+			Saving falls more than one-for-one for extra $T$ in the second case and less than one-for-one in the
+			third case.
+
+			In equilibrium,
+			\begin{align*}
+				K_{t+1}&= s_t N_t \\
+				(1+n)k_{t+1} &= s_t\\
+				(1+n)k_{t+1} &= \frac{\beta}{1+\beta}W_t - \frac{T}{1+\beta}(\beta + \frac{1+n}{R_{t+1}})
+			\end{align*}
+
+			If we assume technology growth is 0, i.e. $A_t = A_0 = 1, \forall t$, we can rewrite the equation above as
+			\[(1+n)k_{t+1} = \frac{\beta}{1+\beta}w(k_t) - \frac{T}{1+\beta}
+			\left(\beta + \frac{1+n}{1+Q(k_{t+1})-\delta}\right)\]
+
+			This implies $\frac{\partial k_t^\ast}{\partial T}<0$, which means the steady state saving rate
+			decreases with the introduction of PAYG social security.
+
+			It is natural for us to ask if this type of social security makes dynamically inefficient more efficient.
+			The answer is \textbf{yes}, it does improve welfare.
+			To see this, observe the lifetime budget constraint
+			\[c_{1t}+\frac{c_{2t+1}}{R_{t+1}=W_t - T\left[ \frac{r_{t+1}-n}{1+r_{t+1}} \right]}\]
+
+			If the economy was initially efficient, i.e. $k^\ast < k_{GR}$, obviously, this cannot be improve
+			whatsoever.
+			As increasing saving rate will always harm the current young.
+			Same could be said for PAYG scheme, where the current old is better off while the the initial young are
+			worse off.
+			Mathematically, we have $k^\ast < k_{GR}$ and dynamic efficiency implies $r^\ast >n$, thus,
+			\[\frac{r_{t+1}-n}{R_{t+1}}>0 \implies T \uparrow \implies c, s \downarrow \implies w \downarrow\]
+
+			If the economy was initially inefficient, i.e. $k^\ast > k_{GR}, r^\ast <n$.
+			Then, with the PAYG, both the olds and youngs are strictly better off.
+			At the time of introduction, $k_t$ does not change.
+			\[r^\ast <n, \frac{r_{t+1}-n}{R_{t+1}}<0 \implies T \uparrow \implies c \uparrow\]
+			This means saving pays $r^\ast$ while social security pays $n$, subsequent generations are also strictly
+			better off, although the gain will decreases and gradually oncverge to 0.
+
+		\subsection{Fully Funded}\label{subsec:fully-funded}
+			In fully funded regime, young household's decision problem is
+			\[\max \ln(c_t)+\beta \ln (c_{2t+1})\]
+			subject to
+			\begin{cases}
+				c_{1t}+s_t =W_t - T\\
+				c_{2t+1} = R_{t+1}s_t + R_{t+1}T
+			\end{cases}
+
+			Solving for the UMP w.r.t $s_t$ yields \[s_t = \frac{\beta}{1+\beta}W_t -T, T\leq \frac{\beta}{1+\beta}W_t\]
+
+			Now the law of motion of capital is
+			\begin{align*}
+				K_{t+1} &= s_t N_t + TN_t \\
+				K_{t+1} &= (s_t + T)N_t \\
+						&= \frac{\beta}{1+\beta}W_t N_t
+			\end{align*}
+			This means the fully funded scheme has no effect on capital accumulation, as it uses the tax collect to
+			invest in the market, which means no inference on capital accumulation.
+			The fully funded scheme will not be affected by demographic and time inconsistency either.
+
+	\section{Intergenerational Altruism}
+		There are two approaches to intergenerational altruism,
+		\begin{enumerate}
+			\item Dynastic preference: ``pure'' altruism
+			\item ``Warm glow'' preference: impure altruism
+		\end{enumerate}
+
+		\subsection{Dynastic Preference}
+			Take a two-period OLG model, the UMP of current households now becomes
+			\[
+				\max U_t = u(c_{1t}) +\beta u(c_{2t+1})+\gamma(1+n)U_{t+1}
+			\]
+			where
+			\[
+				U_{t+1} = u(c_{1t+1}) +\beta u(c_{2t+2})+\gamma(1+n)U_{t+2}
+			\]
+			subject to
+			\begin{align*}
+				c_{1t} &= W_t + b_t - s_t\\
+				c_{2t+1} &= R_{t+1}s_t  +(1+n)b_{t+1}\\
+				b_{t+1} &\geq 0, \text{ given } b_t \geq 0, (W_t, R_{t+1})
+			\end{align*}
+
+			We assume $\gamma(1+n)<1$ and $b_t$ is the inheritance received, $b_{t+1}$ is the bequest made.
+
+			This effectively transforms households' utility function into an infinite horizon one.
+			Using recursive substitution, we have
+			\[
+				\sum_{i=0}^{\infty} \{\gamma(1+n)\}^i \{u(c_{1t+i})+\beta u(c_{2t+i+1})\} +\lim_{s\rightarrow \infty}\{\gamma(1+n)\}^{s-t}U_s
+			\]
+
+			We need $\gamma(1+n)<1$ and sequence $\{U_s\}_{0}^{\infty}$ to be bounded above at $\bar{U}<\infty$,
+			which gives
+			\[
+				\lim_{s\rightarrow \infty}\{\gamma(1+n)\}^{s-t}U_s =0
+			\]
+
+			Set up the two-period Lagrangian gives
+			\begin{align*}
+				\mathcal{L} &= u(c_{1t}) + \beta u(c_{2t+1})+ \gamma (1+n)
+				[ u(c_{1t+1})\\
+				&+ \beta u(c_{2t+2}) - \gamma (1+n) U_{t+2} ] + \lambda_t b_{t+1}
+				\end{align*}
+			where
+			\begin{align*}
+				c_{1t} &= w_t + b_t - s_t \\
+				c_{2t+1} &= R_{t+1} s_t - (1+n) b_{t+1} \\
+				c_{1t+1} &= w_{t+1} + b_{t+1} - s_{t+1}
+			\end{align*}
+
+			From the FOCs we have
+			\begin{gather*}
+				-u'(c_{1t}) + \beta R_{t+1} u'(c_{2t+1}) = 0 \tag{9.1}\\
+				\gamma u'(c_{1t+1}) = \beta u'(c_{2t+1})- \frac{\lambda_t}{1+n} \tag{9.2}
+			\end{gather*}
+
+			And complementary slackness condition
+			\[
+				\lambda_t b_{t+1} = 0, \text{ with } \lambda_t =0 \text{ if } b_{t+1}>0
+			\]
+
+			Suppose we solve for an equilibrium where $b_t >0, \forall t$, the (9.2) becomes
+			\[
+				\gamma u'(c_{1t+1}) = \beta u'(c_{2t+1})
+			\]
+
+			If $\beta >\gamma$, then we have a selfish household
+			\[
+				 u'(c_{2t+1}) = \frac{\gamma}{\beta}u'(c_{1t+1}) < u'(c_{1t+1})
+			\]
+
+			Suppose we have CES utility function $u(c) = \frac{c_^{1-\sigma}}{1-\sigma}$, then we have
+			\begin{align*}
+				\frac{c_{2t+1}}{c_{1t}} &= (\beta R_{t+1})^{1/\sigma} \tag{9.3}\\
+				\frac{c_{2t+1}}{c_{1t}} &= \left(\frac{\beta}{\gamma}\right)^{1/\sigma} \tag{9.4}
+			\end{align*}
+
+			Combining 9.3 and 9.4 gives
+			\begin{align*}
+				\frac{c_{1t+1}}{c_{1t}} &= \frac{c_{1t+1}}{c_{2t+1}} \cdot \frac{c_{2t+1}}{c_{1t}} = (\gamma R_{t+1})
+				^{1/\sigma}\\
+				\frac{c_{2t+1}}{c_{2t}} &=
+				\frac{c_{2t+1}/(\beta/\gamma)^{1/\sigma}}{c_{2t/(\beta/\gamma)^{1/\sigma}}}=\frac{c_{1t+1}}{c_{1t}} = (\gamma R_{t+1})^{1/\sigma}
+			\end{align*}
+
+			Hence $\frac{c_{t+1}}{c_{t}}=(\gamma R_{t+1})^{1/\sigma}$, where $c_t = \frac{(1+n)c_{1t}+c_{2t}}{1+n}$
+			is per capita consumption.
+
+		\subsection{Warm-glow}
+			Warm-glow, on the other hand, gives out a bequest in the last period, and households values the bequest
+			in the last period.
+
+			Now, this changes the UMP to:
+			\[
+				\max \ u(c_{1t}) + \beta u(c_{2t+1}) + \gamma (1+n) v(b_{t+1})
+			\]
+
+			subject to
+			\begin{align*}
+					c_{1t} &= w_t + b_t - s_t, \\
+					c_{2t+1} &= R_{t+1}s_t - (1+n)b_{t+1}, \\
+					b_{t+1} &\geq 0, \quad \text{given } b_t > 0
+			\end{align*}
+
+			Set up the Lagrangian gives:
+			\[
+				\mathcal{L} = u(c_{1t}) + \beta u(c_{2t+1}) + \lambda_t b_{t+1}
+			\]
+
+			First Order Conditions (FOC):
+			\begin{gather*}
+			    -u'(c_{1t}) + \beta R_{t+1} u'(c_{2t+1}) = 0\\
+			    -(1+n)\beta u'(c_{2t+1}) + \gamma(1+n)v'(b_{t+1}) + \lambda_t = 0
+			\end{gather*}
+			
+			Complementary Slackness:
+			\[
+				\lambda_t b_{t+1} = 0 \quad \text{with} \quad \lambda_t = 0 \ \text{if } b_{t+1} > 0
+			\]
+
+			If \( b_{t+1} = 0 \) and \( \lambda_t > 0 \), the second FOC implies:
+			\[
+				\beta u'(c_{2t+1}) > \gamma v'(b_{t+1})
+			\]
+
+			Similar to dynamic preferences.
+\end{document}

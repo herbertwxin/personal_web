@@ -4,111 +4,203 @@ interface LaTeXRendererProps {
   className?: string
 }
 
-// Simple LaTeX-like formatter without external dependencies
+// Enhanced LaTeX-like formatter for mathematical expressions
 function formatMath(content: string): string {
   return (
     content
-      // Greek letters
-      .replace(/\\\\alpha/g, 'α')
-      .replace(/\\\\beta/g, 'β')
-      .replace(/\\\\gamma/g, 'γ')
-      .replace(/\\\\delta/g, 'δ')
-      .replace(/\\\\epsilon/g, 'ε')
-      .replace(/\\\\zeta/g, 'ζ')
-      .replace(/\\\\eta/g, 'η')
-      .replace(/\\\\theta/g, 'θ')
-      .replace(/\\\\iota/g, 'ι')
-      .replace(/\\\\kappa/g, 'κ')
-      .replace(/\\\\lambda/g, 'λ')
-      .replace(/\\\\mu/g, 'μ')
-      .replace(/\\\\nu/g, 'ν')
-      .replace(/\\\\xi/g, 'ξ')
-      .replace(/\\\\pi/g, 'π')
-      .replace(/\\\\rho/g, 'ρ')
-      .replace(/\\\\sigma/g, 'σ')
-      .replace(/\\\\tau/g, 'τ')
-      .replace(/\\\\phi/g, 'φ')
-      .replace(/\\\\chi/g, 'χ')
-      .replace(/\\\\psi/g, 'ψ')
-      .replace(/\\\\omega/g, 'ω')
+      // Greek letters (single backslash)
+      .replace(/\\alpha\b/g, 'α')
+      .replace(/\\beta\b/g, 'β')
+      .replace(/\\gamma\b/g, 'γ')
+      .replace(/\\delta\b/g, 'δ')
+      .replace(/\\epsilon\b/g, 'ε')
+      .replace(/\\varepsilon\b/g, 'ε')
+      .replace(/\\zeta\b/g, 'ζ')
+      .replace(/\\eta\b/g, 'η')
+      .replace(/\\theta\b/g, 'θ')
+      .replace(/\\vartheta\b/g, 'ϑ')
+      .replace(/\\iota\b/g, 'ι')
+      .replace(/\\kappa\b/g, 'κ')
+      .replace(/\\lambda\b/g, 'λ')
+      .replace(/\\mu\b/g, 'μ')
+      .replace(/\\nu\b/g, 'ν')
+      .replace(/\\xi\b/g, 'ξ')
+      .replace(/\\pi\b/g, 'π')
+      .replace(/\\varpi\b/g, 'ϖ')
+      .replace(/\\rho\b/g, 'ρ')
+      .replace(/\\varrho\b/g, 'ϱ')
+      .replace(/\\sigma\b/g, 'σ')
+      .replace(/\\varsigma\b/g, 'ς')
+      .replace(/\\tau\b/g, 'τ')
+      .replace(/\\upsilon\b/g, 'υ')
+      .replace(/\\phi\b/g, 'φ')
+      .replace(/\\varphi\b/g, 'ϕ')
+      .replace(/\\chi\b/g, 'χ')
+      .replace(/\\psi\b/g, 'ψ')
+      .replace(/\\omega\b/g, 'ω')
+      
       // Capital Greek letters
-      .replace(/\\\\Gamma/g, 'Γ')
-      .replace(/\\\\Delta/g, 'Δ')
-      .replace(/\\\\Theta/g, 'Θ')
-      .replace(/\\\\Lambda/g, 'Λ')
-      .replace(/\\\\Xi/g, 'Ξ')
-      .replace(/\\\\Pi/g, 'Π')
-      .replace(/\\\\Sigma/g, 'Σ')
-      .replace(/\\\\Phi/g, 'Φ')
-      .replace(/\\\\Psi/g, 'Ψ')
-      .replace(/\\\\Omega/g, 'Ω')
-      // Math operators
-      .replace(/\\\\sum/g, '∑')
-      .replace(/\\\\prod/g, '∏')
-      .replace(/\\\\int/g, '∫')
-      .replace(/\\\\partial/g, '∂')
-      .replace(/\\\\nabla/g, '∇')
-      .replace(/\\\\infty/g, '∞')
-      .replace(/\\\\leq/g, '≤')
-      .replace(/\\\\geq/g, '≥')
-      .replace(/\\\\neq/g, '≠')
-      .replace(/\\\\approx/g, '≈')
-      .replace(/\\\\equiv/g, '≡')
-      .replace(/\\\\propto/g, '∝')
-      .replace(/\\\\in/g, '∈')
-      .replace(/\\\\subset/g, '⊂')
-      .replace(/\\\\subseteq/g, '⊆')
-      .replace(/\\\\cup/g, '∪')
-      .replace(/\\\\cap/g, '∩')
-      .replace(/\\\\emptyset/g, '∅')
-      .replace(/\\\\forall/g, '∀')
-      .replace(/\\\\exists/g, '∃')
-      .replace(/\\\\neg/g, '¬')
-      .replace(/\\\\land/g, '∧')
-      .replace(/\\\\lor/g, '∨')
-      .replace(/\\\\to/g, '→')
-      .replace(/\\\\Rightarrow/g, '⇒')
-      .replace(/\\\\Leftarrow/g, '⇐')
-      .replace(/\\\\Leftrightarrow/g, '⇔')
-      // Math functions with operatorname
-      .replace(/\\\\operatorname\{([^}]+)\}/g, '$1')
-      .replace(/\\\\max/g, 'max')
-      .replace(/\\\\min/g, 'min')
-      .replace(/\\\\arg/g, 'arg')
-      .replace(/\\\\sup/g, 'sup')
-      .replace(/\\\\inf/g, 'inf')
-      .replace(/\\\\lim/g, 'lim')
-      .replace(/\\\\sin/g, 'sin')
-      .replace(/\\\\cos/g, 'cos')
-      .replace(/\\\\tan/g, 'tan')
-      .replace(/\\\\exp/g, 'exp')
-      .replace(/\\\\log/g, 'log')
-      .replace(/\\\\ln/g, 'ln')
-      // Expected value and other common operators
-      .replace(/E_t/g, 'E₍ₜ₎')
-      .replace(/E_0/g, 'E₍₀₎')
+      .replace(/\\Gamma\b/g, 'Γ')
+      .replace(/\\Delta\b/g, 'Δ')
+      .replace(/\\Theta\b/g, 'Θ')
+      .replace(/\\Lambda\b/g, 'Λ')
+      .replace(/\\Xi\b/g, 'Ξ')
+      .replace(/\\Pi\b/g, 'Π')
+      .replace(/\\Sigma\b/g, 'Σ')
+      .replace(/\\Upsilon\b/g, 'Υ')
+      .replace(/\\Phi\b/g, 'Φ')
+      .replace(/\\Chi\b/g, 'Χ')
+      .replace(/\\Psi\b/g, 'Ψ')
+      .replace(/\\Omega\b/g, 'Ω')
+      
+      // Math operators and symbols
+      .replace(/\\sum\b/g, '∑')
+      .replace(/\\prod\b/g, '∏')
+      .replace(/\\int\b/g, '∫')
+      .replace(/\\oint\b/g, '∮')
+      .replace(/\\partial\b/g, '∂')
+      .replace(/\\nabla\b/g, '∇')
+      .replace(/\\infty\b/g, '∞')
+      .replace(/\\leq\b/g, '≤')
+      .replace(/\\geq\b/g, '≥')
+      .replace(/\\neq\b/g, '≠')
+      .replace(/\\approx\b/g, '≈')
+      .replace(/\\equiv\b/g, '≡')
+      .replace(/\\propto\b/g, '∝')
+      .replace(/\\in\b/g, '∈')
+      .replace(/\\notin\b/g, '∉')
+      .replace(/\\subset\b/g, '⊂')
+      .replace(/\\subseteq\b/g, '⊆')
+      .replace(/\\supset\b/g, '⊃')
+      .replace(/\\supseteq\b/g, '⊇')
+      .replace(/\\cup\b/g, '∪')
+      .replace(/\\cap\b/g, '∩')
+      .replace(/\\emptyset\b/g, '∅')
+      .replace(/\\forall\b/g, '∀')
+      .replace(/\\exists\b/g, '∃')
+      .replace(/\\neg\b/g, '¬')
+      .replace(/\\land\b/g, '∧')
+      .replace(/\\lor\b/g, '∨')
+      .replace(/\\to\b/g, '→')
+      .replace(/\\rightarrow\b/g, '→')
+      .replace(/\\leftarrow\b/g, '←')
+      .replace(/\\leftrightarrow\b/g, '↔')
+      .replace(/\\Rightarrow\b/g, '⇒')
+      .replace(/\\Leftarrow\b/g, '⇐')
+      .replace(/\\Leftrightarrow\b/g, '⇔')
+      .replace(/\\implies\b/g, '⇒')
+      .replace(/\\iff\b/g, '⇔')
+      
+      // Additional math symbols
+      .replace(/\\pm\b/g, '±')
+      .replace(/\\mp\b/g, '∓')
+      .replace(/\\times\b/g, '×')
+      .replace(/\\div\b/g, '÷')
+      .replace(/\\cdot\b/g, '⋅')
+      .replace(/\\bullet\b/g, '•')
+      .replace(/\\circ\b/g, '∘')
+      .replace(/\\oplus\b/g, '⊕')
+      .replace(/\\ominus\b/g, '⊖')
+      .replace(/\\otimes\b/g, '⊗')
+      .replace(/\\oslash\b/g, '⊘')
+      
       // Dots
-      .replace(/\\\\ldots/g, '...')
-      .replace(/\\\\cdots/g, '⋯')
-      .replace(/\\\\ddots/g, '⋱')
-      .replace(/\\\\vdots/g, '⋮')
-      // Fractions - simple replacement
-      .replace(/\\\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)')
-      // Matrices and arrays - simplified
-      .replace(/\\\\begin\{[^}]*\}/g, '[')
-      .replace(/\\\\end\{[^}]*\}/g, ']')
-      .replace(/\\\\\\\\/g, '; ') // Line breaks in matrices
-      .replace(/&/g, ', ') // Column separators
-      // Superscripts and subscripts - handle both braced and single character
-      .replace(/\\\\_\{([^}]+)\}/g, '₍$1₎')
-      .replace(/\\\\\^\{([^}]+)\}/g, '⁽$1⁾')
-      .replace(/\\\\_([a-zA-Z0-9])/g, '₍$1₎')
-      .replace(/\\\\\^([a-zA-Z0-9])/g, '⁽$1⁾')
-      // Clean up remaining backslashes and braces
-      .replace(/\\\\([a-zA-Z]+)/g, '$1')
+      .replace(/\\ldots\b/g, '…')
+      .replace(/\\cdots\b/g, '⋯')
+      .replace(/\\ddots\b/g, '⋱')
+      .replace(/\\vdots\b/g, '⋮')
+      
+      // Math functions
+      .replace(/\\operatorname\{([^}]+)\}/g, '$1')
+      .replace(/\\max\b/g, 'max')
+      .replace(/\\min\b/g, 'min')
+      .replace(/\\arg\b/g, 'arg')
+      .replace(/\\sup\b/g, 'sup')
+      .replace(/\\inf\b/g, 'inf')
+      .replace(/\\lim\b/g, 'lim')
+      .replace(/\\sin\b/g, 'sin')
+      .replace(/\\cos\b/g, 'cos')
+      .replace(/\\tan\b/g, 'tan')
+      .replace(/\\sec\b/g, 'sec')
+      .replace(/\\csc\b/g, 'csc')
+      .replace(/\\cot\b/g, 'cot')
+      .replace(/\\exp\b/g, 'exp')
+      .replace(/\\log\b/g, 'log')
+      .replace(/\\ln\b/g, 'ln')
+      .replace(/\\det\b/g, 'det')
+      .replace(/\\dim\b/g, 'dim')
+      .replace(/\\ker\b/g, 'ker')
+      .replace(/\\gcd\b/g, 'gcd')
+      
+      // Expected value and probability
+      .replace(/\\mathbb\{E\}/g, '𝔼')
+      .replace(/\\mathbb\{P\}/g, 'ℙ')
+      .replace(/\\mathbb\{R\}/g, 'ℝ')
+      .replace(/\\mathbb\{N\}/g, 'ℕ')
+      .replace(/\\mathbb\{Z\}/g, 'ℤ')
+      .replace(/\\mathbb\{Q\}/g, 'ℚ')
+      .replace(/\\mathbb\{C\}/g, 'ℂ')
+      
+      // Fractions - enhanced handling
+      .replace(/\\frac\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '($1)/($2)')
+      
+      // Superscripts and subscripts with better handling
+      .replace(/_\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, (_, content) => {
+        return '₍' + convertToSubscript(content) + '₎'
+      })
+      .replace(/\^\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, (_, content) => {
+        return '⁽' + convertToSuperscript(content) + '⁾'
+      })
+      .replace(/_([a-zA-Z0-9])/g, '₍$1₎')
+      .replace(/\^([a-zA-Z0-9])/g, '⁽$1⁾')
+      
+      // Square roots
+      .replace(/\\sqrt\{([^}]+)\}/g, '√($1)')
+      
+      // Matrices and arrays - better handling
+      .replace(/\\begin\{pmatrix\}([\s\S]*?)\\end\{pmatrix\}/g, (_, content) => {
+        return '(' + content.replace(/\\\\/g, '; ').replace(/&/g, ', ') + ')'
+      })
+      .replace(/\\begin\{bmatrix\}([\s\S]*?)\\end\{bmatrix\}/g, (_, content) => {
+        return '[' + content.replace(/\\\\/g, '; ').replace(/&/g, ', ') + ']'
+      })
+      .replace(/\\begin\{matrix\}([\s\S]*?)\\end\{matrix\}/g, (_, content) => {
+        return content.replace(/\\\\/g, '; ').replace(/&/g, ', ')
+      })
+      
+      // Clean up spacing and remaining LaTeX commands
+      .replace(/\\quad/g, '  ')
+      .replace(/\\qquad/g, '    ')
+      .replace(/\\,/g, ' ')
+      .replace(/\\;/g, ' ')
+      .replace(/\\!/g, '')
+      .replace(/\\:/g, ' ')
+      .replace(/\\ /g, ' ')
+      
+      // Remove remaining backslashes and clean up
+      .replace(/\\([a-zA-Z]+)/g, '$1')
       .replace(/\\\\/g, '')
-      .replace(/[{}]/g, '')
+      .replace(/\{([^{}]*)\}/g, '$1')
   )
+}
+
+// Helper functions for subscript/superscript conversion
+function convertToSubscript(text: string): string {
+  return text
+    .replace(/0/g, '₀').replace(/1/g, '₁').replace(/2/g, '₂')
+    .replace(/3/g, '₃').replace(/4/g, '₄').replace(/5/g, '₅')
+    .replace(/6/g, '₆').replace(/7/g, '₇').replace(/8/g, '₈')
+    .replace(/9/g, '₉').replace(/\+/g, '₊').replace(/-/g, '₋')
+    .replace(/=/g, '₌').replace(/\(/g, '₍').replace(/\)/g, '₎')
+}
+
+function convertToSuperscript(text: string): string {
+  return text
+    .replace(/0/g, '⁰').replace(/1/g, '¹').replace(/2/g, '²')
+    .replace(/3/g, '³').replace(/4/g, '⁴').replace(/5/g, '⁵')
+    .replace(/6/g, '⁶').replace(/7/g, '⁷').replace(/8/g, '⁸')
+    .replace(/9/g, '⁹').replace(/\+/g, '⁺').replace(/-/g, '⁻')
+    .replace(/=/g, '⁼').replace(/\(/g, '⁽').replace(/\)/g, '⁾')
 }
 
 export function LaTeXRenderer({
@@ -227,25 +319,46 @@ export function ProcessedText({
   children: string
   className?: string
 }) {
-  const parts = children.split(
-    /(\$\$[\s\S]*?\$\$|\$[^$\n][^$]*?[^$\n]\$|\$[^$\n]\$)/
-  )
+  // More robust math detection
+  let processedContent = children
+  const mathParts: { type: 'display' | 'inline', content: string, placeholder: string }[] = []
+  
+  // First, extract and replace display math ($$...$$)
+  processedContent = processedContent.replace(/\$\$([\s\S]*?)\$\$/g, (_, content) => {
+    const placeholder = `__DISPLAY_MATH_${mathParts.length}__`
+    mathParts.push({ type: 'display', content: content.trim(), placeholder })
+    return placeholder
+  })
+  
+  // Then extract and replace inline math ($...$)
+  processedContent = processedContent.replace(/\$([^$\n]+)\$/g, (_, content) => {
+    const placeholder = `__INLINE_MATH_${mathParts.length}__`
+    mathParts.push({ type: 'inline', content: content.trim(), placeholder })
+    return placeholder
+  })
+  
+  // Split by placeholders
+  const parts = processedContent.split(/(__(?:DISPLAY|INLINE)_MATH_\d+__)/)
 
   return (
     <span className={className}>
       {parts.map((part, index) => {
-        if (part.startsWith('$') && part.endsWith('$')) {
-          // Display math
-          const mathContent = part.slice(2, -2)
-          return <DisplayMath key={index}>{mathContent}</DisplayMath>
-        } else if (part.startsWith(') && part.endsWith(') && part.length > 2) {
-          // Inline math
-          const mathContent = part.slice(1, -1)
-          return <InlineMath key={index}>{mathContent}</InlineMath>
-        } else {
-          // Regular text - process markdown formatting
-          return <span key={index}>{processInlineMarkdown(part)}</span>
+        // Check if this part is a math placeholder
+        const mathMatch = part.match(/__(?:DISPLAY|INLINE)_MATH_(\d+)__/)
+        if (mathMatch) {
+          const mathIndex = parseInt(mathMatch[1])
+          const mathPart = mathParts[mathIndex]
+          if (mathPart) {
+            if (mathPart.type === 'display') {
+              return <DisplayMath key={index}>{mathPart.content}</DisplayMath>
+            } else {
+              return <InlineMath key={index}>{mathPart.content}</InlineMath>
+            }
+          }
         }
+        
+        // Regular text - process markdown formatting
+        return <span key={index}>{processInlineMarkdown(part)}</span>
       })}
     </span>
   )
