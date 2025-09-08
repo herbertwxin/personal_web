@@ -71,35 +71,16 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const { width: selectorWidth, xPosition } = getCurrentPageData()
 
   const handlePageChange = (pageId: string, button: HTMLButtonElement) => {
-    // 计算点击按钮的位置
-    const buttonRect = button.getBoundingClientRect();
-    const navRect = button.closest('nav')?.getBoundingClientRect();
-    
-    if (!navRect) {
-      onPageChange(pageId);
-      return;
-    }
-
-    // 开始动画
+    // Start zoom animation immediately
     setIsAnimating(true);
     
-    // 计算相对位置
-    const relativeX = buttonRect.left - navRect.left;
+    // Change page immediately so movement starts at the same time
+    onPageChange(pageId);
     
-    // 设置临时位置（放大动画的起始位置）
-    setTempPosition({
-      x: relativeX,
-      width: buttonRect.width
-    });
-
-    // 短暂延迟后执行实际页面切换
+    // Reset animation state after animation completes
     setTimeout(() => {
-      onPageChange(pageId);
-      // 动画完成后恢复状态
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 300);
-    }, 150);
+      setIsAnimating(false);
+    }, 400); // Slightly longer to ensure smooth completion
   };
 
   return (
@@ -143,14 +124,14 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
               initial={false}
               animate={{
                 x: xPosition,
-                width: isAnimating ? tempPosition.width : selectorWidth,
+                width: selectorWidth,
                 scale: isAnimating ? 1.3 : 1,
               }}
               exit={{ opacity: 0 }}
               transition={{
                 type: 'spring',
-                stiffness: isAnimating ? 500 : 350,
-                damping: isAnimating ? 25 : 35,
+                stiffness: 400,
+                damping: 30,
                 mass: 0.4,
               }}
               style={{
