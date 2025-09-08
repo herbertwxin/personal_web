@@ -1,0 +1,20 @@
+{
+  "creatorIdentifier" : "net.ia.presenter",
+  "net.ia.presenter" : {
+    "appearance" : "light",
+    "bodyfont" : "Arial",
+    "darkbackgroundcolor" : "#2d2d2d",
+    "darkbodytextcolor" : "#2d2d2d",
+    "darktitletextcolor" : "#f85b45",
+    "footerleading" : "logo",
+    "lightbackgroundcolor" : "#00000000",
+    "lightbodytextcolor" : "#fffeff",
+    "lighttitletextcolor" : "#fffeff",
+    "logo" : "\/assets\/USYD-logo.png",
+    "preset" : "Default",
+    "template" : "university of sydney"
+  },
+  "transient" : false,
+  "type" : "net.daringfireball.markdown",
+  "version" : 2
+}
