@@ -136,12 +136,12 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
               }}
               style={{
                 // 液体玻璃效果背景
-                background: 'rgba(147, 51, 234, 0.15)',
+                background: 'rgba(106, 90, 205, 0.15)',
                 backdropFilter: 'blur(10px)',
                 WebkitBackdropFilter: 'blur(10px)',
-                border: '1px solid rgba(147, 51, 234, 0.2)',
+                border: '1px solid rgba(106, 90, 205, 0.2)',
                 boxShadow: `
-                  0 4px 20px rgba(147, 51, 234, 0.15),
+                  0 4px 20px rgba(106, 90, 205, 0.15),
                   inset 0 1px 1px rgba(255, 255, 255, 0.4),
                   inset 0 -1px 1px rgba(0, 0, 0, 0.05)
                 `,
