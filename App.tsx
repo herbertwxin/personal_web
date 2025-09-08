@@ -58,16 +58,18 @@ export default function App() {
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [windowDimensions, setWindowDimensions] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: typeof window !== 'undefined' ? window.innerWidth : 1024,
+    height: typeof window !== 'undefined' ? window.innerHeight : 768,
   })
 
   // Handle window resize for responsive texture animations
   const handleResize = useCallback(() => {
-    setWindowDimensions({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
+    if (typeof window !== 'undefined') {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
   }, [])
 
   // Performance monitoring and texture optimization setup
@@ -90,11 +92,20 @@ export default function App() {
 
   // Window resize listener for responsive texture behavior
   useEffect(() => {
-    window.addEventListener('resize', handleResize, { passive: true })
-    
-    return () => {
-      window.removeEventListener('resize', handleResize)
+    if (typeof window !== 'undefined') {
+      // Set initial dimensions on client side
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+      
+      window.addEventListener('resize', handleResize, { passive: true })
+      
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
     }
+    return undefined
   }, [handleResize])
 
   // Texture performance optimization
