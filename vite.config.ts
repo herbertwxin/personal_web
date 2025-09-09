@@ -93,19 +93,10 @@ export default defineConfig({
       output: {
         // Optimize manual chunks for better caching
         manualChunks: id => {
-          // Core React libraries - most stable, cache longest
-          if (id.includes('react') || id.includes('react-dom')) {
-            return 'vendor-react'
-          }
-
-          // Animation library - separate chunk for optional loading
-          if (id.includes('framer-motion')) {
-            return 'vendor-motion'
-          }
-
-          // Radix UI components - group by frequency of use
+          // 1. 首先处理最具体的条件
+          // Radix UI 组件 - 按使用频率分组
           if (id.includes('@radix-ui')) {
-            // Core UI components used everywhere
+            // 核心 UI 组件
             if (
               id.includes('react-slot') ||
               id.includes('react-dialog') ||
@@ -114,7 +105,7 @@ export default defineConfig({
             ) {
               return 'ui-core'
             }
-            // Form components
+            // 表单组件
             if (
               id.includes('react-checkbox') ||
               id.includes('react-radio-group') ||
@@ -125,7 +116,7 @@ export default defineConfig({
             ) {
               return 'ui-forms'
             }
-            // Layout components
+            // 布局组件
             if (
               id.includes('react-accordion') ||
               id.includes('react-collapsible') ||
@@ -135,7 +126,7 @@ export default defineConfig({
             ) {
               return 'ui-layout'
             }
-            // Navigation components
+            // 导航组件
             if (
               id.includes('react-navigation-menu') ||
               id.includes('react-menubar') ||
@@ -144,11 +135,39 @@ export default defineConfig({
             ) {
               return 'ui-navigation'
             }
-            // Remaining UI components
+            // 剩余的 UI 组件
             return 'ui-misc'
           }
 
-          // Utility libraries - small and frequently used
+          // 2. 处理其他特定库
+          // React 核心库 - 最稳定，缓存时间最长
+          if (id.includes('/node_modules/react/') || 
+              id.includes('/node_modules/react-dom/') ||
+              id.includes('/node_modules/react/jsx-runtime')) {
+            return 'vendor-react'
+          }
+
+          // 动画库 - 用于可选加载的独立块
+          if (id.includes('framer-motion')) {
+            return 'vendor-motion'
+          }
+
+          // 图标库 - 用于延迟加载
+          if (id.includes('lucide-react')) {
+            return 'vendor-icons'
+          }
+
+          // 图表和数据可视化
+          if (id.includes('recharts')) {
+            return 'vendor-charts'
+          }
+
+          // 表单处理
+          if (id.includes('react-hook-form')) {
+            return 'vendor-forms'
+          }
+
+          // 工具库 - 小型且常用
           if (
             id.includes('class-variance-authority') ||
             id.includes('clsx') ||
@@ -157,25 +176,27 @@ export default defineConfig({
             return 'utils-styling'
           }
 
-          // Icon library - separate for lazy loading
-          if (id.includes('lucide-react')) {
-            return 'vendor-icons'
-          }
-
-          // Chart and data visualization
-          if (id.includes('recharts')) {
-            return 'vendor-charts'
-          }
-
-          // Form handling
-          if (id.includes('react-hook-form')) {
-            return 'vendor-forms'
-          }
-
-          // Other vendor libraries
+          // 3. 处理其他 vendor 库
           if (id.includes('node_modules')) {
+            // 根据模块大小进一步优化
+            const match = id.match(/node_modules\/([^/]+)/)
+            if (match) {
+              const packageName = match[1]
+              
+              // 大型库单独分包
+              if (packageName.startsWith('@') || packageName.length > 15) {
+                return `vendor-${packageName.replace(/[^a-zA-Z0-9]/g, '-')}`
+              }
+              
+              // 小型库分组
+              return 'vendor-misc'
+            }
+            
             return 'vendor-misc'
           }
+
+          // 4. 默认返回 null 让 Rollup 决定
+          return null
         },
         // Optimize chunk and asset file names for caching
         chunkFileNames: chunkInfo => {

@@ -25,6 +25,9 @@ export function useAcademicLayout(): AcademicLayoutConfig {
 
   useEffect(() => {
     const updateLayout = () => {
+      if (typeof window === 'undefined') {
+        return
+      }
       const width = window.innerWidth
       
       const isMobile = width < 640
@@ -75,10 +78,14 @@ export function useAcademicLayout(): AcademicLayoutConfig {
     updateLayout()
 
     // Add event listener
-    window.addEventListener('resize', updateLayout)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateLayout)
+      
+      // Cleanup
+      return () => window.removeEventListener('resize', updateLayout)
+    }
     
-    // Cleanup
-    return () => window.removeEventListener('resize', updateLayout)
+    return undefined
   }, [])
 
   return config
@@ -90,6 +97,9 @@ export function useAcademicTypography() {
   
   useEffect(() => {
     const updateScale = () => {
+      if (typeof window === 'undefined') {
+        return
+      }
       const width = window.innerWidth
       
       if (width < 375) {
@@ -106,9 +116,13 @@ export function useAcademicTypography() {
     }
     
     updateScale()
-    window.addEventListener('resize', updateScale)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateScale)
+      
+      return () => window.removeEventListener('resize', updateScale)
+    }
     
-    return () => window.removeEventListener('resize', updateScale)
+    return undefined
   }, [])
   
   return scale

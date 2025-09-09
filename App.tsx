@@ -43,13 +43,18 @@ const BlogPostPage = lazy(() =>
 
 // Loading component for lazy-loaded pages
 const PageLoader = () => (
-  <div className='flex items-center justify-center min-h-[60vh]'>
+  <motion.div 
+    className='flex items-center justify-center min-h-[60vh]'
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.2, duration: 0.3 }}
+  >
     <motion.div
-      className='w-8 h-8 border-2 border-muted-purple-300 border-t-muted-purple-600 rounded-full'
+      className='w-6 h-6 border-2 border-transparent border-t-muted-purple-600 rounded-full'
       animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+      transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
     />
-  </div>
+  </motion.div>
 )
 
 export default function App() {
