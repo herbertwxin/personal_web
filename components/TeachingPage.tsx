@@ -314,7 +314,7 @@ export function TeachingPage() {
       className='min-h-screen pb-12 px-6'
       style={{ y }}
     >
-      <div className='max-w-6xl mx-auto'>
+      <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='text-center mb-12'>
           <h1 className='text-4xl text-black mb-4'>Teaching Materials</h1>

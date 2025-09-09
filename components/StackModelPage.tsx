@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { ArrowLeft, Download } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { LaTeXDocumentRenderer } from './LaTeXDocumentRenderer'
+import { NewLaTeXRenderer } from './NewLaTeXRenderer'
 
 interface StackModelPageProps {
   modelId: number | null
@@ -221,9 +221,8 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
             color: 'var(--academic-text-primary)'
           }}
         >
-          <LaTeXDocumentRenderer 
-            filename={model.latexFile} 
-            className="latex-academic-content"
+          <NewLaTeXRenderer 
+            filename={model.latexFile}
           />
         </motion.article>
       </div>

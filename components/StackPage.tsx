@@ -187,7 +187,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       style={{ willChange: hasAnimated ? 'auto' : 'transform, opacity' }}
     >
-      <div className='max-w-6xl mx-auto'>
+      <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <motion.div
           initial={hasAnimated ? false : { opacity: 0, y: 20 }}

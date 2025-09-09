@@ -44,7 +44,7 @@ export function HomePage() {
       initial='hidden'
       animate='visible'
     >
-      <div className='max-w-6xl mx-auto'>
+      <div className='max-w-4xl mx-auto'>
         {/* Hero Section */}
         <motion.div variants={itemVariants} className='mb-16'>
           <div className='flex flex-col lg:flex-row items-start gap-12 lg:gap-16'>

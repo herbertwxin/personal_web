@@ -8,6 +8,10 @@ interface LaTeXRendererProps {
 function formatMath(content: string): string {
   return (
     content
+      // Handle line breaks in equations
+      .replace(/\\\\/g, '\n')
+      // Handle alignment characters (just remove them for now)
+      .replace(/&/g, ' ')
       // Greek letters (single backslash)
       .replace(/\\alpha\b/g, 'α')
       .replace(/\\beta\b/g, 'β')
@@ -212,14 +216,24 @@ export function LaTeXRenderer({
 
   return (
     <span
-      className={`${className} ${displayMode ? 'block text-center my-4 text-lg' : 'inline'}`}
+      className={`${className} ${displayMode ? 'block my-6 text-lg font-serif' : 'inline font-serif'}`}
       style={{
-        fontFamily: displayMode ? 'serif' : 'inherit',
         fontStyle: 'italic',
         fontSize: displayMode ? '1.1em' : 'inherit',
+        lineHeight: displayMode ? '1.6' : 'inherit',
       }}
     >
-      {formattedContent}
+      <div className={displayMode ? 'bg-gray-50 p-4 rounded-lg border-l-4 border-blue-200' : 'inline'}>
+        {displayMode ? (
+          formattedContent.split('\n').map((line, index) => (
+            <div key={index} className="mb-2">
+              {line}
+            </div>
+          ))
+        ) : (
+          formattedContent
+        )}
+      </div>
     </span>
   )
 }
@@ -323,7 +337,19 @@ export function ProcessedText({
   let processedContent = children
   const mathParts: { type: 'display' | 'inline', content: string, placeholder: string }[] = []
   
-  // First, extract and replace display math ($$...$$)
+  // First, handle \begin{align} environments
+  processedContent = processedContent.replace(/\\begin\{align\}([\s\S]*?)\\end\{align\}/g, (_, content) => {
+    const placeholder = `__DISPLAY_MATH_${mathParts.length}__`
+    mathParts.push({ type: 'display', content: content.trim(), placeholder })
+    return placeholder
+  })
+  
+  // Handle \subsection{} commands
+  processedContent = processedContent.replace(/\\subsection\{([^}]+)\}/g, (_, title) => {
+    return `\n### ${title}\n`
+  })
+  
+  // Then, extract and replace display math ($$...$$)
   processedContent = processedContent.replace(/\$\$([\s\S]*?)\$\$/g, (_, content) => {
     const placeholder = `__DISPLAY_MATH_${mathParts.length}__`
     mathParts.push({ type: 'display', content: content.trim(), placeholder })
@@ -357,8 +383,26 @@ export function ProcessedText({
           }
         }
         
-        // Regular text - process markdown formatting
-        return <span key={index}>{processInlineMarkdown(part)}</span>
+        // Regular text - split into lines and process markdown formatting
+        const lines = part.split('\n')
+        return (
+          <div key={index}>
+            {lines.map((line, lineIndex) => {
+              // Check for headers
+              if (line.startsWith('### ')) {
+                return (
+                  <h3 key={lineIndex} className="text-xl font-medium mt-6 mb-4 text-black">
+                    {line.substring(4)}
+                  </h3>
+                )
+              } else if (line.trim() === '') {
+                return <br key={lineIndex} />
+              } else {
+                return <span key={lineIndex}>{processInlineMarkdown(line)}</span>
+              }
+            })}
+          </div>
+        )
       })}
     </span>
   )

@@ -95,7 +95,7 @@ export function LaTeXDocumentRenderer({ filename, className = '' }: LaTeXDocumen
       )}
 
       {/* Document Content */}
-      <article className="prose prose-lg max-w-none">
+      <article className="max-w-none text-gray-700 leading-relaxed">
         <DocumentContent content={document.content} sections={document.sections} />
       </article>
     </div>

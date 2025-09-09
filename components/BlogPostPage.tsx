@@ -187,23 +187,19 @@ Since **Foliate** is not a very demanding software, even without GPU acceleratio
 
 Always refer to the official installation guide for more info.
 
-1. After the downloading the MATLAB installation file, unzip it with
+After the downloading the MATLAB installation file, unzip it with
 
-   \`\`\`bash
-   	unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
-   \`\`\`
+\`\`\`bash
+unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
+\`\`\`
 
-2. Navigate to \`matlab_R2023b_glnxa64\` directory and launch the installer with
+Navigate to \`matlab_R2023b_glnxa64\` directory and launch the installer with
 
-   \`\`\`bash
-   ./install
-   \`\`\`
+\`\`\`bash
+./install
+\`\`\`
 
-3. Install MATLAB under \`/var\` directory so you have full permission, the way I do it is
-
-   \`\`\`bash
-   /var/home/$USER/bin
-   \`\`\`
+Install MATLAB under \`/var\` directory so you have full permission. I recommend installing it to: \`/var/home/$USER/bin\`
 
 #### Desktop Entry
 
