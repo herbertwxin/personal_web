@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { MarkdownRenderer } from './MarkdownRenderer'
+import { TableOfContents } from './TableOfContents'
 
 interface BlogPostPageProps {
   blogId: number | null
@@ -562,7 +563,7 @@ This would allow LaTeX Workshop to communicate with LaTeX.`,
 
   return (
     <div className='min-h-screen pb-12'>
-      <div className='max-w-4xl mx-auto px-6'>
+      <div className='max-w-7xl mx-auto px-6'>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -580,8 +581,8 @@ This would allow LaTeX Workshop to communicate with LaTeX.`,
           </Button>
 
           {/* Article Header */}
-          <header className='mb-8'>
-            <h1 
+          <header className='mb-8 page-header'>
+            <h1
               className='text-black mb-6'
               style={{
                 fontSize: 'var(--academic-font-size-page-title)',
@@ -627,59 +628,70 @@ This would allow LaTeX Workshop to communicate with LaTeX.`,
           </header>
         </motion.div>
 
-        {/* Article Content */}
-        <motion.article
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className='prose prose-lg max-w-none'
-          style={{
-            fontSize: 'var(--academic-font-size-body)',
-            lineHeight: 'var(--academic-line-height-normal)',
-            color: 'var(--academic-text-primary)'
-          }}
-        >
-          <MarkdownRenderer content={post.content} />
-        </motion.article>
+        {/* Content with TOC Layout */}
+        <div className='flex gap-8'>
+          {/* Main Content */}
+          <div className='flex-1'>
+            {/* Article Content */}
+            <motion.article
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className='prose prose-lg max-w-none'
+              style={{
+                fontSize: 'var(--academic-font-size-body)',
+                lineHeight: 'var(--academic-line-height-normal)',
+                color: 'var(--academic-text-primary)'
+              }}
+            >
+              <MarkdownRenderer content={post.content} />
+            </motion.article>
 
-        {/* Article Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className='mt-12 pt-8 border-t border-gray-200'
-        >
-          <div className='flex items-center justify-between'>
-            <div className='flex items-center gap-4'>
-              <Button
-                variant='outline'
-                size='sm'
-                onClick={() => setLiked(!liked)}
-                className={`${
-                  liked ? 'bg-blue-50 text-blue-600 border-blue-200' : ''
-                }`}
-              >
-                <ThumbsUp className={`w-4 h-4 mr-2 ${liked ? 'fill-current' : ''}`} />
-                {liked ? 'Liked' : 'Like'}
-              </Button>
-              <Button
-                variant='outline'
-                size='sm'
-                onClick={() => setBookmarked(!bookmarked)}
-                className={`${
-                  bookmarked ? 'bg-yellow-50 text-yellow-600 border-yellow-200' : ''
-                }`}
-              >
-                <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
-                {bookmarked ? 'Saved' : 'Save'}
-              </Button>
-            </div>
-            <Button variant='outline' size='sm'>
-              <Share2 className='w-4 h-4 mr-2' />
-              Share
-            </Button>
+            {/* Article Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className='mt-12 pt-8 border-t border-gray-200'
+            >
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={() => setLiked(!liked)}
+                    className={`${
+                      liked ? 'bg-blue-50 text-blue-600 border-blue-200' : ''
+                    }`}
+                  >
+                    <ThumbsUp className={`w-4 h-4 mr-2 ${liked ? 'fill-current' : ''}`} />
+                    {liked ? 'Liked' : 'Like'}
+                  </Button>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={() => setBookmarked(!bookmarked)}
+                    className={`${
+                      bookmarked ? 'bg-yellow-50 text-yellow-600 border-yellow-200' : ''
+                    }`}
+                  >
+                    <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
+                    {bookmarked ? 'Saved' : 'Save'}
+                  </Button>
+                </div>
+                <Button variant='outline' size='sm'>
+                  <Share2 className='w-4 h-4 mr-2' />
+                  Share
+                </Button>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* Table of Contents Sidebar */}
+          <div className='hidden lg:block w-64 flex-shrink-0'>
+            <TableOfContents />
+          </div>
+        </div>
       </div>
     </div>
   )

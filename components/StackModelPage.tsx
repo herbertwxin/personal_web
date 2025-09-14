@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import { ArrowLeft, Download } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { NewLaTeXRenderer } from './NewLaTeXRenderer'
+import { TableOfContents } from './TableOfContents'
 
 interface StackModelPageProps {
   modelId: number | null
@@ -138,7 +139,7 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
 
   return (
     <div className='min-h-screen pb-12'>
-      <div className='max-w-4xl mx-auto px-6'>
+      <div className='max-w-7xl mx-auto px-6'>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -156,8 +157,8 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
           </Button>
 
           {/* Model Header */}
-          <header className='mb-8'>
-            <h1 
+          <header className='mb-8 page-header'>
+            <h1
               className='text-black mb-4'
               style={{
                 fontSize: 'var(--academic-font-size-page-title)',
@@ -209,22 +210,30 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
           </header>
         </motion.div>
 
-        {/* Model Content */}
-        <motion.article
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className='max-w-none'
-          style={{
-            fontSize: 'var(--academic-font-size-body)',
-            lineHeight: 'var(--academic-line-height-normal)',
-            color: 'var(--academic-text-primary)'
-          }}
-        >
-          <NewLaTeXRenderer 
-            filename={model.latexFile}
-          />
-        </motion.article>
+        {/* Content with TOC Layout */}
+        <div className='flex gap-8'>
+          {/* Main Content */}
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className='flex-1 max-w-none'
+            style={{
+              fontSize: 'var(--academic-font-size-body)',
+              lineHeight: 'var(--academic-line-height-normal)',
+              color: 'var(--academic-text-primary)'
+            }}
+          >
+            <NewLaTeXRenderer
+              filename={model.latexFile}
+            />
+          </motion.article>
+
+          {/* Table of Contents Sidebar */}
+          <div className='hidden lg:block w-64 flex-shrink-0'>
+            <TableOfContents />
+          </div>
+        </div>
       </div>
     </div>
   )

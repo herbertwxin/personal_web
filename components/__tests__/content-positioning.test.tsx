@@ -121,11 +121,11 @@ describe('Content Positioning Tests', () => {
       
       // Verify office hours section is visible
       expect(screen.getByText('Office Hours')).toBeInTheDocument()
-      expect(screen.getByText('Monday')).toBeInTheDocument()
-      expect(screen.getByText('2:00 - 4:00 PM')).toBeInTheDocument()
-      
+      expect(screen.getByText('TBD for Fall 2025')).toBeInTheDocument()
+
       // Verify contact information is visible
-      expect(screen.getByText('Economics Building, Room 304')).toBeInTheDocument()
+      expect(screen.getByText('Office Location')).toBeInTheDocument()
+      expect(screen.getByText('Prince Lucien Campbell Hall (PLC)')).toBeInTheDocument()
     })
   })
 

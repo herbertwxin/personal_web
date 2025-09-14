@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
-import { 
-  AcademicList,
-  AcademicSectionHeader,
-  AcademicInlineMetadata
+import {
+  AcademicSectionHeader
 } from './ui/academic-list'
 
 import {
@@ -102,36 +100,33 @@ export function HomePage() {
         {/* Office Hours Section */}
         <motion.div variants={itemVariants} className='mt-12'>
           <div className='max-w-2xl'>
-            {/* Office Hours */}
-            <div>
-              <AcademicSectionHeader 
-                level={2} 
-                className='mb-4 flex items-center gap-2'
-                style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
-              >
-                <Clock className='w-5 h-5 text-[var(--academic-text-accent)]' />
-                Office Hours
-              </AcademicSectionHeader>
-              
-              <AcademicList variant='compact' className='space-y-2'>
-                <div className='flex justify-between py-2 border-b border-[var(--academic-border-subtle)]'>
-                  <span className='text-[var(--academic-text-primary)]'>Monday</span>
-                  <AcademicInlineMetadata>2:00 - 4:00 PM</AcademicInlineMetadata>
-                </div>
-                <div className='flex justify-between py-2 border-b border-[var(--academic-border-subtle)]'>
-                  <span className='text-[var(--academic-text-primary)]'>Wednesday</span>
-                  <AcademicInlineMetadata>10:00 - 12:00 PM</AcademicInlineMetadata>
-                </div>
-                <div className='flex justify-between py-2 border-b border-[var(--academic-border-subtle)]'>
-                  <span className='text-[var(--academic-text-primary)]'>Friday</span>
-                  <AcademicInlineMetadata>1:00 - 3:00 PM</AcademicInlineMetadata>
-                </div>
-              </AcademicList>
-              
-              <div className='mt-4 pt-3 border-t border-[var(--academic-border-subtle)]'>
-                <div className='flex items-center gap-2 text-[var(--academic-text-secondary)]'>
-                  <MapPin className='w-4 h-4' />
-                  <span>Economics Building, Room 304</span>
+            <AcademicSectionHeader
+              level={2}
+              className='mb-6 flex items-center gap-2'
+              style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
+            >
+              <Clock className='w-5 h-5 text-[var(--academic-text-accent)]' />
+              Office Hours
+            </AcademicSectionHeader>
+
+            <div className='bg-gray-50/80 rounded-lg p-6 border border-gray-100'>
+              <div className='mb-4'>
+                <p className='text-lg text-black font-medium mb-2' style={{ fontSize: 'var(--academic-font-size-body)' }}>
+                  TBD for Fall 2025
+                </p>
+                <p className='text-gray-600 text-sm'>
+                  Office hours will be announced at the beginning of the semester.
+                </p>
+              </div>
+
+              <div className='pt-4 border-t border-gray-200'>
+                <div className='flex items-start gap-3'>
+                  <MapPin className='w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0' />
+                  <div>
+                    <p className='text-gray-800 font-medium'>Office Location</p>
+                    <p className='text-gray-600'>Prince Lucien Campbell Hall (PLC)</p>
+                    <p className='text-gray-600'>Room 522</p>
+                  </div>
                 </div>
               </div>
             </div>

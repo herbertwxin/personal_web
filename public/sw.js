@@ -1,5 +1,5 @@
 // Simple service worker for asset caching
-const CACHE_NAME = 'academic-portfolio-v1'
+const CACHE_NAME = 'herbert-xin-v1'
 const STATIC_ASSETS = [
   '/',
   '/favicon.svg',

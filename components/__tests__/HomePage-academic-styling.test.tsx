@@ -25,19 +25,17 @@ describe('HomePage Academic Styling', () => {
     expect(publicationsHeader.tagName).toBe('H2')
   })
 
-  it('should render office hours in clean list format', () => {
+  it('should render office hours in clean format', () => {
     render(<HomePage />)
-    
-    // Check office hours are displayed as clean list
-    expect(screen.getByText('Monday')).toBeInTheDocument()
-    expect(screen.getByText('2:00 - 4:00 PM')).toBeInTheDocument()
-    expect(screen.getByText('Wednesday')).toBeInTheDocument()
-    expect(screen.getByText('10:00 - 12:00 PM')).toBeInTheDocument()
-    expect(screen.getByText('Friday')).toBeInTheDocument()
-    expect(screen.getByText('1:00 - 3:00 PM')).toBeInTheDocument()
-    
+
+    // Check office hours are displayed
+    expect(screen.getByText('TBD for Fall 2025')).toBeInTheDocument()
+    expect(screen.getByText('Office hours will be announced at the beginning of the semester.')).toBeInTheDocument()
+
     // Check location information
-    expect(screen.getByText('Economics Building, Room 304')).toBeInTheDocument()
+    expect(screen.getByText('Office Location')).toBeInTheDocument()
+    expect(screen.getByText('Prince Lucien Campbell Hall (PLC)')).toBeInTheDocument()
+    expect(screen.getByText('Room 522')).toBeInTheDocument()
   })
 
   it('should not render removed events and recognition sections', () => {

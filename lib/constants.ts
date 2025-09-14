@@ -1,8 +1,8 @@
 // Application constants
 
 export const APP_CONFIG = {
-  name: 'Academic Portfolio',
-  description: 'Professional academic portfolio and research showcase',
+  name: 'Herbert W. Xin',
+  description: 'Professional research showcase and teaching materials',
   version: '1.0.0',
   author: 'Dr. Academic Researcher',
   email: 'researcher@university.edu',
@@ -71,7 +71,5 @@ export const BREAKPOINTS = {
 } as const
 
 export const OFFICE_HOURS = [
-  { day: 'Monday', time: '2:00 - 4:00 PM' },
-  { day: 'Wednesday', time: '10:00 - 12:00 PM' },
-  { day: 'Friday', time: '1:00 - 3:00 PM' },
+  { day: 'Fall 2025', time: 'TBD' },
 ] as const
