@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { TextRenderer } from './NewLaTeXRenderer'
 
 interface TOCItem {
   id: string
   title: string
+  plainTitle: string
   level: number
 }
 
@@ -29,7 +31,9 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
       headings.forEach((heading, index) => {
         const element = heading as HTMLElement
         const level = parseInt(element.tagName.charAt(1))
-        const title = element.textContent?.trim() || ''
+        const plainTitle = element.textContent?.trim() || ''
+        const dataTitle = element.getAttribute('data-latex-title')?.trim()
+        const title = dataTitle && dataTitle.length > 0 ? dataTitle : plainTitle
 
         // Skip if no title or if it's the main page title
         if (!title || element.closest('.page-header')) {
@@ -43,7 +47,7 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
           element.id = id
         }
 
-        items.push({ id, title, level })
+        items.push({ id, title, plainTitle, level })
       })
 
       setTocItems(items)
@@ -136,10 +140,10 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
                     : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
                 }
               `}
-              title={item.title}
+              title={item.plainTitle}
             >
               <span className="truncate block">
-                {item.title}
+                <TextRenderer content={item.title} />
               </span>
             </button>
           ))}

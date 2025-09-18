@@ -66,7 +66,12 @@ export function NewLaTeXRenderer({ filename }: NewLaTeXRendererProps) {
     <div className="max-w-none">
       {/* Header */}
       <header className="mb-8 pb-6 border-b border-gray-200">
-        <h1 className="text-3xl font-bold text-black mb-4">{content.title}</h1>
+        <h1
+          className="text-3xl font-bold text-black mb-4"
+          data-latex-title={content.title}
+        >
+          <TextRenderer content={content.title} />
+        </h1>
       </header>
 
       {/* Content */}
@@ -104,6 +109,11 @@ function parseLaTeX(text: string): LaTeXContent {
     .replace(/\\vspace\{[^}]+\}/g, '')
     .replace(/\\newpage/g, '')
     .replace(/\\pagebreak/g, '')
+    // Remove metadata commands that otherwise leak curly-brace text
+    .replace(/\\title\{[^}]*\}\s*/g, '')
+    .replace(/\\author\{[^}]*\}\s*/g, '')
+    .replace(/\\date\{[^}]*\}\s*/g, '')
+    .replace(/\\thanks\{[^}]*\}\s*/g, '')
     // Handle labels and equation references
     .replace(/\\label\{[^}]+\}/g, '') // Remove label commands
     // Handle spacing commands like \\[4pt]
@@ -113,10 +123,7 @@ function parseLaTeX(text: string): LaTeXContent {
     // Clean up extra line breaks and spacing
     .replace(/\\\\\\\\/g, '\\\\') // Convert \\\\ to \\
     .replace(/\s*\\\\\s*/g, ' \\\\ ') // Normalize spacing around line breaks
-    // Remove \(...\) delimiters - just keep the content
-    .replace(/\\\(/g, '') // Remove \(
-    .replace(/\\\)/g, '') // Remove \)
-    // Remove title/author blocks like {Complete Markets} {Herbert W. Xin} {}
+    // Remove title blocks that may appear after command stripping
     .replace(/\{[^}]*\}\s*\{[^}]*\}\s*\{\s*\}/g, '')
     // Remove figure-related commands since we're focusing on text content
     .replace(/\\includegraphics\[[^\]]*\]\{[^}]+\}/g, '') // Remove includegraphics
@@ -124,6 +131,15 @@ function parseLaTeX(text: string): LaTeXContent {
     .replace(/\\captionof\{[^}]+\}\{[^}]+\}/g, '') // Remove captionof commands
     .replace(/\\begin\{figure\}[\s\S]*?\\end\{figure\}/g, '') // Remove entire figure environments
     .replace(/\\begin\{table\}[\s\S]*?\\end\{table\}/g, '') // Remove table environments
+
+  // Normalize inline math delimiters such as \(...\) into $...$
+  content = content.replace(/\\\((.+?)\\\)/gs, (_, inner) => `$${inner.trim()}$`)
+
+  // Normalize display math written with $$...$$ into \[ ... \]
+  content = content.replace(/\$\$([\s\S]+?)\$\$/g, (_match, inner) => `\\[${inner.trim()}\\]`)
+
+  // Standardize line endings
+  content = content.replace(/\r\n?/g, '\n')
 
   return { title, author, sections: [], content }
 }
@@ -151,6 +167,39 @@ function processLaTeX(content: string): JSX.Element[] {
     // Skip empty lines
     if (!line) {
       i++
+      continue
+    }
+
+    // Skip leftover title metadata braces that occasionally slip through
+    if (/^\{[^}]+\}\s*\{[^}]+\}\s*\{?[^}]*\}?\s*$/.test(line)) {
+      i++
+      continue
+    }
+
+    // Handle manual bullet markers ($\bullet$)
+    if (line.startsWith('$\\bullet$')) {
+      const bulletItems: string[] = []
+      let j = i
+      while (j < lines.length) {
+        const candidate = lines[j].trim()
+        if (!candidate.startsWith('$\\bullet$')) {
+          break
+        }
+        bulletItems.push(candidate.replace(/^\$\\bullet\$\s*/, ''))
+        j++
+      }
+
+      elements.push(
+        <ul key={`manual-bullets-${i}`} className="list-disc list-inside space-y-2 ml-4">
+          {bulletItems.map((item, index) => (
+            <li key={index} className="text-gray-700">
+              <TextRenderer content={item} />
+            </li>
+          ))}
+        </ul>
+      )
+
+      i = j
       continue
     }
 
@@ -183,38 +232,19 @@ function processLaTeX(content: string): JSX.Element[] {
       continue
     }
 
-    // Handle sections
-    if (line.startsWith('\\section{')) {
-      const title = extractBraces(line, '\\section{')
+    const heading = matchHeading(line)
+    if (heading) {
+      const { title, tag: Tag, className } = heading
       elements.push(
-        <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-black border-b border-gray-200 pb-2">
-          {title}
-        </h2>
+        <Tag
+          key={i}
+          className={className}
+          data-latex-title={title}
+        >
+          <TextRenderer content={title} />
+        </Tag>
       )
-      i++
-      continue
-    }
 
-    // Handle subsections
-    if (line.startsWith('\\subsection{')) {
-      const title = extractBraces(line, '\\subsection{')
-      elements.push(
-        <h3 key={i} className="text-xl font-semibold mt-6 mb-3 text-black">
-          {title}
-        </h3>
-      )
-      i++
-      continue
-    }
-
-    // Handle subsubsections
-    if (line.startsWith('\\subsubsection{')) {
-      const title = extractBraces(line, '\\subsubsection{')
-      elements.push(
-        <h4 key={i} className="text-lg font-medium mt-4 mb-2 text-black">
-          {title}
-        </h4>
-      )
       i++
       continue
     }
@@ -303,10 +333,60 @@ function processLaTeX(content: string): JSX.Element[] {
   return elements
 }
 
-function extractBraces(line: string, command: string): string {
-  const start = line.indexOf(command) + command.length
-  const end = line.indexOf('}', start)
-  return end !== -1 ? line.substring(start, end) : line.substring(start)
+type HeadingMatch = {
+  level: number
+  title: string
+  tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  className: string
+}
+
+function matchHeading(line: string): HeadingMatch | null {
+  const definitions: Array<{ regex: RegExp; level: number; tag: HeadingMatch['tag']; className: string }> = [
+    {
+      regex: /^\\section\*?\{([\s\S]+)\}$/,
+      level: 2,
+      tag: 'h2',
+      className: 'text-2xl font-bold mt-8 mb-4 text-black border-b border-gray-200 pb-2',
+    },
+    {
+      regex: /^\\subsection\*?\{([\s\S]+)\}$/,
+      level: 3,
+      tag: 'h3',
+      className: 'text-xl font-semibold mt-6 mb-3 text-black',
+    },
+    {
+      regex: /^\\subsubsection\*?\{([\s\S]+)\}$/,
+      level: 4,
+      tag: 'h4',
+      className: 'text-lg font-medium mt-4 mb-2 text-black',
+    },
+    {
+      regex: /^\\paragraph\*?\{([\s\S]+)\}$/,
+      level: 5,
+      tag: 'h5',
+      className: 'text-base font-medium mt-3 mb-2 text-black',
+    },
+    {
+      regex: /^\\subparagraph\*?\{([\s\S]+)\}$/,
+      level: 6,
+      tag: 'h6',
+      className: 'text-sm font-semibold mt-2 mb-1 text-black',
+    },
+  ]
+
+  for (const definition of definitions) {
+    const match = line.match(definition.regex)
+    if (match) {
+      return {
+        level: definition.level,
+        title: match[1].trim(),
+        tag: definition.tag,
+        className: definition.className,
+      }
+    }
+  }
+
+  return null
 }
 
 function extractListBlock(lines: string[], startIndex: number): { items: string[], endIndex: number } {
@@ -385,14 +465,23 @@ function extractMathBlock(lines: string[], startIndex: number): { content: strin
 
 function MathRenderer({ content, displayMode }: { content: string, displayMode: boolean }) {
   try {
-    // Clean up content for better KaTeX rendering
-    let cleanContent = content
-      // Handle line breaks properly - KaTeX expects \\ not \\\\ 
-      .replace(/\\\\\\\\/g, '\\\\')
-      // Handle extra spacing
-      .replace(/\s+/g, ' ')
-      .trim()
-    
+    let cleanContent = content.replace(/\r\n?/g, '\n').trim()
+
+    // Normalize excessive backslashes while maintaining structure
+    cleanContent = cleanContent.replace(/\\\\\\\\/g, '\\\\')
+
+    if (displayMode) {
+      cleanContent = cleanContent
+        .replace(/\\begin{align\*}/g, '\\begin{aligned}')
+        .replace(/\\end{align\*}/g, '\\end{aligned}')
+        .replace(/\\begin{align}/g, '\\begin{aligned}')
+        .replace(/\\end{align}/g, '\\end{aligned}')
+        .replace(/\\begin{gather\*}/g, '\\begin{aligned}')
+        .replace(/\\end{gather\*}/g, '\\end{aligned}')
+        .replace(/\\begin{gather}/g, '\\begin{aligned}')
+        .replace(/\\end{gather}/g, '\\end{aligned}')
+    }
+
     const html = katex.renderToString(cleanContent, {
       displayMode,
       throwOnError: false,
@@ -416,11 +505,13 @@ function MathRenderer({ content, displayMode }: { content: string, displayMode: 
   }
 }
 
-function TextRenderer({ content }: { content: string }) {
+export function TextRenderer({ content }: { content: string }) {
   // Handle inline math with KaTeX and standalone \implies commands
-  
+  const normalized = content
+    .replace(/\\\((.+?)\\\)/gs, (_, inner) => `$${inner.trim()}$`)
+
   // Split on math expressions and standalone math commands
-  const parts = content.split(/(\$[^$]+\$|\\implies|\\impies|\\Rightarrow|\\rightarrow|\\leftarrow)/)
+  const parts = normalized.split(/(\$[^$]+\$|\\implies|\\impies|\\Rightarrow|\\rightarrow|\\leftarrow)/)
   
   return (
     <>
@@ -445,8 +536,13 @@ function TextRenderer({ content }: { content: string }) {
             .replace(/\\eqref\{([^}]+)\}/g, '($1)') // Convert equation references to parentheses
             .replace(/\\ref\{([^}]+)\}/g, '$1') // Convert other references
             .replace(/\\impies/g, '\\implies') // Fix typo
-            .replace(/\\([a-zA-Z]+)/g, '') // Remove remaining unknown LaTeX commands
-          
+            .replace(/\\&/g, '&')
+            .replace(/\\%/g, '%')
+            .replace(/\\#/g, '#')
+            .replace(/\\_/g, '_')
+            .replace(/\\~/g, '&nbsp;')
+            .replace(/\\\\/g, '<br />')
+
           return <span key={index} dangerouslySetInnerHTML={{ __html: processedText }} />
         }
       })}
