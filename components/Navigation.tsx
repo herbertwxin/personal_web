@@ -167,12 +167,17 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
 
   const { width: selectorWidth, xPosition } = getCurrentPageData()
 
-  const handlePageChange = (pageId: string, _button: HTMLButtonElement) => {
+  const handlePageChange = (pageId: string, button: HTMLButtonElement) => {
     // Start zoom animation immediately
     setIsAnimating(true);
     
     // Change page immediately so movement starts at the same time
     onPageChange(pageId);
+    
+    // Remove focus outline after pointer click for cleaner look
+    window.requestAnimationFrame(() => {
+      button.blur()
+    })
     
     // Reset animation state after animation completes
     setTimeout(() => {
