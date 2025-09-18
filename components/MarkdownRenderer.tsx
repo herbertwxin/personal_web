@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 interface MarkdownRendererProps {
   content: string
 }
@@ -162,9 +164,11 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
     return elements
   }
 
+  const renderedContent = useMemo(() => renderContent(content), [content])
+
   return (
     <div className="prose prose-lg max-w-none">
-      {renderContent(content)}
+      {renderedContent}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, Suspense, lazy, useEffect, useCallback } from 'react'
+import { useState, Suspense, lazy, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -66,16 +66,7 @@ export default function App() {
     width: typeof window !== 'undefined' ? window.innerWidth : 1024,
     height: typeof window !== 'undefined' ? window.innerHeight : 768,
   })
-
-  // Handle window resize for responsive texture animations
-  const handleResize = useCallback(() => {
-    if (typeof window !== 'undefined') {
-      setWindowDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
-    }
-  }, [])
+  const resizeRafRef = useRef<number>()
 
   // Performance monitoring and texture optimization setup
   useEffect(() => {
@@ -97,21 +88,36 @@ export default function App() {
 
   // Window resize listener for responsive texture behavior
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Set initial dimensions on client side
+    if (typeof window === 'undefined') {
+      return undefined
+    }
+
+    const updateDimensions = () => {
       setWindowDimensions({
         width: window.innerWidth,
         height: window.innerHeight,
       })
-      
-      window.addEventListener('resize', handleResize, { passive: true })
-      
-      return () => {
-        window.removeEventListener('resize', handleResize)
-      }
     }
-    return undefined
-  }, [handleResize])
+
+    const handleResize = () => {
+      if (resizeRafRef.current) {
+        cancelAnimationFrame(resizeRafRef.current)
+      }
+      resizeRafRef.current = window.requestAnimationFrame(updateDimensions)
+    }
+
+    // Set initial dimensions on client side
+    updateDimensions()
+
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    return () => {
+      if (resizeRafRef.current) {
+        cancelAnimationFrame(resizeRafRef.current)
+      }
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   // Texture performance optimization
   useEffect(() => {

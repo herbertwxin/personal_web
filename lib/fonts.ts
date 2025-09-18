@@ -38,18 +38,48 @@ export const preloadFonts = () => {
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
   ]
 
-  fontPreloads.forEach(href => {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.as = 'style'
-    link.href = href
-    document.head.appendChild(link)
+  // Ensure preconnect is established for remote font origins
+  const preconnectOrigins = [
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com',
+  ] as const
 
-    // Also add the actual stylesheet
-    const stylesheet = document.createElement('link')
-    stylesheet.rel = 'stylesheet'
-    stylesheet.href = href
-    document.head.appendChild(stylesheet)
+  preconnectOrigins.forEach(origin => {
+    if (!document.querySelector(`link[rel="preconnect"][href="${origin}"]`)) {
+      const preconnect = document.createElement('link')
+      preconnect.rel = 'preconnect'
+      preconnect.href = origin
+      if (origin.includes('gstatic')) {
+        preconnect.crossOrigin = 'anonymous'
+      }
+      document.head.appendChild(preconnect)
+    }
+  })
+
+  fontPreloads.forEach(href => {
+    if (document.querySelector(`link[data-font-preload="${href}"]`)) {
+      return
+    }
+
+    const preloadLink = document.createElement('link')
+    preloadLink.rel = 'preload'
+    preloadLink.as = 'style'
+    preloadLink.href = href
+    preloadLink.crossOrigin = 'anonymous'
+    preloadLink.setAttribute('data-font-preload', href)
+
+    const activateStylesheet = () => {
+      preloadLink.rel = 'stylesheet'
+      preloadLink.removeAttribute('as')
+    }
+
+    preloadLink.addEventListener('load', activateStylesheet, { once: true })
+    preloadLink.addEventListener('error', activateStylesheet, { once: true })
+
+    // Fallback in case the load event never fires (older browsers)
+    setTimeout(activateStylesheet, 3000)
+
+    document.head.appendChild(preloadLink)
   })
 }
 
@@ -61,12 +91,15 @@ export const optimizeFontDisplay = () => {
   }
 
   // Add font-display: swap to improve loading performance
-  const style = document.createElement('style')
-  style.textContent = `
-    @font-face {
-      font-family: 'Inter';
-      font-display: swap;
-    }
-  `
-  document.head.appendChild(style)
+  if (!document.getElementById('font-display-optimization')) {
+    const style = document.createElement('style')
+    style.id = 'font-display-optimization'
+    style.textContent = `
+      @font-face {
+        font-family: 'Inter';
+        font-display: swap;
+      }
+    `
+    document.head.appendChild(style)
+  }
 }

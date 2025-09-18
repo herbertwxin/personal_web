@@ -16,8 +16,14 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const contentRoot = document.querySelector('[data-toc-root]') ?? document.body
+
     const extractHeadings = () => {
-      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+      const headings = contentRoot.querySelectorAll('h1, h2, h3, h4, h5, h6')
       const items: TOCItem[] = []
 
       headings.forEach((heading, index) => {
@@ -51,7 +57,7 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
       extractHeadings()
     })
 
-    observer.observe(document.body, {
+    observer.observe(contentRoot, {
       childList: true,
       subtree: true,
     })
