@@ -288,17 +288,17 @@ export function TeachingPage() {
   const getLevelColor = (level: string) => {
     switch (level) {
       case 'Undergraduate':
-        return 'bg-green-100 text-green-700 border-green-300'
+        return 'bg-emerald-500/20 text-emerald-100 border-emerald-300/40'
       case 'Graduate':
-        return 'bg-blue-100 text-blue-700 border-blue-300'
+        return 'bg-sky-500/20 text-sky-100 border-sky-300/40'
       case 'Advanced':
-        return 'bg-red-100 text-red-700 border-red-300'
+        return 'bg-rose-500/20 text-rose-100 border-rose-300/40'
       case 'All Levels':
-        return 'bg-[#e9e5ff] text-[#5a4fcf] border-[#b8a9ff]'
+        return 'bg-[#b19eef]/20 text-[#e7defc] border-[#b19eef]/40'
       case 'Intermediate':
-        return 'bg-yellow-100 text-yellow-700 border-yellow-300'
+        return 'bg-amber-500/25 text-amber-100 border-amber-300/40'
       default:
-        return 'bg-gray-100 text-gray-700 border-gray-300'
+        return 'bg-white/10 text-white border-white/30'
     }
   }
 
@@ -317,15 +317,15 @@ export function TeachingPage() {
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='text-center mb-12'>
-          <h1 className='text-4xl text-black mb-4'>Teaching Materials</h1>
-          <p className='text-xl text-black mb-6 max-w-3xl mx-auto'>
+          <h1 className='text-4xl text-white mb-4 font-light tracking-wide'>Teaching Materials</h1>
+          <p className='text-xl text-white/75 mb-6 max-w-3xl mx-auto'>
             Educational resources, course materials, and tutorials for students.
           </p>
         </div>
 
         {/* Current Courses */}
         <div className='mb-16'>
-          <h2 className='text-3xl text-black mb-8 border-b border-[#d6ceff] pb-4'>
+          <h2 className='text-3xl text-white mb-8 border-b border-white/20 pb-4'>
             Current Courses
           </h2>
           <div className='space-y-6'>
@@ -335,20 +335,20 @@ export function TeachingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className='border-b border-gray-200 pb-6 last:border-b-0'
+                className='border-b border-white/15 pb-6 last:border-b-0'
               >
                 {/* Course Header with Tabular Information */}
                 <div className='mb-4'>
                   <div className='flex items-start justify-between mb-2'>
                     <div className='flex-1'>
-                      <h3 className='text-xl font-medium text-black mb-1'>
+                      <h3 className='text-xl font-medium text-white mb-1'>
                         {course.code}: {course.title}
                       </h3>
-                      <div className='text-sm text-gray-600 mb-2'>
+                      <div className='text-sm text-white/70 mb-2'>
                         {course.description}
                       </div>
                       {course.status === 'Not available in Course Materials' && (
-                        <div className='text-sm text-red-600 font-medium mb-2'>
+                        <div className='text-sm text-rose-300 font-medium mb-2'>
                           Not available in Course Materials
                         </div>
                       )}
@@ -367,7 +367,7 @@ export function TeachingPage() {
                             <Button
                               size='sm'
                               variant='outline'
-                              className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
+                              className='border-white/30 text-white hover:bg-white/10'
                               onClick={(e) => {
                                 openDialog(`course-${index}`, course, e.currentTarget)
                               }}
@@ -375,12 +375,12 @@ export function TeachingPage() {
                               View Materials
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto'>
+                          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto bg-white/10 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
                             <DialogHeader>
-                              <DialogTitle className='text-2xl text-black mb-2'>
+                              <DialogTitle className='text-2xl text-white mb-2'>
                                 {course.title} - Course Materials
                               </DialogTitle>
-                              <DialogDescription>
+                              <DialogDescription className='text-white/70'>
                                 Access all course materials, assignments, and
                                 resources for this {course.level.toLowerCase()} level
                                 course.
@@ -390,67 +390,67 @@ export function TeachingPage() {
                               >
                                 {course.level}
                               </Badge>
-                            </DialogHeader>
-                            <div className='mt-6'>
-                              <div className='mb-6'>
-                                <p className='text-black mb-4'>
-                                  {course.description}
-                                </p>
-                                <div className='flex items-center space-x-4 text-sm text-black'>
-                                  <span>
-                                    <strong>Course Code:</strong> {course.code}
-                                  </span>
-                                  <span>
-                                    <strong>Semester:</strong> {course.semester}
-                                  </span>
+                              </DialogHeader>
+                              <div className='mt-6'>
+                                <div className='mb-6'>
+                                  <p className='text-white/75 mb-4'>
+                                    {course.description}
+                                  </p>
+                                  <div className='flex items-center space-x-4 text-sm text-white/70'>
+                                    <span>
+                                      <strong>Course Code:</strong> {course.code}
+                                    </span>
+                                    <span>
+                                      <strong>Semester:</strong> {course.semester}
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
 
-                              <div className='mb-6'>
-                                <div className='flex items-center justify-between mb-3'>
-                                  <h4 className='text-lg text-black'>
-                                    Available Materials
-                                  </h4>
-                                  <Button
-                                    size='sm'
-                                    className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white'
-                                    onClick={() => course.folderPath && handleDownload(course.folderPath)}
-                                  >
-                                    <Download className='w-3 h-3 mr-1' />
-                                    Download All Materials
-                                  </Button>
-                                </div>
-                                <div className='space-y-2'>
-                                  {course.materials.map((material, matIndex) => (
-                                    <div
-                                      key={matIndex}
-                                      className='flex items-center justify-between py-2 px-3 hover:bg-gray-50 rounded'
+                                <div className='mb-6'>
+                                  <div className='flex items-center justify-between mb-3'>
+                                    <h4 className='text-lg text-white'>
+                                      Available Materials
+                                    </h4>
+                                    <Button
+                                      size='sm'
+                                      className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white shadow-lg shadow-[#6A5ACD]/30'
+                                      onClick={() => course.folderPath && handleDownload(course.folderPath)}
                                     >
-                                      <div className='flex items-center space-x-3'>
-                                        <material.icon className='w-4 h-4 text-[#6A5ACD]' />
-                                        <span className='text-black text-sm'>
-                                          {material.type} ({material.count} items)
-                                        </span>
-                                      </div>
-                                      <Button
-                                        size='sm'
-                                        variant='outline'
-                                        className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#e9e5ff] text-xs'
-                                        onClick={() => course.folderPath && handleDownload(course.folderPath)}
+                                      <Download className='w-3 h-3 mr-1' />
+                                      Download All Materials
+                                    </Button>
+                                  </div>
+                                  <div className='space-y-2'>
+                                    {course.materials.map((material, matIndex) => (
+                                      <div
+                                        key={matIndex}
+                                        className='flex items-center justify-between py-2 px-3 rounded bg-white/5 hover:bg-white/10 transition-colors'
                                       >
-                                        <Download className='w-3 h-3 mr-1' />
-                                        Browse
-                                      </Button>
+                                        <div className='flex items-center space-x-3'>
+                                          <material.icon className='w-4 h-4 text-[#b19eef]' />
+                                          <span className='text-white text-sm'>
+                                            {material.type} ({material.count} items)
+                                          </span>
+                                        </div>
+                                        <Button
+                                          size='sm'
+                                          variant='outline'
+                                          className='border-white/30 text-white hover:bg-white/10 text-xs'
+                                          onClick={() => course.folderPath && handleDownload(course.folderPath)}
+                                        >
+                                          <Download className='w-3 h-3 mr-1' />
+                                          Browse
+                                        </Button>
                                     </div>
                                   ))}
                                 </div>
                               </div>
 
                               <div>
-                                <h4 className='text-lg text-black mb-3'>
+                                <h4 className='text-lg text-white mb-3'>
                                   Topics Covered
                                 </h4>
-                                <div className='text-sm text-gray-600'>
+                                <div className='text-sm text-white/70'>
                                   {course.topics.join(', ')}
                                 </div>
                               </div>
@@ -471,37 +471,37 @@ export function TeachingPage() {
                   </div>
 
                   {/* Tabular Course Information */}
-                  <div className='grid grid-cols-3 gap-4 text-sm bg-gray-50 p-3 rounded'>
+                  <div className='grid grid-cols-3 gap-4 text-sm bg-white/5 p-3 rounded border border-white/10'>
                     <div>
-                      <span className='font-medium text-gray-700'>Level:</span> {course.level}
+                      <span className='font-medium text-white'>Level:</span> <span className='text-white/70'>{course.level}</span>
                     </div>
                     <div>
-                      <span className='font-medium text-gray-700'>Semester:</span> {course.semester}
+                      <span className='font-medium text-white'>Semester:</span> <span className='text-white/70'>{course.semester}</span>
                     </div>
                     <div>
-                      <span className='font-medium text-gray-700'>Materials:</span> {
+                      <span className='font-medium text-white'>Materials:</span> <span className='text-white/70'> {
                         course.status === 'Available'
                           ? `${course.materials.reduce((sum, m) => sum + m.count, 0)} items`
                           : 'Not available'
-                      }
+                      }</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Materials List */}
                 <div className='mb-4'>
-                  <h4 className='text-sm font-medium text-gray-700 mb-2'>Course Materials:</h4>
+                  <h4 className='text-sm font-medium text-white mb-2'>Course Materials:</h4>
                   {course.status === 'Available' ? (
                     <ul className='space-y-1 ml-4'>
                       {course.materials.map((material, matIndex) => (
-                        <li key={matIndex} className='text-sm text-gray-600 flex items-center'>
-                          <span className='w-2 h-2 bg-gray-400 rounded-full mr-3 flex-shrink-0'></span>
+                        <li key={matIndex} className='text-sm text-white/65 flex items-center'>
+                          <span className='w-2 h-2 bg-white/60 rounded-full mr-3 flex-shrink-0'></span>
                           {material.type}: {material.count} items
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <div className='text-sm text-red-600 ml-4'>
+                    <div className='text-sm text-rose-300 ml-4'>
                       Not available in Course Materials
                     </div>
                   )}
@@ -509,8 +509,8 @@ export function TeachingPage() {
 
                 {/* Topics */}
                 <div>
-                  <h4 className='text-sm font-medium text-gray-700 mb-2'>Topics:</h4>
-                  <div className='text-sm text-gray-600 ml-4'>
+                  <h4 className='text-sm font-medium text-white mb-2'>Topics:</h4>
+                  <div className='text-sm text-white/70 ml-4'>
                     {course.status === 'Available' && course.topics[0] !== 'Not available'
                       ? course.topics.join(' • ')
                       : 'Not available in Course Materials'
@@ -524,7 +524,7 @@ export function TeachingPage() {
 
         {/* Additional Resources */}
         <div className='mb-16'>
-          <h2 className='text-3xl text-black mb-8 border-b border-[#d6ceff] pb-4'>
+          <h2 className='text-3xl text-white mb-8 border-b border-white/20 pb-4'>
             Additional Resources
           </h2>
           <div className='space-y-4'>
@@ -534,14 +534,14 @@ export function TeachingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                className='border-b border-gray-200 pb-4 last:border-b-0'
+                className='border-b border-white/15 pb-4 last:border-b-0'
               >
                 <div className='flex items-start justify-between mb-2'>
                   <div className='flex-1'>
-                    <h3 className='text-lg font-medium text-black mb-1'>
+                    <h3 className='text-lg font-medium text-white mb-1'>
                       {resource.title}
                     </h3>
-                    <p className='text-sm text-gray-600 mb-2'>
+                    <p className='text-sm text-white/70 mb-2'>
                       {resource.description}
                     </p>
                   </div>
@@ -558,7 +558,7 @@ export function TeachingPage() {
                         <Button
                           size='sm'
                           variant='outline'
-                          className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
+                          className='border-white/30 text-white hover:bg-white/10'
                           onClick={(e) => {
                             openDialog(`resource-${index}`, resource, e.currentTarget)
                           }}
@@ -566,12 +566,12 @@ export function TeachingPage() {
                           Access Resource
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className='max-w-3xl max-h-[80vh] overflow-y-auto'>
+                      <DialogContent className='max-w-3xl max-h-[80vh] overflow-y-auto bg-white/10 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
                         <DialogHeader>
-                          <DialogTitle className='text-2xl text-black mb-2'>
+                          <DialogTitle className='text-2xl text-white mb-2'>
                             {resource.title}
                           </DialogTitle>
-                          <DialogDescription>
+                          <DialogDescription className='text-white/70'>
                             Explore this {resource.type.toLowerCase()} designed
                             for {resource.level.toLowerCase()} learners with{' '}
                             {resource.items} available items.
@@ -579,7 +579,7 @@ export function TeachingPage() {
                           <div className='flex items-center space-x-2'>
                             <Badge
                               variant='secondary'
-                              className='bg-[#e9e5ff] text-[#5a4fcf] border-[#b8a9ff]'
+                              className='bg-[#b19eef]/20 text-[#e4dcff] border-[#b19eef]/40'
                             >
                               {resource.type}
                             </Badge>
@@ -589,16 +589,16 @@ export function TeachingPage() {
                           </div>
                         </DialogHeader>
                         <div className='mt-6'>
-                          <p className='text-black mb-6'>
+                          <p className='text-white/75 mb-6'>
                             {resource.description}
                           </p>
 
                           <div className='mb-6'>
-                            <h4 className='text-lg text-black mb-3'>
+                            <h4 className='text-lg text-white mb-3'>
                               Resource Details
                             </h4>
-                            <div className='bg-[#f3f1ff] p-4 rounded border border-[#e9e5ff]'>
-                              <div className='grid md:grid-cols-2 gap-4 text-sm text-black'>
+                            <div className='bg-white/5 p-4 rounded border border-white/10'>
+                              <div className='grid md:grid-cols-2 gap-4 text-sm text-white/75'>
                                 <div>
                                   <strong>Total Items:</strong> {resource.items}
                                 </div>
@@ -618,11 +618,11 @@ export function TeachingPage() {
                           </div>
 
                           <div className='mb-6'>
-                            <h4 className='text-lg text-black mb-3'>
+                            <h4 className='text-lg text-white mb-3'>
                               Preview Content
                             </h4>
-                            <div className='bg-gray-50 p-4 rounded border'>
-                              <p className='text-gray-600 text-sm italic'>
+                            <div className='bg-white/5 p-4 rounded border border-white/10'>
+                              <p className='text-white/70 text-sm italic'>
                                 {resource.type === 'Video Series' &&
                                   'This resource includes comprehensive video tutorials with step-by-step explanations and practical examples.'}
                                 {resource.type === 'Problem Sets' &&
@@ -642,7 +642,7 @@ export function TeachingPage() {
                             </Button>
                             <Button
                               variant='outline'
-                              className='border-[#b8a9ff] text-[#6A5ACD] hover:bg-[#f3f1ff]'
+                              className='border-white/30 text-white hover:bg-white/10'
                             >
                               <Download className='w-4 h-4 mr-2' />
                               Download
@@ -655,18 +655,18 @@ export function TeachingPage() {
                 </div>
 
                 {/* Inline Metadata */}
-                <div className='grid grid-cols-4 gap-4 text-sm bg-gray-50 p-3 rounded'>
+                <div className='grid grid-cols-4 gap-4 text-sm bg-white/5 p-3 rounded border border-white/10'>
                   <div>
-                    <span className='font-medium text-gray-700'>Type:</span> {resource.type}
+                    <span className='font-medium text-white'>Type:</span> <span className='text-white/70'>{resource.type}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-gray-700'>Level:</span> {resource.level}
+                    <span className='font-medium text-white'>Level:</span> <span className='text-white/70'>{resource.level}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-gray-700'>Items:</span> {resource.items}
+                    <span className='font-medium text-white'>Items:</span> <span className='text-white/70'>{resource.items}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-gray-700'>Updated:</span> {resource.lastUpdated}
+                    <span className='font-medium text-white'>Updated:</span> <span className='text-white/70'>{resource.lastUpdated}</span>
                   </div>
                 </div>
               </motion.div>

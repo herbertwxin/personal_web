@@ -206,16 +206,16 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
           transition: { duration: 0.2 },
         }}
         style={{
-          background: 'rgba(255,255,255,0.1)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background: 'rgba(8, 6, 24, 0.72)',
+          backdropFilter: 'blur(24px) saturate(0.82)',
+          WebkitBackdropFilter: 'blur(24px) saturate(0.82)',
           willChange: 'transform, width',
           padding: '8px 16px',
           height: '48px',
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
-          border: 'none',
-          boxShadow: 'none',
+          border: '1px solid rgba(177, 158, 239, 0.22)',
+          boxShadow: '0 24px 64px -24px rgba(5, 3, 24, 0.82)',
           minWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
           maxWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
         }}
@@ -286,19 +286,19 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Search className='w-5 h-5 text-black flex-shrink-0' />
+              <Search className='w-5 h-5 text-white flex-shrink-0' />
               <input
                 ref={searchInputRef}
                 type='text'
                 placeholder='Search academic content...'
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className='flex-1 bg-transparent text-black placeholder-gray-500 border-none outline-none text-sm h-full'
+                className='flex-1 bg-transparent text-white placeholder-white/50 border-none outline-none text-sm h-full'
                 autoFocus
               />
               <motion.button
                 onClick={closeSearch}
-                className='text-black hover:text-gray-800 transition-colors flex-shrink-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                className='text-white hover:text-white/70 transition-colors flex-shrink-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
                 style={{
                   outline: 'none',
                   boxShadow: 'none',
@@ -362,8 +362,8 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                       }`}
                       style={{
                         width: `${page.width}px`,
-                        color: '#000000',
-                        opacity: isActive ? 1 : 0.7,
+                        color: '#ffffff',
+                        opacity: isActive ? 1 : 0.75,
                         outline: 'none',
                         boxShadow: 'none',
                       }}
@@ -378,7 +378,7 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               {/* Search Icon */}
               <motion.button
                 onClick={openSearch}
-                className='ml-3 p-2 text-black hover:text-gray-800 transition-colors rounded-full hover:bg-[#f3f1ff] h-8 w-8 flex items-center justify-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                className='ml-3 p-2 text-white hover:text-white/70 transition-colors rounded-full hover:bg-white/10 h-8 w-8 flex items-center justify-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
                 style={{
                   outline: 'none',
                   boxShadow: 'none',
@@ -394,7 +394,7 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                   transition: { duration: 0.1 },
                 }}
               >
-                <Search className='w-4 h-4' />
+                <Search className='w-4 h-4 text-white' />
               </motion.button>
             </motion.div>
           )}
@@ -421,15 +421,16 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className='fixed top-16 sm:top-20 left-1/2 transform -translate-x-1/2 rounded-2xl overflow-hidden shadow-2xl z-50'
           style={{
-            background: 'rgba(255,255,255,0.98)',
-            backdropFilter: 'blur(30px)',
-            WebkitBackdropFilter: 'blur(30px)',
-            border: '1px solid rgba(0,0,0,0.1)',
+            background: 'rgba(7, 5, 26, 0.82)',
+            backdropFilter: 'blur(36px) saturate(0.85)',
+            WebkitBackdropFilter: 'blur(36px) saturate(0.85)',
+            border: '1px solid rgba(177, 158, 239, 0.18)',
             maxHeight: '500px',
             overflowY: 'auto',
             width: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
             maxWidth: '90vw',
             marginLeft: '-210px',
+            boxShadow: '0 40px 96px -32px rgba(5, 3, 24, 0.75)',
           }}
         >
           {!searchQuery.trim() ? (

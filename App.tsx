@@ -1,10 +1,11 @@
-import { useState, Suspense, lazy, useEffect, useRef } from 'react'
+import { useState, Suspense, lazy, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Navigation } from './components/Navigation'
 import { HomePage } from './components/HomePage'
 import { perf, logMemoryUsage } from './lib/performance'
+import PixelBlast from './components/pixel-blast/PixelBlast'
 
 // Lazy load page components for better performance
 const StackPage = lazy(() =>
@@ -62,11 +63,6 @@ export default function App() {
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
   const [isSearchActive, setIsSearchActive] = useState(false)
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1024,
-    height: typeof window !== 'undefined' ? window.innerHeight : 768,
-  })
-  const resizeRafRef = useRef<number>()
 
   // Performance monitoring and texture optimization setup
   useEffect(() => {
@@ -83,70 +79,6 @@ export default function App() {
         perf.measure('app-lifetime', 'app-mount', 'app-unmount')
       }
     }
-    return undefined
-  }, [])
-
-  // Window resize listener for responsive texture behavior
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return undefined
-    }
-
-    const updateDimensions = () => {
-      setWindowDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
-    }
-
-    const handleResize = () => {
-      if (resizeRafRef.current) {
-        cancelAnimationFrame(resizeRafRef.current)
-      }
-      resizeRafRef.current = window.requestAnimationFrame(updateDimensions)
-    }
-
-    // Set initial dimensions on client side
-    updateDimensions()
-
-    window.addEventListener('resize', handleResize, { passive: true })
-
-    return () => {
-      if (resizeRafRef.current) {
-        cancelAnimationFrame(resizeRafRef.current)
-      }
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  // Texture performance optimization
-  useEffect(() => {
-    // Enable hardware acceleration for texture elements
-    const textureElements = document.querySelectorAll('.texture-background')
-    textureElements.forEach(element => {
-      const htmlElement = element as HTMLElement
-      htmlElement.style.transform = 'translateZ(0)'
-      htmlElement.style.willChange = 'transform'
-    })
-
-    // Performance monitoring for texture rendering
-    if (process.env.NODE_ENV === 'development') {
-      const observer = new PerformanceObserver((list) => {
-        const entries = list.getEntries()
-        entries.forEach((entry) => {
-          if (entry.name.includes('texture') || entry.name.includes('background')) {
-            console.log(`Texture performance: ${entry.name} took ${entry.duration}ms`)
-          }
-        })
-      })
-      
-      observer.observe({ entryTypes: ['measure', 'navigation'] })
-      
-      return () => {
-        observer.disconnect()
-      }
-    }
-    
     return undefined
   }, [])
 
@@ -218,109 +150,37 @@ export default function App() {
   }
 
   return (
-    <div className='min-h-screen relative'>
-      {/* Background Container - ISOLATED */}
-      <div className='fixed inset-0 pointer-events-none' style={{ zIndex: 0 }}>
-        {/* Base white background */}
-        <div className='absolute inset-0 bg-white' />
-        
-
-
-        {/* Animated purple circles */}
-        <motion.div
-          className='absolute w-96 h-96 rounded-full blur-3xl'
-          style={{ 
-            backgroundColor: 'rgba(120, 100, 150, 0.25)',
-          }}
-          animate={{
-            x: [100, Math.max(windowDimensions.width - 400, 200), 200, 100],
-            y: [150, 300, Math.max(windowDimensions.height - 200, 300), 150],
-            scale: [0.8, 1.2, 0.9, 0.8],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className='absolute w-80 h-80 rounded-full blur-3xl'
-          style={{ 
-            backgroundColor: 'rgba(135, 115, 160, 0.2)',
-          }}
-          animate={{
-            x: [
-              Math.max(windowDimensions.width - 300, 150),
-              150,
-              Math.max(windowDimensions.width - 400, 200),
-              Math.max(windowDimensions.width - 300, 150),
-            ],
-            y: [200, Math.max(windowDimensions.height - 300, 200), 100, 200],
-            scale: [1, 0.7, 1.1, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 5,
-          }}
-        />
-        <motion.div
-          className='absolute w-64 h-64 rounded-full blur-3xl'
-          style={{ 
-            backgroundColor: 'rgba(105, 90, 140, 0.15)',
-          }}
-          animate={{
-            x: [300, Math.max(windowDimensions.width - 200, 300), 100, 300],
-            y: [
-              Math.max(windowDimensions.height - 200, 300),
-              100,
-              Math.max(windowDimensions.height - 300, 200),
-              Math.max(windowDimensions.height - 200, 300),
-            ],
-            scale: [0.9, 1.3, 0.8, 0.9],
-          }}
-          transition={{
-            duration: 35,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 10,
-          }}
-        />
-        <motion.div
-          className='absolute w-72 h-72 rounded-full blur-3xl'
-          style={{ 
-            backgroundColor: 'rgba(140, 120, 165, 0.12)',
-          }}
-          animate={{
-            x: [50, 400, Math.max(windowDimensions.width - 150, 400), 50],
-            y: [
-              windowDimensions.height / 2,
-              80,
-              Math.max(windowDimensions.height - 100, 200),
-              windowDimensions.height / 2,
-            ],
-            scale: [1.1, 0.6, 1.4, 1.1],
-          }}
-          transition={{
-            duration: 28,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 15,
-          }}
+    <div className='relative min-h-screen overflow-hidden text-foreground'>
+      <div className='pixel-blast-background' aria-hidden='true'>
+        <PixelBlast
+          variant='circle'
+          pixelSize={6}
+          color='#B19EEF'
+          patternScale={3}
+          patternDensity={1.2}
+          pixelSizeJitter={0.5}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={0.6}
+          edgeFade={0.25}
+          transparent
+          autoPauseOffscreen
         />
       </div>
 
-      {/* Search Overlay Blur */}
       {isSearchActive && (
         <div 
-          className='fixed inset-0 backdrop-blur-sm bg-black/10 transition-all duration-300'
-          style={{ zIndex: 40 }}
+          className='fixed inset-0 z-40 backdrop-blur-md bg-black/30 transition-all duration-300'
         />
       )}
 
-      {/* Navigation */}
-      <div className='relative' style={{ zIndex: 50 }}>
+      <div className='relative z-50'>
         <Navigation 
           currentPage={currentPage} 
           onPageChange={setCurrentPage}
@@ -328,17 +188,18 @@ export default function App() {
         />
       </div>
 
-      {/* Main Content */}
       <main 
-        className={`relative pt-32 transition-all duration-300 ${
+        className={`relative z-30 pt-32 pb-16 transition-all duration-300 ${
           isSearchActive ? 'blur-sm scale-[0.98]' : ''
-        }`} 
-        style={{ zIndex: 10 }}
+        }`}
       >
-        {renderPage()}
+        <div className='px-4 sm:px-6 md:px-10'>
+          <div className='page-surface mx-auto w-full max-w-6xl py-10 sm:py-12'>
+            {renderPage()}
+          </div>
+        </div>
       </main>
 
-      {/* Vercel Analytics and Speed Insights */}
       <Analytics />
       <SpeedInsights />
     </div>

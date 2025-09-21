@@ -3,7 +3,7 @@
 export const APP_CONFIG = {
   name: 'Herbert W. Xin',
   description: 'Professional research showcase and teaching materials',
-  version: '1.0.0',
+  version: '2.0.0',
   author: 'Dr. Academic Researcher',
   email: 'researcher@university.edu',
   university: 'University of Economics',
