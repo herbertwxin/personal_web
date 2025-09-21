@@ -86,7 +86,7 @@ export function HomePage() {
             </div>
 
             {/* Profile Image - Right Side */}
-            <div className='lg:w-80 flex-shrink-0 w-full lg:w-auto'>
+            <div className='flex-shrink-0 w-full lg:w-[24rem] lg:min-w-[24rem]'>
               <div className='relative flex justify-center'>
                 <Lanyard position={[0, 0, 9.5]} gravity={[0, -40, 0]} />
               </div>
