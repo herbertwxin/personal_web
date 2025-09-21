@@ -52,6 +52,7 @@ export default defineConfig({
     '**/*.gif',
     '**/*.webp',
     '**/*.ico',
+    '**/*.glb',
   ],
   publicDir: 'public',
   server: {

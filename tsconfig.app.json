@@ -8,6 +8,7 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "allowArbitraryExtensions": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -54,6 +55,7 @@
     "App.tsx",
     "main.tsx"
   ],
+  "files": ["src/global.d.ts"],
   "exclude": [
     "**/*.test.ts",
     "**/*.test.tsx",

@@ -7,6 +7,7 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react'
+import Lanyard from './lanyard/Lanyard'
 
 export function HomePage() {
   const containerVariants = {
@@ -85,13 +86,9 @@ export function HomePage() {
             </div>
 
             {/* Profile Image - Right Side */}
-            <div className='lg:w-80 flex-shrink-0'>
-              <div className='relative'>
-                <img 
-                  src='/downloadable/profile.jpeg'
-                  alt='Herbert Xin'
-                  className='w-72 h-72 lg:w-80 lg:h-80 rounded-lg object-cover border border-[var(--academic-border-subtle)]'
-                />
+            <div className='lg:w-80 flex-shrink-0 w-full lg:w-auto'>
+              <div className='relative flex justify-center'>
+                <Lanyard position={[0, 0, 9.5]} gravity={[0, -40, 0]} />
               </div>
             </div>
           </div>
