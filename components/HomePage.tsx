@@ -109,10 +109,7 @@ export function HomePage() {
             <div className='rounded-xl p-6 border border-white/20 bg-white/10 backdrop-blur-xl shadow-lg shadow-black/20'>
               <div className='mb-4'>
                 <p className='text-lg text-white font-medium mb-2' style={{ fontSize: 'var(--academic-font-size-body)' }}>
-                  TBD for Fall 2025
-                </p>
-                <p className='text-white/70 text-sm'>
-                  Office hours will be announced at the beginning of the semester.
+                  By appointment for Fall 2025
                 </p>
               </div>
 
