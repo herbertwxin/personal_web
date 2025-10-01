@@ -71,16 +71,21 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
 
   useEffect(() => {
     const observerOptions = {
-      rootMargin: '-20% 0% -80% 0%',
-      threshold: 0,
+      rootMargin: '-10% 0% -70% 0%',
+      threshold: [0, 0.25, 0.5, 0.75, 1],
     }
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveId(entry.target.id)
-        }
-      })
+      // Find the entry that's most visible
+      const visibleEntries = entries.filter(entry => entry.isIntersecting)
+      
+      if (visibleEntries.length > 0) {
+        // Sort by intersection ratio to find the most visible heading
+        const mostVisible = visibleEntries.reduce((prev, current) => 
+          current.intersectionRatio > prev.intersectionRatio ? current : prev
+        )
+        setActiveId(mostVisible.target.id)
+      }
     }
 
     const observer = new IntersectionObserver(observerCallback, observerOptions)
@@ -98,11 +103,13 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 100
+      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 120
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth',
       })
+      // Update active state immediately for better UX
+      setActiveId(id)
     }
   }
 
@@ -115,10 +122,10 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: 0.2 }}
-      className={`sticky top-32 ${className}`}
+      className={className}
     >
       <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg p-4 shadow-sm">
-        <h3 className="text-sm font-medium text-gray-800 mb-3 border-b border-gray-200 pb-2">
+        <h3 className="text-sm font-medium text-white mb-3 border-b border-gray-500 pb-2">
           Table of Contents
         </h3>
         <nav className="space-y-1">
@@ -136,8 +143,8 @@ export function TableOfContents({ className = '' }: TableOfContentsProps) {
                 ${item.level === 6 ? 'ml-10' : ''}
                 ${
                   activeId === item.id
-                    ? 'text-[#6A5ACD] bg-[#6A5ACD]/10 border-l-2 border-[#6A5ACD]'
-                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                    ? 'text-[#b19eef] bg-[#b19eef]/20 border-l-3 border-[#b19eef] font-medium'
+                    : 'text-white/80 hover:text-white hover:bg-white/10'
                 }
               `}
               title={item.plainTitle}

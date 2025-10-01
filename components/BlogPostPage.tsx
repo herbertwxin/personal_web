@@ -46,8 +46,8 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
   }
 
   return (
-    <div className='min-h-screen pb-12'>
-      <div className='max-w-7xl mx-auto px-6'>
+    <div className='min-h-screen pb-12 px-6'>
+      <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -113,9 +113,9 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
         </motion.div>
 
         {/* Content with TOC Layout */}
-        <div className='flex gap-8'>
+        <div className='flex gap-8 relative'>
           {/* Main Content */}
-          <div className='flex-1'>
+          <div className='flex-1 min-w-0'>
             {/* Article Content */}
             <motion.article
               initial={{ opacity: 0, y: 20 }}
@@ -172,9 +172,11 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
             </motion.div>
           </div>
 
-          {/* Table of Contents Sidebar */}
+          {/* Table of Contents Sidebar - Sticky */}
           <div className='hidden lg:block w-64 flex-shrink-0'>
-            <TableOfContents />
+            <div className='sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto'>
+              <TableOfContents className='w-full' />
+            </div>
           </div>
         </div>
       </div>

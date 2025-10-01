@@ -38,8 +38,8 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
   }
 
   return (
-    <div className='min-h-screen pb-12'>
-      <div className='max-w-7xl mx-auto px-6'>
+    <div className='min-h-screen pb-12 px-6'>
+      <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,13 +111,13 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
         </motion.div>
 
         {/* Content with TOC Layout */}
-        <div className='flex gap-8'>
+        <div className='flex gap-8 relative'>
           {/* Main Content */}
           <motion.article
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className='flex-1 max-w-none'
+            className='flex-1 max-w-none min-w-0'
             style={{
               fontSize: 'var(--academic-font-size-body)',
               lineHeight: 'var(--academic-line-height-normal)',
@@ -130,9 +130,11 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
             />
           </motion.article>
 
-          {/* Table of Contents Sidebar */}
+          {/* Table of Contents Sidebar - Sticky */}
           <div className='hidden lg:block w-64 flex-shrink-0'>
-            <TableOfContents />
+            <div className='sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto'>
+              <TableOfContents className='w-full' />
+            </div>
           </div>
         </div>
       </div>
