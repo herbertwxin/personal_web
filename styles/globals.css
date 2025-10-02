@@ -868,7 +868,10 @@ nav:focus-within {
   padding-left: 1em;
   margin: 1.5em 0;
   font-style: italic;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(177, 158, 239, 0.08);
+  padding: 1em;
+  border-radius: 6px;
 }
 
 /* ========================================

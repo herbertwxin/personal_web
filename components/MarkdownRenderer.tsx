@@ -88,7 +88,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
       // Handle blockquotes
       if (line.startsWith('> ')) {
         elements.push(
-          <blockquote key={i} className="border-l-4 border-blue-300 pl-4 py-2 my-4 bg-blue-50 text-gray-700 italic">
+          <blockquote key={i} className="border-l-4 border-purple-400 pl-4 py-2 my-4 bg-purple-900/20 text-gray-200 italic rounded-md">
             <div dangerouslySetInnerHTML={{ __html: processedLine.substring(2) }} />
           </blockquote>
         )
