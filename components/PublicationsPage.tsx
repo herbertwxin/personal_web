@@ -217,38 +217,26 @@ export function PublicationsPage() {
                     aria-label={`Publication: ${pub.title}`}
                     id={`pub-${year}-${index}`}
                   >
-                    {/* Citation Entry with Hanging Indent */}
-                    <div className='ml-8 -indent-8 mb-3'>
-                      <div className='inline'>
-                        <h3 
-                          className='text-black font-medium text-[1.25rem] leading-tight inline'
-                          id={`pub-title-${year}-${index}`}
-                        >
-                          {pub.title}
-                        </h3>
-                        <span className='text-black text-base ml-2'>
-                          {pub.authors}.
-                        </span>
-                        <span className='text-black text-base ml-1'>
-                          <em>{pub.journal}</em>
-                          {pub.volume && <span>, {pub.volume}</span>}
-                          {pub.pages && <span>, {pub.pages}</span>}.
-                        </span>
+                    {/* Citation Entry - Each element on separate line */}
+                    <div className='mb-3'>
+                      {/* Line 1: Title */}
+                      <h3
+                        className='text-black font-medium text-[1.25rem] leading-tight mb-1'
+                        id={`pub-title-${year}-${index}`}
+                      >
+                        {pub.title}
+                      </h3>
+
+                      {/* Line 2: Authors */}
+                      <div className='text-black text-base mb-1'>
+                        {pub.authors}
                       </div>
-                      
-                    </div>
-                    
-                    {/* Citation Metadata - Separate line for better alignment */}
-                    <div className='ml-8 mt-1'>
-                      <div className='flex flex-wrap items-center gap-2'>
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs ${getStatusColor(pub.status)}`}>
-                          {pub.status}
-                        </span>
-                        {pub.citations > 0 && (
-                          <span className='text-sm text-gray-600'>
-                            Cited {pub.citations} times
-                          </span>
-                        )}
+
+                      {/* Line 3: Journal, Volume, Pages */}
+                      <div className='text-black text-base'>
+                        <em>{pub.journal}</em>
+                        {pub.volume && <span>, {pub.volume}</span>}
+                        {pub.pages && <span>, {pub.pages}</span>}
                       </div>
                     </div>
 
@@ -294,6 +282,7 @@ export function PublicationsPage() {
                             variant='ghost'
                             className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                             aria-label={`View ${pub.title} online`}
+                            onClick={() => window.open(`https://doi.org/${pub.doi}`, '_blank')}
                           >
                             <ExternalLink className='w-3 h-3 mr-1' aria-hidden="true" />
                             View
@@ -304,6 +293,10 @@ export function PublicationsPage() {
                           variant='ghost'
                           className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Download PDF of ${pub.title}`}
+                          onClick={() => {
+                            const pdfUrl = `/downloadable/publications/${pub.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
+                            window.open(pdfUrl, '_blank')
+                          }}
                         >
                           <Download className='w-3 h-3 mr-1' aria-hidden="true" />
                           PDF
@@ -313,6 +306,11 @@ export function PublicationsPage() {
                           variant='ghost'
                           className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Get citation for ${pub.title}`}
+                          onClick={() => {
+                            const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`
+                            navigator.clipboard.writeText(citation)
+                            alert('Citation copied to clipboard!')
+                          }}
                         >
                           <Quote className='w-3 h-3 mr-1' aria-hidden="true" />
                           Cite

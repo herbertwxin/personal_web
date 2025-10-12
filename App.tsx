@@ -2,10 +2,10 @@ import { useState, Suspense, lazy, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Navigation } from './components/Navigation'
+import { StaggeredMenu } from './components/StaggeredMenu'
+import type { StaggeredMenuItem, StaggeredMenuSocialItem } from './components/StaggeredMenu'
 import { HomePage } from './components/HomePage'
 import { perf, logMemoryUsage } from './lib/performance'
-import PixelBlast from './components/pixel-blast/PixelBlast'
 
 // Lazy load page components for better performance
 const StackPage = lazy(() =>
@@ -62,7 +62,34 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
-  const [isSearchActive, setIsSearchActive] = useState(false)
+
+  const menuItems: StaggeredMenuItem[] = [
+    { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+    { label: 'Stack', ariaLabel: 'View Stack', link: '/stack' },
+    { label: 'Publications', ariaLabel: 'View Publications', link: '/publications' },
+    { label: 'Resume', ariaLabel: 'View Resume', link: '/resume' },
+    { label: 'Teaching', ariaLabel: 'View Teaching', link: '/teaching' },
+    { label: 'Blog', ariaLabel: 'View Blog', link: '/blog' }
+  ]
+
+  const socialItems: StaggeredMenuSocialItem[] = [
+    { label: 'Twitter', link: 'https://twitter.com' },
+    { label: 'GitHub', link: 'https://github.com' },
+    { label: 'LinkedIn', link: 'https://linkedin.com' }
+  ]
+
+  const handleMenuItemClick = (link: string) => {
+    const pageMap: Record<string, string> = {
+      '/': 'home',
+      '/stack': 'stack',
+      '/publications': 'publications',
+      '/resume': 'resume',
+      '/teaching': 'teaching',
+      '/blog': 'blog'
+    }
+    const page = pageMap[link] || 'home'
+    setCurrentPage(page)
+  }
 
   // Performance monitoring and texture optimization setup
   useEffect(() => {
@@ -150,49 +177,24 @@ export default function App() {
   }
 
   return (
-    <div className='relative min-h-screen overflow-hidden text-foreground'>
-      <div className='pixel-blast-background' aria-hidden='true'>
-        <PixelBlast
-          variant='circle'
-          pixelSize={6}
-          color='#B19EEF'
-          patternScale={3}
-          patternDensity={1.2}
-          pixelSizeJitter={0.5}
-          enableRipples
-          rippleSpeed={0.4}
-          rippleThickness={0.12}
-          rippleIntensityScale={1.5}
-          liquid
-          liquidStrength={0.12}
-          liquidRadius={1.2}
-          liquidWobbleSpeed={5}
-          speed={0.6}
-          edgeFade={0.25}
-          transparent
-          autoPauseOffscreen
-        />
-      </div>
+    <div className='relative min-h-screen overflow-hidden text-foreground bg-black'>
+      <StaggeredMenu
+        position='right'
+        items={menuItems}
+        socialItems={socialItems}
+        displaySocials={true}
+        displayItemNumbering={true}
+        menuButtonColor='#fff'
+        openMenuButtonColor='#fff'
+        changeMenuColorOnOpen={true}
+        colors={['#B19EEF', '#5227FF']}
+        accentColor='#B19EEF'
+        isFixed={true}
+        logoUrl=''
+        onItemClick={(item) => handleMenuItemClick(item.link)}
+      />
 
-      {isSearchActive && (
-        <div 
-          className='fixed inset-0 z-40 backdrop-blur-md bg-black/30 transition-all duration-300'
-        />
-      )}
-
-      <div className='relative z-50'>
-        <Navigation 
-          currentPage={currentPage} 
-          onPageChange={setCurrentPage}
-          onSearchStateChange={setIsSearchActive}
-        />
-      </div>
-
-      <main 
-        className={`relative z-30 pt-32 pb-16 transition-all duration-300 ${
-          isSearchActive ? 'blur-sm scale-[0.98]' : ''
-        }`}
-      >
+      <main className='relative z-30 pt-32 pb-16'>
         <div className='px-4 sm:px-6 md:px-10'>
           <div className='page-surface mx-auto w-full max-w-6xl py-10 sm:py-12'>
             {renderPage()}

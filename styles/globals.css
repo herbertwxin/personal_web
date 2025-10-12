@@ -387,73 +387,11 @@ body {
   box-shadow: 0 8px 32px rgba(106, 90, 205, 0.1);
 }
 
-/* Darkened blur surface used to lift content off the animated background */
+/* Simple content surface without glass effects */
 .page-surface {
   position: relative;
-  isolation: isolate;
-  border-radius: clamp(1.75rem, 4vw, 3rem);
   background: transparent;
-  box-shadow: 0 32px 92px -32px rgba(5, 3, 24, 0.6);
   overflow: visible;
-}
-
-.page-surface::before {
-  content: '';
-  position: absolute;
-  inset: -6%;
-  border-radius: inherit;
-  background: rgba(5, 3, 24, 0.5);
-  backdrop-filter: blur(32px) saturate(0.85);
-  -webkit-backdrop-filter: blur(32px) saturate(0.85);
-  pointer-events: none;
-  z-index: 0;
-  mask-image: radial-gradient(
-    ellipse at 50% 45%,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.6) 38%,
-    rgba(0, 0, 0, 0.28) 62%,
-    rgba(0, 0, 0, 0.12) 78%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse at 50% 45%,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.6) 38%,
-    rgba(0, 0, 0, 0.28) 62%,
-    rgba(0, 0, 0, 0.12) 78%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-
-@supports not (mask-image: radial-gradient(white, transparent)) {
-  .page-surface::before {
-    mask-image: none;
-    -webkit-mask-image: none;
-    background: radial-gradient(
-      ellipse at 50% 45%,
-      rgba(5, 3, 24, 0.55) 0%,
-      rgba(5, 3, 24, 0.34) 48%,
-      rgba(5, 3, 24, 0.16) 72%,
-      rgba(5, 3, 24, 0) 100%
-    );
-  }
-}
-
-.page-surface::after {
-  content: '';
-  position: absolute;
-  inset: -12%;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    rgba(5, 3, 24, 0.32) 0%,
-    rgba(5, 3, 24, 0.16) 54%,
-    rgba(5, 3, 24, 0.08) 72%,
-    rgba(5, 3, 24, 0) 100%
-  );
-  filter: blur(28px);
 }
 
 .page-surface > * {
