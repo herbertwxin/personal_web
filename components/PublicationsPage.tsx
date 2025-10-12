@@ -62,19 +62,6 @@ export function PublicationsPage() {
     setFilteredPublications(filtered)
   }, [selectedFilter])
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Published':
-        return 'bg-green-100 text-green-700 border-green-300'
-      case 'Under Review':
-        return 'bg-yellow-100 text-yellow-700 border-yellow-300'
-      case 'Working Paper':
-        return 'bg-blue-100 text-blue-700 border-blue-300'
-      default:
-        return 'bg-[#e9e5ff] text-[#5a4fcf] border-[#b8a9ff]'
-    }
-  }
-
   const filterOptions = [
     'All Publications',
     'Journal Articles',
