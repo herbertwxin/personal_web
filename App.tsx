@@ -190,7 +190,7 @@ export default function App() {
         colors={['#B19EEF', '#5227FF']}
         accentColor='#B19EEF'
         isFixed={true}
-        logoUrl='/logo.svg'
+        logoUrl='/logo.png'
         onItemClick={(item) => handleMenuItemClick(item.link)}
       />
 

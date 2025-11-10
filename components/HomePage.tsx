@@ -57,7 +57,7 @@ export function HomePage() {
               </h1>
 
               <div
-                className='text-[1.75rem] font-medium text-white mb-6'
+                className='text-[1.75rem] font-medium text-white mb-1'
                 style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
               >
                 PhD Candidate in Economics
