@@ -16,7 +16,7 @@ const initializeAssets = () => {
   optimizeFontDisplay()
 
   // Preload critical assets
-  const criticalAssets = ['/favicon.svg', '/favicon.png']
+  const criticalAssets = ['/logo.svg', '/logo.png']
   preloadAssets(criticalAssets)
 }
 

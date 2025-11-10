@@ -39,6 +39,9 @@
   display: flex;
   align-items: center;
   user-select: none;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .sm-logo-img {
@@ -46,6 +49,8 @@
   height: 32px;
   width: auto;
   object-fit: contain;
+  background: transparent;
+  border: none;
 }
 
 .sm-toggle {

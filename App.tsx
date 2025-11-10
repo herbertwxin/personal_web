@@ -185,12 +185,12 @@ export default function App() {
         displaySocials={true}
         displayItemNumbering={true}
         menuButtonColor='#fff'
-        openMenuButtonColor='#fff'
+        openMenuButtonColor='#000'
         changeMenuColorOnOpen={true}
         colors={['#B19EEF', '#5227FF']}
         accentColor='#B19EEF'
         isFixed={true}
-        logoUrl=''
+        logoUrl='/logo.svg'
         onItemClick={(item) => handleMenuItemClick(item.link)}
       />
 

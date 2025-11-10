@@ -49,38 +49,35 @@ export function HomePage() {
             {/* Left Column - Text Content and Office Hours */}
             <div className='flex-1'>
               {/* Hero Text */}
-              <motion.h1
+              <h1
                 className='text-[2.5rem] leading-tight font-normal text-white mb-4'
                 style={{ fontSize: 'var(--academic-font-size-page-title)', fontWeight: 'var(--academic-font-weight-page-title)' }}
               >
                 Herbert Xin
-              </motion.h1>
+              </h1>
 
-              <motion.div
+              <div
                 className='text-[1.75rem] font-medium text-white mb-6'
                 style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
               >
                 PhD Candidate in Economics
-              </motion.div>
+              </div>
 
-              <motion.div
+              <div
                 className='text-[1.75rem] font-medium text-white mb-6'
                 style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
               >
                 University of Oregon
-              </motion.div>
+              </div>
 
-              <motion.p
+              <p
                 className='text-lg text-white/80 max-w-2xl mb-8 leading-relaxed'
                 style={{ fontSize: 'var(--academic-font-size-body)', lineHeight: 'var(--academic-line-height-relaxed)' }}
               >
                 My current research focuses on interaction between monetary and fiscal policy.
                 This website also serves as a blog and repo for my personal project Model Stack,
                 a directory for macroeconomics models.
-              </motion.p>
+              </p>
 
               {/* Office Hours Section - Now under hero text */}
               <div className='mt-12'>
