@@ -40,7 +40,7 @@ export function LaTeXDocumentRenderer({ filename, className = '' }: LaTeXDocumen
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 space-y-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#6A5ACD]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#B19EEF]"></div>
         <div className="text-gray-600">Loading LaTeX document...</div>
         <div className="text-sm text-gray-500">Parsing mathematical content</div>
       </div>

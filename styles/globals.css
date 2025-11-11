@@ -376,15 +376,15 @@ body {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(106, 90, 205, 0.1);
+  border: 1px solid rgba(177, 158, 239, 0.1);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(106, 90, 205, 0.1);
-  box-shadow: 0 8px 32px rgba(106, 90, 205, 0.1);
+  border: 1px solid rgba(177, 158, 239, 0.1);
+  box-shadow: 0 8px 32px rgba(177, 158, 239, 0.1);
 }
 
 /* Simple content surface without glass effects */
@@ -405,17 +405,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(106, 90, 205, 0.05);
+  background: rgba(177, 158, 239, 0.05);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(106, 90, 205, 0.25);
+  background: rgba(177, 158, 239, 0.25);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(106, 90, 205, 0.4);
+  background: rgba(177, 158, 239, 0.4);
 }
 
 /* Enhanced Dialog Overlay Styles for Better Cross-Browser Support */
@@ -765,12 +765,12 @@ nav:focus-within {
 }
 
 .markdown-content h1 {
-  border-bottom: 2px solid rgba(106, 90, 205, 0.2);
+  border-bottom: 2px solid rgba(177, 158, 239, 0.2);
   padding-bottom: 0.5em;
 }
 
 .markdown-content h2 {
-  border-bottom: 1px solid rgba(106, 90, 205, 0.15);
+  border-bottom: 1px solid rgba(177, 158, 239, 0.15);
   padding-bottom: 0.3em;
 }
 
@@ -785,7 +785,7 @@ nav:focus-within {
 }
 
 .markdown-content code {
-  background: rgba(106, 90, 205, 0.08);
+  background: rgba(177, 158, 239, 0.08);
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-family: 'Monaco', 'Consolas', monospace;
@@ -802,7 +802,7 @@ nav:focus-within {
 }
 
 .markdown-content blockquote {
-  border-left: 4px solid rgba(106, 90, 205, 0.3);
+  border-left: 4px solid rgba(177, 158, 239, 0.3);
   padding-left: 1em;
   margin: 1.5em 0;
   font-style: italic;
@@ -1997,8 +1997,8 @@ main {
 }
 
 .academic-badge-accent {
-  background: rgba(106, 90, 205, 0.08);
-  border-color: rgba(106, 90, 205, 0.2);
+  background: rgba(177, 158, 239, 0.08);
+  border-color: rgba(177, 158, 239, 0.2);
   color: var(--academic-text-accent);
 }
 

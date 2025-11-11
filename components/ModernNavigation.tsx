@@ -37,7 +37,7 @@ export function ModernNavigation({
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
-            <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-[#6A5ACD] rounded-lg flex items-center justify-center'>
+            <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-[#B19EEF] rounded-lg flex items-center justify-center'>
               <span className='text-white font-bold text-sm'>A</span>
             </div>
             <span className='text-xl font-semibold text-white'>Academic</span>
@@ -89,7 +89,7 @@ export function ModernNavigation({
 
             {/* CTA Button */}
             <Button
-              className='bg-gradient-to-r from-blue-600 to-[#6A5ACD] hover:from-blue-700 hover:to-[#5a4fcf] text-white px-6 py-2 rounded-lg transition-all duration-200'
+              className='bg-gradient-to-r from-blue-600 to-[#B19EEF] hover:from-blue-700 hover:to-[#8f79da] text-white px-6 py-2 rounded-lg transition-all duration-200'
               onClick={() => onPageChange('resume')}
             >
               View CV

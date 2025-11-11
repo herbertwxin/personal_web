@@ -120,7 +120,7 @@ export function PublicationsPage() {
               href="https://orcid.org/0009-0000-9394-9423" 
               target="_blank" 
               rel="noopener noreferrer"
-              className='text-[#6A5ACD] hover:underline'
+              className='text-[#B19EEF] hover:underline'
             >
               https://orcid.org/0009-0000-9394-9423
             </a>
@@ -142,7 +142,7 @@ export function PublicationsPage() {
               key={option}
               className={`px-3 py-1 text-sm border rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                 selectedFilter === option
-                  ? 'bg-[#6A5ACD] text-white border-[#6A5ACD]'
+                  ? 'bg-[#B19EEF] text-white border-[#B19EEF]'
                   : 'bg-white text-black border-black/10 hover:bg-black/5'
               }`}
               onClick={() => setSelectedFilter(option)}
@@ -248,7 +248,7 @@ export function PublicationsPage() {
                         {pub.keywords.map((keyword, keyIndex) => (
                           <span
                             key={keyIndex}
-                            className='text-xs text-[#6A5ACD] bg-black/5 px-2 py-0.5 rounded'
+                            className='text-xs text-[#B19EEF] bg-black/5 px-2 py-0.5 rounded'
                             role="status"
                             aria-label={`Keyword: ${keyword}`}
                           >
@@ -267,7 +267,7 @@ export function PublicationsPage() {
                           <Button
                             size='sm'
                             variant='ghost'
-                            className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                            className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                             aria-label={`View ${pub.title} online`}
                             onClick={() => window.open(`https://doi.org/${pub.doi}`, '_blank')}
                           >
@@ -278,7 +278,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Download PDF of ${pub.title}`}
                           onClick={() => {
                             const pdfUrl = `/downloadable/publications/${pub.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
@@ -291,7 +291,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#6A5ACD] hover:text-[#6A5ACD] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Get citation for ${pub.title}`}
                           onClick={() => {
                             const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`

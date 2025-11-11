@@ -304,7 +304,7 @@ function processInlineMarkdown(text: string): JSX.Element[] {
             <a
               key={idx}
               href={match[2]}
-              className='text-[#6A5ACD] hover:underline'
+              className='text-[#B19EEF] hover:underline'
               target='_blank'
               rel='noopener noreferrer'
             >

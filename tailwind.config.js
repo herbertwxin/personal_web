@@ -76,7 +76,7 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
-        // Custom purple-blue accent color (#6A5ACD)
+        // Custom purple-blue accent color (#B19EEF)
         'purple-blue': {
           50: '#f3f1ff',
           100: '#e9e5ff',
@@ -84,8 +84,8 @@ export default {
           300: '#b8a9ff',
           400: '#9575ff',
           500: '#7c3aed',
-          600: '#6A5ACD', // Main accent color
-          700: '#5a4fcf',
+          600: '#B19EEF', // Main accent color
+          700: '#8f79da',
           800: '#4c41a3',
           900: '#3f3582',
         },

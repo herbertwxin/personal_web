@@ -47,7 +47,7 @@ export function NewLaTeXRenderer({ filename }: NewLaTeXRendererProps) {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 space-y-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#6A5ACD]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#B19EEF]"></div>
         <div className="text-gray-600">Loading document...</div>
       </div>
     )
@@ -281,6 +281,9 @@ function processLaTeX(content: string): JSX.Element[] {
     // Handle display math environments
     if (line.startsWith('\\begin{align') || line.startsWith('\\begin{equation') || line.startsWith('\\begin{gather') || line.startsWith('\\begin{cases') || line.startsWith('\\begin{array') || line.startsWith('\\[')) {
       const mathContent = extractMathBlock(lines, i)
+
+      // cases environment is rendered directly with displayMode: true
+      // KaTeX will handle it properly in display mode
       elements.push(
         <div key={i} className="my-6">
           <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-200">
@@ -446,6 +449,18 @@ function extractMathBlock(lines: string[], startIndex: number): { content: strin
       content += ' ' + line
       i++
     }
+  } else if (startLine.startsWith('\\begin{cases}')) {
+    // Handle cases environment specially
+    content = startLine + '\n'
+    i++
+    while (i < lines.length) {
+      const line = lines[i].trim()
+      content += line + '\n'
+      if (line.startsWith('\\end{cases}')) {
+        break
+      }
+      i++
+    }
   } else {
     // Handle align, equation, and gather environments - include the environment tags for KaTeX
     content = startLine + '\n' // Include the \begin{...} line
@@ -453,7 +468,7 @@ function extractMathBlock(lines: string[], startIndex: number): { content: strin
     while (i < lines.length) {
       const line = lines[i].trim()
       content += line + '\n'
-      if (line.startsWith('\\end{align') || line.startsWith('\\end{equation') || line.startsWith('\\end{gather') || line.startsWith('\\end{cases') || line.startsWith('\\end{array')) {
+      if (line.startsWith('\\end{align') || line.startsWith('\\end{equation') || line.startsWith('\\end{gather') || line.startsWith('\\end{array')) {
         break
       }
       i++
@@ -482,21 +497,31 @@ function MathRenderer({ content, displayMode }: { content: string, displayMode: 
         .replace(/\\end{gather}/g, '\\end{aligned}')
     }
 
+    // Debug logging for cases environment
+    if (cleanContent.includes('\\begin{cases}')) {
+      console.log('Rendering cases environment:', cleanContent)
+    }
+
     const html = katex.renderToString(cleanContent, {
       displayMode,
       throwOnError: false,
       strict: false,
-      trust: true
+      trust: true,
+      fleqn: false,
+      macros: {
+        "\\eqref": "(\\text{#1})"
+      }
     })
-    
+
     return (
-      <span 
+      <span
         dangerouslySetInnerHTML={{ __html: html }}
         className={displayMode ? "block text-center my-4" : "inline"}
       />
     )
   } catch (error) {
     // Fallback for invalid LaTeX
+    console.error('KaTeX rendering error:', error, 'Content:', content)
     return (
       <span className={`font-mono text-red-600 ${displayMode ? 'block' : 'inline'}`}>
         Error: {content}
@@ -510,9 +535,9 @@ export function TextRenderer({ content }: { content: string }) {
   const normalized = content
     .replace(/\\\((.+?)\\\)/gs, (_, inner) => `$${inner.trim()}$`)
 
-  // Split on math expressions and standalone math commands
-  const parts = normalized.split(/(\$[^$]+\$|\\implies|\\impies|\\Rightarrow|\\rightarrow|\\leftarrow)/)
-  
+  // Split on math expressions, standalone math commands, and math environments
+  const parts = normalized.split(/(\$[^$]+\$|\\implies|\\impies|\\Rightarrow|\\rightarrow|\\leftarrow|\\begin\{cases\}[\s\S]*?\\end\{cases\})/)
+
   return (
     <>
       {parts.map((part, index) => {
@@ -520,6 +545,16 @@ export function TextRenderer({ content }: { content: string }) {
           // This is inline math with $ delimiters
           const mathContent = part.slice(1, -1) // Remove $ delimiters
           return <MathRenderer key={index} content={mathContent} displayMode={false} />
+        } else if (part.match(/\\begin\{cases\}[\s\S]*?\\end\{cases\}/)) {
+          // Handle cases environment in display mode
+          // KaTeX renders cases properly when displayMode is true
+          return (
+            <div key={index} className="my-4">
+              <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-200">
+                <MathRenderer content={part} displayMode={true} />
+              </div>
+            </div>
+          )
         } else if (part === '\\implies' || part === '\\impies' || part === '\\Rightarrow') {
           // Handle standalone implies as inline math (including typo \impies)
           return <MathRenderer key={index} content="\\implies" displayMode={false} />
@@ -533,7 +568,7 @@ export function TextRenderer({ content }: { content: string }) {
             .replace(/\\textbf\{([^}]+)\}/g, '<strong>$1</strong>')
             .replace(/\\emph\{([^}]+)\}/g, '<em>$1</em>')
             .replace(/\\text\{([^}]+)\}/g, '$1')
-            .replace(/\\eqref\{([^}]+)\}/g, '($1)') // Convert equation references to parentheses
+            .replace(/\\eqref\{([^}]+)\}/g, '<span class="equation-ref">($1)</span>') // Convert equation references with styling
             .replace(/\\ref\{([^}]+)\}/g, '$1') // Convert other references
             .replace(/\\impies/g, '\\implies') // Fix typo
             .replace(/\\&/g, '&')

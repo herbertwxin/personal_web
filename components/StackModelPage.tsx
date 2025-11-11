@@ -94,7 +94,7 @@ export function StackModelPage({ modelId, onBack }: StackModelPageProps) {
             {/* Download Button */}
             <Button
               variant='outline'
-              className='border-[#6A5ACD] text-[#6A5ACD] hover:bg-[#6A5ACD] hover:text-white'
+              className='border-[#B19EEF] text-[#B19EEF] hover:bg-[#B19EEF] hover:text-white'
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = model.pdfPath;

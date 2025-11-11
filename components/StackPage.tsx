@@ -148,7 +148,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
                   {/* Title and metadata row */}
                   <div className='flex items-start justify-between mb-2'>
                     <h3
-                      className='text-lg font-medium text-black group-hover:text-[#6A5ACD] transition-colors cursor-pointer'
+                      className='text-lg font-medium text-black group-hover:text-[#B19EEF] transition-colors cursor-pointer'
                       onClick={() => onViewModel(model.id)}
                     >
                       {model.title}
@@ -184,7 +184,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
                     <Button
                       size='sm'
                       variant='outline'
-                      className='text-[#6A5ACD] border-[#6A5ACD] hover:bg-[#6A5ACD] hover:text-white'
+                      className='text-[#B19EEF] border-[#B19EEF] hover:bg-[#B19EEF] hover:text-white'
                       onClick={() => onViewModel(model.id)}
                     >
                       <Play className='w-3 h-3 mr-1' />

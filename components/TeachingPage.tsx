@@ -413,7 +413,7 @@ export function TeachingPage() {
                                     </h4>
                                     <Button
                                       size='sm'
-                                      className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white shadow-lg shadow-[#6A5ACD]/30'
+                                      className='bg-[#B19EEF] hover:bg-[#8f79da] text-white shadow-lg shadow-[#B19EEF]/30'
                                       onClick={() => course.folderPath && handleDownload(course.folderPath)}
                                     >
                                       <Download className='w-3 h-3 mr-1' />
@@ -636,7 +636,7 @@ export function TeachingPage() {
                           </div>
 
                           <div className='flex space-x-2'>
-                            <Button className='bg-[#6A5ACD] hover:bg-[#5a4fcf] text-white flex-1'>
+                            <Button className='bg-[#B19EEF] hover:bg-[#8f79da] text-white flex-1'>
                               <BookOpen className='w-4 h-4 mr-2' />
                               Open Full Resource
                             </Button>
