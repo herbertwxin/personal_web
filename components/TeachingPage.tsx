@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import {
@@ -10,31 +9,6 @@ import {
   DialogTrigger,
 } from './ui/dialog'
 import { BookOpen, Download, Video, FileText } from 'lucide-react'
-
-interface Course {
-  code: string
-  title: string
-  level: string
-  semester: string
-  description: string
-  materials: {
-    type: string
-    count: number
-    icon: React.ComponentType
-  }[]
-  topics: string[]
-  status?: string
-  folderPath?: string
-}
-
-interface Resource {
-  title: string
-  description: string
-  type: string
-  items: number
-  level: string
-  lastUpdated: string
-}
 
 export function TeachingPage() {
   const courses = [

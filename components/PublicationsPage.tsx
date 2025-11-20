@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { ExternalLink, Download, Quote } from 'lucide-react'
 import { useState, useEffect } from 'react'

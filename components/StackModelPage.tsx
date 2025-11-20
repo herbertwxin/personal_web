@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { ArrowLeft, Download } from 'lucide-react'
 import { NewLaTeXRenderer } from './NewLaTeXRenderer'

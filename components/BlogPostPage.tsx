@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import {
@@ -9,7 +8,7 @@ import {
   Bookmark,
   ThumbsUp,
 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { MarkdownRenderer } from './MarkdownRenderer'
 import { TableOfContents } from './TableOfContents'
 import { blogPosts } from '../lib/blogPosts'
