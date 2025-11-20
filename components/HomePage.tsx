@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion'
-import {
-  AcademicSectionHeader
-} from './ui/academic-list'
-
-import {
-  MapPin,
-  Clock,
-} from 'lucide-react'
+import { MapPin, Clock } from 'lucide-react'
 
 export function HomePage() {
   const containerVariants = {
@@ -33,8 +26,6 @@ export function HomePage() {
     },
   }
 
-
-
   return (
     <motion.div
       className='min-h-screen pb-12 px-6'
@@ -44,64 +35,50 @@ export function HomePage() {
     >
       <div className='max-w-4xl mx-auto'>
         {/* Hero Section */}
-        <motion.div variants={itemVariants} className='mb-16'>
-          <div className='flex flex-col lg:flex-row items-start gap-12 lg:gap-16'>
+        <motion.div variants={itemVariants} className='mb-8'>
+          <div className='flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16'>
             {/* Left Column - Text Content and Office Hours */}
             <div className='flex-1'>
               {/* Hero Text */}
-              <h1
-                className='text-[2.5rem] leading-tight font-normal text-white mb-4'
-                style={{ fontSize: 'var(--academic-font-size-page-title)', fontWeight: 'var(--academic-font-weight-page-title)' }}
-              >
+              <h1 className='text-5xl font-bold text-white tracking-tighter mb-4'>
                 Herbert Xin
               </h1>
 
-              <div
-                className='text-[1.75rem] font-medium text-white mb-1'
-                style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
-              >
+              <div className='text-2xl font-semibold text-white tracking-tight mb-2'>
                 PhD Candidate in Economics
               </div>
 
-              <div
-                className='text-[1.75rem] font-medium text-white mb-6'
-                style={{ fontSize: 'var(--academic-font-size-section-header)', fontWeight: 'var(--academic-font-weight-section-header)' }}
-              >
+              <div className='text-2xl font-semibold text-white tracking-tight mb-8'>
                 University of Oregon
               </div>
 
-              <p
-                className='text-lg text-white/80 max-w-2xl mb-8 leading-relaxed'
-                style={{ fontSize: 'var(--academic-font-size-body)', lineHeight: 'var(--academic-line-height-relaxed)' }}
-              >
+              <p className='text-lg text-white/90 max-w-2xl mb-12 leading-normal'>
                 My current research focuses on interaction between monetary and fiscal policy.
                 This website also serves as a blog and repo for my personal project Model Stack,
                 a directory for macroeconomics models.
               </p>
 
-              {/* Office Hours Section - Now under hero text */}
+              {/* Office Hours Section */}
               <div className='mt-12'>
-                <AcademicSectionHeader
-                  level={2}
-                  className='mb-4 flex items-center gap-2'
-                  style={{ fontSize: 'var(--academic-font-size-body)', fontWeight: 'var(--academic-font-weight-section-header)' }}
-                >
-                  <Clock className='w-4 h-4 text-[var(--academic-text-accent)]' />
+                <h2 className='mb-4 flex items-center gap-3 text-lg font-semibold text-white tracking-tight'>
+                  <Clock className='w-5 h-5 text-white/70' />
                   Office Hours
-                </AcademicSectionHeader>
+                </h2>
 
                 <div>
-                  <div className='mb-3'>
-                    <p className='text-base text-white font-medium' style={{ fontSize: '0.95rem' }}>
+                  <div className='mb-4'>
+                    <p className='text-base text-white/90 font-medium'>
                       By appointment for Fall 2025
                     </p>
                   </div>
 
                   <div className='flex items-start gap-3'>
-                    <MapPin className='w-4 h-4 text-white/70 mt-0.5 flex-shrink-0' />
+                    <MapPin className='w-5 h-5 text-white/70 mt-0.5 flex-shrink-0' />
                     <div>
-                      <p className='text-base text-white font-medium' style={{ fontSize: '0.95rem' }}>Office Location</p>
-                      <p className='text-sm text-white/70' style={{ fontSize: '0.875rem' }}>Prince Lucien Campbell Hall (PLC), Room 522</p>
+                      <p className='text-base text-white/90 font-medium'>Office Location</p>
+                      <p className='text-sm text-white/70'>
+                        Prince Lucien Campbell Hall (PLC), Room 522
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -110,19 +87,16 @@ export function HomePage() {
 
             {/* Profile Image - Right Side */}
             <div className='flex-shrink-0 w-full lg:w-[24rem] lg:min-w-[24rem]'>
-              <div className='relative flex justify-center'>
+              <div className='relative flex justify-center h-full'>
                 <img
                   src='/downloadable/profile.jpeg'
                   alt='Herbert Xin Profile'
-                  className='w-full h-auto rounded-lg object-cover'
-                  style={{ maxWidth: '24rem' }}
+                  className='w-full h-full rounded-lg object-cover border-4 border-white/10'
                 />
               </div>
             </div>
           </div>
         </motion.div>
-
-
       </div>
     </motion.div>
   )

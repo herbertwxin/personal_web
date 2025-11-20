@@ -19,16 +19,10 @@ interface Publication {
 }
 
 export function PublicationsPage() {
-  const [hasAnimated, setHasAnimated] = useState(false)
   const [selectedFilter, setSelectedFilter] = useState('All Publications')
   const [filteredPublications, setFilteredPublications] = useState<
     Publication[]
   >([])
-
-  useEffect(() => {
-    const timer = setTimeout(() => setHasAnimated(true), 100)
-    return () => clearTimeout(timer)
-  }, [])
 
   const publications = [
     {
@@ -83,38 +77,28 @@ export function PublicationsPage() {
   const sortedYears = Object.keys(groupedPublications).sort((a, b) => parseInt(b) - parseInt(a))
 
   return (
-    <motion.main
+    <main
       className='min-h-screen pb-12 px-6'
-      initial={hasAnimated ? false : { opacity: 0, y: 10 }}
-      animate={hasAnimated ? false : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      style={{ willChange: hasAnimated ? 'auto' : 'transform, opacity' }}
       id="main-content"
       role="main"
       aria-label="Publications page content"
     >
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
-        <motion.header
-          initial={hasAnimated ? false : { opacity: 0, y: 20 }}
-          animate={hasAnimated ? false : { opacity: 1, y: 0 }}
-          transition={{
-            duration: hasAnimated ? 0 : 0.4,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+        <header
           className='mb-12'
           role="banner"
         >
           <h1 
-            className='text-[2.5rem] font-normal text-black mb-6 leading-tight'
+            className='text-5xl font-bold text-white tracking-tighter mb-6'
             id="page-title"
           >
-            Publication
+            Publications
           </h1>
-          <p className='text-lg text-black mb-8 max-w-3xl leading-relaxed'>
+          <p className='text-lg text-white/70 mb-8 max-w-3xl leading-relaxed'>
             Research contributions in economics and related fields.
           </p>
-          <div className='flex items-center gap-2 text-sm text-gray-600'>
+          <div className='flex items-center gap-2 text-sm text-white/70'>
             <span>ORCID:</span>
             <a 
               href="https://orcid.org/0009-0000-9394-9423" 
@@ -125,13 +109,10 @@ export function PublicationsPage() {
               https://orcid.org/0009-0000-9394-9423
             </a>
           </div>
-        </motion.header>
+        </header>
 
         {/* Filter Options */}
-        <motion.nav
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        <nav
           className='flex flex-wrap gap-2 mb-12'
           role="navigation"
           aria-label="Publication filters"
@@ -143,7 +124,7 @@ export function PublicationsPage() {
               className={`px-3 py-1 text-sm border rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
                 selectedFilter === option
                   ? 'bg-[#B19EEF] text-white border-[#B19EEF]'
-                  : 'bg-white text-black border-black/10 hover:bg-black/5'
+                  : 'text-white/70 border-white/20 hover:bg-white/10 hover:text-white'
               }`}
               onClick={() => setSelectedFilter(option)}
               aria-pressed={selectedFilter === option}
@@ -152,31 +133,21 @@ export function PublicationsPage() {
               {option}
             </button>
           ))}
-        </motion.nav>
+        </nav>
 
         {/* Academic Bibliography List */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+        <section
           aria-label="Publications by year"
         >
-          {sortedYears.map((year, yearIndex) => (
-            <motion.section
+          {sortedYears.map((year) => (
+            <section
               key={year}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.35,
-                delay: 0.3 + yearIndex * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
               className='mb-12'
               aria-labelledby={`year-${year}`}
             >
               {/* Year Header */}
               <h2 
-                className='text-[1.75rem] font-medium text-black mb-6 border-b border-black/10 pb-2'
+                className='text-3xl font-bold text-white mb-6 border-b border-white/10 pb-2'
                 id={`year-${year}`}
               >
                 {year}
@@ -189,15 +160,8 @@ export function PublicationsPage() {
                 aria-label={`Publications from ${year}`}
               >
                 {groupedPublications[year].map((pub, index) => (
-                  <motion.article
+                  <article
                     key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: 0.4 + yearIndex * 0.1 + index * 0.05,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
                     className='group'
                     role="listitem"
                     tabIndex={0}
@@ -208,19 +172,19 @@ export function PublicationsPage() {
                     <div className='mb-3'>
                       {/* Line 1: Title */}
                       <h3
-                        className='text-black font-medium text-[1.25rem] leading-tight mb-1'
+                        className='text-white font-medium text-xl leading-tight mb-1'
                         id={`pub-title-${year}-${index}`}
                       >
                         {pub.title}
                       </h3>
 
                       {/* Line 2: Authors */}
-                      <div className='text-black text-base mb-1'>
+                      <div className='text-white/90 text-base mb-1'>
                         {pub.authors}
                       </div>
 
                       {/* Line 3: Journal, Volume, Pages */}
-                      <div className='text-black text-base'>
+                      <div className='text-white/90 text-base'>
                         <em>{pub.journal}</em>
                         {pub.volume && <span>, {pub.volume}</span>}
                         {pub.pages && <span>, {pub.pages}</span>}
@@ -230,7 +194,7 @@ export function PublicationsPage() {
                     {/* Abstract */}
                     <div className='ml-4 mb-3'>
                       <p 
-                        className='text-sm text-gray-600 leading-relaxed'
+                        className='text-sm text-white/70 leading-relaxed'
                         aria-describedby={`pub-title-${year}-${index}`}
                       >
                         {pub.abstract}
@@ -248,7 +212,7 @@ export function PublicationsPage() {
                         {pub.keywords.map((keyword, keyIndex) => (
                           <span
                             key={keyIndex}
-                            className='text-xs text-[#B19EEF] bg-black/5 px-2 py-0.5 rounded'
+                            className='text-xs text-[#B19EEF] bg-white/10 px-2 py-0.5 rounded'
                             role="status"
                             aria-label={`Keyword: ${keyword}`}
                           >
@@ -267,7 +231,7 @@ export function PublicationsPage() {
                           <Button
                             size='sm'
                             variant='ghost'
-                            className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                            className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                             aria-label={`View ${pub.title} online`}
                             onClick={() => window.open(`https://doi.org/${pub.doi}`, '_blank')}
                           >
@@ -278,7 +242,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Download PDF of ${pub.title}`}
                           onClick={() => {
                             const pdfUrl = `/downloadable/publications/${pub.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
@@ -291,7 +255,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-black/5 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Get citation for ${pub.title}`}
                           onClick={() => {
                             const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`
@@ -304,15 +268,15 @@ export function PublicationsPage() {
                         </Button>
                       </div>
                     </div>
-                  </motion.article>
+                  </article>
                 ))}
               </div>
-            </motion.section>
+            </section>
           ))}
-        </motion.section>
+        </section>
 
 
       </div>
-    </motion.main>
+    </main>
   )
 }

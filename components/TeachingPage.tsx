@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import {
@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from './ui/dialog'
 import { BookOpen, Download, Video, FileText } from 'lucide-react'
-import { useRef, useState, useCallback, useEffect } from 'react'
 
 interface Course {
   code: string
@@ -37,132 +36,7 @@ interface Resource {
   lastUpdated: string
 }
 
-interface DialogState {
-  isOpen: boolean
-  dialogId: string
-  content: Course | Resource | null
-  triggerElement: HTMLElement | null
-}
-
 export function TeachingPage() {
-  const containerRef = useRef(null)
-
-  // Enhanced dialog state management
-  const [dialogStates, setDialogStates] = useState<Map<string, DialogState>>(new Map())
-  const dialogTimeouts = useRef<Map<string, NodeJS.Timeout>>(new Map())
-
-  // Track active dialogs for proper cleanup
-  const activeDialogs = useRef<Set<string>>(new Set())
-
-  // Enhanced dialog management functions
-  const openDialog = useCallback((dialogId: string, content: Course | Resource, triggerElement: HTMLElement | null) => {
-    // Clear any existing timeout for this dialog
-    const existingTimeout = dialogTimeouts.current.get(dialogId)
-    if (existingTimeout) {
-      clearTimeout(existingTimeout)
-      dialogTimeouts.current.delete(dialogId)
-    }
-
-    // Update dialog state
-    setDialogStates(prev => {
-      const newStates = new Map(prev)
-      newStates.set(dialogId, {
-        isOpen: true,
-        dialogId,
-        content,
-        triggerElement
-      })
-      return newStates
-    })
-
-    // Track active dialog
-    activeDialogs.current.add(dialogId)
-  }, [])
-
-  const closeDialog = useCallback((dialogId: string) => {
-    const dialogState = dialogStates.get(dialogId)
-
-    // Return focus to trigger element if available
-    if (dialogState?.triggerElement) {
-      // Use a timeout to ensure the dialog has fully closed before focusing
-      const timeout = setTimeout(() => {
-        try {
-          dialogState.triggerElement?.focus()
-        } catch (error) {
-          // Silently handle focus errors (element might be unmounted)
-          console.debug('Focus restoration failed for dialog:', dialogId, error)
-        }
-        dialogTimeouts.current.delete(dialogId)
-      }, 100)
-
-      dialogTimeouts.current.set(dialogId, timeout)
-    }
-
-    // Update dialog state
-    setDialogStates(prev => {
-      const newStates = new Map(prev)
-      newStates.set(dialogId, {
-        ...dialogState,
-        isOpen: false,
-        content: null
-      } as DialogState)
-      return newStates
-    })
-
-    // Remove from active dialogs
-    activeDialogs.current.delete(dialogId)
-  }, [dialogStates])
-
-  const getDialogState = useCallback((dialogId: string): DialogState => {
-    return dialogStates.get(dialogId) || {
-      isOpen: false,
-      dialogId,
-      content: null,
-      triggerElement: null
-    }
-  }, [dialogStates])
-
-  // Cleanup function to prevent memory leaks
-  useEffect(() => {
-    return () => {
-      // Clear all timeouts on unmount
-      dialogTimeouts.current.forEach(timeout => clearTimeout(timeout))
-      dialogTimeouts.current.clear()
-
-      // Clear active dialogs tracking
-      activeDialogs.current.clear()
-
-      // Clear dialog states
-      setDialogStates(new Map())
-    }
-  }, [])
-
-  // Handle dialog state changes and cleanup
-  useEffect(() => {
-    // Clean up closed dialogs after a delay to prevent memory leaks
-    const cleanupTimeout = setTimeout(() => {
-      setDialogStates(prev => {
-        const newStates = new Map()
-        prev.forEach((state, id) => {
-          // Keep only open dialogs or recently closed ones
-          if (state.isOpen || activeDialogs.current.has(id)) {
-            newStates.set(id, state)
-          }
-        })
-        return newStates
-      })
-    }, 5000) // Clean up after 5 seconds
-
-    return () => clearTimeout(cleanupTimeout)
-  }, [dialogStates])
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, -20])
-
   const courses = [
     {
       code: 'EC 201',
@@ -288,15 +162,15 @@ export function TeachingPage() {
   const getLevelColor = (level: string) => {
     switch (level) {
       case 'Undergraduate':
-        return 'bg-emerald-500/20 text-emerald-100 border-emerald-300/40'
+        return 'bg-green-500/20 text-green-300 border-green-300/40'
       case 'Graduate':
-        return 'bg-sky-500/20 text-sky-100 border-sky-300/40'
+        return 'bg-sky-500/20 text-sky-300 border-sky-300/40'
       case 'Advanced':
-        return 'bg-rose-500/20 text-rose-100 border-rose-300/40'
+        return 'bg-rose-500/20 text-rose-300 border-rose-300/40'
       case 'All Levels':
-        return 'bg-[#b19eef]/20 text-[#e7defc] border-[#b19eef]/40'
+        return 'bg-blue-500/20 text-blue-300 border-blue-300/40'
       case 'Intermediate':
-        return 'bg-amber-500/25 text-amber-100 border-amber-300/40'
+        return 'bg-amber-500/25 text-amber-300 border-amber-300/40'
       default:
         return 'bg-white/10 text-white border-white/30'
     }
@@ -309,73 +183,56 @@ export function TeachingPage() {
   }
 
   return (
-    <motion.div
-      ref={containerRef}
-      className='min-h-screen pb-12 px-6'
-      style={{ y }}
-    >
+    <div className='min-h-screen pb-12 px-6'>
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='text-center mb-12'>
-          <h1 className='text-4xl text-white mb-4 font-light tracking-wide'>Teaching Materials</h1>
-          <p className='text-xl text-white/75 mb-6 max-w-3xl mx-auto'>
+          <h1 className='text-5xl font-bold text-white tracking-tighter mb-4'>Teaching Materials</h1>
+          <p className='text-lg text-white/70 mb-6 max-w-3xl mx-auto'>
             Educational resources, course materials, and tutorials for students.
           </p>
         </div>
 
         {/* Current Courses */}
         <div className='mb-16'>
-          <h2 className='text-3xl text-white mb-8 border-b border-white/20 pb-4'>
+          <h2 className='text-3xl font-bold text-white mb-8 border-b border-white/10 pb-4'>
             Current Courses
           </h2>
           <div className='space-y-6'>
             {courses.map((course, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className='border-b border-white/15 pb-6 last:border-b-0'
+                className='border-b border-white/10 pb-6 last:border-b-0'
               >
                 {/* Course Header with Tabular Information */}
                 <div className='mb-4'>
                   <div className='flex items-start justify-between mb-2'>
                     <div className='flex-1'>
-                      <h3 className='text-xl font-medium text-white mb-1'>
+                      <h3 className='text-xl font-medium text-white/90 mb-1'>
                         {course.code}: {course.title}
                       </h3>
                       <div className='text-sm text-white/70 mb-2'>
                         {course.description}
                       </div>
                       {course.status === 'Not available in Course Materials' && (
-                        <div className='text-sm text-rose-300 font-medium mb-2'>
+                        <div className='text-sm text-red-400 font-medium mb-2'>
                           Not available in Course Materials
                         </div>
                       )}
                     </div>
                     <div className='ml-6 text-right'>
                       {course.status === 'Available' ? (
-                        <Dialog
-                          open={getDialogState(`course-${index}`).isOpen}
-                          onOpenChange={(open) => {
-                            if (!open) {
-                              closeDialog(`course-${index}`)
-                            }
-                          }}
-                        >
+                        <Dialog>
                           <DialogTrigger asChild>
                             <Button
                               size='sm'
                               variant='outline'
-                              className='border-white/30 text-white hover:bg-white/10'
-                              onClick={(e) => {
-                                openDialog(`course-${index}`, course, e.currentTarget)
-                              }}
+                              className='border-white/20 text-white/80 hover:bg-white/10 hover:text-white'
                             >
                               View Materials
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto bg-white/10 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
+                          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto bg-black/80 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
                             <DialogHeader>
                               <DialogTitle className='text-2xl text-white mb-2'>
                                 {course.title} - Course Materials
@@ -462,7 +319,7 @@ export function TeachingPage() {
                           size='sm'
                           variant='outline'
                           disabled
-                          className='border-gray-300 text-gray-400'
+                          className='border-gray-500 text-gray-500'
                         >
                           No Materials
                         </Button>
@@ -473,13 +330,13 @@ export function TeachingPage() {
                   {/* Tabular Course Information */}
                   <div className='grid grid-cols-3 gap-4 text-sm bg-white/5 p-3 rounded border border-white/10'>
                     <div>
-                      <span className='font-medium text-white'>Level:</span> <span className='text-white/70'>{course.level}</span>
+                      <span className='font-medium text-white/90'>Level:</span> <span className='text-white/70'>{course.level}</span>
                     </div>
                     <div>
-                      <span className='font-medium text-white'>Semester:</span> <span className='text-white/70'>{course.semester}</span>
+                      <span className='font-medium text-white/90'>Semester:</span> <span className='text-white/70'>{course.semester}</span>
                     </div>
                     <div>
-                      <span className='font-medium text-white'>Materials:</span> <span className='text-white/70'> {
+                      <span className='font-medium text-white/90'>Materials:</span> <span className='text-white/70'> {
                         course.status === 'Available'
                           ? `${course.materials.reduce((sum, m) => sum + m.count, 0)} items`
                           : 'Not available'
@@ -490,18 +347,18 @@ export function TeachingPage() {
 
                 {/* Materials List */}
                 <div className='mb-4'>
-                  <h4 className='text-sm font-medium text-white mb-2'>Course Materials:</h4>
+                  <h4 className='text-sm font-medium text-white/90 mb-2'>Course Materials:</h4>
                   {course.status === 'Available' ? (
                     <ul className='space-y-1 ml-4'>
                       {course.materials.map((material, matIndex) => (
-                        <li key={matIndex} className='text-sm text-white/65 flex items-center'>
+                        <li key={matIndex} className='text-sm text-white/70 flex items-center'>
                           <span className='w-2 h-2 bg-white/60 rounded-full mr-3 flex-shrink-0'></span>
                           {material.type}: {material.count} items
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <div className='text-sm text-rose-300 ml-4'>
+                    <div className='text-sm text-red-400 ml-4'>
                       Not available in Course Materials
                     </div>
                   )}
@@ -509,7 +366,7 @@ export function TeachingPage() {
 
                 {/* Topics */}
                 <div>
-                  <h4 className='text-sm font-medium text-white mb-2'>Topics:</h4>
+                  <h4 className='text-sm font-medium text-white/90 mb-2'>Topics:</h4>
                   <div className='text-sm text-white/70 ml-4'>
                     {course.status === 'Available' && course.topics[0] !== 'Not available'
                       ? course.topics.join(' • ')
@@ -517,28 +374,25 @@ export function TeachingPage() {
                     }
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Additional Resources */}
         <div className='mb-16'>
-          <h2 className='text-3xl text-white mb-8 border-b border-white/20 pb-4'>
+          <h2 className='text-3xl font-bold text-white mb-8 border-b border-white/10 pb-4'>
             Additional Resources
           </h2>
           <div className='space-y-4'>
             {resources.map((resource, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                className='border-b border-white/15 pb-4 last:border-b-0'
+                className='border-b border-white/10 pb-4 last:border-b-0'
               >
                 <div className='flex items-start justify-between mb-2'>
                   <div className='flex-1'>
-                    <h3 className='text-lg font-medium text-white mb-1'>
+                    <h3 className='text-lg font-medium text-white/90 mb-1'>
                       {resource.title}
                     </h3>
                     <p className='text-sm text-white/70 mb-2'>
@@ -546,27 +400,17 @@ export function TeachingPage() {
                     </p>
                   </div>
                   <div className='ml-6 text-right'>
-                    <Dialog
-                      open={getDialogState(`resource-${index}`).isOpen}
-                      onOpenChange={(open) => {
-                        if (!open) {
-                          closeDialog(`resource-${index}`)
-                        }
-                      }}
-                    >
+                    <Dialog>
                       <DialogTrigger asChild>
                         <Button
                           size='sm'
                           variant='outline'
-                          className='border-white/30 text-white hover:bg-white/10'
-                          onClick={(e) => {
-                            openDialog(`resource-${index}`, resource, e.currentTarget)
-                          }}
+                          className='border-white/20 text-white/80 hover:bg-white/10 hover:text-white'
                         >
                           Access Resource
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className='max-w-3xl max-h-[80vh] overflow-y-auto bg-white/10 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
+                      <DialogContent className='max-w-3xl max-h-[80vh] overflow-y-auto bg-black/80 text-white border border-white/20 backdrop-blur-2xl shadow-2xl shadow-black/40'>
                         <DialogHeader>
                           <DialogTitle className='text-2xl text-white mb-2'>
                             {resource.title}
@@ -579,7 +423,7 @@ export function TeachingPage() {
                           <div className='flex items-center space-x-2'>
                             <Badge
                               variant='secondary'
-                              className='bg-[#b19eef]/20 text-[#e4dcff] border-[#b19eef]/40'
+                              className='bg-blue-500/20 text-blue-300 border-blue-300/40'
                             >
                               {resource.type}
                             </Badge>
@@ -594,7 +438,7 @@ export function TeachingPage() {
                           </p>
 
                           <div className='mb-6'>
-                            <h4 className='text-lg text-white mb-3'>
+                            <h4 className='text-lg text-white'>
                               Resource Details
                             </h4>
                             <div className='bg-white/5 p-4 rounded border border-white/10'>
@@ -657,25 +501,25 @@ export function TeachingPage() {
                 {/* Inline Metadata */}
                 <div className='grid grid-cols-4 gap-4 text-sm bg-white/5 p-3 rounded border border-white/10'>
                   <div>
-                    <span className='font-medium text-white'>Type:</span> <span className='text-white/70'>{resource.type}</span>
+                    <span className='font-medium text-white/90'>Type:</span> <span className='text-white/70'>{resource.type}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-white'>Level:</span> <span className='text-white/70'>{resource.level}</span>
+                    <span className='font-medium text-white/90'>Level:</span> <span className='text-white/70'>{resource.level}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-white'>Items:</span> <span className='text-white/70'>{resource.items}</span>
+                    <span className='font-medium text-white/90'>Items:</span> <span className='text-white/70'>{resource.items}</span>
                   </div>
                   <div>
-                    <span className='font-medium text-white'>Updated:</span> <span className='text-white/70'>{resource.lastUpdated}</span>
+                    <span className='font-medium text-white/90'>Updated:</span> <span className='text-white/70'>{resource.lastUpdated}</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
 
       </div>
-    </motion.div>
+    </div>
   )
 }
