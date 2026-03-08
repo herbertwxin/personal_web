@@ -1,6 +1,6 @@
 import { Button } from './ui/button'
 import { ExternalLink, Download, Quote } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 
 interface Publication {
   title: string
@@ -19,11 +19,8 @@ interface Publication {
 
 export function PublicationsPage() {
   const [selectedFilter, setSelectedFilter] = useState('All Publications')
-  const [filteredPublications, setFilteredPublications] = useState<
-    Publication[]
-  >([])
 
-  const publications = [
+  const publications = useMemo(() => [
     {
       title: 'The sacrifice ratio and active fiscal policy',
       authors: 'Christopher G. Gibbs and Herbert W. Xin',
@@ -38,22 +35,20 @@ export function PublicationsPage() {
       citations: 0,
       doi: '10.1016/j.econlet.2024.112038',
     },
-  ]
+  ], [])
 
-  // Filter publications based on selected filter
-  useEffect(() => {
-    let filtered = publications
-
-    if (selectedFilter === 'Journal Articles') {
-      filtered = publications.filter(pub => pub.type === 'Journal Article')
-    } else if (selectedFilter === 'Books') {
-      filtered = publications.filter(pub => pub.type === 'Book')
-    } else if (selectedFilter === 'Working Papers') {
-      filtered = publications.filter(pub => pub.type === 'Working Paper')
+  const filteredPublications = useMemo(() => {
+    switch (selectedFilter) {
+      case 'Journal Articles':
+        return publications.filter(pub => pub.type === 'Journal Article')
+      case 'Books':
+        return publications.filter(pub => pub.type === 'Book')
+      case 'Working Papers':
+        return publications.filter(pub => pub.type === 'Working Paper')
+      default:
+        return publications
     }
-
-    setFilteredPublications(filtered)
-  }, [selectedFilter])
+  }, [selectedFilter, publications])
 
   const filterOptions = [
     'All Publications',
@@ -63,17 +58,32 @@ export function PublicationsPage() {
   ]
 
   // Group publications by year for academic bibliography format
-  const groupedPublications = filteredPublications.reduce((groups, pub) => {
+  const groupedPublications = useMemo(() => filteredPublications.reduce((groups, pub) => {
     const year = pub.year
     if (!groups[year]) {
       groups[year] = []
     }
     groups[year].push(pub)
     return groups
-  }, {} as Record<string, Publication[]>)
+  }, {} as Record<string, Publication[]>), [filteredPublications])
 
   // Sort years in descending order
-  const sortedYears = Object.keys(groupedPublications).sort((a, b) => parseInt(b) - parseInt(a))
+  const sortedYears = useMemo(() => Object.keys(groupedPublications).sort((a, b) => parseInt(b) - parseInt(a)), [groupedPublications])
+
+  const handleOpenDOI = useCallback((doi: string) => {
+    window.open(`https://doi.org/${doi}`, '_blank')
+  }, [])
+
+  const handleDownloadPDF = useCallback((title: string) => {
+    const pdfUrl = `/downloadable/publications/${title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
+    window.open(pdfUrl, '_blank')
+  }, [])
+
+  const handleCopyCitation = useCallback((pub: Publication) => {
+    const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`
+    navigator.clipboard.writeText(citation)
+    alert('Citation copied to clipboard!')
+  }, [])
 
   return (
     <main
@@ -232,7 +242,7 @@ export function PublicationsPage() {
                             variant='ghost'
                             className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                             aria-label={`View ${pub.title} online`}
-                            onClick={() => window.open(`https://doi.org/${pub.doi}`, '_blank')}
+                            onClick={() => handleOpenDOI(pub.doi)}
                           >
                             <ExternalLink className='w-3 h-3 mr-1' aria-hidden="true" />
                             View
@@ -243,10 +253,7 @@ export function PublicationsPage() {
                           variant='ghost'
                           className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Download PDF of ${pub.title}`}
-                          onClick={() => {
-                            const pdfUrl = `/downloadable/publications/${pub.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
-                            window.open(pdfUrl, '_blank')
-                          }}
+                          onClick={() => handleDownloadPDF(pub.title)}
                         >
                           <Download className='w-3 h-3 mr-1' aria-hidden="true" />
                           PDF
@@ -256,11 +263,7 @@ export function PublicationsPage() {
                           variant='ghost'
                           className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                           aria-label={`Get citation for ${pub.title}`}
-                          onClick={() => {
-                            const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`
-                            navigator.clipboard.writeText(citation)
-                            alert('Citation copied to clipboard!')
-                          }}
+                          onClick={() => handleCopyCitation(pub)}
                         >
                           <Quote className='w-3 h-3 mr-1' aria-hidden="true" />
                           Cite

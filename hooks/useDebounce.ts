@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Custom hook for debouncing values
 export function useDebounce<T>(value: T, delay: number): T {
@@ -21,18 +21,33 @@ export function useDebounce<T>(value: T, delay: number): T {
 export function useDebouncedCallback<T extends (...args: any[]) => any>(
   callback: T,
   delay: number
-): T {
-  const [debouncedCallback, setDebouncedCallback] = useState<T>(callback)
+): (...args: Parameters<T>) => void {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const callbackRef = useRef(callback)
 
+  // Keep the callback ref up to date
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedCallback(() => callback)
-    }, delay)
+    callbackRef.current = callback
+  }, [callback])
 
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
-      clearTimeout(handler)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
     }
-  }, [callback, delay])
+  }, [])
 
-  return debouncedCallback
+  return useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      timeoutRef.current = setTimeout(() => {
+        callbackRef.current(...args)
+      }, delay)
+    },
+    [delay]
+  )
 }

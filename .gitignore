@@ -3,6 +3,7 @@
 
 # Build artifacts
 /dist
+*.tsbuildinfo
 
 # Logs
 *.log
@@ -12,3 +13,7 @@ yarn-error.log*
 
 # System files
 .DS_Store
+
+# Debug files
+debug-*.html
+debug-*.js

@@ -1,4 +1,4 @@
-import { useState, Suspense, lazy, useEffect } from 'react'
+import { useState, Suspense, lazy, useEffect, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
@@ -63,22 +63,22 @@ export default function App() {
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
 
-  const menuItems: StaggeredMenuItem[] = [
+  const menuItems: StaggeredMenuItem[] = useMemo(() => [
     { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
     { label: 'Stack', ariaLabel: 'View Stack', link: '/stack' },
     { label: 'Publications', ariaLabel: 'View Publications', link: '/publications' },
     { label: 'Resume', ariaLabel: 'View Resume', link: '/resume' },
     { label: 'Teaching', ariaLabel: 'View Teaching', link: '/teaching' },
     { label: 'Blog', ariaLabel: 'View Blog', link: '/blog' }
-  ]
+  ], [])
 
-  const socialItems: StaggeredMenuSocialItem[] = [
+  const socialItems: StaggeredMenuSocialItem[] = useMemo(() => [
     { label: 'Twitter', link: 'https://twitter.com' },
     { label: 'GitHub', link: 'https://github.com' },
     { label: 'LinkedIn', link: 'https://linkedin.com' }
-  ]
+  ], [])
 
-  const handleMenuItemClick = (link: string) => {
+  const handleMenuItemClick = useCallback((link: string) => {
     const pageMap: Record<string, string> = {
       '/': 'home',
       '/stack': 'stack',
@@ -89,7 +89,7 @@ export default function App() {
     }
     const page = pageMap[link] || 'home'
     setCurrentPage(page)
-  }
+  }, [])
 
   // Performance monitoring and texture optimization setup
   useEffect(() => {

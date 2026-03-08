@@ -77,12 +77,21 @@ export function useAcademicLayout(): AcademicLayoutConfig {
     // Initial check
     updateLayout()
 
-    // Add event listener
+    // Add debounced event listener
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null
+    const debouncedUpdateLayout = () => {
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(updateLayout, 150)
+    }
+
     if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateLayout)
+      window.addEventListener('resize', debouncedUpdateLayout)
       
       // Cleanup
-      return () => window.removeEventListener('resize', updateLayout)
+      return () => {
+        window.removeEventListener('resize', debouncedUpdateLayout)
+        if (resizeTimer) clearTimeout(resizeTimer)
+      }
     }
     
     return undefined
@@ -116,10 +125,19 @@ export function useAcademicTypography() {
     }
     
     updateScale()
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null
+    const debouncedUpdateScale = () => {
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(updateScale, 150)
+    }
+
     if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateScale)
+      window.addEventListener('resize', debouncedUpdateScale)
       
-      return () => window.removeEventListener('resize', updateScale)
+      return () => {
+        window.removeEventListener('resize', debouncedUpdateScale)
+        if (resizeTimer) clearTimeout(resizeTimer)
+      }
     }
     
     return undefined

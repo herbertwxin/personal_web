@@ -106,13 +106,27 @@ export const applyCSSFallbacks = () => {
   document.head.appendChild(style)
 }
 
-// Check for CSS feature support
+// Check for CSS feature support (cached)
+const cssSupport = typeof CSS !== 'undefined' && CSS.supports ? {
+  backdropFilter: CSS.supports('backdrop-filter', 'blur(1px)'),
+  grid: CSS.supports('display', 'grid'),
+  customProperties: CSS.supports('color', 'var(--test)'),
+  focusVisible: CSS.supports('selector(:focus-visible)'),
+  scrollBehavior: CSS.supports('scroll-behavior', 'smooth'),
+} : {
+  backdropFilter: false,
+  grid: false,
+  customProperties: false,
+  focusVisible: false,
+  scrollBehavior: false,
+}
+
 export const checkCSSSupport = {
-  backdropFilter: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('backdrop-filter', 'blur(1px)'),
-  grid: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('display', 'grid'),
-  customProperties: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('color', 'var(--test)'),
-  focusVisible: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('selector(:focus-visible)'),
-  scrollBehavior: () => typeof CSS !== 'undefined' && CSS.supports && CSS.supports('scroll-behavior', 'smooth'),
+  backdropFilter: () => cssSupport.backdropFilter,
+  grid: () => cssSupport.grid,
+  customProperties: () => cssSupport.customProperties,
+  focusVisible: () => cssSupport.focusVisible,
+  scrollBehavior: () => cssSupport.scrollBehavior,
 }
 
 // Progressive enhancement for CSS features

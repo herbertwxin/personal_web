@@ -1,65 +1,71 @@
 import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { Play } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { stackModels, type StackModel } from '../lib/stackModels'
+import { useState, useMemo, useCallback } from 'react'
+import { stackModels } from '../lib/stackModels'
 
 interface StackPageProps {
   onViewModel: (modelId: number) => void
 }
 
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty) {
+    case 'Beginner':
+      return 'text-green-400'
+    case 'Intermediate':
+      return 'text-yellow-400'
+    case 'Advanced':
+      return 'text-red-400'
+    default:
+      return 'text-blue-400'
+  }
+}
+
+const filterOptions = ['All Models', 'Growth Theory', 'New Keynesian', 'Monetary', 'Advanced Models']
+
 export function StackPage({ onViewModel }: StackPageProps) {
   const [selectedFilter, setSelectedFilter] = useState('All Models')
-  const [filteredModels, setFilteredModels] = useState<StackModel[]>(stackModels)
 
-  // Filter models based on selected filter
-  useEffect(() => {
-    let filtered = stackModels
-
-    if (selectedFilter === 'Growth Theory') {
-      filtered = stackModels.filter(
-        model =>
-          model.topics.some(topic => topic.includes('Growth')) ||
-          model.title.toLowerCase().includes('growth') ||
-          model.title.toLowerCase().includes('solow') ||
-          model.title.toLowerCase().includes('ramsey')
-      )
-    } else if (selectedFilter === 'New Keynesian') {
-      filtered = stackModels.filter(
-        model =>
-          model.topics.some(topic => topic.includes('Keynesian')) ||
-          model.title.toLowerCase().includes('keynesian')
-      )
-    } else if (selectedFilter === 'Monetary') {
-      filtered = stackModels.filter(
-        model =>
-          model.topics.some(topic => topic.includes('Monetary')) ||
-          model.title.toLowerCase().includes('monetary')
-      )
-    } else if (selectedFilter === 'Advanced Models') {
-      filtered = stackModels.filter(
-        model =>
-          model.difficulty === 'Advanced'
-      )
+  const filteredModels = useMemo(() => {
+    switch (selectedFilter) {
+      case 'Growth Theory':
+        return stackModels.filter(
+          model =>
+            model.topics.some(topic => topic.includes('Growth')) ||
+            model.title.toLowerCase().includes('growth') ||
+            model.title.toLowerCase().includes('solow') ||
+            model.title.toLowerCase().includes('ramsey')
+        )
+      case 'New Keynesian':
+        return stackModels.filter(
+          model =>
+            model.topics.some(topic => topic.includes('Keynesian')) ||
+            model.title.toLowerCase().includes('keynesian')
+        )
+      case 'Monetary':
+        return stackModels.filter(
+          model =>
+            model.topics.some(topic => topic.includes('Monetary')) ||
+            model.title.toLowerCase().includes('monetary')
+        )
+      case 'Advanced Models':
+        return stackModels.filter(
+          model =>
+            model.difficulty === 'Advanced'
+        )
+      default:
+        return stackModels
     }
-
-    setFilteredModels(filtered)
   }, [selectedFilter])
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Beginner':
-        return 'text-green-400'
-      case 'Intermediate':
-        return 'text-yellow-400'
-      case 'Advanced':
-        return 'text-red-400'
-      default:
-        return 'text-blue-400'
-    }
-  }
-
-  const filterOptions = ['All Models', 'Growth Theory', 'New Keynesian', 'Monetary', 'Advanced Models']
+  const handleDownloadPDF = useCallback((pdfPath: string) => {
+    const link = document.createElement('a');
+    link.href = pdfPath;
+    link.download = pdfPath.split('/').pop() || 'document.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, [])
 
   return (
     <motion.div
@@ -159,14 +165,7 @@ export function StackPage({ onViewModel }: StackPageProps) {
                       size='sm'
                       variant='outline'
                       className='text-white/70 border-white/20 hover:bg-white/10 hover:text-white'
-                      onClick={() => {
-                        const link = document.createElement('a');
-                        link.href = model.pdfPath;
-                        link.download = model.pdfPath.split('/').pop() || 'document.pdf';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
+                      onClick={() => handleDownloadPDF(model.pdfPath)}
                     >
                       Download PDF
                     </Button>

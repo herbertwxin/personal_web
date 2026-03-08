@@ -17,20 +17,26 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
   const [selectedResultIndex, setSelectedResultIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  useState({ x: 0, width: 0 })
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const searchInputRef = useRef<HTMLInputElement>(null)
 
-  // Responsive behavior detection
+  // Responsive behavior detection with debounced resize
   useEffect(() => {
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+      if (resizeTimer) clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        setIsMobile(window.innerWidth < 768)
+      }, 150)
     }
     
-    checkMobile()
+    setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', checkMobile)
     
-    return () => window.removeEventListener('resize', checkMobile)
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      if (resizeTimer) clearTimeout(resizeTimer)
+    }
   }, [])
 
   // Search functionality

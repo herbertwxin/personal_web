@@ -77,7 +77,11 @@ export const preloadFonts = () => {
     preloadLink.addEventListener('error', activateStylesheet, { once: true })
 
     // Fallback in case the load event never fires (older browsers)
-    setTimeout(activateStylesheet, 3000)
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(activateStylesheet)
+    } else {
+      setTimeout(activateStylesheet, 1000)
+    }
 
     document.head.appendChild(preloadLink)
   })
