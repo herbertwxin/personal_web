@@ -1,12 +1,13 @@
 import { blogPosts } from '../lib/blogPosts'
 import { Button } from './ui/button'
+import { useMemo } from 'react'
 
 interface BlogPageProps {
   onReadPost: (blogId: number) => void
 }
 
 export function BlogPage({ onReadPost }: BlogPageProps) {
-  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const sortedPosts = useMemo(() => [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), [])
 
   return (
     <div className='min-h-screen pb-12 px-6'>
