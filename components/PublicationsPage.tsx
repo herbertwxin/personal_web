@@ -81,8 +81,11 @@ export function PublicationsPage() {
 
   const handleCopyCitation = useCallback((pub: Publication) => {
     const citation = `${pub.authors}. "${pub.title}." ${pub.journal}, ${pub.volume}, ${pub.pages} (${pub.year}). https://doi.org/${pub.doi}`
-    navigator.clipboard.writeText(citation)
-    alert('Citation copied to clipboard!')
+    navigator.clipboard.writeText(citation).then(() => {
+      alert('Citation copied to clipboard!')
+    }).catch(() => {
+      alert('Failed to copy citation.')
+    })
   }, [])
 
   return (

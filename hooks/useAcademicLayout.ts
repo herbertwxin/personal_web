@@ -1,5 +1,18 @@
 import { useState, useEffect } from 'react'
 
+// Helper to create a debounced version of a callback for use in event listeners
+function createDebouncedHandler(handler: () => void, delay: number) {
+  let timer: ReturnType<typeof setTimeout> | null = null
+  const debounced = () => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(handler, delay)
+  }
+  const cleanup = () => {
+    if (timer) clearTimeout(timer)
+  }
+  return { debounced, cleanup }
+}
+
 interface AcademicLayoutConfig {
   isMobile: boolean
   isTablet: boolean
@@ -78,11 +91,7 @@ export function useAcademicLayout(): AcademicLayoutConfig {
     updateLayout()
 
     // Add debounced event listener
-    let resizeTimer: ReturnType<typeof setTimeout> | null = null
-    const debouncedUpdateLayout = () => {
-      if (resizeTimer) clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(updateLayout, 150)
-    }
+    const { debounced: debouncedUpdateLayout, cleanup } = createDebouncedHandler(updateLayout, 150)
 
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', debouncedUpdateLayout)
@@ -90,7 +99,7 @@ export function useAcademicLayout(): AcademicLayoutConfig {
       // Cleanup
       return () => {
         window.removeEventListener('resize', debouncedUpdateLayout)
-        if (resizeTimer) clearTimeout(resizeTimer)
+        cleanup()
       }
     }
     
@@ -125,18 +134,14 @@ export function useAcademicTypography() {
     }
     
     updateScale()
-    let resizeTimer: ReturnType<typeof setTimeout> | null = null
-    const debouncedUpdateScale = () => {
-      if (resizeTimer) clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(updateScale, 150)
-    }
+    const { debounced: debouncedUpdateScale, cleanup } = createDebouncedHandler(updateScale, 150)
 
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', debouncedUpdateScale)
       
       return () => {
         window.removeEventListener('resize', debouncedUpdateScale)
-        if (resizeTimer) clearTimeout(resizeTimer)
+        cleanup()
       }
     }
     

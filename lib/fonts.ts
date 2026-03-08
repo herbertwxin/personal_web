@@ -78,7 +78,7 @@ export const preloadFonts = () => {
 
     // Fallback in case the load event never fires (older browsers)
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(activateStylesheet)
+      requestIdleCallback(activateStylesheet, { timeout: 1000 })
     } else {
       setTimeout(activateStylesheet, 1000)
     }
