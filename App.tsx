@@ -1,15 +1,12 @@
-import { useState, Suspense, lazy, useEffect, useMemo, useCallback } from 'react'
+import { useState, Suspense, lazy, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { StaggeredMenu } from './components/StaggeredMenu'
-import type { StaggeredMenuItem, StaggeredMenuSocialItem } from './components/StaggeredMenu'
+import { TopNav } from './components/TopNav'
 import { HomePage } from './components/HomePage'
-import { ThemeToggle } from './components/ThemeToggle'
 import { useTheme } from './hooks/useTheme'
 import { perf, logMemoryUsage } from './lib/performance'
 
-// Lazy load page components for better performance
 const StackPage = lazy(() =>
   import('./components/StackPage').then(module => ({
     default: module.StackPage,
@@ -44,7 +41,6 @@ const BlogPostPage = lazy(() =>
   }))
 )
 
-// Loading component for lazy-loaded pages
 const PageLoader = () => (
   <motion.div
     className='flex items-center justify-center min-h-[60vh]'
@@ -61,46 +57,20 @@ const PageLoader = () => (
 )
 
 export default function App() {
-  useTheme() // initialize theme from system/localStorage on mount
+  useTheme()
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
 
-  const menuItems: StaggeredMenuItem[] = useMemo(() => [
-    { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
-    { label: 'Publications', ariaLabel: 'View Publications', link: '/publications' },
-    { label: 'Resume', ariaLabel: 'View Resume', link: '/resume' },
-    { label: 'Teaching', ariaLabel: 'View Teaching', link: '/teaching' },
-    { label: 'Blog', ariaLabel: 'View Blog', link: '/blog' }
-  ], [])
-
-  const socialItems: StaggeredMenuSocialItem[] = useMemo(() => [
-    { label: 'Twitter', link: 'https://twitter.com' },
-    { label: 'GitHub', link: 'https://github.com' },
-    { label: 'LinkedIn', link: 'https://linkedin.com' }
-  ], [])
-
-  const handleMenuItemClick = useCallback((link: string) => {
-    const pageMap: Record<string, string> = {
-      '/': 'home',
-      '/publications': 'publications',
-      '/resume': 'resume',
-      '/teaching': 'teaching',
-      '/blog': 'blog'
-    }
-    const page = pageMap[link] || 'home'
+  const handlePageChange = useCallback((page: string) => {
     setCurrentPage(page)
   }, [])
 
-  // Performance monitoring and texture optimization setup
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       perf.mark('app-mount')
       perf.logBundleInfo()
-
-      // Log memory usage periodically in development
       const memoryInterval = setInterval(logMemoryUsage, 30000)
-
       return () => {
         clearInterval(memoryInterval)
         perf.mark('app-unmount')
@@ -113,7 +83,14 @@ export default function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage />
+        return (
+          <HomePage
+            onNavigateToBlogPost={id => {
+              setCurrentBlogId(id)
+              setCurrentPage('blog-post')
+            }}
+          />
+        )
       case 'stack':
         return (
           <Suspense fallback={<PageLoader />}>
@@ -173,29 +150,22 @@ export default function App() {
           </Suspense>
         )
       default:
-        return <HomePage />
+        return (
+          <HomePage
+            onNavigateToBlogPost={id => {
+              setCurrentBlogId(id)
+              setCurrentPage('blog-post')
+            }}
+          />
+        )
     }
   }
 
   return (
     <div className='relative min-h-screen overflow-hidden text-tx-primary bg-sf-base'>
-      <StaggeredMenu
-        position='right'
-        items={menuItems}
-        socialItems={socialItems}
-        displaySocials={true}
-        displayItemNumbering={true}
-        menuButtonColor='#141413'
-        openMenuButtonColor='#faf9f5'
-        changeMenuColorOnOpen={true}
-        colors={['#c96442', '#a85035']}
-        accentColor='#c96442'
-        isFixed={true}
-        logoSlot={<ThemeToggle />}
-        onItemClick={(item) => handleMenuItemClick(item.link)}
-      />
+      <TopNav currentPage={currentPage} onPageChange={handlePageChange} />
 
-      <main className='relative z-30 pt-32 pb-16'>
+      <main className='relative z-30 pt-20 pb-16'>
         <div className='px-4 sm:px-6 md:px-10'>
           <div className='page-surface mx-auto w-full max-w-6xl py-10 sm:py-12'>
             {renderPage()}

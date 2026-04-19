@@ -1,47 +1,38 @@
-import { motion } from 'framer-motion'
-import { MapPin, Clock } from 'lucide-react'
+import { MapPin, Clock, ExternalLink } from 'lucide-react'
+import { useMemo } from 'react'
+import { publications } from '../lib/publications'
+import { blogPosts } from '../lib/blogPosts'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-} as const
+interface HomePageProps {
+  onNavigateToBlogPost: (id: number) => void
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-} as const
+export function HomePage({ onNavigateToBlogPost }: HomePageProps) {
+  const recentPublications = useMemo(
+    () => [...publications].sort((a, b) => parseInt(b.year) - parseInt(a.year)).slice(0, 3),
+    []
+  )
 
-export function HomePage() {
+  const recentBlogPosts = useMemo(
+    () =>
+      [...blogPosts]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 3),
+    []
+  )
+
   return (
-    <motion.div
-      className='min-h-screen pb-12 px-6'
-      variants={containerVariants}
-      initial='hidden'
-      animate='visible'
-    >
+    <div className='min-h-screen pb-12 px-6'>
       <div className='max-w-4xl mx-auto'>
         {/* Hero Section */}
-        <motion.div variants={itemVariants} className='mb-8'>
+        <div className='mb-16'>
           <div className='flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16'>
-            {/* Left Column - Text Content and Office Hours */}
+            {/* Left Column */}
             <div className='flex-1'>
-              {/* Hero Text */}
-              <h1 className='font-serif text-5xl font-medium text-tx-primary tracking-tight leading-tight mb-4'
-                style={{ lineHeight: '1.1' }}>
+              <h1
+                className='font-serif text-5xl font-medium text-tx-primary tracking-tight leading-tight mb-4'
+                style={{ lineHeight: '1.1' }}
+              >
                 Herbert Xin
               </h1>
 
@@ -58,7 +49,7 @@ export function HomePage() {
                 This website also serves as a blog and repo for my personal projects.
               </p>
 
-              {/* Office Hours Section */}
+              {/* Office Hours */}
               <div className='mt-12'>
                 <h2 className='mb-4 flex items-center gap-3 text-base font-medium text-tx-secondary tracking-tight'>
                   <Clock className='w-4 h-4 text-tx-faint' />
@@ -85,20 +76,82 @@ export function HomePage() {
               </div>
             </div>
 
-            {/* Profile Image - Right Side */}
-            <div className='flex-shrink-0 w-full lg:w-[24rem] lg:min-w-[24rem]'>
+            {/* Profile Sketch */}
+            <div className='flex-shrink-0 w-full lg:w-[21rem] lg:min-w-[21rem]'>
               <div className='relative flex justify-center h-full'>
                 <img
-                  src='/downloadable/profile.jpeg'
-                  alt='Herbert Xin Profile'
-                  className='w-full h-full rounded-xl object-cover'
-                  style={{ boxShadow: 'rgba(20,20,19,0.06) 0 4px 24px, 0 0 0 1px #f0eee6' }}
+                  src='/downloadable/profile-sketch.png'
+                  alt='Herbert Xin'
+                  className='w-full object-contain'
+                  style={{
+                    maxHeight: '26rem',
+                    maskImage:
+                      'radial-gradient(ellipse 88% 88% at 50% 44%, black 20%, transparent 72%)',
+                    WebkitMaskImage:
+                      'radial-gradient(ellipse 88% 88% at 50% 44%, black 20%, transparent 72%)',
+                  }}
                 />
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Recent Publications */}
+        <div className='mb-14'>
+          <h2 className='font-serif text-2xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
+            Recent Publications
+          </h2>
+          <ul className='space-y-5'>
+            {recentPublications.map(pub => (
+              <li key={pub.doi}>
+                <a
+                  href={`https://doi.org/${pub.doi}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='group flex items-start gap-2 hover:opacity-80 transition-opacity'
+                >
+                  <span className='flex-1 text-base font-medium text-tx-primary group-hover:text-ac-brand transition-colors'>
+                    {pub.title}
+                  </span>
+                  <ExternalLink className='w-3.5 h-3.5 text-tx-faint mt-1 flex-shrink-0' />
+                </a>
+                <p className='text-sm text-tx-faint mt-0.5'>
+                  {pub.journal} · {pub.year}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Recent Blog Posts */}
+        <div>
+          <h2 className='font-serif text-2xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
+            Recent Posts
+          </h2>
+          <ul className='space-y-5'>
+            {recentBlogPosts.map(post => (
+              <li key={post.id}>
+                <button
+                  onClick={() => onNavigateToBlogPost(post.id)}
+                  className='group text-left w-full'
+                >
+                  <span className='text-base font-medium text-tx-primary group-hover:text-ac-brand transition-colors'>
+                    {post.title}
+                  </span>
+                </button>
+                <p className='text-sm text-tx-faint mt-0.5'>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}{' '}
+                  · {post.readTime}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
