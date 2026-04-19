@@ -2,12 +2,16 @@ import { MapPin, Clock, ExternalLink } from 'lucide-react'
 import { useMemo } from 'react'
 import { publications } from '../lib/publications'
 import { blogPosts } from '../lib/blogPosts'
+import { useTheme } from '../hooks/useTheme'
 
 interface HomePageProps {
   onNavigateToBlogPost: (id: number) => void
 }
 
 export function HomePage({ onNavigateToBlogPost }: HomePageProps) {
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+
   const recentPublications = useMemo(
     () => [...publications].sort((a, b) => parseInt(b.year) - parseInt(a.year)).slice(0, 3),
     []
@@ -80,10 +84,12 @@ export function HomePage({ onNavigateToBlogPost }: HomePageProps) {
             <div className='flex-shrink-0 w-full lg:w-[21rem] lg:min-w-[21rem]'>
               <div className='relative flex justify-center h-full'>
                 <img
-                  src='/downloadable/profile-sketch.png'
+                  src={isDark ? '/downloadable/profile.jpeg' : '/downloadable/profile-sketch.png'}
                   alt='Herbert Xin'
                   className='w-full object-contain'
-                  style={{
+                  style={isDark ? {
+                    maxHeight: '26rem',
+                  } : {
                     maxHeight: '26rem',
                     maskImage:
                       'radial-gradient(ellipse 88% 88% at 50% 44%, black 20%, transparent 72%)',
