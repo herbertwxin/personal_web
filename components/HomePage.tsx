@@ -2,16 +2,13 @@ import { MapPin, Clock, ExternalLink } from 'lucide-react'
 import { useMemo } from 'react'
 import { publications } from '../lib/publications'
 import { blogPosts } from '../lib/blogPosts'
-import { useTheme } from '../hooks/useTheme'
 
 interface HomePageProps {
+  isDark: boolean
   onNavigateToBlogPost: (id: number) => void
 }
 
-export function HomePage({ onNavigateToBlogPost }: HomePageProps) {
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
-
+export function HomePage({ isDark, onNavigateToBlogPost }: HomePageProps) {
   const recentPublications = useMemo(
     () => [...publications].sort((a, b) => parseInt(b.year) - parseInt(a.year)).slice(0, 3),
     []

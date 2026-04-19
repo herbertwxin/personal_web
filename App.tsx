@@ -57,7 +57,7 @@ const PageLoader = () => (
 )
 
 export default function App() {
-  useTheme()
+  const { theme } = useTheme()
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
@@ -85,6 +85,7 @@ export default function App() {
       case 'home':
         return (
           <HomePage
+            isDark={theme === 'dark'}
             onNavigateToBlogPost={id => {
               setCurrentBlogId(id)
               setCurrentPage('blog-post')
@@ -152,6 +153,7 @@ export default function App() {
       default:
         return (
           <HomePage
+            isDark={theme === 'dark'}
             onNavigateToBlogPost={id => {
               setCurrentBlogId(id)
               setCurrentPage('blog-post')
@@ -162,7 +164,7 @@ export default function App() {
   }
 
   return (
-    <div className='relative min-h-screen overflow-hidden text-tx-primary bg-sf-base'>
+    <div className='relative min-h-screen overflow-x-hidden text-tx-primary bg-sf-base'>
       <TopNav currentPage={currentPage} onPageChange={handlePageChange} />
 
       <main className='relative z-30 pt-20 pb-16'>

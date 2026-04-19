@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'
 
-function getSystemTheme(): Theme {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
-
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle('dark', theme === 'dark')
 }
@@ -13,7 +9,7 @@ function applyTheme(theme: Theme) {
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(() => {
     const stored = localStorage.getItem('theme') as Theme | null
-    return stored ?? getSystemTheme()
+    return stored ?? 'light'
   })
 
   useEffect(() => {
