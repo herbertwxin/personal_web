@@ -34,7 +34,7 @@ export function HomePage({ isDark, onNavigateToBlogPost }: HomePageProps) {
                 className='font-serif text-5xl font-medium text-tx-primary tracking-tight leading-tight mb-4'
                 style={{ lineHeight: '1.1' }}
               >
-                Herbert Xin
+                Herbert W. Xin
               </h1>
 
               <div className='text-xl font-medium text-tx-muted tracking-tight mb-1'>
