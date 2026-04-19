@@ -3,6 +3,8 @@ import { ThemeToggle } from './ThemeToggle'
 interface TopNavProps {
   currentPage: string
   onPageChange: (page: string) => void
+  theme: 'light' | 'dark'
+  onToggleTheme: () => void
 }
 
 const navItems = [
@@ -13,7 +15,7 @@ const navItems = [
   { id: 'blog', label: 'Blog' },
 ]
 
-export function TopNav({ currentPage, onPageChange }: TopNavProps) {
+export function TopNav({ currentPage, onPageChange, theme, onToggleTheme }: TopNavProps) {
   return (
     <header
       style={{
@@ -62,7 +64,7 @@ export function TopNav({ currentPage, onPageChange }: TopNavProps) {
               })}
             </nav>
             <div className='ml-2 pl-2' style={{ borderLeft: '1px solid var(--nav-border)' }}>
-              <ThemeToggle />
+              <ThemeToggle theme={theme} onToggle={onToggleTheme} />
             </div>
           </div>
         </div>

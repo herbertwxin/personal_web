@@ -314,6 +314,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   overscroll-behavior: bounce;
   -webkit-overflow-scrolling: touch;
   /* Prevent layout shifts from margin collapsing */

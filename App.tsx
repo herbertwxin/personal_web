@@ -57,7 +57,7 @@ const PageLoader = () => (
 )
 
 export default function App() {
-  const { theme } = useTheme()
+  const { theme, toggleTheme } = useTheme()
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
@@ -164,8 +164,8 @@ export default function App() {
   }
 
   return (
-    <div className='relative min-h-screen overflow-x-hidden text-tx-primary bg-sf-base'>
-      <TopNav currentPage={currentPage} onPageChange={handlePageChange} />
+    <div className='relative min-h-screen text-tx-primary bg-sf-base'>
+      <TopNav currentPage={currentPage} onPageChange={handlePageChange} theme={theme} onToggleTheme={toggleTheme} />
 
       <main className='relative z-30 pt-20 pb-16'>
         <div className='px-4 sm:px-6 md:px-10'>
