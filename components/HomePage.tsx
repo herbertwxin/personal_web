@@ -40,44 +40,43 @@ export function HomePage() {
             {/* Left Column - Text Content and Office Hours */}
             <div className='flex-1'>
               {/* Hero Text */}
-              <h1 className='font-serif text-5xl font-medium text-near-black tracking-tight leading-tight mb-4'
+              <h1 className='font-serif text-5xl font-medium text-tx-primary tracking-tight leading-tight mb-4'
                 style={{ lineHeight: '1.1' }}>
                 Herbert Xin
               </h1>
 
-              <div className='text-xl font-medium text-olive-gray tracking-tight mb-1'>
+              <div className='text-xl font-medium text-tx-muted tracking-tight mb-1'>
                 PhD Candidate in Economics
               </div>
 
-              <div className='text-xl font-medium text-olive-gray tracking-tight mb-8'>
+              <div className='text-xl font-medium text-tx-muted tracking-tight mb-8'>
                 University of Oregon
               </div>
 
-              <p className='text-lg text-olive-gray max-w-2xl mb-12 leading-relaxed'>
-                My current research focuses on interaction between monetary and fiscal policy.
-                This website also serves as a blog and repo for my personal project Model Stack,
-                a directory for macroeconomics models.
+              <p className='text-lg text-tx-muted max-w-2xl mb-12 leading-relaxed'>
+                My current research focuses on computational economics, monetary and fiscal policy.
+                This website also serves as a blog and repo for my personal projects.
               </p>
 
               {/* Office Hours Section */}
               <div className='mt-12'>
-                <h2 className='mb-4 flex items-center gap-3 text-base font-medium text-charcoal-warm tracking-tight'>
-                  <Clock className='w-4 h-4 text-stone-gray' />
+                <h2 className='mb-4 flex items-center gap-3 text-base font-medium text-tx-secondary tracking-tight'>
+                  <Clock className='w-4 h-4 text-tx-faint' />
                   Office Hours
                 </h2>
 
                 <div>
                   <div className='mb-4'>
-                    <p className='text-base text-charcoal-warm'>
-                      By appointment for Fall 2025
+                    <p className='text-base text-tx-secondary'>
+                      Wednesdays 10:00-12:00 AM for Spring 2026
                     </p>
                   </div>
 
                   <div className='flex items-start gap-3'>
-                    <MapPin className='w-4 h-4 text-stone-gray mt-0.5 flex-shrink-0' />
+                    <MapPin className='w-4 h-4 text-tx-faint mt-0.5 flex-shrink-0' />
                     <div>
-                      <p className='text-base text-charcoal-warm'>Office Location</p>
-                      <p className='text-sm text-stone-gray'>
+                      <p className='text-base text-tx-secondary'>Office Location</p>
+                      <p className='text-sm text-tx-faint'>
                         Prince Lucien Campbell Hall (PLC), Room 522
                       </p>
                     </div>
