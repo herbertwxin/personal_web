@@ -5,6 +5,8 @@ import { SpeedInsights } from '@vercel/speed-insights/react'
 import { StaggeredMenu } from './components/StaggeredMenu'
 import type { StaggeredMenuItem, StaggeredMenuSocialItem } from './components/StaggeredMenu'
 import { HomePage } from './components/HomePage'
+import { ThemeToggle } from './components/ThemeToggle'
+import { useTheme } from './hooks/useTheme'
 import { perf, logMemoryUsage } from './lib/performance'
 
 // Lazy load page components for better performance
@@ -44,14 +46,14 @@ const BlogPostPage = lazy(() =>
 
 // Loading component for lazy-loaded pages
 const PageLoader = () => (
-  <motion.div 
+  <motion.div
     className='flex items-center justify-center min-h-[60vh]'
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 0.2, duration: 0.3 }}
   >
     <motion.div
-      className='w-6 h-6 border-2 border-transparent border-t-muted-purple-600 rounded-full'
+      className='w-6 h-6 border-2 border-transparent border-t-terracotta rounded-full'
       animate={{ rotate: 360 }}
       transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
     />
@@ -59,13 +61,13 @@ const PageLoader = () => (
 )
 
 export default function App() {
+  useTheme() // initialize theme from system/localStorage on mount
   const [currentPage, setCurrentPage] = useState('home')
   const [currentModelId, setCurrentModelId] = useState<number | null>(null)
   const [currentBlogId, setCurrentBlogId] = useState<number | null>(null)
 
   const menuItems: StaggeredMenuItem[] = useMemo(() => [
     { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
-    { label: 'Stack', ariaLabel: 'View Stack', link: '/stack' },
     { label: 'Publications', ariaLabel: 'View Publications', link: '/publications' },
     { label: 'Resume', ariaLabel: 'View Resume', link: '/resume' },
     { label: 'Teaching', ariaLabel: 'View Teaching', link: '/teaching' },
@@ -81,7 +83,6 @@ export default function App() {
   const handleMenuItemClick = useCallback((link: string) => {
     const pageMap: Record<string, string> = {
       '/': 'home',
-      '/stack': 'stack',
       '/publications': 'publications',
       '/resume': 'resume',
       '/teaching': 'teaching',
@@ -177,20 +178,20 @@ export default function App() {
   }
 
   return (
-    <div className='relative min-h-screen overflow-hidden text-foreground bg-black'>
+    <div className='relative min-h-screen overflow-hidden text-tx-primary bg-sf-base'>
       <StaggeredMenu
         position='right'
         items={menuItems}
         socialItems={socialItems}
         displaySocials={true}
         displayItemNumbering={true}
-        menuButtonColor='#fff'
-        openMenuButtonColor='#000'
+        menuButtonColor='#141413'
+        openMenuButtonColor='#faf9f5'
         changeMenuColorOnOpen={true}
-        colors={['#B19EEF', '#5227FF']}
-        accentColor='#B19EEF'
+        colors={['#c96442', '#a85035']}
+        accentColor='#c96442'
         isFixed={true}
-        logoUrl='/logo.png'
+        logoSlot={<ThemeToggle />}
         onItemClick={(item) => handleMenuItemClick(item.link)}
       />
 

@@ -5,169 +5,136 @@ interface MarkdownRendererProps {
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  // Simple markdown-like rendering for mathematical content
   const renderContent = (text: string) => {
     const lines = text.split('\n')
     const elements: JSX.Element[] = []
     let i = 0
-    
+
     while (i < lines.length) {
       const line = lines[i]
-      
-      // Handle code blocks
+
       if (line.startsWith('```')) {
         const language = line.substring(3).trim()
         const codeLines: string[] = []
-        i++ // Move past opening ```
-        
-        // Collect code lines until closing ```
+        i++
+
         while (i < lines.length && !lines[i].startsWith('```')) {
           codeLines.push(lines[i])
           i++
         }
-        
-        // Move past closing ``` if found
-        if (i < lines.length) {
-          i++
-        }
-        
+        if (i < lines.length) i++
+
         let codeContent = codeLines.join('\n')
-        
-        // Clean up code content (remove leading tabs/spaces if consistent)
         if (codeLines.length > 0 && codeLines[0].trim() !== '') {
           const firstLineIndent = codeLines[0].match(/^[\t\s]*/)?.[0] || ''
-          if (firstLineIndent && codeLines.every((line: string) => line.startsWith(firstLineIndent) || line.trim() === '')) {
-            codeContent = codeLines.map((line: string) => line.substring(firstLineIndent.length)).join('\n')
+          if (firstLineIndent && codeLines.every((l: string) => l.startsWith(firstLineIndent) || l.trim() === '')) {
+            codeContent = codeLines.map((l: string) => l.substring(firstLineIndent.length)).join('\n')
           }
         }
-        
-        // Auto-detect language if not specified
+
         let detectedLanguage = language
         if (!detectedLanguage && codeContent.includes('[Desktop Entry]')) {
           detectedLanguage = 'desktop'
         }
-        
-        // Determine text color based on language
+
         let textColor = 'text-gray-100'
-        if (detectedLanguage === 'bash') {
-          textColor = 'text-purple-400'
-        } else if (detectedLanguage === 'desktop') {
-          textColor = 'text-blue-300'
-        }
-        
+        if (detectedLanguage === 'bash') textColor = 'text-purple-300'
+        else if (detectedLanguage === 'desktop') textColor = 'text-blue-300'
+
         elements.push(
-          <div key={`code-${i}`} className="my-4">
-            <div className="bg-gray-900 rounded-lg overflow-hidden">
+          <div key={`code-${i}`} className='my-4'>
+            <div className='bg-[#1e1e1c] rounded-lg overflow-hidden border border-[#30302e]'>
               {(language || detectedLanguage) && (
-                <div className="bg-gray-800 px-4 py-2 text-sm text-gray-300 font-mono border-b border-gray-700">
+                <div className='bg-[#141413] px-4 py-2 text-sm text-[#87867f] font-mono border-b border-[#30302e]'>
                   {language || detectedLanguage}
                 </div>
               )}
-              <pre className="p-4 overflow-x-auto">
-                <code className={`text-sm font-mono ${textColor}`}>
-                  {codeContent}
-                </code>
+              <pre className='p-4 overflow-x-auto'>
+                <code className={`text-sm font-mono ${textColor}`}>{codeContent}</code>
               </pre>
             </div>
           </div>
         )
-        
-        continue // Skip the increment at the bottom
+        continue
       }
-      
-      // Handle inline formatting (code, links, bold, italic)
-      let processedLine = line.replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>')
-      
-      // Handle markdown links [text](url)
-      processedLine = processedLine.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">$1</a>')
-      
-      // Handle bold and italic (do bold first, then italic to avoid conflicts)
+
+      let processedLine = line.replace(
+        /`([^`]+)`/g,
+        '<code class="bg-bd-subtle px-1 py-0.5 rounded text-sm font-mono text-tx-primary">$1</code>'
+      )
+      processedLine = processedLine.replace(
+        /\[([^\]]+)\]\(([^)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-ac-brand hover:text-ac-hover underline">$1</a>'
+      )
       processedLine = processedLine.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
       processedLine = processedLine.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-      
-      // Handle blockquotes
+
       if (line.startsWith('> ')) {
         elements.push(
-          <blockquote key={i} className="border-l-4 border-purple-400 pl-4 py-2 my-4 bg-purple-900/20 text-gray-200 italic rounded-md">
+          <blockquote key={i} className='border-l-4 border-ac-brand pl-4 py-2 my-4 bg-sf-hover text-tx-secondary italic rounded-r-md'>
             <div dangerouslySetInnerHTML={{ __html: processedLine.substring(2) }} />
           </blockquote>
         )
         i++
         continue
       }
-      
-      // Headers (apply formatting to header text)
+
       if (line.startsWith('# ')) {
-        const headerText = processedLine.substring(2)
         elements.push(
-          <h1 key={i} className="text-3xl font-bold mt-8 mb-4 text-black">
-            <div dangerouslySetInnerHTML={{ __html: headerText }} />
+          <h1 key={i} className='font-serif text-3xl font-medium mt-8 mb-4 text-tx-primary'>
+            <div dangerouslySetInnerHTML={{ __html: processedLine.substring(2) }} />
           </h1>
         )
       } else if (line.startsWith('## ')) {
-        const headerText = processedLine.substring(3)
         elements.push(
-          <h2 key={i} className="text-2xl font-semibold mt-6 mb-3 text-black">
-            <div dangerouslySetInnerHTML={{ __html: headerText }} />
+          <h2 key={i} className='font-serif text-2xl font-medium mt-6 mb-3 text-tx-primary'>
+            <div dangerouslySetInnerHTML={{ __html: processedLine.substring(3) }} />
           </h2>
         )
       } else if (line.startsWith('### ')) {
-        const headerText = processedLine.substring(4)
         elements.push(
-          <h3 key={i} className="text-xl font-medium mt-4 mb-2 text-black">
-            <div dangerouslySetInnerHTML={{ __html: headerText }} />
+          <h3 key={i} className='font-serif text-xl font-medium mt-4 mb-2 text-tx-primary'>
+            <div dangerouslySetInnerHTML={{ __html: processedLine.substring(4) }} />
           </h3>
         )
       } else if (line.startsWith('#### ')) {
-        const headerText = processedLine.substring(5)
         elements.push(
-          <h4 key={i} className="text-lg font-medium mt-3 mb-2 text-black">
-            <div dangerouslySetInnerHTML={{ __html: headerText }} />
+          <h4 key={i} className='text-lg font-medium mt-3 mb-2 text-tx-primary'>
+            <div dangerouslySetInnerHTML={{ __html: processedLine.substring(5) }} />
           </h4>
         )
       } else if (line.trim() === '') {
-        // Empty lines
         elements.push(<br key={i} />)
-      } else if (line.includes('=') && (line.includes('_') || line.includes('^') || line.includes('∑') || line.includes('∫'))) {
-        // Mathematical expressions (simple detection)
-        elements.push(
-          <div key={i} className="bg-gray-50 p-3 my-2 rounded border-l-4 border-blue-200 font-mono text-sm">
-            {line}
-          </div>
-        )
       } else if (line.trim().startsWith('- ')) {
-        // Unordered lists
         const listText = processedLine.substring(processedLine.indexOf('- ') + 2)
         elements.push(
-          <li key={i} className="ml-4 mb-1 text-gray-700 list-disc">
+          <li key={i} className='ml-4 mb-1 text-tx-secondary list-disc'>
             <div dangerouslySetInnerHTML={{ __html: listText }} />
           </li>
         )
       } else if (/^\d+\./.test(line.trim())) {
-        // Ordered lists
         const listText = processedLine.substring(processedLine.indexOf('.') + 1).trim()
         elements.push(
-          <li key={i} className="ml-4 mb-1 text-gray-700 list-decimal">
+          <li key={i} className='ml-4 mb-1 text-tx-secondary list-decimal'>
             <div dangerouslySetInnerHTML={{ __html: listText }} />
           </li>
         )
       } else {
-        // Regular paragraphs with all formatting applied
         elements.push(
-          <p key={i} className="mb-3 text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />
+          <p key={i} className='mb-3 text-tx-secondary leading-relaxed' dangerouslySetInnerHTML={{ __html: processedLine }} />
         )
       }
-      
-      i++ // Move to next line
+
+      i++
     }
-    
+
     return elements
   }
 
   const renderedContent = useMemo(() => renderContent(content), [content])
 
   return (
-    <div className="prose prose-lg max-w-none">
+    <div className='prose prose-lg max-w-none'>
       {renderedContent}
     </div>
   )

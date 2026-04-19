@@ -28,8 +28,8 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
     return (
       <div className='min-h-screen flex items-center justify-center'>
         <div className='text-center'>
-          <h1 className='text-2xl font-bold text-white mb-4'>Post not found</h1>
-          <Button onClick={onBack} variant="outline" className="text-white/80 border-white/20 hover:bg-white/10 hover:text-white">
+          <h1 className='font-serif text-2xl font-medium text-tx-primary mb-4'>Post not found</h1>
+          <Button onClick={onBack} variant="outline" className="text-tx-secondary border-bd-strong hover:bg-sf-hover hover:text-tx-primary">
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
           </Button>
@@ -46,7 +46,7 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
           <Button
             variant='ghost'
             onClick={onBack}
-            className='mb-8 text-white/70 hover:bg-white/10 hover:text-white'
+            className='mb-8 text-tx-muted hover:bg-sf-hover hover:text-tx-primary'
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
@@ -54,13 +54,16 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
 
           {/* Article Header */}
           <header className='mb-8 page-header'>
-            <h1 className='text-5xl font-bold text-white tracking-tighter mb-6'>
+            <h1
+              className='font-serif text-5xl font-medium text-tx-primary tracking-tight mb-6'
+              style={{ lineHeight: '1.1' }}
+            >
               {post.title}
             </h1>
 
             {/* Article Meta */}
             <div className='flex flex-wrap items-center gap-6 mb-6'>
-              <div className='flex items-center gap-2 text-white/70'>
+              <div className='flex items-center gap-2 text-tx-faint'>
                 <Calendar className='w-4 h-4' />
                 <span>
                   {new Date(post.date).toLocaleDateString('en-US', {
@@ -70,11 +73,9 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
                   })}
                 </span>
               </div>
-              <div className='flex items-center gap-2 text-white/70'>
+              <div className='flex items-center gap-2 text-tx-faint'>
                 <Clock className='w-4 h-4' />
-                <span>
-                  {post.readTime}
-                </span>
+                <span>{post.readTime}</span>
               </div>
             </div>
 
@@ -84,7 +85,7 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
                 <Badge
                   key={tag}
                   variant='secondary'
-                  className='bg-white/10 text-white/80'
+                  className='bg-sf-hover text-tx-muted border border-bd-strong'
                 >
                   {tag}
                 </Badge>
@@ -97,13 +98,12 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
         <div className='flex gap-8 relative'>
           {/* Main Content */}
           <div className='flex-1 min-w-0'>
-            {/* Article Content */}
-            <article className='prose prose-invert prose-lg max-w-none'>
+            <article className='prose prose-stone prose-lg max-w-none prose-headings:font-serif prose-headings:font-medium prose-a:text-ac-brand'>
               <MarkdownRenderer content={post.content} />
             </article>
 
             {/* Article Actions */}
-            <div className='mt-12 pt-8 border-t border-white/10'>
+            <div className='mt-12 pt-8 border-t border-bd-subtle'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
                   <Button
@@ -111,7 +111,9 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
                     size='sm'
                     onClick={() => setLiked(!liked)}
                     className={`${
-                      liked ? 'bg-blue-500/10 text-blue-300 border-blue-500/20' : 'text-white/70 border-white/20 hover:bg-white/10 hover:text-white'
+                      liked
+                        ? 'bg-ac-brand/10 text-ac-brand border-ac-brand/30'
+                        : 'text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
                     }`}
                   >
                     <ThumbsUp className={`w-4 h-4 mr-2 ${liked ? 'fill-current' : ''}`} />
@@ -122,14 +124,16 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
                     size='sm'
                     onClick={() => setBookmarked(!bookmarked)}
                     className={`${
-                      bookmarked ? 'bg-yellow-500/10 text-yellow-300 border-yellow-500/20' : 'text-white/70 border-white/20 hover:bg-white/10 hover:text-white'
+                      bookmarked
+                        ? 'bg-amber-50 text-amber-700 border-amber-200'
+                        : 'text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
                     }`}
                   >
                     <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
                     {bookmarked ? 'Saved' : 'Save'}
                   </Button>
                 </div>
-                <Button variant='outline' size='sm' className="text-white/70 border-white/20 hover:bg-white/10 hover:text-white">
+                <Button variant='outline' size='sm' className="text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary">
                   <Share2 className='w-4 h-4 mr-2' />
                   Share
                 </Button>

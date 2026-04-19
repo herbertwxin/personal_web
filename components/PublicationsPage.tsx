@@ -57,17 +57,13 @@ export function PublicationsPage() {
     'Working Papers',
   ]
 
-  // Group publications by year for academic bibliography format
   const groupedPublications = useMemo(() => filteredPublications.reduce((groups, pub) => {
     const year = pub.year
-    if (!groups[year]) {
-      groups[year] = []
-    }
+    if (!groups[year]) groups[year] = []
     groups[year].push(pub)
     return groups
   }, {} as Record<string, Publication[]>), [filteredPublications])
 
-  // Sort years in descending order
   const sortedYears = useMemo(() => Object.keys(groupedPublications).sort((a, b) => parseInt(b) - parseInt(a)), [groupedPublications])
 
   const handleOpenDOI = useCallback((doi: string) => {
@@ -97,26 +93,24 @@ export function PublicationsPage() {
     >
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
-        <header
-          className='mb-12'
-          role="banner"
-        >
-          <h1 
-            className='text-5xl font-bold text-white tracking-tighter mb-6'
+        <header className='mb-12' role="banner">
+          <h1
+            className='font-serif text-5xl font-medium text-tx-primary tracking-tight mb-6'
+            style={{ lineHeight: '1.1' }}
             id="page-title"
           >
             Publications
           </h1>
-          <p className='text-lg text-white/70 mb-8 max-w-3xl leading-relaxed'>
-            Research contributions in economics and related fields.
+          <p className='text-lg text-tx-muted mb-8 max-w-3xl leading-relaxed'>
+            Research contributions
           </p>
-          <div className='flex items-center gap-2 text-sm text-white/70'>
+          <div className='flex items-center gap-2 text-sm text-tx-faint'>
             <span>ORCID:</span>
-            <a 
-              href="https://orcid.org/0009-0000-9394-9423" 
-              target="_blank" 
+            <a
+              href="https://orcid.org/0009-0000-9394-9423"
+              target="_blank"
               rel="noopener noreferrer"
-              className='text-[#B19EEF] hover:underline'
+              className='text-ac-brand hover:underline'
             >
               https://orcid.org/0009-0000-9394-9423
             </a>
@@ -133,10 +127,10 @@ export function PublicationsPage() {
           {filterOptions.map(option => (
             <button
               key={option}
-              className={`px-3 py-1 text-sm border rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+              className={`px-3 py-1 text-sm border rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ac-brand focus-visible:ring-offset-2 ${
                 selectedFilter === option
-                  ? 'bg-[#B19EEF] text-white border-[#B19EEF]'
-                  : 'text-white/70 border-white/20 hover:bg-white/10 hover:text-white'
+                  ? 'bg-ac-brand text-ac-fg border-ac-brand'
+                  : 'text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
               }`}
               onClick={() => setSelectedFilter(option)}
               aria-pressed={selectedFilter === option}
@@ -148,29 +142,17 @@ export function PublicationsPage() {
         </nav>
 
         {/* Academic Bibliography List */}
-        <section
-          aria-label="Publications by year"
-        >
+        <section aria-label="Publications by year">
           {sortedYears.map((year) => (
-            <section
-              key={year}
-              className='mb-12'
-              aria-labelledby={`year-${year}`}
-            >
-              {/* Year Header */}
-              <h2 
-                className='text-3xl font-bold text-white mb-6 border-b border-white/10 pb-2'
+            <section key={year} className='mb-12' aria-labelledby={`year-${year}`}>
+              <h2
+                className='font-serif text-3xl font-medium text-tx-primary mb-6 border-b border-bd-subtle pb-2'
                 id={`year-${year}`}
               >
                 {year}
               </h2>
 
-              {/* Publications for this year */}
-              <div 
-                className='space-y-6'
-                role="list"
-                aria-label={`Publications from ${year}`}
-              >
+              <div className='space-y-6' role="list" aria-label={`Publications from ${year}`}>
                 {groupedPublications[year].map((pub, index) => (
                   <article
                     key={index}
@@ -180,51 +162,40 @@ export function PublicationsPage() {
                     aria-label={`Publication: ${pub.title}`}
                     id={`pub-${year}-${index}`}
                   >
-                    {/* Citation Entry - Each element on separate line */}
                     <div className='mb-3'>
-                      {/* Line 1: Title */}
                       <h3
-                        className='text-white font-medium text-xl leading-tight mb-1'
+                        className='text-tx-primary font-medium text-xl leading-tight mb-1'
                         id={`pub-title-${year}-${index}`}
                       >
                         {pub.title}
                       </h3>
 
-                      {/* Line 2: Authors */}
-                      <div className='text-white/90 text-base mb-1'>
+                      <div className='text-tx-secondary text-base mb-1'>
                         {pub.authors}
                       </div>
 
-                      {/* Line 3: Journal, Volume, Pages */}
-                      <div className='text-white/90 text-base'>
+                      <div className='text-tx-secondary text-base'>
                         <em>{pub.journal}</em>
                         {pub.volume && <span>, {pub.volume}</span>}
                         {pub.pages && <span>, {pub.pages}</span>}
                       </div>
                     </div>
 
-                    {/* Abstract */}
                     <div className='ml-4 mb-3'>
-                      <p 
-                        className='text-sm text-white/70 leading-relaxed'
+                      <p
+                        className='text-sm text-tx-muted leading-relaxed'
                         aria-describedby={`pub-title-${year}-${index}`}
                       >
                         {pub.abstract}
                       </p>
                     </div>
 
-                    {/* Keywords and Actions */}
                     <div className='ml-4 flex flex-wrap items-center gap-4'>
-                      {/* Keywords */}
-                      <div 
-                        className='flex flex-wrap gap-1'
-                        role="group"
-                        aria-label="Publication keywords"
-                      >
+                      <div className='flex flex-wrap gap-1' role="group" aria-label="Publication keywords">
                         {pub.keywords.map((keyword, keyIndex) => (
                           <span
                             key={keyIndex}
-                            className='text-xs text-[#B19EEF] bg-white/10 px-2 py-0.5 rounded'
+                            className='text-xs text-ac-brand bg-sf-raised border border-bd-subtle px-2 py-0.5 rounded'
                             role="status"
                             aria-label={`Keyword: ${keyword}`}
                           >
@@ -233,17 +204,12 @@ export function PublicationsPage() {
                         ))}
                       </div>
 
-                      {/* Action Buttons */}
-                      <div 
-                        className='flex gap-2 ml-auto'
-                        role="group"
-                        aria-label="Publication actions"
-                      >
+                      <div className='flex gap-2 ml-auto' role="group" aria-label="Publication actions">
                         {pub.doi && (
                           <Button
                             size='sm'
                             variant='ghost'
-                            className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                            className='text-xs text-ac-brand hover:text-ac-hover hover:bg-sf-hover p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-ac-brand focus-visible:ring-offset-2'
                             aria-label={`View ${pub.title} online`}
                             onClick={() => handleOpenDOI(pub.doi)}
                           >
@@ -254,7 +220,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-ac-brand hover:text-ac-hover hover:bg-sf-hover p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-ac-brand focus-visible:ring-offset-2'
                           aria-label={`Download PDF of ${pub.title}`}
                           onClick={() => handleDownloadPDF(pub.title)}
                         >
@@ -264,7 +230,7 @@ export function PublicationsPage() {
                         <Button
                           size='sm'
                           variant='ghost'
-                          className='text-xs text-[#B19EEF] hover:text-[#B19EEF] hover:bg-white/10 p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                          className='text-xs text-ac-brand hover:text-ac-hover hover:bg-sf-hover p-1 h-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-ac-brand focus-visible:ring-offset-2'
                           aria-label={`Get citation for ${pub.title}`}
                           onClick={() => handleCopyCitation(pub)}
                         >
@@ -279,8 +245,6 @@ export function PublicationsPage() {
             </section>
           ))}
         </section>
-
-
       </div>
     </main>
   )

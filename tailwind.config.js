@@ -76,20 +76,45 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
-        // Custom purple-blue accent color (#B19EEF)
-        'purple-blue': {
-          50: '#f3f1ff',
-          100: '#e9e5ff',
-          200: '#d6ceff',
-          300: '#b8a9ff',
-          400: '#9575ff',
-          500: '#7c3aed',
-          600: '#B19EEF', // Main accent color
-          700: '#8f79da',
-          800: '#4c41a3',
-          900: '#3f3582',
+        // Adaptive semantic tokens (auto dark/light)
+        'tx-primary': 'var(--tx-primary)',
+        'tx-secondary': 'var(--tx-secondary)',
+        'tx-muted': 'var(--tx-muted)',
+        'tx-faint': 'var(--tx-faint)',
+        'tx-accent': 'var(--tx-accent)',
+        'sf-base': 'var(--sf-base)',
+        'sf-raised': 'var(--sf-raised)',
+        'sf-hover': 'var(--sf-hover)',
+        'sf-active': 'var(--sf-active)',
+        'bd-subtle': 'var(--bd-subtle)',
+        'bd-strong': 'var(--bd-strong)',
+        'ac-brand': 'var(--ac-brand)',
+        'ac-hover': 'var(--ac-hover)',
+        'ac-fg': 'var(--ac-fg)',
+        // Warm neutral palette
+        'parchment': '#f5f4ed',
+        'ivory': '#faf9f5',
+        'terracotta': {
+          DEFAULT: '#c96442',
+          light: '#d97757',
+          dark: '#a85035',
         },
-        // Custom muted purple design tokens (updated to purple-blue)
+        'near-black': '#141413',
+        'charcoal-warm': '#4d4c48',
+        'olive-gray': '#5e5d59',
+        'stone-gray': '#87867f',
+        'warm-silver': '#b0aea5',
+        'warm-sand': '#e8e6dc',
+        'border-cream': '#f0eee6',
+        'border-warm': '#e8e6dc',
+        'dark-surface': '#30302e',
+        'ring-warm': '#d1cfc5',
+        // Kept for backward compat with any components that reference it
+        'purple-blue': {
+          600: '#c96442',
+          700: '#a85035',
+        },
+        // Terracotta accent tones (replaces muted-purple)
         'muted-purple': {
           50: 'var(--muted-purple-50)',
           100: 'var(--muted-purple-100)',
@@ -105,6 +130,13 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
+        serif: [
+          'Georgia',
+          'Cambria',
+          'Times New Roman',
+          'Times',
+          'serif',
+        ],
         sans: [
           'Inter',
           '-apple-system',

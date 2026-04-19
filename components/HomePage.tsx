@@ -40,19 +40,20 @@ export function HomePage() {
             {/* Left Column - Text Content and Office Hours */}
             <div className='flex-1'>
               {/* Hero Text */}
-              <h1 className='text-5xl font-bold text-white tracking-tighter mb-4'>
+              <h1 className='font-serif text-5xl font-medium text-near-black tracking-tight leading-tight mb-4'
+                style={{ lineHeight: '1.1' }}>
                 Herbert Xin
               </h1>
 
-              <div className='text-2xl font-semibold text-white tracking-tight mb-2'>
+              <div className='text-xl font-medium text-olive-gray tracking-tight mb-1'>
                 PhD Candidate in Economics
               </div>
 
-              <div className='text-2xl font-semibold text-white tracking-tight mb-8'>
+              <div className='text-xl font-medium text-olive-gray tracking-tight mb-8'>
                 University of Oregon
               </div>
 
-              <p className='text-lg text-white/90 max-w-2xl mb-12 leading-normal'>
+              <p className='text-lg text-olive-gray max-w-2xl mb-12 leading-relaxed'>
                 My current research focuses on interaction between monetary and fiscal policy.
                 This website also serves as a blog and repo for my personal project Model Stack,
                 a directory for macroeconomics models.
@@ -60,23 +61,23 @@ export function HomePage() {
 
               {/* Office Hours Section */}
               <div className='mt-12'>
-                <h2 className='mb-4 flex items-center gap-3 text-lg font-semibold text-white tracking-tight'>
-                  <Clock className='w-5 h-5 text-white/70' />
+                <h2 className='mb-4 flex items-center gap-3 text-base font-medium text-charcoal-warm tracking-tight'>
+                  <Clock className='w-4 h-4 text-stone-gray' />
                   Office Hours
                 </h2>
 
                 <div>
                   <div className='mb-4'>
-                    <p className='text-base text-white/90 font-medium'>
+                    <p className='text-base text-charcoal-warm'>
                       By appointment for Fall 2025
                     </p>
                   </div>
 
                   <div className='flex items-start gap-3'>
-                    <MapPin className='w-5 h-5 text-white/70 mt-0.5 flex-shrink-0' />
+                    <MapPin className='w-4 h-4 text-stone-gray mt-0.5 flex-shrink-0' />
                     <div>
-                      <p className='text-base text-white/90 font-medium'>Office Location</p>
-                      <p className='text-sm text-white/70'>
+                      <p className='text-base text-charcoal-warm'>Office Location</p>
+                      <p className='text-sm text-stone-gray'>
                         Prince Lucien Campbell Hall (PLC), Room 522
                       </p>
                     </div>
@@ -91,7 +92,8 @@ export function HomePage() {
                 <img
                   src='/downloadable/profile.jpeg'
                   alt='Herbert Xin Profile'
-                  className='w-full h-full rounded-lg object-cover border-4 border-white/10'
+                  className='w-full h-full rounded-xl object-cover'
+                  style={{ boxShadow: 'rgba(20,20,19,0.06) 0 4px 24px, 0 0 0 1px #f0eee6' }}
                 />
               </div>
             </div>

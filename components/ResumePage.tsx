@@ -103,24 +103,27 @@ export function ResumePage() {
     },
   ]
 
-
-
   return (
     <div className='min-h-screen pb-12 px-6'>
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='mb-12'>
-          <h1 className='text-5xl font-bold text-white tracking-tighter mb-2'>Curriculum Vitae</h1>
-          <p className='text-lg text-white/90 mb-6'>
+          <h1
+            className='font-serif text-5xl font-medium text-tx-primary tracking-tight mb-2'
+            style={{ lineHeight: '1.1' }}
+          >
+            Curriculum Vitae
+          </h1>
+          <p className='text-lg text-tx-secondary mb-6'>
             Wei (Herbert) Xin
           </p>
-          <div className='text-sm text-white/70 mb-6 space-y-1'>
+          <div className='text-sm text-tx-muted mb-6 space-y-1'>
             <div>📧 hxin@uoregon.edu</div>
-            <div>🔗 <a href="https://www.linkedin.com/in/herbert-xin-24170aa3/" className="text-blue-400 hover:underline">LinkedIn Profile</a></div>
+            <div>🔗 <a href="https://www.linkedin.com/in/herbert-xin-24170aa3/" className="text-ac-brand hover:underline">LinkedIn Profile</a></div>
           </div>
           <Button
             variant="outline"
-            className='text-white/80 border-white/20 hover:bg-white/10 hover:text-white'
+            className='text-tx-secondary border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
           >
             <Download className='w-4 h-4 mr-2' />
             Download PDF
@@ -129,21 +132,21 @@ export function ResumePage() {
 
         {/* Education Section */}
         <section className='mb-12'>
-          <h2 className='text-3xl font-bold text-white mb-6 pb-2 border-b border-white/10'>
+          <h2 className='font-serif text-3xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
             Education
           </h2>
           <div className='space-y-4'>
             {education.map((edu, index) => (
               <div key={index} className='flex justify-between items-start'>
                 <div className='flex-1'>
-                  <div className='font-medium text-white/90'>{edu.degree}</div>
-                  <div className='text-white/90'>{edu.institution}</div>
-                  <div className='text-sm text-white/70 mt-1'>{edu.details}</div>
+                  <div className='font-medium text-tx-secondary'>{edu.degree}</div>
+                  <div className='text-tx-secondary'>{edu.institution}</div>
+                  <div className='text-sm text-tx-muted mt-1'>{edu.details}</div>
                   {edu.advisor && (
-                    <div className='text-sm text-white/70'>Advisor: {edu.advisor}</div>
+                    <div className='text-sm text-tx-muted'>Advisor: {edu.advisor}</div>
                   )}
                 </div>
-                <div className='text-sm text-white/70 ml-4 flex-shrink-0'>
+                <div className='text-sm text-tx-faint ml-4 flex-shrink-0'>
                   {edu.year}
                 </div>
               </div>
@@ -153,7 +156,7 @@ export function ResumePage() {
 
         {/* Experience Section */}
         <section className='mb-12'>
-          <h2 className='text-3xl font-bold text-white mb-6 pb-2 border-b border-white/10'>
+          <h2 className='font-serif text-3xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
             Professional Experience
           </h2>
           <div className='space-y-6'>
@@ -161,14 +164,14 @@ export function ResumePage() {
               <div key={index}>
                 <div className='flex justify-between items-start mb-2'>
                   <div className='flex-1'>
-                    <div className='font-medium text-white/90'>{exp.position}</div>
-                    <div className='text-white/90'>{exp.institution}</div>
+                    <div className='font-medium text-tx-secondary'>{exp.position}</div>
+                    <div className='text-tx-secondary'>{exp.institution}</div>
                   </div>
-                  <div className='text-sm text-white/70 ml-4 flex-shrink-0'>
+                  <div className='text-sm text-tx-faint ml-4 flex-shrink-0'>
                     {exp.period}
                   </div>
                 </div>
-                <ul className='mt-2 space-y-1 text-sm text-white/70'>
+                <ul className='mt-2 space-y-1 text-sm text-tx-muted'>
                   {exp.details.map((detail, detailIndex) => (
                     <li key={detailIndex} className='ml-4'>
                       • {detail}
@@ -182,16 +185,16 @@ export function ResumePage() {
 
         {/* Skills Section */}
         <section className='mb-12'>
-          <h2 className='text-3xl font-bold text-white mb-6 pb-2 border-b border-white/10'>
-            Skills & Expertise
+          <h2 className='font-serif text-3xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
+            Skills &amp; Expertise
           </h2>
           <div className='grid md:grid-cols-2 gap-6'>
             {skills.map((skillSet, index) => (
               <div key={index}>
-                <h3 className='font-medium text-white/90 mb-2'>
+                <h3 className='font-medium text-tx-secondary mb-2'>
                   {skillSet.category}
                 </h3>
-                <div className='text-sm text-white/70'>
+                <div className='text-sm text-tx-muted'>
                   {skillSet.items.join(', ')}
                 </div>
               </div>
@@ -199,11 +202,9 @@ export function ResumePage() {
           </div>
         </section>
 
-
-
         {/* Projects Section */}
         <section className='mb-12'>
-          <h2 className='text-3xl font-bold text-white mb-6 pb-2 border-b border-white/10'>
+          <h2 className='font-serif text-3xl font-medium text-tx-primary mb-6 pb-2 border-b border-bd-subtle'>
             Personal Projects
           </h2>
           <div className='space-y-6'>
@@ -211,11 +212,11 @@ export function ResumePage() {
               <div key={index}>
                 <div className='flex justify-between items-start mb-2'>
                   <div className='flex-1'>
-                    <div className='font-medium text-white/90'>{project.title}</div>
-                    <div className='text-white/90'>{project.description}</div>
+                    <div className='font-medium text-tx-secondary'>{project.title}</div>
+                    <div className='text-tx-secondary'>{project.description}</div>
                   </div>
                 </div>
-                <ul className='mt-2 space-y-1 text-sm text-white/70'>
+                <ul className='mt-2 space-y-1 text-sm text-tx-muted'>
                   {project.details.map((detail, detailIndex) => (
                     <li key={detailIndex} className='ml-4'>
                       • {detail}
@@ -227,18 +228,16 @@ export function ResumePage() {
           </div>
         </section>
 
-
-
         {/* Contact CTA */}
-        <div className='pt-8 border-t border-white/10'>
-          <h3 className='text-xl font-bold text-white mb-3'>Contact</h3>
-          <p className='text-white/70 mb-4 max-w-2xl'>
+        <div className='pt-8 border-t border-bd-subtle'>
+          <h3 className='font-serif text-xl font-medium text-tx-primary mb-3'>Contact</h3>
+          <p className='text-tx-muted mb-4 max-w-2xl'>
             Interested in collaboration, research opportunities, or academic discussions?
             I'd love to hear from you.
           </p>
           <Button
             variant='outline'
-            className='text-white/80 border-white/20 hover:bg-white/10 hover:text-white'
+            className='text-tx-secondary border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
           >
             Get In Touch
           </Button>

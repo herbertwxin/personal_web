@@ -132,7 +132,6 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
 
   const pages = [
     { id: 'home', label: 'Home', width: isMobile ? 60 : 82, mobileLabel: 'Home' },
-    { id: 'stack', label: 'Stack', width: isMobile ? 60 : 82, mobileLabel: 'Stack' },
     { id: 'publications', label: isMobile ? 'Pubs' : 'Publications', width: isMobile ? 50 : 110, mobileLabel: 'Pubs' },
     { id: 'resume', label: 'Resume', width: isMobile ? 60 : 82, mobileLabel: 'Resume' },
     { id: 'teaching', label: isMobile ? 'Teach' : 'Teaching', width: isMobile ? 50 : 88, mobileLabel: 'Teach' },
@@ -200,7 +199,7 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
         animate={{
           opacity: 1,
           scale: 1,
-          width: searchMode ? (isMobile ? 320 : 420) : (isMobile ? 480 : 700),
+          width: searchMode ? (isMobile ? 320 : 420) : (isMobile ? 480 : 620),
         }}
         transition={{
           duration: 0.6,
@@ -212,18 +211,18 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
           transition: { duration: 0.2 },
         }}
         style={{
-          background: 'rgba(8, 6, 24, 0.72)',
-          backdropFilter: 'blur(24px) saturate(0.82)',
-          WebkitBackdropFilter: 'blur(24px) saturate(0.82)',
+          background: 'rgba(245, 244, 237, 0.92)',
+          backdropFilter: 'blur(24px) saturate(1.1)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.1)',
           willChange: 'transform, width',
           padding: '8px 16px',
           height: '48px',
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
-          border: '1px solid rgba(177, 158, 239, 0.22)',
-          boxShadow: '0 24px 64px -24px rgba(5, 3, 24, 0.82)',
-          minWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
-          maxWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
+          border: '1px solid #f0eee6',
+          boxShadow: '0 4px 24px -8px rgba(20, 20, 19, 0.1), 0 0 0 1px #f0eee6',
+          minWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '620px'),
+          maxWidth: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '620px'),
         }}
       >
         <AnimatePresence>
@@ -244,16 +243,11 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                 mass: 0.4,
               }}
               style={{
-                // 液体玻璃效果背景
-                background: 'rgba(177, 158, 239, 0.15)',
+                background: '#e8e6dc',
                 backdropFilter: 'blur(10px)',
                 WebkitBackdropFilter: 'blur(10px)',
-                border: '1px solid rgba(177, 158, 239, 0.2)',
-                boxShadow: `
-                  0 4px 20px rgba(177, 158, 239, 0.15),
-                  inset 0 1px 1px rgba(255, 255, 255, 0.4),
-                  inset 0 -1px 1px rgba(0, 0, 0, 0.05)
-                `,
+                border: '1px solid #d1cfc5',
+                boxShadow: '0 0 0 1px #d1cfc5, inset 0 1px 1px rgba(255,255,255,0.6)',
                 willChange: 'transform, width, scale',
                 transform: 'translateZ(0)',
                 backfaceVisibility: 'hidden',
@@ -292,19 +286,19 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Search className='w-5 h-5 text-white flex-shrink-0' />
+              <Search className='w-5 h-5 text-olive-gray flex-shrink-0' />
               <input
                 ref={searchInputRef}
                 type='text'
                 placeholder='Search academic content...'
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className='flex-1 bg-transparent text-white placeholder-white/50 border-none outline-none text-sm h-full'
+                className='flex-1 bg-transparent text-near-black placeholder-stone-gray border-none outline-none text-sm h-full'
                 autoFocus
               />
               <motion.button
                 onClick={closeSearch}
-                className='text-white hover:text-white/70 transition-colors flex-shrink-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                className='text-olive-gray hover:text-near-black transition-colors flex-shrink-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
                 style={{
                   outline: 'none',
                   boxShadow: 'none',
@@ -368,8 +362,8 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                       }`}
                       style={{
                         width: `${page.width}px`,
-                        color: '#ffffff',
-                        opacity: isActive ? 1 : 0.75,
+                        color: '#141413',
+                        opacity: isActive ? 1 : 0.55,
                         outline: 'none',
                         boxShadow: 'none',
                       }}
@@ -384,7 +378,7 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
               {/* Search Icon */}
               <motion.button
                 onClick={openSearch}
-                className='ml-3 p-2 text-white hover:text-white/70 transition-colors rounded-full hover:bg-white/10 h-8 w-8 flex items-center justify-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
+                className='ml-3 p-2 text-olive-gray hover:text-near-black transition-colors rounded-full hover:bg-warm-sand h-8 w-8 flex items-center justify-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 outline-none'
                 style={{
                   outline: 'none',
                   boxShadow: 'none',
@@ -400,18 +394,18 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
                   transition: { duration: 0.1 },
                 }}
               >
-                <Search className='w-4 h-4 text-white' />
+                <Search className='w-4 h-4 text-olive-gray' />
               </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Glass reflection effect */}
+        {/* Warm highlight effect */}
         <div
           className='absolute inset-0 rounded-full pointer-events-none overflow-hidden'
           style={{
             background:
-              'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 30%, rgba(255,255,255,0.1) 100%)',
+              'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 40%)',
           }}
         />
       </motion.div>
@@ -427,16 +421,16 @@ export function Navigation({ currentPage, onPageChange, onSearchStateChange }: N
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className='fixed top-16 sm:top-20 left-1/2 transform -translate-x-1/2 rounded-2xl overflow-hidden shadow-2xl z-50'
           style={{
-            background: 'rgba(7, 5, 26, 0.82)',
-            backdropFilter: 'blur(36px) saturate(0.85)',
-            WebkitBackdropFilter: 'blur(36px) saturate(0.85)',
-            border: '1px solid rgba(177, 158, 239, 0.18)',
+            background: 'rgba(250, 249, 245, 0.98)',
+            backdropFilter: 'blur(24px) saturate(1.1)',
+            WebkitBackdropFilter: 'blur(24px) saturate(1.1)',
+            border: '1px solid #f0eee6',
             maxHeight: '500px',
             overflowY: 'auto',
-            width: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '700px'),
+            width: searchMode ? (isMobile ? '320px' : '420px') : (isMobile ? '480px' : '620px'),
             maxWidth: '90vw',
             marginLeft: '-210px',
-            boxShadow: '0 40px 96px -32px rgba(5, 3, 24, 0.75)',
+            boxShadow: '0 8px 32px -8px rgba(20, 20, 19, 0.12), 0 0 0 1px #f0eee6',
           }}
         >
           {!searchQuery.trim() ? (
