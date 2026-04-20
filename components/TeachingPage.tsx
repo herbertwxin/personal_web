@@ -1,16 +1,16 @@
 export function TeachingPage() {
   const courses = [
     {
-      code: 'EC 201',
-      title: 'Principles of Microeconomics',
-      semester: 'Spring 2025',
+      code: 'EC 607',
+      title: 'Core Marcoeconomics',
+      semester: 'Fall 2025, Winter 2025, Spring 2026',
       description:
-        'Examines how consumers and firms make choices when facing scarce resources, and how those choices are related to government policy and market outcomes, such as prices and output.',
+        'Core Macroeconomics course for 1st year PhD.',
     },
     {
       code: 'EC 201',
       title: 'Principles of Microeconomics',
-      semester: 'Winter 2024',
+      semester: 'Winter 2024, Spring 2025',
       description:
         'Examines how consumers and firms make choices when facing scarce resources, and how those choices are related to government policy and market outcomes, such as prices and output.',
     },
