@@ -1,16 +1,7 @@
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
-import {
-  ArrowLeft,
-  Calendar,
-  Clock,
-  Share2,
-  Bookmark,
-  ThumbsUp,
-} from 'lucide-react'
-import { useState } from 'react'
-import { MarkdownRenderer } from './MarkdownRenderer'
-import { TableOfContents } from './TableOfContents'
+import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { blogPosts } from '../lib/blogPosts'
 
 interface BlogPostPageProps {
@@ -19,17 +10,58 @@ interface BlogPostPageProps {
 }
 
 export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
-  const [liked, setLiked] = useState(false)
-  const [bookmarked, setBookmarked] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const observerRef = useRef<ResizeObserver | null>(null)
+  const [iframeHeight, setIframeHeight] = useState<number>(600)
 
   const post = blogPosts.find(p => p.id === blogId)
+
+  // Measure the rendered document and size the iframe so the article flows
+  // inline with a single page scroll (no nested scrollbar).
+  const resizeIframe = useCallback(() => {
+    const iframe = iframeRef.current
+    const doc = iframe?.contentWindow?.document
+    if (!doc) {return}
+    const height = Math.max(
+      doc.documentElement.scrollHeight,
+      doc.body?.scrollHeight ?? 0
+    )
+    if (height > 0) {setIframeHeight(height)}
+  }, [])
+
+  // On load, measure once and then keep watching the document: images and web
+  // fonts settle after the load event and grow the content, so a single
+  // measurement clips the article. A ResizeObserver re-measures on any change.
+  const handleLoad = useCallback(() => {
+    resizeIframe()
+    const doc = iframeRef.current?.contentWindow?.document
+    if (!doc) {return}
+    observerRef.current?.disconnect()
+    const observer = new ResizeObserver(() => resizeIframe())
+    observer.observe(doc.documentElement)
+    observerRef.current = observer
+  }, [resizeIframe])
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeIframe)
+    return () => {
+      window.removeEventListener('resize', resizeIframe)
+      observerRef.current?.disconnect()
+    }
+  }, [resizeIframe])
 
   if (!post) {
     return (
       <div className='min-h-screen flex items-center justify-center'>
         <div className='text-center'>
-          <h1 className='font-serif text-2xl font-medium text-tx-primary mb-4'>Post not found</h1>
-          <Button onClick={onBack} variant="outline" className="text-tx-secondary border-bd-strong hover:bg-sf-hover hover:text-tx-primary">
+          <h1 className='font-serif text-2xl font-medium text-tx-primary mb-4'>
+            Post not found
+          </h1>
+          <Button
+            onClick={onBack}
+            variant='outline'
+            className='text-tx-secondary border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
+          >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
           </Button>
@@ -41,47 +73,32 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
   return (
     <div className='min-h-screen pb-12 px-6'>
       <div className='max-w-4xl mx-auto'>
-        {/* Header */}
+        {/* Toolbar */}
         <div className='py-8'>
           <Button
             variant='ghost'
             onClick={onBack}
-            className='mb-8 text-tx-muted hover:bg-sf-hover hover:text-tx-primary'
+            className='mb-6 text-tx-muted hover:bg-sf-hover hover:text-tx-primary'
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Blog
           </Button>
 
-          {/* Article Header */}
-          <header className='mb-8 page-header'>
-            <h1
-              className='font-serif text-5xl font-medium text-tx-primary tracking-tight mb-6'
-              style={{ lineHeight: '1.1' }}
-            >
-              {post.title}
-            </h1>
-
-            {/* Article Meta */}
-            <div className='flex flex-wrap items-center gap-6 mb-6'>
-              <div className='flex items-center gap-2 text-tx-faint'>
-                <Calendar className='w-4 h-4' />
-                <span>
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </span>
-              </div>
-              <div className='flex items-center gap-2 text-tx-faint'>
-                <Clock className='w-4 h-4' />
-                <span>{post.readTime}</span>
-              </div>
-            </div>
-
-            {/* Tags */}
-            <div className='flex flex-wrap gap-2 mb-8'>
-              {post.tags.map((tag) => (
+          <div className='flex flex-wrap items-center gap-4 text-sm text-tx-faint'>
+            <span className='flex items-center gap-2'>
+              <Calendar className='w-4 h-4' />
+              {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
+            <span className='flex items-center gap-2'>
+              <Clock className='w-4 h-4' />
+              {post.readTime}
+            </span>
+            <span className='flex flex-wrap gap-2'>
+              {post.tags.map(tag => (
                 <Badge
                   key={tag}
                   variant='secondary'
@@ -90,63 +107,43 @@ export function BlogPostPage({ blogId, onBack }: BlogPostPageProps) {
                   {tag}
                 </Badge>
               ))}
-            </div>
-          </header>
+            </span>
+          </div>
         </div>
 
-        {/* Content with TOC Layout */}
-        <div className='flex gap-8 relative'>
-          {/* Main Content */}
-          <div className='flex-1 min-w-0'>
-            <article className='prose prose-stone prose-lg max-w-none prose-headings:font-serif prose-headings:font-medium prose-a:text-ac-brand'>
-              <MarkdownRenderer content={post.content} />
-            </article>
+        {/* Article rendered in a sandboxed iframe to preserve its
+            self-contained styling and isolate its CSS from the site. */}
+        <div className='overflow-hidden rounded-lg border border-bd-subtle bg-white shadow-sm'>
+          <iframe
+            ref={iframeRef}
+            src={`/downloadable/blog/${post.htmlFile}`}
+            title={post.title}
+            onLoad={handleLoad}
+            scrolling='no'
+            sandbox='allow-same-origin allow-popups allow-popups-to-escape-sandbox'
+            className='w-full block border-0'
+            style={{ height: `${iframeHeight}px` }}
+          />
+        </div>
 
-            {/* Article Actions */}
-            <div className='mt-12 pt-8 border-t border-bd-subtle'>
-              <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-4'>
-                  <Button
-                    variant='outline'
-                    size='sm'
-                    onClick={() => setLiked(!liked)}
-                    className={`${
-                      liked
-                        ? 'bg-ac-brand/10 text-ac-brand border-ac-brand/30'
-                        : 'text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
-                    }`}
-                  >
-                    <ThumbsUp className={`w-4 h-4 mr-2 ${liked ? 'fill-current' : ''}`} />
-                    {liked ? 'Liked' : 'Like'}
-                  </Button>
-                  <Button
-                    variant='outline'
-                    size='sm'
-                    onClick={() => setBookmarked(!bookmarked)}
-                    className={`${
-                      bookmarked
-                        ? 'bg-amber-50 text-amber-700 border-amber-200'
-                        : 'text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
-                    }`}
-                  >
-                    <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
-                    {bookmarked ? 'Saved' : 'Save'}
-                  </Button>
-                </div>
-                <Button variant='outline' size='sm' className="text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary">
-                  <Share2 className='w-4 h-4 mr-2' />
-                  Share
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Table of Contents Sidebar - Sticky */}
-          <div className='hidden lg:block w-64 flex-shrink-0'>
-            <div className='sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto'>
-              <TableOfContents className='w-full' />
-            </div>
-          </div>
+        {/* Actions */}
+        <div className='mt-8 flex items-center justify-end'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => {
+              const url = `${window.location.origin}/downloadable/blog/${post.htmlFile}`
+              if (navigator.share) {
+                void navigator.share({ title: post.title, url })
+              } else {
+                void navigator.clipboard?.writeText(url)
+              }
+            }}
+            className='text-tx-muted border-bd-strong hover:bg-sf-hover hover:text-tx-primary'
+          >
+            <Share2 className='w-4 h-4 mr-2' />
+            Share
+          </Button>
         </div>
       </div>
     </div>

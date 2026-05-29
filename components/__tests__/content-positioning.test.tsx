@@ -38,18 +38,6 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: any) => <div>{children}</div>,
 }))
 
-// Mock Navigation component to avoid complex dependencies
-vi.mock('../Navigation', () => ({
-  Navigation: ({ onPageChange }: any) => (
-    <nav>
-      <button onClick={() => onPageChange('home')}>Home</button>
-      <button onClick={() => onPageChange('blog')}>Blog</button>
-      <button onClick={() => onPageChange('resume')}>Resume</button>
-      <button onClick={() => onPageChange('teaching')}>Teaching</button>
-    </nav>
-  ),
-}))
-
 // Mock window dimensions for responsive tests
 const mockWindowDimensions = (width: number, height: number) => {
   Object.defineProperty(window, 'innerWidth', {

@@ -1,13 +1,42 @@
 import { blogPosts } from '../lib/blogPosts'
 import { Button } from './ui/button'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 interface BlogPageProps {
   onReadPost: (blogId: number) => void
 }
 
 export function BlogPage({ onReadPost }: BlogPageProps) {
-  const sortedPosts = useMemo(() => [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), [])
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+
+  const sortedPosts = useMemo(
+    () =>
+      [...blogPosts].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      ),
+    []
+  )
+
+  const allTags = useMemo(() => {
+    const tags = new Set<string>()
+    blogPosts.forEach(post => post.tags.forEach(tag => tags.add(tag)))
+    return Array.from(tags).sort((a, b) => a.localeCompare(b))
+  }, [])
+
+  // OR filtering: no tags selected → show all; otherwise show any post that
+  // shares at least one tag with the selection.
+  const visiblePosts = useMemo(() => {
+    if (selectedTags.length === 0) {return sortedPosts}
+    return sortedPosts.filter(post =>
+      post.tags.some(tag => selectedTags.includes(tag))
+    )
+  }, [sortedPosts, selectedTags])
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev =>
+      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+    )
+  }
 
   return (
     <div className='min-h-screen pb-12 px-6'>
@@ -26,9 +55,46 @@ export function BlogPage({ onReadPost }: BlogPageProps) {
           </p>
         </div>
 
+        {/* Tag Filter */}
+        <div className='mb-10 flex flex-wrap items-center gap-2'>
+          <button
+            type='button'
+            onClick={() => setSelectedTags([])}
+            aria-pressed={selectedTags.length === 0}
+            className={`rounded-full border px-3 py-1 text-sm font-medium transition-colors duration-200 ${
+              selectedTags.length === 0
+                ? 'border-ac-brand bg-ac-brand text-ac-fg'
+                : 'border-bd-strong text-tx-muted hover:border-ac-brand hover:text-tx-primary'
+            }`}
+          >
+            All
+          </button>
+          {allTags.map(tag => {
+            const active = selectedTags.includes(tag)
+            return (
+              <button
+                key={tag}
+                type='button'
+                onClick={() => toggleTag(tag)}
+                aria-pressed={active}
+                className={`rounded-full border px-3 py-1 text-sm font-medium transition-colors duration-200 ${
+                  active
+                    ? 'border-ac-brand bg-ac-brand text-ac-fg'
+                    : 'border-bd-strong text-tx-muted hover:border-ac-brand hover:text-tx-primary'
+                }`}
+              >
+                {tag}
+              </button>
+            )
+          })}
+        </div>
+
         {/* Academic Article List */}
         <div className='space-y-8'>
-          {sortedPosts.map((post) => (
+          {visiblePosts.length === 0 && (
+            <p className='text-tx-muted'>No posts match the selected tags.</p>
+          )}
+          {visiblePosts.map((post) => (
             <article
               key={post.id}
               className='cursor-pointer group border-b border-bd-subtle pb-8 last:border-b-0'
