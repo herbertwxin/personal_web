@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japanese Yakuza: Structural Evolution and Regulatory History, 1945–2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #6B1010;
+    --red-mid: #8B1A1A;
+    --red-light: #b22222;
+    --gold: #9A7B28;
+    --text: #1a1714;
+    --text-muted: #5c534d;
+    --text-light: #8a7d76;
+    --bg: #fdfaf6;
+    --bg-alt: #f5f0e8;
+    --bg-card: #ffffff;
+    --border: #ddd5c8;
+    --border-strong: #c8bfb2;
+    --table-head-bg: #2c1a10;
+    --table-head-text: #f5ede0;
+    --intensity-1: #e8f4e8;
+    --intensity-2: #d4ead4;
+    --intensity-3: #f5e6a0;
+    --intensity-4: #f5c08a;
+    --intensity-5: #f0887a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--text);
+    background-color: var(--bg);
+    line-height: 1.75;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    border-top: 4px solid var(--red);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0 2rem;
+    margin-bottom: 3rem;
+  }
+  .masthead-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .masthead-sub {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+    flex-wrap: wrap;
+  }
+
+  /* ─── ABSTRACT ─── */
+  .abstract {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--red-mid);
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 3rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .abstract-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+  .abstract p { font-size: 0.92rem; color: var(--text-muted); }
+
+  /* ─── SECTION HEADERS ─── */
+  .part-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .part-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--border-strong);
+    min-width: 2rem;
+  }
+  .part-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ─── DECADE BLOCKS ─── */
+  .decade {
+    margin-bottom: 3.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .decade-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1.1rem 1.8rem;
+    background: var(--table-head-bg);
+  }
+  .decade-range {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #f5e8d0;
+    letter-spacing: 0.04em;
+    min-width: 90px;
+  }
+  .decade-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #f8efe0;
+  }
+  .decade-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #c8b49a;
+    margin-left: auto;
+  }
+  .decade-body { padding: 1.8rem; }
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2.5rem;
+    margin-bottom: 1.8rem;
+  }
+  @media (max-width: 680px) { .analysis-grid { grid-template-columns: 1fr; } }
+  .analysis-section h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red-mid);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .analysis-section p { font-size: 0.88rem; line-height: 1.7; color: var(--text); }
+
+  /* ─── DECADE PROFILE TABLE ─── */
+  .profile-table-wrap {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+  }
+  .profile-table-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.7rem;
+  }
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+  .profile-table th {
+    background: var(--bg-alt);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.45rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .profile-table td {
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid #ece5db;
+    vertical-align: top;
+  }
+  .profile-table tr:last-child td { border-bottom: none; }
+  .profile-table td.metric-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    width: 160px;
+    font-weight: 500;
+  }
+  .intensity-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .i1 { background: var(--intensity-1); color: #1a4d1a; }
+  .i2 { background: var(--intensity-2); color: #0d3d0d; }
+  .i3 { background: var(--intensity-3); color: #4d3d00; }
+  .i4 { background: var(--intensity-4); color: #5c2d00; }
+  .i5 { background: var(--intensity-5); color: #5c0a06; }
+
+  /* ─── MASTER COMPARISON TABLE ─── */
+  .master-table-wrap {
+    margin: 2rem 0 3rem;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .master-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .master-table thead tr {
+    background: var(--table-head-bg);
+  }
+  .master-table thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--table-head-text);
+    padding: 0.75rem 0.9rem;
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .master-table tbody tr:nth-child(even) td { background: var(--bg-alt); }
+  .master-table tbody tr:nth-child(odd) td { background: var(--bg-card); }
+  .master-table tbody tr:hover td { background: #f0e8dc; }
+  .master-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .master-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .master-table td:nth-child(2) { font-weight: 600; }
+  .master-table td .membership {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ─── ANALYSIS FRAMEWORK ─── */
+  .framework-section { margin-top: 1rem; }
+  .framework-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--red-mid);
+    margin: 1.5rem 0 0.5rem;
+  }
+  .framework-section p { font-size: 0.9rem; line-height: 1.8; margin-bottom: 0.8rem; }
+
+  /* ─── FOOTNOTE ─── */
+  .report-footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── PULLQUOTE ─── */
+  .pullquote {
+    border-left: 3px solid var(--gold);
+    padding: 0.4rem 1.2rem;
+    margin: 1.2rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.88rem;
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight-box {
+    background: #fff8e6;
+    border: 1px solid #d4b870;
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.2rem 0;
+    font-size: 0.85rem;
+  }
+  .highlight-box strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ─── MEMBERSHIP TREND INDICATORS ─── */
+  .trend-up { color: #2d7a2d; font-family: monospace; }
+  .trend-down { color: #b22222; font-family: monospace; }
+  .trend-stable { color: #8a6d00; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-label">Comparative Institutional Analysis · Organized Crime &amp; Political Economy</div>
+  <h1>Japanese Yakuza: Structural Evolution and Regulatory History</h1>
+  <div class="masthead-sub">From Post-War Black Markets to Semi-Gure Networks, 1945–2025</div>
+  <div class="masthead-meta">
+    <span>Period: 1945–2025</span>
+    <span>Scope: Eight Decade Analysis</span>
+    <span>Primary Source Basis: NPA Annual Reports, Legislative Records, Judicial Filings</span>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>This report traces eight decades of Japanese organized crime (boryokudan, 暴力団) evolution, examining structural transitions from post-war gurentai formations through corporate-era embedding to present-day fragmented semi-gure networks. Analysis proceeds along four analytical axes per decade: organizational structure, socioeconomic embeddedness, legislative environment, and police containment strategy. The 1992 Boryokudan Taisaku Ho constitutes the primary structural break in the enforcement regime, operationalizing vicarious liability and administrative designation that precipitated a secular decline in formal membership from approximately 95,000 (1992) to 24,100 (2022). The 2011 Organized Crime Exclusion Ordinances represent a second-order discontinuity, extending regulatory reach from criminal conduct to economic relationships. Throughout, the yakuza trajectory illustrates the institutional complementarity hypothesis — organized crime fills governance vacuums — and its limits under sufficiently intensive and broad-based state capacity deployment.</p>
+</div>
+
+<!-- PART I: DECADE ANALYSES -->
+<div class="part-header">
+  <span class="part-num">I</span>
+  <span class="part-title">Decade-by-Decade Structural Analysis</span>
+</div>
+
+<!-- ====== DECADE 1: 1945–1954 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1945–1954</span>
+    <span class="decade-title">Post-War Genesis: Occupation, Black Markets, and Informal State Delegation</span>
+    <span class="decade-subtitle">Gurentai Formation Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The modern yakuza crystallizes from three pre-existing social formations: the <em>tekiya</em> (的屋, itinerant street merchants), the <em>bakuto</em> (博徒, professional gamblers), and the more violent <em>gurentai</em> (愚連隊), street gangs composed of demobilized soldiers, repatriated colonists, and ethnic Koreans (Zainichi). No dominant national syndicate yet exists; regional formations are fluid, contested, and organized around the dyadic <em>oyabun-kobun</em> (親分子分) patron-client bond. The Yamaguchi-gumi (founded 1915 as a Kobe harbor labor contractor) begins regional expansion but remains one formation among many. Yoshio Kodama — wartime intelligence operative turned postwar fixer — negotiates an informal operational concordat between fragmented yakuza factions and SCAP intelligence interests, positioning organized crime as a bulwark against leftist labor organizations.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's industrial output in 1945 had collapsed to roughly 10% of pre-war levels. With formal market institutions destroyed and 6.6 million repatriates flooding urban labor markets, the black market (<em>yami-ichi</em>) in Shinjuku, Ueno, and Umeda becomes the dominant urban resource allocation mechanism. Yakuza fill the institutional vacuum created by state failure, providing contract enforcement, market-making, and physical security where formal institutions are absent — precisely the institutional complementarity function Gambetta (1993) identifies for the Sicilian Mafia. The 1950–1953 Korean War boom accelerates reconstruction and generates new procurement and day-labor contracting opportunities that yakuza-affiliated organizations are well-positioned to capture.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>No organized-crime-specific legislation exists. The 1948 Police Law, enacted under SCAP direction, decentralizes and weakens the domestic police apparatus, creating 1,600+ autonomous municipal police forces with minimal coordinating capacity. The 1954 Police Law reverses this, establishing the National Police Agency (NPA) and consolidating prefectural police. Crucially, occupation authorities maintain implicit tolerance of yakuza as an anti-communist utility; SCAP intelligence files later declassified document awareness of Kodama's operational role. This tolerance creates a normative precedent — a perceived legitimacy of organized crime as a state instrument — that persists informally through the 1970s.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>Effective containment is absent. Decentralized occupation-era police lack the jurisdictional reach, intelligence infrastructure, or legal instruments to target cross-regional criminal organizations. The informal SCAP-yakuza operational relationship creates political constraints against aggressive enforcement. Periodic local anti-vice sweeps occur but function as revenue-generating shakedowns rather than structural suppression, reinforcing rather than disrupting the complementary relationship between local law enforcement and organized crime. The NPA's 1954 consolidation begins systematic membership tracking — the intelligence foundation on which the 1992 legislative framework will eventually rest.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Black-market commodities (food, textiles, medicine); gambling; prostitution; yami-ichi market control</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Labor intermediation (day workers, construction); occupation-era procurement networks</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">50,000–70,000 (fragmented, pre-syndicate)</span> <span class="trend-up">↑</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Gurentai / tekiya / bakuto — dyadic patron-client cells; no national hierarchy</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>None specific; 1954 Police Law (NPA creation)</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i1">Very Low</span> — occupation tolerance; fragmented enforcement</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 2: 1955–1964 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1955–1964</span>
+    <span class="decade-title">Syndicate Consolidation: Oligopoly Formation under High Growth</span>
+    <span class="decade-subtitle">Hierarchical Formalization Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The end of occupation inaugurates rapid syndicate consolidation. The Yamaguchi-gumi, under Kazuo Taoka (third-generation <em>kumichō</em>), expands aggressively from Kobe using a strategy of absorbing smaller regional groups through a combination of violence and negotiated affiliation (<em>kumi-iri</em>). By the early 1960s, a three-syndicate oligopolistic structure emerges: Yamaguchi-gumi (Kansai/national expansion), Inagawa-kai (Kanto), and Sumiyoshi-kai (Tokyo metropolitan). Formal internal institutional rules — the <em>jingi</em> code of conduct, standardized rank hierarchy (<em>kumichō → wakagashira → shateigashira → kyōdai/shatei/wakashū</em>), and the <em>sakazuki</em> ritual induction ceremony — become widely standardized. NPA membership tracking records the absolute historical peak of approximately 184,000 total individuals (including associates) circa 1963.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's high-growth era (average real GDP growth approximately 10% per annum, 1955–1970) generates construction booms, rapid urbanization, and labor market demand that yakuza-affiliated organizations systematically exploit. Day-labor markets (<em>doyagai</em>) in Kamagasaki (Osaka) and Sanya (Tokyo) fall under yakuza-controlled labor contracting. The 1964 Tokyo Olympics preparatory construction program generates substantial contracting and subcontracting opportunities. The entertainment industry and <em>mizu shōbai</em> (bars, hostess clubs, cabarets) provide diversified revenue alongside growing respectability. Growth-era wealth inequality also creates the early foundations of corporate extortion (<em>sokaiya</em>) targeting listed companies, though this remains embryonic relative to its 1980s peak.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The 1954 Police Law's NPA reorganization begins systematic data collection on gang affiliation. Anti-gang measures remain procedurally weak and limited to the Violent Acts Punishment Law, which requires individual criminal act prosecution rather than organizational liability. The LDP's 1955 founding creates an informal political channel through which select yakuza bosses maintain connections to conservative politicians, providing mutual services: yakuza offer strikebreaking capacity and electoral mobilization; politicians provide investigative protection. This relationship is not merely corrupt but structurally rationalized within a Cold War political economy that treats organized crime as a domestic anti-communist instrument.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>The NPA establishes dedicated organized crime investigation units (<em>sōsatai</em>) in major prefectural police departments. "Operation Purge" (<em>bōryokudan sōatari</em>) campaigns occur periodically in major cities — Osaka (1958), Tokyo (1960) — but these produce temporary suppression without structural impact. Intelligence investment is significant: NPA begins building the membership registry that will underpin the 1992 designation system. Crucially, police tolerance remains relatively high. Prefectural police departments commonly use yakuza as intelligence assets and intermediaries for maintaining low-level social order in entertainment districts — a classic "controlled coexistence" model that institutional inertia will preserve for two more decades.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Labor contracting; construction subcontracting; entertainment/mizu shōbai; gambling</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Prostitution; early corporate influence (sokaiya, nascent); illicit goods distribution</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">150,000–184,000 (historical peak ~184,000, 1963)</span> <span class="trend-up">↑ PEAK</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Three-syndicate oligopoly forming; standardized rank hierarchy; sakazuki ceremony institutionalized</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>1954 Police Law (NPA); Violent Acts Punishment Law amendments</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i1">Low</span> — periodic purge campaigns; controlled coexistence model</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 3: 1965–1974 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1965–1974</span>
+    <span class="decade-title">Violent Wars and Cultural Institutionalization: Cinema, Hierarchy, Methamphetamine</span>
+    <span class="decade-subtitle">Territorial Formalization Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>Interorganizational violence intensifies as the Yamaguchi-gumi's national expansion program generates territorial conflicts — particularly the prolonged series of disputes against Kansai-based competitors. Simultaneously, a cultural institutionalization mechanism of decisive long-term importance emerges: Toei Studios' <em>ninkyo eiga</em> (任侠映画, chivalry films) genre, starring Koji Tsuruta and Ken Takakura, constructs a powerful positive public image for yakuza as adherents of the <em>ninkyo dōri</em> code (侠道, the way of chivalry) — honorable, loyal, and fundamentally opposed to the corruptions of modern corporate capitalism. This cultural production complicates police enforcement legitimacy and generates public ambivalence that persists through the 1990s. The concept of <em>kigyō shatei</em> (企業舎弟, corporate younger brother) — legitimate business fronts operated by affiliated individuals — expands beyond entertainment into construction and real estate.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's high growth continues until the 1973 Oil Shock, which creates construction sector volatility that yakuza-affiliated labor contractors navigate through information advantages and extralegal contract enforcement capacity. Wealth inequality produced by the high-growth era creates both lucrative corporate extortion targets and a pool of economically marginalized workers available for violent service provision. The methamphetamine (<em>kakuseizai</em>) trade — rooted in post-war surplus military stimulants and manufactured primarily in North Korea and distributed through Zainichi Korean criminal networks with yakuza wholesale infrastructure — becomes a significant and growing revenue stream. Drug revenues will eventually become the dominant income source by the 2000s; its roots are planted firmly in this decade.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The NPA pursues legislative strengthening with limited success. The Act on Punishment of Physical Violence and Others sees revisions, but fundamental structural problems remain: Japanese law requires evidence of specific criminal acts by identifiable individuals; organizational liability — essential for attacking syndicate leadership — is unavailable. Political connections insulate senior yakuza leadership from prosecution. The 1964 Violent Acts Punishment Law, while formally applicable, requires sufficient evidence for individual prosecutions that complex hierarchical organizations are structurally designed to prevent. Academic and journalistic pressure for dedicated organized crime legislation begins building, but the political coalition supporting legislative action remains insufficient until the early 1990s.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>Dedicated <em>sōsatai</em> units in major prefectural police departments intensify intelligence operations and pursue individual prosecution where evidence permits. However, the fundamental legal instrument deficit renders structural containment impossible. An important tactical innovation occurs in the use of tax investigation as an indirect enforcement mechanism — yakuza operations generate taxable income, and tax evasion prosecution reaches organizational leadership without requiring direct evidence of criminal acts. The NPA begins annual publication of organized crime statistics (membership counts, syndicate affiliations, criminal violations), institutionalizing the transparent accounting of the problem that will prove essential for mobilizing political will for the 1992 legislative response.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Construction; gambling; prostitution; entertainment industry control</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Methamphetamine distribution (rapidly growing); corporate influence operations (nascent)</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">130,000–160,000</span> <span class="trend-down">↓ moderate decline</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Territorial demarcation formalized; kigyō shatei expands; yubitsume (finger-shortening) as disciplinary institution</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>Violent Acts Punishment Law revisions; no structural breakthrough</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i2">Low–Moderate</span> — sōsatai units; tax enforcement as indirect tool</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 4: 1975–1984 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1975–1984</span>
+    <span class="decade-title">Corporate Institutionalization: Kigyo Boryokudan and the Peak of Sokaiya</span>
+    <span class="decade-subtitle">Corporate Yakuza Formation Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>This decade marks the decisive organizational transition from street-gang formations to what scholars term "corporate yakuza" (<em>kigyō bōryokudan</em>). Syndicates — most visibly the Yamaguchi-gumi in Kobe — adopt quasi-corporate governance: formal office buildings with posted addresses, printed business cards, internal accounting structures, and in some instances published organizational charts submitted to police. The <em>sokaiya</em> (総会屋) operation achieves peak institutional development. Sokaiya specialists purchase minimal shareholdings in listed companies, then threaten to disrupt Annual General Meetings (AGMs) by raising embarrassing questions unless paid to remain silent — or are paid to suppress legitimate activist shareholders. By the late 1970s, virtually every major Japanese corporation maintains sokaiya payment relationships, constituting a systematic private protection tax on corporate Japan. Dai-Ichi Kangyo Bank, Nomura Securities, and Fuji Bank will later be implicated in particularly egregious sokaiya relationships.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Post-oil-shock Japan transitions toward a service-oriented and finance-led economy, generating new revenue streams for organized crime in financial sector leverage (<em>sokaiya</em>), consumer credit (<em>yamikin</em>, shadow lending), and construction industry collusion (<em>dango</em>, bid-rigging). Yakuza-affiliated construction firms routinely participate in collusive tendering at local government project levels; the institutional infrastructure for this — relationships with public works officials, information networks on tender specifications — is a persistent structural feature built over decades of day-labor market control. The consumer credit market's rapid expansion creates loan-sharking opportunities targeting individuals unable to access formal credit, a segment particularly large given Japan's historically segmented credit markets and social stigma around personal financial distress.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The 1982 Commercial Code revision introduces first-generation sokaiya countermeasures: corporations are prohibited from paying sokaiya and required to take measures to ensure orderly AGMs. This proves largely ineffective, as payments continue under different contractual forms and the prohibition targets the corporate side of the transaction while yakuza themselves face no new sanctions. The NPA pursues incremental legislative strengthening, but the political coalition for comprehensive organized crime legislation remains insufficient. Academic criminologists (notably Wagatsuma, Hanzawa) begin publishing systematic analyses of yakuza organizational economics that will eventually inform the 1992 Act's design. The fundamental problem — yakuza membership is not a criminal offense, and organizational liability is unavailable — is widely understood but politically unresolvable.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>The NPA expands administrative and financial intelligence capacity. Tax investigation as indirect enforcement becomes more systematized, with coordinated NPA-National Tax Agency operations targeting senior yakuza leadership on income tax evasion charges. Prefectural police experiment with administrative guidance mechanisms — informal pressure on landlords, entertainment venue operators, and construction companies to reduce business relationships with designated yakuza affiliates — foreshadowing the formal exclusion ordinance regime three decades later. However, without statutory backing, administrative guidance is legally fragile and inconsistently applied. Total membership continues its secular post-1963 decline, but the organizational core remains robust and well-funded by sokaiya and construction revenues.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Sokaiya (peak); construction (dango/bid-rigging); yamikin (shadow lending)</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Methamphetamine (growing); entertainment/mizu shōbai; labor intermediation</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">100,000–120,000</span> <span class="trend-down">↓ gradual</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Corporate yakuza (kigyō bōryokudan); formal office buildings; sokaiya specialists; quasi-corporate governance</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>1982 Commercial Code (sokaiya, 1st generation — largely ineffective)</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i3">Moderate</span> — tax enforcement; administrative guidance; NPA intelligence expansion</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 5: 1985–1994 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1985–1994</span>
+    <span class="decade-title">Bubble Economy Integration and Legislative Rupture: The 1992 Structural Break</span>
+    <span class="decade-subtitle">Bubble Embedding / 1992 Act</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The Bubble Economy (Nikkei +300%, six-city land prices +170%, 1986–1991) generates extraordinary structural opportunities for yakuza-embedded financial operations. <em>Jiage-ya</em> (地上げ屋, "land turners") — yakuza operatives specializing in forcing holdout landowners to sell through intimidation, arson threats, and harassment — enable land consolidation for speculative real estate development. Yakuza syndicates receive substantial lending from Jusen (<em>jūsen</em>, Housing Loan Corporations) and related non-bank institutions; estimated yakuza-linked bad loans range from ¥1–5 trillion at peak exposure. Financial market manipulation — stock price ramping, insider trading networks, bond market manipulation — emerges as a significant revenue stream. The 1985 Yama-Ichi War (<em>Yama-Ichi Sōgu</em>) — Yamaguchi-gumi versus the breakaway Ichiwa-kai following the assassination of 4th Yamaguchi-gumi <em>kumichō</em> Masahisa Takenaka in November 1985 — produces approximately 25 deaths, numerous injuries, and massive urban disruption, generating the decisive political will for the 1992 legislative response.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>The Bubble collapse (1991) devastates yakuza-linked real estate portfolios and banking relationships simultaneously. The subsequent banking crisis — NPL resolution consuming roughly ¥100 trillion in public funds through the late 1990s — reveals systematic yakuza penetration of the financial sector as a structural macroeconomic risk rather than merely a law enforcement problem. This framing shift — from crime problem to systemic financial stability threat — is essential to understanding why the 1992 legislation passed with cross-party support despite the LDP's long-standing informal yakuza connections. The Jusen scandal (1996) forces explicit government acknowledgment of organized crime's contribution to the NPL crisis and accelerates further legislative tightening.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The <strong>1992 Bōryokudan Taisaku Hō</strong> (Act for Prevention of Unjust Acts by Organized Crime Group Members, effective March 1, 1992) constitutes the primary structural break in the enforcement regime. Key provisions: (1) <em>Designation mechanism</em> — Prefectural Public Safety Commissions designate specific groups as <em>shitei bōryokudan</em>; five groups initially designated, ultimately eleven; (2) <em>Prohibited conduct enumeration</em> — 22 specific prohibited acts (extortion, loan-shark collection demands, construction contract intimidation, etc.) subject to administrative cease-and-desist orders, bypassing criminal evidentiary standards; (3) <em>Vicarious liability</em> — kumichō bears civil liability for damages caused by subordinates acting in organizational capacity; (4) <em>Youth recruitment prohibition</em> — forbidding yakuza-member recruitment of minors. Critically, the Act does not criminalize yakuza membership per se, creating an enforcement gap that permits continued quasi-legal organizational existence but exposes specific conduct to rapid administrative response.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>Post-1992 enforcement is transformatively more intensive. The Act generates over 5,000 administrative cease-and-desist dispositions in its first year, primarily targeting sokaiya operations and construction contract extortion. Prefectural police establish dedicated Bōryokudan Taisaku Departments. NPA coordinates with the Financial Services Agency (predecessor) on money laundering investigation; the 1992 Act's civil liability provisions enable victims to bring private suits against kumichō for subordinates' actions, adding a private enforcement dimension absent from prior regimes. Yakuza adaptation is rapid: sokaiya operations restructure as nominally independent "consulting" operations, and direct organizational extortion gives way to more complex multi-step schemes exploiting the non-criminalization of membership itself.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <strong>Legislative Landmark</strong>
+      The 1992 Bōryokudan Taisaku Hō represents the first Japanese legislation to target organized crime organizations as such, rather than individual criminal acts. Its administrative designation mechanism — bypassing the criminal evidentiary standard — is the primary enforcement innovation. The Act's explicit non-criminalization of membership was a deliberate political compromise preserving constitutional assembly protections, and created the adaptive space that yakuza organizations would exploit for the subsequent three decades.
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Real estate speculation (jiage-ya); financial market manipulation; sokaiya; construction</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Methamphetamine; Jusen/non-bank lending relationships; international real estate</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">80,000–100,000 (NPA designates ~95,000 full members, 1992)</span> <span class="trend-down">↓</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Deep corporate and financial embedding; jiage-ya specialization; Yama-Ichi War and aftermath</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td><strong>1992 Bōryokudan Taisaku Hō (THE structural break)</strong> — designation, 22 prohibited acts, vicarious liability</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i3">Moderate → </span><span class="intensity-badge i4">High</span> — 5,000+ administrative dispositions in 1992–93 alone</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 6: 1995–2004 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">1995–2004</span>
+    <span class="decade-title">Adaptive Diversification: The Lost Decade, Sokaiya Collapse, and Methamphetamine Dominance</span>
+    <span class="decade-subtitle">Post-Act Adaptation Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The 1992 Act compresses yakuza operations but triggers rapid organizational adaptation. Sokaiya operations effectively collapse following the 1997 Commercial Code revision criminalizing corporate payments to sokaiya (both sides of the transaction), combined with high-profile prosecutions at Nomura Securities, Dai-Ichi Kangyo Bank, and Sumitomo Bank that reveal systemic corporate exposure and convert reputational risk into criminal liability for corporate executives. Methamphetamine becomes the dominant revenue stream — NPA estimates place drug-related income at 30–40% of total yakuza revenue by the late 1990s, with North Korean and Chinese supply networks providing wholesale product to yakuza distribution infrastructure. The 1995 Great Hanshin Earthquake produces a significant public image moment: Yamaguchi-gumi affiliates deploy faster than government disaster relief in some Kobe neighborhoods, distributing food, water, and supplies to earthquake victims — illustrating the persistent institutional welfare role that yakuza occupy in communities underserved by the retreating developmental state.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's "Lost Decade" (post-1991 stagnation, average GDP growth approximately 0.5%) imposes sustained pressure on yakuza revenue streams while simultaneously expanding the economically marginalized population available for victimization and recruitment. The 1997 Asian Financial Crisis and domestic banking failures dramatically reduce formal credit availability, expanding the <em>yamikin</em> (shadow lending) market with predatory interest rates (often 30–100% annual) targeting individuals excluded from formal credit. The Koizumi structural reform era (2001–2006) accelerates labor market deregulation, creating large populations of non-regular workers — estimated at over 30% of the labor force by 2004 — who are particularly vulnerable to yakuza-controlled labor intermediation, debt entrapment, and recruitment through financial desperation.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The Bōryokudan Act undergoes three significant revisions in this period. The 1997 revision strengthens the original framework by extending the list of prohibited acts and tightening vicarious liability provisions. The 1999 revision authorizes temporary suspension of specified organizational activities — a more aggressive administrative tool than cease-and-desist orders. The 2004 revision introduces additional prohibited conduct categories targeting new revenue streams. Separately, the 1997 Commercial Code revision eliminating corporate sokaiya payments effectively ends a major revenue stream with a two-year implementation lag as corporations audit and terminate payment relationships. The 1999 Law on Punishment of Organized Crime adds RICO-adjacent conspiracy provisions and enhanced asset forfeiture mechanisms, though their application remains more limited than American RICO in practice.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>The NPA builds systematic financial intelligence capacity, establishing liaison relationships with the Financial Services Agency to track money laundering through real estate, pachinko parlors, and entertainment businesses. Coordinated prosecution of senior organizational leadership — using conspiracy provisions from the 1999 legislation and tax evasion charges where direct criminal evidence is insufficient — targets the organizational apex rather than relying solely on low-level enforcement. Total membership declines from approximately 95,000 (1992) to approximately 78,000 (2003) — roughly an 18% reduction over eleven years, suggesting meaningful but not structurally transformative suppression. Police strategy begins conceptually shifting from membership suppression toward financial network disruption.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Methamphetamine (~30–40% of total); financial fraud; yamikin shadow lending; construction</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Entertainment; stock manipulation (post-Bubble residual); labor intermediation</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">75,000–90,000 (declining ~78,000 by 2003)</span> <span class="trend-down">↓ steady</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Front company proliferation; sokaiya → consulting rebranding; financial fraud networks deepen</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>1997/1999/2004 Bōryokudan Act revisions; 1999 Organized Crime Punishment Law; 1997 Commercial Code (sokaiya criminalization)</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i4">High</span> — financial intelligence; coordinated leadership prosecution; NPA-FSA liaison</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 7: 2005–2014 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">2005–2014</span>
+    <span class="decade-title">Organized Crime Exclusion Regime: Economic Ostracism and the 2011 Ordinances</span>
+    <span class="decade-subtitle">Exclusion Ordinance Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The defining institutional innovation is the national rollout of <em>bōryokudan haijo jōrei</em> (暴力団排除条例, Organized Crime Exclusion Ordinances), pioneered by Fukuoka Prefecture (2010) and adopted by all 47 prefectures by October 2011. Unlike the 1992 Act (targeting yakuza conduct), the exclusion ordinances target the economic relationships sustaining yakuza operations: contracts with designated bōryokudan members are voidable; businesses must include yakuza exclusion clauses in standard contracts; financial institutions are prohibited from maintaining accounts with known yakuza members (supported by a national NPA blacklist); real estate transactions with yakuza-affiliated parties are prohibited; and ordinary businesses failing to implement exclusion measures face civil and regulatory penalties. The result is comprehensive economic ostracism: yakuza members lose access to bank accounts, mobile phone contracts, apartment leases, business insurance, and formal employment simultaneously. This mechanism is analytically distinct from criminal prosecution — it imposes severe non-criminal penalties for organizational membership itself, circumventing the constitutional constraint that prevented the 1992 Act from criminalizing membership directly. <em>Yami baito</em> (ヤミバイト, "dark part-time work") — online recruitment of ordinary citizens for criminal operations, allowing principals to maintain operational distance — emerges as a structural adaptation.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's "Lost Two Decades" eliminate most residual yakuza-adjacent real estate and financial market activity. The 2008 Global Financial Crisis destroys secondary revenue streams while intensifying law enforcement focus. Internet-enabled fraud becomes a major revenue center: <em>furikomi sagi</em> (振り込め詐欺, bank transfer fraud) — particularly <em>ore ore sagi</em> (おれおれ詐欺, "it's me, it's me" impersonation fraud targeting elderly victims) — generates estimated ¥30–50 billion annually. Japan's aging demographic structure is structurally well-suited for this fraud typology: wealthy elderly living alone, with family-values-based psychological vulnerabilities to emergency appeals from apparent relatives. The 2011 Great Tōhoku Earthquake generates reconstruction spending that temporarily revitalizes construction sector yakuza revenue, following the pattern established in 1995 Kobe.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The 2011 Exclusion Ordinances represent the most significant extension of the anti-yakuza legislative framework since 1992. The 2012 revision to the Bōryokudan Act strengthens asset forfeiture provisions and extends the reach of prohibited conduct definitions to capture technological adaptations. NPA begins systematically applying anti-money-laundering legislation to cryptocurrency transactions, anticipating the post-2015 shift to digital financial infrastructure. The convergence of criminal law (1992 Act and revisions), civil law (exclusion ordinances), financial regulation (banking blacklist), and administrative regulation (business licensing conditions) creates a multi-layered regime that is significantly harder to arbitrage than any single-instrument approach.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>This is the most intensive enforcement period in post-war Japanese history. The NPA records membership falling from approximately 80,000 (2005) to approximately 57,900 (2013) — a 28% decline in eight years, substantially exceeding the rate achieved in the previous two decades combined. Financial intelligence units expand significantly, coordinating with the Financial Intelligence Unit (FIU) under the Financial Services Agency. Major prosecutions reach the highest organizational levels: Kenichi Shinoda (6th Yamaguchi-gumi <em>kumichō</em>, alias Tadashi Ishii) serves seven years (2005–2011) for firearms violations. Police deploy civilian compliance officers (<em>bōhaijo tantōsha</em>) in major corporations to monitor exclusion clause implementation, institutionalizing private sector enforcement as a complement to state capacity.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <strong>Legislative Landmark</strong>
+      The 2011 Exclusion Ordinances constitute the second major structural break after 1992. Their mechanism — civil/economic ostracism targeting business relationships rather than criminal conduct — circumvents the constitutional constraint preventing criminalization of membership. In institutional economics terms, they convert yakuza membership from a low-cost legal status with constrained criminal liability into a high-cost status with pervasive economic and social penalties, fundamentally altering the individual cost-benefit calculus of organizational participation.
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Furikomi sagi / tokushu sagi (~¥30–50B/yr); methamphetamine; construction (Tōhoku reconstruction)</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Cybercrime (nascent); financial fraud; illegal labor intermediation; yami baito networks</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">57,900–80,000 (57,900 total by 2013)</span> <span class="trend-down">↓↓ accelerating</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Economic ostracism response; front companies; yami baito emergence; banking blacklist</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td><strong>2011 Exclusion Ordinances (all 47 prefectures)</strong>; 2012 Bōryokudan Act revision; enhanced asset forfeiture</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i4">Very High</span> — NPA-FIU coordination; leadership prosecution; 28% membership decline in decade</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====== DECADE 8: 2015–2025 ====== -->
+<div class="decade">
+  <div class="decade-header">
+    <span class="decade-range">2015–2025</span>
+    <span class="decade-title">Fragmentation, Semi-Gure, and Digital Criminal Architecture</span>
+    <span class="decade-subtitle">Post-Split Adaptation Era</span>
+  </div>
+  <div class="decade-body">
+    <div class="analysis-grid">
+      <div class="analysis-section">
+        <h3>Structural Characteristics</h3>
+        <p>The August 2015 Yamaguchi-gumi split — in which a group of 13 organizations primarily from the Kinki region breaks away to form the Kobe Yamaguchi-gumi (神戸山口組) — is the most significant structural disruption to Japanese organized crime since the 1992 Act. A subsequent 2017 breakaway produces the Ninkyo-dantai Yamaguchi-gumi (任侠団体山口組). Three structural consequences follow: (1) <em>Violence escalation</em> — inter-faction shootings and bombings in Osaka and Hyogo prefectures (2016–2018) raise the social cost of yakuza operations and sustain intensive police pressure; (2) <em>Designation uncertainty</em> — splinter groups require individual designation proceedings, creating brief regulatory blind spots; (3) <em>Semi-gure proliferation</em> — the NPA's analytical category <em>jun-bōryokudan</em> (準暴力団, quasi-organized crime groups), colloquially <em>semi-gure</em>, enters official discourse to describe criminal groups maintaining the functional characteristics of organized crime without formal yakuza affiliation. Semi-gure groups include bosozoku motorcycle gang transitions, ethnic Chinese criminal networks, and former yakuza operating as nominally independent criminal consultants. NPA estimates 10,000–20,000 semi-gure individuals, partially compensating statistically for the formal membership decline.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Socioeconomic Drivers</h3>
+        <p>Japan's demographic aging simultaneously creates a large pool of wealthy elderly fraud targets (70+ cohort holds approximately 70% of personal financial assets) and reduces the young male marginal population that historically constituted yakuza recruitment. Labor market dualization continues, but digital platform labor increasingly substitutes for the construction day-labor intermediation that was yakuza's traditional recruitment pipeline. COVID-19 (2020–2021) devastates entertainment industry revenues — historically 15–25% of yakuza income — while accelerating the shift toward digital fraud and remote criminal operations. Cryptocurrency adoption enables sophisticated money laundering strategies that partially evade traditional financial intelligence monitoring, though NPA and FSA coordination on blockchain analytics is advancing rapidly. The <em>yami baito</em> phenomenon — where ordinary young people with financial stress are recruited through social media for criminal "gig work" — represents a fundamental reorganization of the labor supply side of organized crime.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Legislative Environment</h3>
+        <p>The 2017 and 2020 revisions to the Bōryokudan Act address two specific adaptive responses: semi-gure organizations (extending some provisions to apply to groups meeting functional criteria without formal designation) and digital infrastructure (enhancing provisions for cryptocurrency seizure and digital asset forfeiture). Amendments to the Act on Prevention of Transfer of Criminal Proceeds (money laundering legislation) mandate enhanced due diligence on cryptocurrency exchanges following several high-profile yakuza-linked exchange incidents. Anti-yami baito legislation — targeting the online recruitment platforms used for dark labor — is actively under development as of the early 2020s, with NPA pushing for platform liability provisions analogous to European terrorist content removal frameworks. The 2022 NPA annual report records total membership (full + associate) at approximately 24,100 — a 73% decline from the 2005 total.</p>
+      </div>
+      <div class="analysis-section">
+        <h3>Police Containment Strategy</h3>
+        <p>Police strategy undergoes a conceptual reorientation from membership suppression — largely achieved — toward financial network disruption and semi-gure containment. The NPA's Organized Crime Division expands blockchain analytics capacity, coordinating with the Financial Services Agency and international partners (DEA, Europol, FATF) on cross-border drug trafficking and money laundering. The <em>yami baito</em> phenomenon presents a structural enforcement challenge: perpetrators are ordinary individuals recruited online rather than organizational members, making traditional gang-targeting tactics ineffective. NPA responds by pursuing the recruitment principals through digital forensics while advocating platform-level intervention. The Yamaguchi-gumi three-way split has sustained a level of inter-organizational violence that justifies continued intensive enforcement resource allocation despite the aggregate membership decline.</p>
+      </div>
+    </div>
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Decade Profile — Key Metrics</div>
+      <table class="profile-table">
+        <thead><tr><th>Metric</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Primary Revenue</td><td>Tokushu sagi / digital fraud; methamphetamine; yami baito operations; cryptocurrency-facilitated money laundering</td></tr>
+          <tr><td class="metric-label">Secondary Revenue</td><td>Cybercrime; construction (declining); dark web pharmaceutical markets; international drug supply networks</td></tr>
+          <tr><td class="metric-label">Estimated Membership</td><td><span class="membership">24,100–46,900 (24,100 total, 2022 NPA; +10,000–20,000 estimated semi-gure)</span> <span class="trend-down">↓↓↓ accelerating</span></td></tr>
+          <tr><td class="metric-label">Organizational Form</td><td>Fragmented (Yamaguchi-gumi split, 2015); semi-gure proliferation; yami baito decentralization; crypto infrastructure</td></tr>
+          <tr><td class="metric-label">Key Legislation</td><td>2017/2020 Bōryokudan Act revisions; anti-money laundering crypto provisions; yami baito platform legislation (pending)</td></tr>
+          <tr><td class="metric-label">Police Intensity</td><td><span class="intensity-badge i5">Extreme</span> — blockchain analytics; international coordination; semi-gure definitional expansion; 73% membership decline since 2005</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PART II: MASTER COMPARISON TABLE -->
+<div class="part-header">
+  <span class="part-num">II</span>
+  <span class="part-title">Master Comparative Table: All Decades, 1945–2025</span>
+</div>
+
+<div class="master-table-wrap">
+  <table class="master-table">
+    <thead>
+      <tr>
+        <th>Decade</th>
+        <th>Label</th>
+        <th>Primary Revenue Sources</th>
+        <th>Est. Total Membership</th>
+        <th>Organizational Structure</th>
+        <th>Key Legislation</th>
+        <th>Police Intensity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1945–1954</td>
+        <td>Post-War Genesis</td>
+        <td>Black markets; gambling; labor intermediation; prostitution</td>
+        <td><span class="membership">50,000–70,000</span><br><span class="trend-up">↑ forming</span></td>
+        <td>Gurentai / tekiya / bakuto — dyadic patron-client cells; no national hierarchy</td>
+        <td>None specific; 1954 Police Law (NPA creation)</td>
+        <td><span class="intensity-badge i1">Very Low</span></td>
+      </tr>
+      <tr>
+        <td>1955–1964</td>
+        <td>Syndicate Consolidation</td>
+        <td>Labor contracting; construction; gambling; entertainment</td>
+        <td><span class="membership">150,000–184,000</span><br><span class="trend-up">↑ HISTORICAL PEAK (~184k, 1963)</span></td>
+        <td>Three-syndicate oligopoly; standardized oyabun-kobun hierarchy; sakazuki ceremony</td>
+        <td>1954 Police Law; Violent Acts Punishment Law amendments</td>
+        <td><span class="intensity-badge i1">Low</span></td>
+      </tr>
+      <tr>
+        <td>1965–1974</td>
+        <td>Cultural Institutionalization</td>
+        <td>Construction; gambling; entertainment; meth (nascent ~10%)</td>
+        <td><span class="membership">130,000–160,000</span><br><span class="trend-down">↓ moderate</span></td>
+        <td>Territorial demarcation; kigyō shatei expansion; Toei film cultural legitimation</td>
+        <td>Violent Acts Punishment Law revisions (limited)</td>
+        <td><span class="intensity-badge i2">Low–Moderate</span></td>
+      </tr>
+      <tr>
+        <td>1975–1984</td>
+        <td>Corporate Institutionalization</td>
+        <td>Sokaiya (peak); construction (dango); yamikin; meth (~15%)</td>
+        <td><span class="membership">100,000–120,000</span><br><span class="trend-down">↓ gradual</span></td>
+        <td>Corporate yakuza (kigyō bōryokudan); formal offices; sokaiya specialists</td>
+        <td>1982 Commercial Code (sokaiya, 1st gen — largely ineffective)</td>
+        <td><span class="intensity-badge i3">Moderate</span></td>
+      </tr>
+      <tr>
+        <td>1985–1994</td>
+        <td>Bubble Integration / 1992 Break</td>
+        <td>Real estate (jiage-ya); financial speculation; sokaiya; drugs</td>
+        <td><span class="membership">80,000–100,000</span><br><span class="trend-down">↓ post-Act acceleration</span></td>
+        <td>Deep financial embedding; jiage-ya specialists; Yama-Ichi War; post-1992 adaptation begins</td>
+        <td><strong>1992 Bōryokudan Taisaku Hō</strong> — designation, prohibited conduct, vicarious liability</td>
+        <td><span class="intensity-badge i3">Moderate</span> → <span class="intensity-badge i4">High</span></td>
+      </tr>
+      <tr>
+        <td>1995–2004</td>
+        <td>Adaptive Diversification</td>
+        <td>Meth (~30–40%); financial fraud; yamikin; construction</td>
+        <td><span class="membership">75,000–90,000 (~78,000, 2003)</span><br><span class="trend-down">↓ steady</span></td>
+        <td>Front company proliferation; sokaiya collapse; disaster relief PR; financial crime deepens</td>
+        <td>1997/1999/2004 Bōryokudan Act revisions; 1997 Commercial Code (sokaiya criminalization)</td>
+        <td><span class="intensity-badge i4">High</span></td>
+      </tr>
+      <tr>
+        <td>2005–2014</td>
+        <td>Exclusion Regime</td>
+        <td>Furikomi sagi (~¥30–50B/yr); meth; construction (Tōhoku); cybercrime (nascent)</td>
+        <td><span class="membership">57,900–80,000 (57,900 total, 2013)</span><br><span class="trend-down">↓↓ accelerating</span></td>
+        <td>Banking blacklist; exclusion clause compliance; yami baito emergence; economic ostracism response</td>
+        <td><strong>2011 Exclusion Ordinances</strong> (all 47 prefectures); 2012 Bōryokudan Act revision; enhanced asset forfeiture</td>
+        <td><span class="intensity-badge i4">Very High</span></td>
+      </tr>
+      <tr>
+        <td>2015–2025</td>
+        <td>Fragmentation / Semi-Gure</td>
+        <td>Tokushu sagi (digital fraud); meth; yami baito; crypto money laundering</td>
+        <td><span class="membership">24,100–46,900 (24,100 formal, 2022; +est. 10–20k semi-gure)</span><br><span class="trend-down">↓↓↓ 73% decline since 2005</span></td>
+        <td>Fragmented (Yamaguchi-gumi 2015 split); semi-gure proliferation; digital criminal architecture</td>
+        <td>2017/2020 Bōryokudan Act revisions; crypto AML provisions; yami baito platform legislation (pending)</td>
+        <td><span class="intensity-badge i5">Extreme</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PART III: ANALYTICAL FRAMEWORK -->
+<div class="part-header">
+  <span class="part-num">III</span>
+  <span class="part-title">Theoretical Interpretation and Structural Observations</span>
+</div>
+
+<div class="framework-section">
+  <h3>1. State Capacity Complementarity and the Governance Vacuum Thesis</h3>
+  <p>The yakuza trajectory through 1975 maps cleanly onto the institutional complementarity hypothesis — organized crime expands to fill governance vacuums where state institutions fail to provide credible contract enforcement and physical security. The 1945–1955 period is the extreme case: state capacity effectively zero in urban markets, yakuza providing the entire private-order infrastructure. As Japanese state capacity expands through the high-growth era and the developmental state matures, the yakuza's institutional comparative advantage narrows, and the relationship transitions from complementarity to competition. The post-1992 legislative trajectory is best understood as the Japanese state finally deploying sufficient instruments to partially reclaim the monopoly on legitimate violence it had informally delegated to organized crime during the reconstruction era. The persistence of yakuza in welfare and disaster-relief functions (1995, 2011 earthquakes) reveals the incompleteness of that reclamation.</p>
+
+  <h3>2. Regulatory Ratchets and Organizational Selection</h3>
+  <p>The membership decline trajectory following 1992 and accelerating post-2011 is consistent with a regulatory ratchet mechanism: each legislative tightening removes marginal members whose participation relies on low regulatory risk, pushing the minimum viable commitment level higher and selecting for more dedicated organizational members. The result — a smaller but potentially more resilient criminal core — is consistent with the international criminology literature on adaptive responses to enforcement intensification. The semi-gure phenomenon can be read as evidence of this selection process reaching its organizational limit: rather than remaining in formal structures subject to designation and exclusion, sophisticated criminal actors exit formal yakuza membership to operate as undesignated independent criminal networks, retaining criminal revenue streams while shedding the enforcement exposure that formal membership now entails.</p>
+
+  <h3>3. Financial Embeddedness and Macroeconomic Risk</h3>
+  <p>The Bubble-era yakuza penetration of the Jusen system and broader banking sector illustrates how organized crime operating within a financially repressed system with weak disclosure standards can generate genuine macroeconomic systemic risk. Estimated yakuza-linked NPLs of ¥1–5 trillion at peak represent a non-trivial fraction of the total NPL stock that contributed to Japan's "lost decade" growth pathology — rendering organized crime a minor but identifiable contributor to Japan's most significant macroeconomic episode. This framing — organized crime as financial stability risk rather than merely social disorder — was essential to mobilizing the cross-party political coalition that enacted the 1992 Act, and has direct parallels to how financial regulators in advanced economies increasingly approach organized crime: as a threat to financial system integrity requiring macro-prudential response rather than conventional criminal justice instruments alone.</p>
+
+  <h3>4. Adversarial Adaptive Dynamics</h3>
+  <p>The eight-decade yakuza-enforcement interaction exhibits characteristic adversarial adaptive dynamics: each major enforcement innovation triggers organizational mutation that partially neutralizes it, followed by a new enforcement innovation, in a recursive co-evolutionary process. The 1992 Act's administrative designation mechanism is met by front-company proliferation and sokaiya restructuring as consulting. The 2011 exclusion ordinances' banking blacklist is met by cryptocurrency infrastructure. The formal membership prosecution regime is met by semi-gure formation. This dynamic has a direct parallel in adversarial machine learning, where each model perturbation defense generates new attack strategies that partially circumvent it. The implication for policy design is that single-instrument enforcement strategies will consistently be outpaced by organizational adaptation; only multi-layered regimes targeting criminal conduct, economic relationships, financial flows, and organizational membership simultaneously — as the current Japanese regime increasingly does — impose sustained suppression pressure that is sufficiently multidimensional to resist arbitrage.</p>
+</div>
+
+<div class="report-footer">
+  <p>Sources: NPA Annual Organized Crime Reports (各年版); Bōryokudan Taisaku Hō (1992 and revisions); Ministry of Justice Criminal Statistics; Academic literature: Hill (2003) <em>The Japanese Mafia</em>; Kaplan &amp; Dubro (2003) <em>Yakuza</em>; Gambetta (1993) <em>The Sicilian Mafia</em>; Adelstein (2010); Cabinet Office white papers on organized crime countermeasures. Membership estimates based on NPA annual designation statistics; ranges reflect different definitional treatments of associate members (準構成員) vs. full members (構成員).</p>
+</div>
+
+</body>
+</html>

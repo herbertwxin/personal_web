@@ -21,7 +21,7 @@ This is a **React + Vite SPA** (not Next.js) — a personal academic portfolio f
 
 ### Routing
 
-No React Router or Next.js. Routing is pure React state in `App.tsx`: a `currentPage` string drives a switch/render to lazily-loaded page components. Navigation is handled by the `StaggeredMenu` component and internal link clicks that call `setCurrentPage`.
+No React Router or Next.js. Routing is pure React state in `App.tsx`: a `currentPage` string drives a switch/render to lazily-loaded page components. Navigation is handled by the `TopNav` component and internal link clicks that call `setCurrentPage`.
 
 Routes: `/` (home), `/stack` (model list), `/stack-model/:id` (LaTeX model detail), `/publications`, `/resume`, `/teaching`, `/blog`, `/blog/:id`.
 
@@ -29,14 +29,14 @@ Routes: `/` (home), `/stack` (model list), `/stack-model/:id` (LaTeX model detai
 
 All content is **static and bundled** — no API calls:
 - `lib/stackModels.ts` — macroeconomics model metadata + LaTeX file paths
-- `lib/blogPosts.ts` — blog posts with inline markdown content
-- `public/` — PDFs and static assets served directly
+- `lib/blogPosts.ts` — blog post metadata; each entry points at a self-contained HTML file in `public/downloadable/blog/`
+- `public/` — PDFs, blog HTML, and static assets served directly
 
 ### LaTeX & Markdown Rendering
 
 - `components/NewLaTeXRenderer.tsx` — KaTeX-based renderer that loads `.tex` files from `/lib`
-- `components/MarkdownRenderer.tsx` — custom markdown renderer
-- `components/TableOfContents.tsx` — auto-generated from headings
+- `components/TableOfContents.tsx` — auto-generated from headings (stack model pages)
+- Blog posts are authored as standalone HTML in `public/downloadable/blog/` and rendered in a sandboxed iframe by `components/BlogPostPage.tsx`
 
 ### Styling
 

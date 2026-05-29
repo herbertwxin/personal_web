@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan's Persistent Hierarchies: Kazoku Legacy, Gakubatsu, and Hereditary Power</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #17243d;
+    --navy-mid: #1e3056;
+    --navy-light: #274578;
+    --gold: #9a7b28;
+    --gold-light: #c4a44a;
+    --text: #1a1714;
+    --text-muted: #4f4a44;
+    --text-light: #8a7d76;
+    --bg: #fdfaf6;
+    --bg-alt: #f3f0ea;
+    --bg-card: #ffffff;
+    --border: #ddd5c8;
+    --border-strong: #c0b8ac;
+    --table-head-bg: #17243d;
+    --table-head-text: #eee8d8;
+    --tag-a: #e4eefd; --tag-a-text: #0f2d5a;
+    --tag-b: #fdf2dc; --tag-b-text: #5c3d00;
+    --tag-c: #e8f5e8; --tag-c-text: #1a4d1a;
+    --tag-d: #fdeaea; --tag-d-text: #5c0a0a;
+    --tag-e: #f0eafa; --tag-e-text: #3d1a6e;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--text);
+    background-color: var(--bg);
+    line-height: 1.8;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    border-top: 4px solid var(--navy);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0 2rem;
+    margin-bottom: 3rem;
+  }
+  .masthead-series {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 0.55rem;
+  }
+  .masthead-sub {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 1.4rem;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ABSTRACT */
+  .abstract {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--navy-mid);
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 3rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .abstract-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+  .abstract p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* PART HEADERS */
+  .part-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .part-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.9rem;
+    color: var(--border-strong);
+    min-width: 2rem;
+  }
+  .part-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.38rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* SECTION BLOCKS */
+  .section-block {
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1rem 1.8rem;
+    background: var(--table-head-bg);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #8a9ec4;
+    min-width: 28px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #f0e8d0;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #a8b8d0;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .section-body {
+    padding: 1.8rem;
+  }
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem 2.4rem;
+    margin-bottom: 1.6rem;
+  }
+  @media (max-width: 680px) { .analysis-grid { grid-template-columns: 1fr; } }
+  .analysis-col h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .analysis-col p { font-size: 0.88rem; line-height: 1.72; color: var(--text); margin-bottom: 0.6rem; }
+  .analysis-col p:last-child { margin-bottom: 0; }
+
+  /* FULL-WIDTH ANALYSIS */
+  .full-analysis h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+    margin-top: 1.2rem;
+  }
+  .full-analysis h3:first-child { margin-top: 0; }
+  .full-analysis p { font-size: 0.88rem; line-height: 1.72; margin-bottom: 0.75rem; }
+
+  /* PROFILE TABLE */
+  .profile-table-wrap {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+  }
+  .profile-table-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.65rem;
+  }
+  .profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+  .profile-table th {
+    background: var(--bg-alt);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.42rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .profile-table td {
+    padding: 0.42rem 0.75rem;
+    border-bottom: 1px solid #ece5db;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .profile-table tr:last-child td { border-bottom: none; }
+  .profile-table td.metric-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    width: 180px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* TAGS / BADGES */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    margin-right: 4px;
+    margin-bottom: 2px;
+  }
+  .tag-a { background: var(--tag-a); color: var(--tag-a-text); }
+  .tag-b { background: var(--tag-b); color: var(--tag-b-text); }
+  .tag-c { background: var(--tag-c); color: var(--tag-c-text); }
+  .tag-d { background: var(--tag-d); color: var(--tag-d-text); }
+  .tag-e { background: var(--tag-e); color: var(--tag-e-text); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: #f5f0e0;
+    border: 1px solid #c8b060;
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.2rem 0;
+    font-size: 0.85rem;
+  }
+  .highlight-box strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .callout-navy {
+    background: #edf2fc;
+    border-left: 3px solid var(--navy-mid);
+    padding: 1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.2rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .callout-navy strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-mid);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* MASTER COMPARISON TABLES */
+  .master-table-wrap {
+    margin: 1.5rem 0 2.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .master-table {
+    width: 100%;
+    min-width: 820px;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .master-table thead tr { background: var(--table-head-bg); }
+  .master-table thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--table-head-text);
+    padding: 0.72rem 0.9rem;
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .master-table tbody tr:nth-child(even) td { background: var(--bg-alt); }
+  .master-table tbody tr:nth-child(odd) td { background: var(--bg-card); }
+  .master-table tbody tr:hover td { background: #eceae4; }
+  .master-table td {
+    padding: 0.58rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .master-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--navy-mid);
+    white-space: nowrap;
+  }
+
+  /* COMPARISON TWO-COLUMN TABLE */
+  .compare-table-wrap {
+    margin: 1.5rem 0 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .compare-table thead tr { background: var(--table-head-bg); }
+  .compare-table thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--table-head-text);
+    padding: 0.7rem 1rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .compare-table thead th:first-child { width: 22%; }
+  .compare-table td {
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 500;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+  }
+  .compare-table td:nth-child(2) { background: #f8fcff; }
+  .compare-table td:nth-child(3) { background: #fffaf5; }
+  .compare-table .col-head-a {
+    background: #1e3a6e !important;
+    color: #d0e0f4 !important;
+    font-weight: 500;
+  }
+  .compare-table .col-head-b {
+    background: #3d2a10 !important;
+    color: #f0dfc0 !important;
+    font-weight: 500;
+  }
+
+  /* FRAMEWORK SECTION */
+  .framework-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 1.6rem 0 0.5rem;
+  }
+  .framework-section h3:first-child { margin-top: 0; }
+  .framework-section p { font-size: 0.9rem; line-height: 1.8; margin-bottom: 0.8rem; }
+
+  /* DYNASTY EXAMPLES */
+  .dynasty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 1.2rem 0;
+  }
+  .dynasty-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.82rem;
+  }
+  .dynasty-card .family-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.94rem;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+  }
+  .dynasty-card .family-kanji {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+  }
+  .dynasty-card .family-desc {
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* PIPELINE DIAGRAM (CSS) */
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.2rem 0;
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .pipe-step {
+    background: var(--navy);
+    color: #e8f0fa;
+    padding: 0.45rem 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 3px;
+  }
+  .pipe-arrow {
+    color: var(--gold);
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+    font-weight: 700;
+  }
+  .pipe-step.alt { background: var(--gold); color: #1a1200; }
+
+  /* REPORT FOOTER */
+  .report-footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+  .kanji { font-size: 0.9em; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-series">Institutional Political Economy — Japan Series · Report II</div>
+  <h1>Japan's Persistent Hierarchies: Kazoku Legacy, Gakubatsu, and Hereditary Political Power</h1>
+  <div class="masthead-sub">From Imperial Peerage Abolition to Semi-Feudal Electoral Geography, 1947–2025</div>
+  <div class="masthead-meta">
+    <span>Domains: Constitutional Reform · Elite Sociology · Bureaucratic Pipeline · Electoral Studies</span>
+    <span>Key Concepts: 华族 · 学閥 · 出身 · 世襲議員 · 地盤</span>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>GHQ's 1947 constitutional reforms formally dissolved the <em>kazoku</em> (華族) peerage system established under the 1884 Meiji nobility decree, abolishing approximately 1,011 family titles and replacing the House of Peers with the elected House of Councillors. This report examines why this formal legal discontinuity failed to dismantle the underlying architecture of elite reproduction. Former noble families preserved status through three durable capital forms — educational (Gakushuin networks, elite secondary school pipelines), social (endogamous marriage networks, club affiliations), and partial economic (urban asset retention, business diversification preceding land reform). The analysis then extends to the broader <em>gakubatsu</em> (学閥) system, wherein <em>shushin</em> (出身, educational pedigree) operates as the dominant screening mechanism for bureaucratic, judicial, and police advancement — most visibly in the UTokyo Law Faculty pipeline to the National Police Agency, Ministry of Finance, and judicial appointments. Finally, the report analyzes <em>seshū giin</em> (世襲議員, hereditary legislators) and <em>jiban</em> (地盤) constituency inheritance as a contemporary expression of quasi-feudal territorial logic within Japan's democratic electoral framework, with specific attention to the structural mechanisms explaining the relative absence of dynastic succession in Tokyo's 23-ward constituencies compared to rural single-member districts.</p>
+</div>
+
+<!-- ====================== PART I ====================== -->
+<div class="part-header">
+  <span class="part-num">I</span>
+  <span class="part-title">The Kazoku System — Constitutional Architecture and GHQ Abolition</span>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">1.1</span>
+    <span class="section-title">Meiji Origins: The 1884 Peerage Ordinance and Its Constituent Logic</span>
+    <span class="section-subtitle">1884–1945</span>
+  </div>
+  <div class="section-body">
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <h3>Constitutional Design</h3>
+        <p>The <em>kazoku</em> (華族, "flowery lineage") system, formalized under the 1884 Peerage Ordinance (<em>Kazoku Rei</em>), was not a simple continuation of pre-Meiji aristocracy. It was a deliberate political construction merging three distinct elite formations: the ancient Kyoto court nobility (<em>kuge</em>, 公家), the former feudal lords (<em>daimyo</em>, 大名), and newly elevated Meiji oligarchs and industrialists. The five-rank hierarchy — <em>Kōshaku</em> (公爵, Prince), <em>Kōshaku</em> (侯爵, Marquess), <em>Hakushaku</em> (伯爵, Count), <em>Shishaku</em> (子爵, Viscount), <em>Danshaku</em> (男爵, Baron) — was explicitly calibrated to the former domain's assessed rice yield (<em>kokudaka</em>) and political prominence, providing a formula for converting Edo-era feudal hierarchy into a modern peerage analogous to European models.</p>
+        <p>At its operational peak, the system comprised approximately 1,011 families. These were not merely symbolic titles: the 1889 Meiji Constitution established the House of Peers (<em>Kizokuin</em>, 貴族院) as the upper chamber of the Imperial Diet, granting kazoku families direct constitutional legislative power. Eldest sons of kazoku families above the baron rank held hereditary seats; barons and imperial appointees held elected seats within the peer class. This architecture deliberately reproduced aristocratic power within a constitutional framework — a defining feature of the Meiji oligarchs' strategy of selective modernization.</p>
+      </div>
+      <div class="analysis-col">
+        <h3>Social Composition and Capital Concentration</h3>
+        <p>The three constituent streams of the kazoku embedded different capital types within the peerage. The ancient <em>kuge</em> families — Konoe (近衛), Ichijo (一条), Nijo (二条), Tokudaiji (徳大寺) — held extensive cultural and ceremonial capital accumulated over a millennium of proximity to the Imperial Household. Their economic capital was relatively modest by the Meiji period, having been partly displaced during the Edo era by rising merchant wealth, but their social and symbolic capital was enormous. The former <em>daimyo</em> — Tokugawa (徳川), Shimazu (島津), Mori (毛利), Maeda (前田), Hosokawa (細川), Date (伊達) — held substantially larger economic capital through domain revenues converted into government bonds and subsequently invested in Meiji-era industrialization. The newly elevated oligarchs — Itō Hirobumi, Yamagata Aritomo, Kuroda Kiyotaka — added political and bureaucratic capital to the amalgam.</p>
+        <p>A critical distinguishing feature: the Meiji government also elevated several major merchant and industrial families — most notably the Mitsui (三井) and Sumitomo (住友) houses received limited peerage recognition, while the Mitsubishi Iwasaki family (岩崎) received Danshaku (Baron) rank. This interpenetration of noble and commercial capital within the kazoku system created the institutional foundation for the post-war corporate elite networks that would survive the system's formal dissolution.</p>
+      </div>
+    </div>
+
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Kazoku System Composition at Peak (c. 1935)</div>
+      <table class="profile-table">
+        <thead><tr><th>Rank (Japanese)</th><th>Approx. Families</th><th>Primary Origin</th><th>House of Peers Seat Type</th><th>Representative Families</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Kōshaku 公爵 (Prince)</td><td>17</td><td>Highest kuge / largest daimyo / top oligarchs</td><td>Hereditary (eldest son)</td><td>Konoe, Tokugawa, Shimazu, Mori, Maeda, Itō, Yamagata</td></tr>
+          <tr><td class="metric-label">Kōshaku 侯爵 (Marquess)</td><td>40</td><td>Senior daimyo / senior kuge / senior oligarchs</td><td>Hereditary (eldest son)</td><td>Hosokawa, Date, Nabeshima, Ōkuma, Saigō (posthumous)</td></tr>
+          <tr><td class="metric-label">Hakushaku 伯爵 (Count)</td><td>108</td><td>Mid-tier daimyo / court nobles / senior bureaucrats</td><td>Hereditary (eldest son)</td><td>Inoue, Gotō, various domain lords</td></tr>
+          <tr><td class="metric-label">Shishaku 子爵 (Viscount)</td><td>379</td><td>Lower daimyo / hatamoto converts / bureaucrats</td><td>Elected among peers</td><td>Various former small-domain lords</td></tr>
+          <tr><td class="metric-label">Danshaku 男爵 (Baron)</td><td>467</td><td>Senior officials / industrialists / local elites</td><td>Elected among peers</td><td>Mitsui, Iwasaki (Mitsubishi), Sumitomo, local notables</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">1.2</span>
+    <span class="section-title">GHQ Abolition: The Formal Break and Its Structural Limits</span>
+    <span class="section-subtitle">1945–1952</span>
+  </div>
+  <div class="section-body">
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <h3>Constitutional Abolition Mechanism</h3>
+        <p>Article 14 of the 1947 Showa Constitution — drafted under SCAP direction — abolishes the peerage with notable directness: "Peers and peerage shall not be recognized. No privilege shall accompany any award of honor, decoration or any distinction, nor shall any such award be valid beyond the lifetime of the individual who now holds or hereafter may receive it." The House of Peers is simultaneously dissolved; the House of Councillors (<em>Sangiin</em>, 参議院) is established as a fully elected upper chamber. All kazoku titles lapse immediately; former members become legally equivalent to any other Japanese citizen.</p>
+        <p>The GHQ-directed Agricultural Land Reform (<em>Nōchi Kaikaku</em>, 1946–1950) redistributed approximately 1.94 million hectares of tenanted farmland to former tenant farmers at deflation-adjusted prices, effectively confiscating the primary rural asset base of many daimyo-descended families who had maintained estate holdings. Combined with progressive inheritance taxation introduced in the same period, this constituted a genuine economic disruption — but a geographically and asset-class-specific one.</p>
+      </div>
+      <div class="analysis-col">
+        <h3>What the Reforms Could Not Reach</h3>
+        <p>The abolition instruments had three critical blind spots that structured the subsequent persistence of kazoku-adjacent elites. First, <em>urban and financial assets</em> were not targeted by agricultural land reform; families who had diversified out of rural landholding — many of the more economically sophisticated daimyo families had done precisely this during the Meiji and Taisho periods — retained their asset base substantially intact. Second, <em>social and educational capital</em> — personal relationships, marriage networks, access to elite institutions — is not transferable property and cannot be legally abolished. Third, <em>institutional memory</em>: the bureaucratic, legal, and corporate institutions that former kazoku families had built connections into over three generations did not change their informal recruitment and promotion norms on the day the title system ended.</p>
+        <p>The Gakushuin (<em>Gakushūin</em>, 学習院, formerly the Peers' School) illustrates this precisely. Formerly the exclusive educational institution for kazoku children, Gakushuin became a regular private school in 1947 — but did not change its student population, its culture, its faculty relationships, or its connection to the Imperial Household (where it continues to educate Imperial family members). The social network embedded in a Gakushuin education persisted seamlessly across the formal abolition boundary.</p>
+      </div>
+    </div>
+
+    <div class="callout-navy">
+      <strong>Key Analytical Point</strong>
+      The abolition of the kazoku system is best understood as a formal-legal discontinuity that successfully eliminated the constitutional transmission mechanism (hereditary legislative seats, titled wealth inheritance) while leaving intact the underlying social and educational capital stocks that generate elite position across generations. The post-1947 reproduction of former-noble-adjacent elites operates through Bourdieuian capital accumulation rather than formal institutional inheritance — which is precisely why it is both more resilient to legal intervention and more analytically challenging to identify and measure.
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART II ====================== -->
+<div class="part-header">
+  <span class="part-num">II</span>
+  <span class="part-title">Mechanisms of Elite Persistence — Capital Reproduction After 1947</span>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">2.1</span>
+    <span class="section-title">Educational Capital: The Gakushuin Network and Elite School Pipelines</span>
+    <span class="section-subtitle">Social Reproduction via Credentialism</span>
+  </div>
+  <div class="section-body">
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <h3>Gakushuin as Social Network</h3>
+        <p>Gakushuin University (学習院大学) and its affiliated primary-through-secondary schools constitute the most direct institutional continuation of the kazoku social world in contemporary Japan. Founded in 1847 as a court-noble educational institution and reorganized in 1877 as the Peers' School under Imperial Household Agency administration, Gakushuin formally separated from the IHA in 1947 but retained its cultural character, faculty networks, and — crucially — its student intake patterns. Attendance at Gakushuin functions as a subtle but legible social signal: it identifies the child as having parents who both know of Gakushuin (knowledge itself gated by prior elite network access) and can afford the fees, and who value the specific form of social capital that Gakushuin confers over the academic capital that UTokyo entrance preparation would optimize for.</p>
+        <p>The current Imperial family's continued attendance at Gakushuin — Emperor Naruhito, Empress Masako (from a senior diplomat's family), Emperor's brother Fumihito — maintains Gakushuin's apex social signal value, functioning as an anchor for the entire elite school network hierarchy below it.</p>
+      </div>
+      <div class="analysis-col">
+        <h3>Elite Secondary School Networks and the Meritocracy Paradox</h3>
+        <p>Below the Gakushuin tier, a constellation of elite private secondary schools — Azabu (麻布), Kaisei (開成), Nada (灘), Rikkyo (立教), Keio Futsubu (慶應義塾普通部) — provides the institutional infrastructure through which former kazoku families, alongside newly wealthy industrial families, reproduce elite educational credentials. Access to these schools is nominally meritocratic (entrance examination performance), but preparation for these examinations requires the financial capacity to fund <em>juku</em> (塾, cram school) attendance from primary school age — a capital-intensive process that structurally advantages families with both financial and cultural capital.</p>
+        <p>This constitutes what might be called the Japanese meritocracy paradox: the elite credentialing system (hensachi-ranked university entrance) appears rigorously meritocratic in its formal mechanism — standardized examination, blind grading — while encoding deep social advantage in the production conditions for examination performance. A former kazoku family that directs children toward elite juku from age 7 and Gakushuin primary from age 6 generates UTokyo-eligible outcomes through intensive capital investment, not hereditary privilege per se. The formal mechanism is meritocratic; the production function for merit is not.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">2.2</span>
+    <span class="section-title">Notable Former Kazoku Families in Contemporary Elite Positions</span>
+    <span class="section-subtitle">Social and Political Capital Persistence</span>
+  </div>
+  <div class="section-body">
+    <div class="full-analysis">
+      <h3>Family Case Studies</h3>
+    </div>
+    <div class="dynasty-grid">
+      <div class="dynasty-card">
+        <div class="family-name">Hosokawa Family</div>
+        <div class="family-kanji">細川家 — Kōshaku (Prince)</div>
+        <div class="family-desc">Former daimyo of Higo (Kumamoto), elevated to Kōshaku. Morihiro Hosokawa (細川護熙) — 79th Prime Minister (1993–94) — is the great-grandson of the daimyo line and maternal grandson of PM Konoe Fumimaro. After leaving politics he became a ceramicist and calligrapher. His political career followed a trajectory from Kumamoto Prefecture Governor to Diet member to PM, leveraging both family name and regional jiban.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Tokugawa Family</div>
+        <div class="family-kanji">徳川家 — Kōshaku (Prince)</div>
+        <div class="family-desc">The main Tokugawa line (<em>honke</em>) was elevated to Kōshaku under the kazoku, reflecting its pre-Meiji shogunal position. Tsunenari Tokugawa (18th generation head, b. 1940) maintains a prominent cultural and diplomatic role — serving on cultural and heritage boards. The family's position is explicitly non-political but occupies the apex of Japan's historical social memory, making it a consistent reference point in public cultural discourse.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Konoe Family</div>
+        <div class="family-kanji">近衛家 — Kōshaku (Prince)</div>
+        <div class="family-desc">Ancient kuge (court nobility) family; one of the Sekke (摂家) families eligible to provide Imperial regents. Fumimaro Konoe was wartime PM (1937–39, 1940–41). His son Michitaka Konoe (1903–1967) became a prominent conductor and president of the Japan Philharmonic Orchestra. Cultural capital fully preserved; political capital expended with wartime legacy but family maintains elite social standing through arts and cultural institutions.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Maeda Family</div>
+        <div class="family-kanji">前田家 — Kōshaku (Prince)</div>
+        <div class="family-desc">Former daimyo of Kaga domain (Kanazawa), Japan's largest outside the Tokugawa, elevated to Kōshaku. Post-war Maeda family members maintained prominent cultural roles in Kanazawa — the region's identity as a major arts center (Kenroku-en, Noh theater, Kanazawa cultural legacy) is partly an artifact of the former domain's Edo-era cultural investment. Regional elite identity persists through cultural patronage rather than formal political office.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Shimazu Family</div>
+        <div class="family-kanji">島津家 — Kōshaku (Prince)</div>
+        <div class="family-desc">Former daimyo of Satsuma (Kagoshima), a domain whose Meiji-era samurai (including Saigō Takamori and Ōkubo Toshimichi) shaped the Meiji state itself. The Shimazu family's Kōshaku elevation reflected this disproportionate political contribution. Post-war presence is primarily regional — Kagoshima cultural and commercial elite still references Shimazu heritage through the Shōkoshūseikan industrial museum (former Shimazu factory) and civic identity.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Yoshida → Aso Family</div>
+        <div class="family-kanji">吉田→麻生 — Inter-elite Marriage Network</div>
+        <div class="family-desc">Not kazoku per se, but illustrates inter-elite marriage capital. Yoshida Shigeru (PM 1946–47, 1948–54) — architect of post-war economic policy — had a daughter Kazuko who married into the Aso family. Their son Taro Aso (麻生太郎) became PM (2008–09) and LDP's long-serving senior figure. The Aso family itself is Kyushu industrial elite (Aso Cement/coal mining). Connects political, bureaucratic-legacy, and industrial capital through marriage rather than noble title.</div>
+      </div>
+    </div>
+
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Capital Preservation Mechanisms: Post-1947 Adaptation Strategies</div>
+      <table class="profile-table">
+        <thead><tr><th>Capital Type</th><th>Pre-1947 Form</th><th>Abolition Impact</th><th>Post-1947 Persistence Mechanism</th><th>Effectiveness</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="metric-label">Social Capital</td>
+            <td>Kazoku-class marriage networks; House of Peers peer relationships; Imperial Household proximity</td>
+            <td>Minimal — relationships are not legally extinguishable</td>
+            <td>Gakushuin alumni networks; elite club memberships; continued endogamous marriage patterns within former-kazoku families and their corporate/political equivalents</td>
+            <td><span class="tag tag-c">High</span></td>
+          </tr>
+          <tr>
+            <td class="metric-label">Educational Capital</td>
+            <td>Exclusive Gakushuin access; private tutoring culture; elite secondary schools</td>
+            <td>Minimal — Gakushuin continues as private school</td>
+            <td>Gakushuin primary/secondary/university pipeline; elite juku investment from early age; UTokyo/Keio/Gakushuin credentialing</td>
+            <td><span class="tag tag-c">High</span></td>
+          </tr>
+          <tr>
+            <td class="metric-label">Financial Capital (Rural)</td>
+            <td>Agricultural estate income; tenanted farmland in home domain regions</td>
+            <td>Significant — 1946–50 land reform redistributed farm tenancies</td>
+            <td>Partial: compensation bonds (deflation-adjusted); families who had already converted rural to urban/financial assets were largely unaffected</td>
+            <td><span class="tag tag-b">Moderate</span></td>
+          </tr>
+          <tr>
+            <td class="metric-label">Financial Capital (Urban)</td>
+            <td>Tokyo/Osaka property; financial securities; industrial shareholding</td>
+            <td>Partial — progressive inheritance tax, inflation eroded stock values; but urban property not directly targeted</td>
+            <td>Urban property appreciation (especially Tokyo) partially compensated for rural loss; financial diversification into securities and business stakes</td>
+            <td><span class="tag tag-b">Moderate–High</span></td>
+          </tr>
+          <tr>
+            <td class="metric-label">Political Capital</td>
+            <td>Hereditary House of Peers seats; direct government access via Imperial Household proximity</td>
+            <td>Significant — hereditary legislative seats abolished; House of Peers dissolved</td>
+            <td>Conversion to elected politics (several former kazoku families win Diet seats); lobbying relationships; cultural influence on policy discourse</td>
+            <td><span class="tag tag-b">Moderate</span></td>
+          </tr>
+          <tr>
+            <td class="metric-label">Symbolic Capital</td>
+            <td>Title recognition; legal precedence; public ceremonial role</td>
+            <td>Total formal abolition — no legal titles recognized</td>
+            <td>Cultural memory; historical brand; regional identity ("the Shimazu family" as Kagoshima civic identity); media references; museum and cultural institution patronage</td>
+            <td><span class="tag tag-b">Moderate</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART III ====================== -->
+<div class="part-header">
+  <span class="part-num">III</span>
+  <span class="part-title">Shushin and the Gakubatsu System — Educational Pedigree as Elite Screening Mechanism</span>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">3.1</span>
+    <span class="section-title">Gakubatsu Architecture: The UTokyo Law Faculty Pipeline to State Power</span>
+    <span class="section-subtitle">Bureaucratic Elite Reproduction</span>
+  </div>
+  <div class="section-body">
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <h3>The Gakubatsu Concept</h3>
+        <p><em>Gakubatsu</em> (学閥, "school clique") refers to the informal networks of mutual support, preferential hiring, and career advancement that flow through shared alma mater affiliation in Japan. It is analytically distinct from pure meritocracy (where credential signals ability and ability drives outcomes) in that the affiliation itself generates loyalty-based preferential treatment independent of individual competence. The concept of <em>shushin</em> (出身, literally "place of origin/emergence") operationalizes this: in Japanese elite professional discourse, "どちらのご出身ですか" ("what is your shushin?") refers primarily to educational background, and the answer carries dense social information about the respondent's likely competence tier, social network position, career trajectory, and ideological orientation.</p>
+        <p>The UTokyo Law Faculty (<em>Tōdai Hōgakubu</em>, 東京大学法学部) occupies the apex of the gakubatsu hierarchy for the three domains of greatest institutional power: the national bureaucracy (especially the Ministry of Finance and METI), the judicial system (Supreme Court), and the police/security apparatus (NPA senior career officials). This is not merely credentialist signaling — it reflects a concrete institutional mechanism: the national civil service <em>Sōgōshoku</em> (総合職, "integrated track") examination, which historically has been dominated by UTokyo graduates, is the mandatory entry point for all central government career officials.</p>
+      </div>
+      <div class="analysis-col">
+        <h3>The National Bureaucracy Pipeline</h3>
+        <p>The <em>Sōgōshoku</em> (formerly <em>Kōtō Shiken</em>, Higher Civil Service Examination, Type I) is the gatekeeper for Japan's career bureaucratic elite. Passing the examination and receiving a ministry assignment — not merely graduating from UTokyo — is the critical threshold; UTokyo Law Faculty graduation is neither necessary nor sufficient, but functions as a near-dominant predictor of examination success and prestigious ministry placement. In peak years through the 1980s, UTokyo Law Faculty graduates constituted 30–50% of all Type I examination passers assigned to elite ministries (MOF, METI, MOJ). The proportion has declined modestly following 1990s administrative reform initiatives but remains the single largest institutional bloc.</p>
+        <p>The Ministry of Finance (<em>Zaimushō</em>, 大蔵省/財務省) illustrates the mechanism most clearly. The Vice Minister of Finance (事務次官) — the highest career position — has historically been held in overwhelming proportion by UTokyo Law graduates. MOF's internal promotion culture explicitly values the UTokyo Law credential as a prior-probability signal of intellectual quality. This creates a self-reinforcing equilibrium: UTokyo Law graduates fill MOF, UTokyo Law graduates make promotion decisions, UTokyo Law graduates are promoted.</p>
+      </div>
+    </div>
+
+    <div class="full-analysis">
+      <h3>The Police (NPA) and Keishisoukan Pipeline</h3>
+      <p>The National Police Agency (警察庁, <em>Keisatsucho</em>) operates a dual-track structure with direct institutional parallels to the broader bureaucratic gakubatsu model. <em>Kyaria</em> (キャリア, "career") officers enter the NPA through the national <em>Sōgōshoku</em> civil service examination — the identical entry pathway as MOF or METI officials — and are immediately distinguished from the vast majority of police officers who enter through prefectural-level examination (<em>non-kyaria</em>, ノンキャリア). The kyaria and non-kyaria tracks are effectively separate career ladders with minimal crossing: kyaria officers typically reach senior prefectural superintendent or NPA division chief positions within 15–20 years, while non-kyaria officers rarely reach equivalent ranks regardless of performance or experience.</p>
+      <p>The NPA takes approximately 20–30 kyaria officers annually through the Sōgōshoku examination. Historically, a significant share — often 25–40% in any given cohort — has been UTokyo graduates, with Kyoto, Keio, and Waseda graduates constituting most of the remainder. The <em>Keishisoukan</em> (警視総監, Superintendent General of the Tokyo Metropolitan Police Department), the highest uniformed position in Japanese policing and one of the most prominent security appointments in the country, is filled by NPA career officials on rotation. Given the UTokyo Law dominance of the NPA kyaria pipeline, a substantial proportion of Keishisoukan appointees have been UTokyo-educated, though the position also draws from other elite university law and social science faculties. The user's observation reflects a real structural pattern: the position's occupant is almost invariably a <em>Sōgōshoku</em> kyaria entrant from an elite law faculty, with UTokyo being the modal but not exclusive shushin.</p>
+      <p>This structure has a precise functional parallel to the kazoku system: just as kazoku rank was not the cause of elite position but the signal that predicted access to the House of Peers, UTokyo Law graduation is not the cause of NPA senior promotion but the signal that predicts access to the kyaria track through Sōgōshoku performance — which is itself predicted by prior educational capital investment. The causal chain runs through capital, not credentials directly.</p>
+    </div>
+
+    <div class="pipeline">
+      <span class="pipe-step">Elite Family Background</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">Elite Primary/Secondary (Gakushuin/Azabu/Kaisei)</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">UTokyo Law Faculty</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">Sōgōshoku Exam</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step alt">NPA Kyaria / MOF / MOJ</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step alt">Keishisoukan / Vice-Minister / Supreme Court</span>
+    </div>
+
+    <div class="profile-table-wrap">
+      <div class="profile-table-label">Gakubatsu Hierarchy Across Institutional Domains</div>
+      <table class="profile-table">
+        <thead><tr><th>Institutional Domain</th><th>Primary Gakubatsu</th><th>Entry Mechanism</th><th>Non-UTokyo Paths</th><th>UTokyo Law Prevalence (est.)</th></tr></thead>
+        <tbody>
+          <tr><td class="metric-label">Ministry of Finance (MOF)</td><td>UTokyo Law Faculty</td><td>Sōgōshoku exam → MOF placement</td><td>Kyoto Law, Hitotsubashi (declining share)</td><td><span class="tag tag-d">High — historically 30–50% of ViceMins</span></td></tr>
+          <tr><td class="metric-label">METI (Trade/Industry)</td><td>UTokyo Law/Economics</td><td>Sōgōshoku exam → METI placement</td><td>Kyoto, Keio, Hitotsubashi</td><td><span class="tag tag-d">High — ~30–40% senior officials</span></td></tr>
+          <tr><td class="metric-label">Ministry of Justice / Judiciary</td><td>UTokyo Law Faculty</td><td>Shiho Shiken (Bar Exam) → Shiho Kenshūjo (Judicial Training Institute)</td><td>Kyoto, Keio, Waseda (rising share)</td><td><span class="tag tag-b">Moderate — declining post-2006 new bar exam</span></td></tr>
+          <tr><td class="metric-label">NPA / Police (Kyaria track)</td><td>UTokyo Law / Social Science</td><td>Sōgōshoku exam → NPA placement</td><td>Kyoto, Keio, Waseda, regional national universities</td><td><span class="tag tag-b">Moderate — ~25–35% of kyaria cohort</span></td></tr>
+          <tr><td class="metric-label">Keishisoukan (Tokyo MPD)</td><td>NPA kyaria officer (UTokyo common)</td><td>Appointment from NPA senior officials by Public Safety Commission</td><td>Other elite university law faculties</td><td><span class="tag tag-b">Moderate — pattern documented, not universal</span></td></tr>
+          <tr><td class="metric-label">Keidanren / Corporate Elite</td><td>UTokyo, Keio, Hitotsubashi</td><td>Graduate recruitment (新卒採用) → internal promotion</td><td>Waseda, Osaka, regional national universities</td><td><span class="tag tag-c">Moderate-High — varies by industry</span></td></tr>
+          <tr><td class="metric-label">LDP Political Elite</td><td>UTokyo (less dominant), Waseda, Keio</td><td>Electoral</td><td>No single gakubatsu — diverse shushin; family connection (seshū) more determinative than school</td><td><span class="tag tag-a">Lower — Waseda often rivals UTokyo in politics</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <strong>The Amakudari Extension</strong>
+      The gakubatsu system does not terminate at retirement. <em>Amakudari</em> (天下り, "descent from heaven") — the practice of senior bureaucrats moving to senior positions in regulated industries, quasi-governmental organizations, and public corporations upon mandatory retirement (typically age 60) — perpetuates UTokyo Law gakubatsu networks across the public-private boundary. A former MOF career official who enters a major bank's regulatory affairs division carries both the personal relationships with current MOF officials and the shared UTokyo Law network that lubricates informal communication. This creates a multi-generational, multi-institutional network with kazoku-era characteristics: position secured by prior ascriptive membership (gakubatsu affiliation) rather than market competition alone.
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART IV ====================== -->
+<div class="part-header">
+  <span class="part-num">IV</span>
+  <span class="part-title">Seshū Giin and Jiban Inheritance — Feudal Logic in Democratic Electoral Geography</span>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">4.1</span>
+    <span class="section-title">The San-ban System: Structural Conditions for Electoral Inheritance</span>
+    <span class="section-subtitle">世襲議員 — Hereditary Legislators</span>
+  </div>
+  <div class="section-body">
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <h3>The Three-Resource Model (三バン)</h3>
+        <p>Japanese electoral sociology identifies three resources that are transferable between generations of politicians from the same constituency, creating a structural basis for what functions as hereditary representation despite formal electoral democracy. The <em>san-ban</em> (三バン, "three boards") framework captures these: <em>jiban</em> (地盤, "base/foundation") refers to the organized personal support network — the <em>kōenkai</em> (後援会, personal support association), agricultural cooperative relationships, local construction industry ties, chamber of commerce relationships — that delivers reliable vote mobilization on election day. <em>Kaban</em> (鞄, literally "bag") refers to the inherited political fund organization: donor lists, fundraising infrastructure, and the goodwill of political contributors accumulated over the predecessor's career. <em>Kanban</em> (看板, "signboard") refers to name recognition — the most directly heritable of the three, as voters who recognized and trusted the parent politician automatically extend initial credibility to a child running under the same surname in the same district.</p>
+      </div>
+      <div class="analysis-col">
+        <h3>Seshū Giin Prevalence and Party Distribution</h3>
+        <p><em>Seshū giin</em> (世襲議員, hereditary Diet members, literally "succession politicians") are legislators whose immediate predecessor in the same constituency was a blood or marriage relative — typically father to child, occasionally sibling succession. Research on Lower House composition places the LDP seshū proportion at approximately 25–30% in elections from 2005 through 2023, compared with substantially lower proportions for opposition parties (Democratic/Constitutional Democratic Party ~10–15%, Nippon Ishin roughly similar). The LDP dominance of rural single-member districts (SMDs), where jiban inheritance is most structurally effective, produces this asymmetry: seshū concentration is not randomly distributed across parties but reflects the LDP's organizational structure built on stable personal support networks in areas where the three-resource model operates most effectively.</p>
+        <p>The phenomenon has attracted significant scholarly attention as an indicator of democratic quality. Ethan Scheiner's analysis of Japan as "democracy without competition" and Gerald Curtis's work on electoral organization document how the kōenkai system — which seshū giin inherit directly — functions as a private political organization that insulates incumbents from policy-preference volatility in the electorate, dampening electoral accountability mechanisms.</p>
+      </div>
+    </div>
+
+    <div class="full-analysis">
+      <h3>Representative Dynasty Examples</h3>
+    </div>
+    <div class="dynasty-grid">
+      <div class="dynasty-card">
+        <div class="family-name">Abe Family — Yamaguchi 4th</div>
+        <div class="family-kanji">安倍家 · 山口4区</div>
+        <div class="family-desc">Nobusuke Kishi (PM 1957–60) → Shintaro Abe (Foreign Minister) → Shinzo Abe (PM 2006–07, 2012–20). Three-generation transmission over Yamaguchi's 4th SMD spanning 60+ years. Kishi himself was a Meiji oligarch descendant with connections to the pre-war bureaucratic elite, illustrating the kazoku-era→seshū-giin continuum. Abe's 2022 assassination interrupted the dynasty; the seat subsequently became contested.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Koizumi Family — Kanagawa 11th</div>
+        <div class="family-kanji">小泉家 · 神奈川11区</div>
+        <div class="family-desc">Jiro Koizumi (senior politician/JDA director-general) → Junichiro Koizumi (PM 2001–06) → Shinjiro Koizumi (Environment Minister; LDP leadership candidate 2024). Third-generation transmission of the Kanagawa 11th SMD. Shinjiro is the most prominent contemporary example of seshū political brand value: elected to the Diet at age 29, his primary credential at initial election was surname recognition and inherited kōenkai organization.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Obuchi Family — Gunma 5th</div>
+        <div class="family-kanji">小渕家 · 群馬5区</div>
+        <div class="family-desc">Keizo Obuchi (PM 1998–2000) → Yuko Obuchi (daughter; Minister of Economy, Trade and Industry 2014). Two-generation transmission; Yuko inherited both the jiban and kaban of her father's Gunma organization at age 26 following his death. She became Japan's youngest female minister at 40 before a campaign finance scandal in 2014. The Obuchi case illustrates gender-inclusive dynastic transmission — increasingly common as female succession fills gaps.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Aso Family — Fukuoka 8th</div>
+        <div class="family-kanji">麻生家 · 福岡8区</div>
+        <div class="family-desc">Takakichi Aso (politician, Aso Cement/Coal heir) → Taro Aso (PM 2008–09; LDP's long-serving senior figure). Two-generation political transmission with a Kyushu industrial elite family foundation. Aso's Fukuoka district represents a regional economic nexus where family business interests (Aso Corporation, now a diversified construction/education conglomerate) and political kōenkai overlap — illustrating the economic-political capital integration characteristic of rural dynasty districts.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Hosokawa → Kumamoto Governor</div>
+        <div class="family-kanji">細川家 · 熊本</div>
+        <div class="family-desc">Morihiro Hosokawa served as Kumamoto Prefecture Governor (1983–91) before entering national politics, a trajectory that leveraged the Hosokawa family's centuries-old Higo/Kumamoto domain connection. His regional political base drew explicitly on former-kazoku symbolic capital translated into contemporary electoral legitimacy — one of the clearest documented cases of kazoku heritage directly informing a modern political career launch.</div>
+      </div>
+      <div class="dynasty-card">
+        <div class="family-name">Takeshita Family — Shimane 2nd</div>
+        <div class="family-kanji">竹下家 · 島根2区</div>
+        <div class="family-desc">Noboru Takeshita (PM 1987–89; founded the Takeshita faction that dominated LDP for decades) → Wataru Takeshita (younger brother; inherited the Shimane 2nd seat). Unusually, sibling rather than parent-child succession. The Shimane constituency is one of Japan's most demographically aging SMDs, where stable small-town organizational networks make jiban inheritance structurally most effective, and where opposition electoral competition is most attenuated.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">4.2</span>
+    <span class="section-title">The Tokyo 23-Ward Exception: Structural Analysis of Why Urban Dynasties Fail</span>
+    <span class="section-subtitle">Electoral Geography and Community Network Density</span>
+  </div>
+  <div class="section-body">
+    <div class="full-analysis">
+      <h3>The Core Observation</h3>
+      <p>The user's observation that jiban inheritance appears substantially less prevalent in Tokyo's 23-ward (<em>Tokubetsu-ku</em>, 特別区) SMDs than in rural or semi-rural constituencies is empirically accurate and structurally significant. This geographic pattern is not accidental but reflects five distinct structural mechanisms that operate differently in dense urban versus rural Japanese electoral environments. Understanding these mechanisms clarifies why the san-ban electoral inheritance model functions as a near-universal feature of rural LDP politics while remaining an anomaly in Tokyo's core districts.</p>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Structural Dimension</th>
+            <th class="col-head-a">Rural / Semi-Rural SMDs<br><span style="font-weight:400;font-style:italic;font-size:10px;">e.g., Yamaguchi 4, Gunma 5, Shimane 2, Kanagawa 11 (semi-rural)</span></th>
+            <th class="col-head-b">Tokyo 23-Ward SMDs<br><span style="font-weight:400;font-style:italic;font-size:10px;">e.g., Tokyo 1–25 (core ward districts)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="metric-label">Residential Stability</td>
+            <td>Low population mobility; multi-generational residency common; households vote in same district for 30–50 years, accumulating relationship capital with incumbent family</td>
+            <td>High residential churn; significant renter population; new residents frequently move in without prior relationship to local political networks; short average tenancy reduces koenkai effectiveness</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Community Network Density</td>
+            <td>Tight <em>chōnaikai</em> (町内会, neighborhood associations) with high membership rates; agricultural cooperative (JA, 農協) membership providing organized voting bloc infrastructure; local construction industry associations; fishing cooperative networks in coastal regions</td>
+            <td>Chōnaikai exist but have lower participation rates; no agricultural cooperatives; business associations more national/industry-oriented than locally embedded; social organizations more voluntary and fragmented</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Vote Mobilization Infrastructure</td>
+            <td>JA cooperative meetings function as de facto political mobilization events; construction industry kōenkai donations create reciprocal vote-delivery obligations; local hospital/school appointment influence creates network dependencies</td>
+            <td>Interest-based voting more prevalent; weaker reciprocal obligation networks; political mobilization through policy-platform communication rather than personal obligation structures; higher proportion of "floating voters" (無党派層)</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Information Environment</td>
+            <td>Local newspaper dominance; national media less penetrant; name recognition provides larger relative informational advantage when policy detail is less accessible; candidate differentiation harder in low-information environment</td>
+            <td>National media market based in Tokyo; TV, newspaper, internet access at saturation levels; highly policy-informed voter segment; name recognition advantage compressed by information abundance; voters can evaluate candidates on substantive grounds</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Electoral Competition Intensity</td>
+            <td>Many rural SMDs are effectively single-party LDP domains where internal LDP candidate selection (often jiban-based) is the decisive competition; opposition parties structurally weak</td>
+            <td>Multiple viable parties; CDP (Constitutional Democratic Party), Nippon Ishin, independent candidates regularly competitive; higher marginal cost of jiban-advantage because opposition can win; jiban inheritance advantage insufficient to guarantee victory</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Demographic Profile</td>
+            <td>Aging population; high proportion of retired and elderly voters who have longest kōenkai relationship histories; smaller absolute electorate increases per-vote value of organized mobilization</td>
+            <td>Younger median voter age; higher proportion of mobile professionals and recent graduates; demographics less amenable to long-term personal loyalty networks; new voters have no prior relationship with incumbent family</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Seshū Prevalence (est.)</td>
+            <td><span class="tag tag-d">~30–45% of LDP SMD seats</span> across rural/semi-rural constituencies</td>
+            <td><span class="tag tag-c">~5–15% of Tokyo 23-ward SMD seats</span> in comparable analysis</td>
+          </tr>
+          <tr>
+            <td class="metric-label">Key Named Examples</td>
+            <td>Abe (Yamaguchi 4), Koizumi (Kanagawa 11), Obuchi (Gunma 5), Aso (Fukuoka 8), Takeshita (Shimane 2), Hosokawa (Kumamoto)</td>
+            <td>Relatively fewer; more competitive; candidates typically win on personal merit or party affiliation rather than family brand; occasional exceptions where urban kōenkai are inherited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout-navy">
+      <strong>The JA Agricultural Cooperative Mechanism — The Decisive Rural Differentiator</strong>
+      The single most important structural explanation for rural-urban dynastic divergence is the Japan Agricultural Cooperative (JA農協) system's role as a vote delivery infrastructure. JA operates approximately 700 local agricultural cooperatives covering nearly all rural farming households. Because local politicians' influence over JA credit availability, input subsidies, price supports, and administrative appointments creates genuine reciprocal dependency, JA cooperative meetings function as de facto political mobilization events. The child of an incumbent politician who has maintained JA relationships for 20 years inherits these reciprocal obligations automatically — the kōenkai's JA branch is already organized, already obligated, and already familiar with the family name. No equivalent institution exists in Tokyo's 23 wards. This single institutional difference accounts for a substantial portion of the rural-urban dynastic divergence.
+    </div>
+  </div>
+</div>
+
+<!-- ====================== PART V ====================== -->
+<div class="part-header">
+  <span class="part-num">V</span>
+  <span class="part-title">Synthesis — The Structural Logic of Japanese Elite Reproduction</span>
+</div>
+
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">5.1</span>
+    <span class="section-title">The Iron Triangle, Mura Shakai, and the Feudal Continuum</span>
+    <span class="section-subtitle">Theoretical Integration</span>
+  </div>
+  <div class="section-body">
+    <div class="framework-section">
+      <h3>1. The Meiji Compromise as Institutional Foundation</h3>
+      <p>The persistence of kazoku-adjacent hierarchy in post-1947 Japan cannot be understood without returning to the Meiji state's foundational design choice. The Meiji oligarchs who constructed the kazoku system, the Imperial University system, and the national civil service examination did so with explicit awareness of the modernization paradox: industrial and military capacity required meritocratic talent allocation (hence the examination system), but social stability required the preservation of hierarchical legitimacy (hence the kazoku and the ceremonial role of the Emperor). The institutional solution — a meritocratic examination system that concentrates preparation advantage at elite educational institutions whose access is stratified by social class — elegantly resolved the paradox by making elite reproduction appear meritocratic while remaining structurally ascriptive. This design, not any particular post-war policy, is the deep root of contemporary gakubatsu dynamics.</p>
+
+      <h3>2. The Iron Triangle as Modern Kazoku Analogue</h3>
+      <p>Karel van Wolferen's "iron triangle" (鉄の三角形) — the interlocking elite network of senior bureaucracy, LDP political leadership, and Keidanren business federation leadership — functions as the structural successor to the kazoku's House of Peers in one precise sense: it concentrates policy-making power in a relatively small network of individuals who share educational backgrounds (primarily UTokyo Law, Economics, and Engineering), who are connected by amakudari career transitions, and who reproduce their membership through the same elite educational pathway. The LDP's post-1955 dominance, built on agricultural cooperative networks in rural constituencies (the structural foundation of rural seshū giin prevalence), provided the political pillar of this triangle with a self-perpetuating electoral mechanism. Chalmers Johnson's observation that Japan is a "developmental state" governed primarily by its bureaucracy rather than elected politicians reflects the relative dominance of the gakubatsu pipeline within this triangle: the MOF and METI career elite govern policy, while elected politicians govern the electoral coalition that legitimizes that governance.</p>
+
+      <h3>3. Mura Shakai and the Persistence of Hierarchical Group Loyalty</h3>
+      <p><em>Mura shakai</em> (村社会, "village society") is the sociological concept used by Japanese scholars to describe how the behavioral norms of the traditional agricultural village community — deference to hierarchy, consensus-orientation over individual assertion, strong in-group/out-group distinctions, emphasis on group loyalty over individual ethics — persist in modern institutional forms. This concept connects the three phenomena analyzed in this report: the kazoku's hierarchical social ordering maps onto the mura shakai's deference to established rank; the gakubatsu's loyalty networks map onto the mura's in-group preference; and the jiban's kōenkai organization maps onto the village's consensus-based collective action for agricultural mutual support. What presents as Japanese "uniqueness" in each domain is, on this analysis, the same underlying social technology applied to successive institutional contexts.</p>
+
+      <h3>4. The Meritocracy Paradox as Equilibrium</h3>
+      <p>The Japanese elite reproduction system is in a stable equilibrium, not an unstable holdover from a feudal past. The meritocratic examination system provides genuine social mobility (a meaningful fraction of UTokyo Law graduates come from non-elite family backgrounds), which ensures that the system retains broad legitimacy and does not generate class-consciousness-based opposition. The examination system simultaneously concentrates elite reproduction among those who can afford intensive preparation capital, which ensures that the elite remains socially coherent and networked. The system offers the promise of meritocratic access without delivering it at a frequency sufficient to disrupt elite cohesion. This is not a coincidence or a design flaw — it is a functional equilibrium that simultaneously satisfies meritocratic legitimacy norms and hierarchical reproduction preferences.</p>
+
+      <h3>5. Reform Vectors and Structural Resistance</h3>
+      <p>Post-war Japan has produced three serious attempts to disrupt this equilibrium. The 2006–2013 administrative reform (<em>Gyōkaku</em>) targeting amakudari produced modest reductions in direct ministry-to-industry revolving door placements while generating creative circumvention through industry associations. The 2009–2012 DPJ government represented the most politically serious challenge to the iron triangle in post-war history, targeting bureaucratic dominance over policy and attempting to weaken the MOF-LDP alliance — it collapsed under bureaucratic resistance and the 2011 earthquake crisis. Electoral system reform (1994 shift from multi-member to single-member districts) paradoxically reinforced dynastic succession by concentrating jiban inheritance value in individual SMDs rather than diffusing it across multi-member contests. Each reform attempt has confronted the fundamental challenge: the mechanisms of elite reproduction are not formally illegal, not concentrated in a single abolishable institution, and are distributed across educational, financial, social, and political capital stocks that are individually unremarkable but collectively constitute a robust hierarchical architecture.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== MASTER TABLE ====================== -->
+<div class="part-header">
+  <span class="part-num">VI</span>
+  <span class="part-title">Master Comparative Table: Elite Reproduction Across Institutional Domains</span>
+</div>
+
+<div class="master-table-wrap">
+  <table class="master-table">
+    <thead>
+      <tr>
+        <th>Domain</th>
+        <th>Formal Entry Mechanism</th>
+        <th>Key Credential (Shushin)</th>
+        <th>Informal Reproduction Mechanism</th>
+        <th>Kazoku-Era Parallel</th>
+        <th>Network Persistence Vehicle</th>
+        <th>GHQ Reform Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>National Bureaucracy (MOF/METI)</td>
+        <td>Sōgōshoku civil service examination + ministry placement</td>
+        <td>UTokyo Law / Economics Faculty (dominant)</td>
+        <td>Gakubatsu preferential promotion; amakudari post-retirement placement</td>
+        <td>Meiji oligarchs' bureaucratic legacy; quasi-noble senior official networks</td>
+        <td>UTokyo Alumni Association; shared ministry career cohort</td>
+        <td><span class="tag tag-b">Minimal — NPA/bureaucracy preserved</span></td>
+      </tr>
+      <tr>
+        <td>Police (NPA/Keishisoukan)</td>
+        <td>Sōgōshoku exam → NPA kyaria assignment; prefectural exam → non-kyaria</td>
+        <td>UTokyo or other elite law faculty for kyaria track</td>
+        <td>Kyaria/non-kyaria dual track produces ceiling for non-elite entrants; UTokyo networks within NPA senior cohort</td>
+        <td>Meiji Home Ministry Police Bureau hierarchy; post-1945 NPA retains bureaucratic character</td>
+        <td>NPA kyaria alumni cohort; Keishisoukan appointment from senior NPA officials</td>
+        <td><span class="tag tag-b">Minimal — NPA reconstituted 1954 with similar elite character</span></td>
+      </tr>
+      <tr>
+        <td>Judiciary</td>
+        <td>New bar examination (旧/新司法試験) → Judicial Training Institute (司法研修所)</td>
+        <td>UTokyo Law (historically dominant; declining since 2006 new bar exam)</td>
+        <td>Supreme Court justice appointment by Cabinet (effectively executive patronage); law professor career path also UTokyo-dominant</td>
+        <td>Meiji civil code legal elite; former kazoku legal advisors</td>
+        <td>Supreme Court justice appointment network; UTokyo Law professor-student chain</td>
+        <td><span class="tag tag-b">Partial — judiciary formalized but UTokyo dominance persisted for decades</span></td>
+      </tr>
+      <tr>
+        <td>Corporate Elite (Keidanren)</td>
+        <td>New graduate recruitment (新卒採用); elite university brand signal dominates screening</td>
+        <td>UTokyo, Keio, Hitotsubashi (varies by industry); Gakushuin for select sectors</td>
+        <td>Amakudari from bureaucracy into corporate regulatory affairs; marriage network between corporate and political elite; industry association cross-elite access</td>
+        <td>Zaibatsu-kazoku economic elite interpenetration (Iwasaki/Mitsui/Sumitomo minor peerage elevation)</td>
+        <td>Keidanren membership; industry association boards; shared UTokyo/Keio alumni events</td>
+        <td><span class="tag tag-a">Moderate — zaibatsu dissolved but corporate networks reconstituted through keiretsu</span></td>
+      </tr>
+      <tr>
+        <td>National Politics (LDP)</td>
+        <td>Electoral — popular vote in SMD or PR block</td>
+        <td>Family connection (seshū, ~25–30% of LDP) > shushin; Waseda/UTokyo for non-seshū elite</td>
+        <td>San-ban jiban inheritance (kōenkai, kaban, kanban); JA-based vote mobilization in rural districts; political faction loyalty networks</td>
+        <td>Former kazoku (e.g., Hosokawa) leveraging historical family name in regional politics; Meiji oligarch descendants in LDP elite</td>
+        <td>Kōenkai (personal support associations); LDP faction structures; political fundraising networks</td>
+        <td><span class="tag tag-a">Significant formally — House of Peers abolished; but seshū system reconstituted dynasty logic in electoral form</span></td>
+      </tr>
+      <tr>
+        <td>Social Elite (Cultural/Ceremonial)</td>
+        <td>Birth / marriage network / Gakushuin attendance</td>
+        <td>Gakushuin; proximity to Imperial Household; historical family name recognition</td>
+        <td>Endogamous marriage within former-kazoku and equivalent new-elite families; cultural board patronage; Gakushuin alumni network</td>
+        <td>Most direct continuation of kazoku social world; Gakushuin as institutional continuity vehicle</td>
+        <td>Gakushuin alumni association; Imperial Household events; arts/cultural patronage networks; elite club memberships</td>
+        <td><span class="tag tag-c">Very Minimal — GHQ had no instrument to abolish social networks or marriage preferences</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="report-footer">
+  <p>Sources &amp; Academic Literature: van Wolferen, K. (1989) <em>The Enigma of Japanese Power</em> (Macmillan); Johnson, C. (1982) <em>MITI and the Japanese Miracle</em> (Stanford UP); Curtis, G.L. (1971, 1999) <em>Election Campaigning Japanese Style</em>; Scheiner, E. (2006) <em>Democracy Without Competition in Japan</em> (Cambridge UP); Hrebenar, R.J. (2000) <em>Japan's New Party System</em>; Makihara, I. (2014) research on political dynasties and electoral geography; Bourdieu, P. (1986) "The Forms of Capital" (theoretical framework); Takaishi, M. (2012) work on seshū giin in Japanese electoral politics; NPA Annual White Papers (警察白書) various years; Rinshō Sōgō Kenkyūjo data on gakubatsu in bureaucratic appointment; Cabinet Office data on hereditary Diet members. Kazoku system historical data from Meiji Jingū archives and Fujitani (1996) <em>Splendid Monarchy</em>.</p>
+</div>
+
+</body>
+</html>

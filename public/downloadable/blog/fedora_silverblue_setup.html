@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fedora Silverblue Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #17243d;
+    --navy-mid: #1e3056;
+    --navy-light: #274578;
+    --gold: #9a7b28;
+    --gold-light: #c4a44a;
+    --text: #1a1714;
+    --text-muted: #4f4a44;
+    --text-light: #8a7d76;
+    --bg: #fdfaf6;
+    --bg-alt: #f3f0ea;
+    --bg-card: #ffffff;
+    --border: #ddd5c8;
+    --border-strong: #c0b8ac;
+    --code-bg: #1e2433;
+    --code-text: #e6e1d6;
+    --code-comment: #8a96ad;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--text);
+    background-color: var(--bg);
+    line-height: 1.8;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    border-top: 4px solid var(--navy);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0 2rem;
+    margin-bottom: 3rem;
+  }
+  .masthead-series {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 0.55rem;
+  }
+  .masthead-sub {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 1.4rem;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ABSTRACT */
+  .abstract {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--navy-mid);
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 3rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .abstract-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+  .abstract p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* SECTION BLOCKS */
+  .section-block {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1rem 1.8rem;
+    background: var(--navy);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #8a9ec4;
+    min-width: 28px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #f0e8d0;
+    line-height: 1.3;
+  }
+  .section-body { padding: 1.8rem; }
+  .section-body > p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+
+  .guide-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 1.8rem 0 0.6rem;
+  }
+  .guide-body h3:first-child { margin-top: 0; }
+  .guide-body h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-light);
+    margin: 1.3rem 0 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .guide-body p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.9rem; }
+  .guide-body ul, .guide-body ol { margin: 0 0 1rem 1.4rem; }
+  .guide-body li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.35rem; }
+  .guide-body a { color: var(--navy-light); }
+
+  /* CODE */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82em;
+    background: var(--bg-alt);
+    color: #5c3d00;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+  pre {
+    background: var(--code-bg);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin: 0.6rem 0 1.2rem;
+    overflow-x: auto;
+    border: 1px solid #2a3346;
+  }
+  pre code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    background: none;
+    border: none;
+    color: var(--code-text);
+    padding: 0;
+    white-space: pre;
+  }
+
+  /* NOTE / QUOTE */
+  .note {
+    background: #f5f0e0;
+    border: 1px solid #c8b060;
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .note strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* REPORT FOOTER */
+  .report-footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-series">Technical Guide — Linux</div>
+  <h1>Fedora Silverblue Setup Guide</h1>
+  <div class="masthead-sub">Post-install steps for an immutable, economist-oriented workstation</div>
+  <div class="masthead-meta">
+    <span>Version: Fedora Silverblue 39</span>
+    <span>Scope: Flatpak · Toolbox · Layering · Nvidia · MATLAB · Dynare · LaTeX</span>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>Fedora Silverblue's immutable design changes how applications and packages are installed: <code>/</code> and <code>/usr</code> are read-only, so the familiar <code>dnf install</code> workflow no longer applies. This guide collects the post-install steps I take to turn a fresh Silverblue system into a usable, economist-oriented workstation — covering the three installation mechanisms (Flatpak, Toolbox, layering), Nvidia/graphics configuration, and the trickier setups for MATLAB, Dynare, and LaTeX under an immutable filesystem. Many ideas are adapted from <a href="https://mutschler.dev/linux/fedora-post-install/#">Willi Mutschler's</a> Workstation guide, but the immutable nature of Silverblue requires a different approach throughout.</p>
+</div>
+
+<div class="note">
+  <strong>Note</strong>
+  Feel free to contact me if you have any question with these instructions — either through email or on the website's GitHub repository. The version used is Fedora Silverblue 39 at the time of writing, and most of the software here is fairly personal and economist-oriented.
+</div>
+
+<!-- SECTION 1 -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">1</span>
+    <span class="section-title">Background: How Silverblue Differs</span>
+  </div>
+  <div class="section-body guide-body">
+    <p>Silverblue differs from normal Fedora Workstation in that it is immutable: system files are read-only and updates are installed as a whole. More technically, <code>/</code>, <code>/usr</code>, and everything below them are read-only, while everything under <code>/var</code> is user-changeable. For more information, consult the <a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/">Fedora Docs</a>.</p>
+    <p>This means Silverblue installs applications and packages differently from Workstation — <code>dnf install</code> will not work. There are three ways to do it.</p>
+
+    <h3>Flatpak</h3>
+    <p>Flatpak is the predominant way to install applications, as it places each application into a sandbox, aligning with the immutable approach of Silverblue. It is generally recommended to add the Flathub repo to gain access to more applications; for instructions, consult the <a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/getting-started/">Fedora Docs</a>.</p>
+
+    <h3>Toolbox</h3>
+    <p>Toolbox creates an isolated container in which to install packages and software. It is almost like an emulator of the host system — a self-contained system attached to the host. To create a toolbox:</p>
+    <pre><code>create toolbox --container [name of container]</code></pre>
+    <p>After entering the toolbox:</p>
+    <pre><code>toolbox enter [name of container]</code></pre>
+    <p>Inside it you can use the normal Fedora/RHEL commands.</p>
+
+    <h3>Layering</h3>
+    <p>Layering goes against the immutable approach of the system, but many packages benefit from it because they are layered onto the system and have a more direct connection with it. I recommend layering only essential packages, like graphics card drivers. To layer a package onto the system:</p>
+    <pre><code>rpm-ostree install [package name]</code></pre>
+    <p>To uninstall a layered package:</p>
+    <pre><code>rpm-ostree uninstall [package name]</code></pre>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">2</span>
+    <span class="section-title">Graphics</span>
+  </div>
+  <div class="section-body guide-body">
+    <h3>Wayland &amp; Xorg</h3>
+    <p>Fedora uses Wayland as the default and will gradually deprecate Xorg, but in practice the experience can be quite poor with an Nvidia card whose drivers are not properly set up. Recent advances from Nvidia have made Wayland quite usable, provided you install all the drivers.</p>
+
+    <h4>Use Xorg</h4>
+    <p>Using an Xorg session, I can solve most display issues with VSCode and Obsidian (both installed through Flatpak). To use Xorg instead of Wayland, uncomment <code>WaylandEnable=false</code> and add <code>DefaultSession=gnome-xorg.desktop</code> to the <code>[daemon]</code> section of <code>/etc/gdm/custom.conf</code>:</p>
+    <pre><code>sudo nano /etc/gdm/custom.conf
+# [daemon]
+# WaylandEnable=false
+# DefaultSession=gnome-xorg.desktop
+
+# Cuda libs for Xorg
+rpm-ostree install xorg-x11-drv-nvidia-cuda
+rpm-ostree install xorg-x11-drv-nvidia-cuda-libs</code></pre>
+    <p>Then reboot for the change to take effect.</p>
+
+    <h4>Nvidia &amp; Wayland</h4>
+    <p>To install the proprietary Nvidia driver:</p>
+    <pre><code>rpm-ostree update
+
+# Nvidia proprietary driver
+rpm-ostree install akmod-nvidia
+
+# The Nvidia proprietary driver doesn't support VAAPI, but there is a
+# wrapper that can bridge NVDEC/NVENC with VAAPI
+rpm-ostree install nvidia-vaapi-driver
+
+# Provides more codecs for video streaming
+rpm-ostree install libavcodec-freeworld</code></pre>
+    <p>After all the installations, follow the instructions and reboot the system:</p>
+    <pre><code>systemctl reboot</code></pre>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-num">3</span>
+    <span class="section-title">Software</span>
+  </div>
+  <div class="section-body guide-body">
+    <h3>Foliate</h3>
+    <p>I really like this handy app for reading my <code>.epub</code> books, but it has some trouble accessing the graphics card, resulting in pages that don't render properly. The issue mostly comes down to a lack of permission. The simplest fix is to disable GPU acceleration for Foliate:</p>
+    <ol>
+      <li>Install <code>Flatseal</code> either via the GUI or the command line.</li>
+      <li>Disable the <strong>GPU acceleration</strong> option for Foliate.</li>
+      <li>Problem fixed!</li>
+    </ol>
+    <p>Since Foliate is not very demanding, even without GPU acceleration it runs smoothly enough that I have not looked for other solutions.</p>
+
+    <h3>MATLAB</h3>
+    <h4>Installation</h4>
+    <p>Always refer to the official installation guide for more info. After downloading the MATLAB installation file, unzip it with:</p>
+    <pre><code>unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64</code></pre>
+    <p>Navigate to the <code>matlab_R2023b_glnxa64</code> directory and launch the installer with:</p>
+    <pre><code>./install</code></pre>
+    <p>Install MATLAB under the <code>/var</code> directory so you have full permission. I recommend installing it to <code>/var/home/$USER/bin</code>.</p>
+
+    <h4>Desktop Entry</h4>
+    <p>Here is a reference for the desktop entry:</p>
+    <pre><code>[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/var/home/$USER/bin/MATLAB/R2023b/bin/matlab -desktop
+Name=MATLAB R2023b
+Icon=/var/home/$USER/bin/MATLAB/bin/glnxa64/cef_resources/matlab_icon.png
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
+StartupWMClass=sun-awt-X11-XFramePeer
+MimeType=text/x-matlab</code></pre>
+
+    <h4>Libraries</h4>
+    <p>Although <a href="https://mutschler.dev/linux/fedora-post-install/#">Willi Mutschler</a> suggests it is better to use system libraries instead of MATLAB's shipped ones, this is not the case under Silverblue: MATLAB does not have access to system-level files and cannot use the system libraries. There is therefore no need to exclude the packages shipped with MATLAB — in fact, you need to copy some packages from the system into the MATLAB directories for Dynare to work properly, since it cannot access system-level files either.</p>
+
+    <h3>Dynare</h3>
+    <p>Dynare needs to be compiled from source on a Fedora-based system, and the method is slightly different under Silverblue.</p>
+
+    <h4>Fundamental packages</h4>
+    <p>To compile Dynare we need several packages. I recommend installing these inside a toolbox to align with the immutable approach.</p>
+    <pre><code>toolbox create --container Dynare-compile
+# Enter the toolbox
+toolbox enter Dynare-compile</code></pre>
+    <p>Install all the packages inside this toolbox:</p>
+    <pre><code># Minimal packages (use --disable-doc and --disable-octave flags)
+sudo dnf install -y gcc gcc-g++ gfortran boost-devel gsl-devel lapack \
+  lapack-devel matio-devel openblas openblas-devel suitesparse-devel \
+  bison flex make autoconf automake redhat-rpm-config
+# Octave packages (use --disable-doc flag)
+sudo dnf install -y octave octave-devel octave-statistics octave-io \
+  octave-optim octave-control
+# Documentation packages
+sudo dnf install -y texlive-scheme-minimal texlive-collection-publishers \
+  texlive-collection-latexextra texlive-collection-fontsextra \
+  texlive-collection-latexrecommended texlive-collection-science \
+  texlive-collection-plaingeneric texlive-lm python3-sphinx latexmk \
+  mathjax doxygen</code></pre>
+    <p>Next, compile <code>slicot</code> and <code>x13as</code>. The code below is adapted from the <a href="https://git.dynare.org/Dynare/dynare#fedora-centos-or-rhel">Dynare compiling instructions for Fedora, CentOS or RHEL</a>.</p>
+    <pre><code># compile slicot from source and put it into /home/$USER/dynare/slicot/lib/
+mkdir -p /var/home/$USER/dynare/slicot
+cd /var/home/$USER/dynare/slicot
+wget https://deb.debian.org/debian/pool/main/s/slicot/slicot_5.0+20101122.orig.tar.gz
+tar xf slicot_5.0+20101122.orig.tar.gz
+cd slicot-5.0+20101122
+make FORTRAN=gfortran OPTS="-O2 -fPIC -fdefault-integer-8" LOADER=gfortran lib
+mkdir -p /var/home/$USER/dynare/slicot/lib
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot64_pic.a # for MATLAB
+cp slicot.a /var/home/$USER/dynare/slicot/lib/libslicot_pic.a   # for octave
+
+# compile x13as from source and put it into /usr/bin/
+mkdir -p /var/home/$USER/dynare/x13as
+cd /var/home/$USER/dynare/x13as
+wget https://www2.census.gov/software/x-13arima-seats/x13as/unix-linux/program-archives/x13as_asciisrc-v1-1-b60.tar.gz
+tar xf x13as_asciisrc-v1-1-b60.tar.gz
+sed -i "s|-static| |" makefile.gf  # removes '-static' in makefile.gf
+make -f makefile.gf FFLAGS="-O2 -std=legacy" PROGRAM=x13as
+sudo cp x13as /usr/bin/</code></pre>
+
+    <h4>Compile Dynare</h4>
+    <p>Once the prerequisite packages are sorted, we can start compiling Dynare.</p>
+    <pre><code>cd /var/home/$USER/dynare
+# This uses the current unstable branch
+git clone --recurse-submodules https://git.dynare.org/dynare/dynare.git unstable
+cd unstable
+# Direct Dynare to your MATLAB path
+meson setup -Dmatlab_path=/var/home/$USER/bin/MATLAB \
+  -Dfortran_args="[ '-B', '/var/home/$USER/dynare/slicot/lib']" \
+  -Dbuildtype=debugoptimized build-matlab
+meson compile -C build-matlab
+ninja -C build-matlab
+meson install -C build-matlab</code></pre>
+    <p>This gives you a nearly working Dynare, except that it now needs the latest <code>libstdc++.so.6</code> and <code>libstdc++.so.6.0.32</code> packages shipped with the system. As mentioned earlier, Silverblue prevents MATLAB from using the system-shipped packages, so we rely on the ones shipped with MATLAB.</p>
+    <p>To do this, first move the <code>libstdc++.so.6</code> and <code>libstdc++.so.6.0.32</code> packages that came with MATLAB into an exclude folder, then copy in the ones from our system:</p>
+    <pre><code>export MATLAB_ROOT=/var/home/$USER/bin/MATLAB
+cd /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+mkdir -p exclude
+mv libstdc++* exclude/
+cd /lib64
+cp libstdc++.so.6 /var/home/$USER/bin/MATLAB/sys/os/glnxa64
+cp libstdc++.so.6.0.32 /var/home/$USER/bin/MATLAB/sys/os/glnxa64</code></pre>
+    <p>This should give you a running Dynare; simply add Dynare to the path inside MATLAB afterward.</p>
+
+    <h3>LaTeX</h3>
+    <p>I use LaTeX with VSCode for all my writing, but this combination is a bit harder under Silverblue. My approach is to install LaTeX in a toolbox and then let VSCode (and LaTeX Workshop) communicate with the LaTeX stored inside the toolbox.</p>
+
+    <h4>Install TeX Live</h4>
+    <pre><code># Create the LaTeX container
+toolbox create --container LaTeX
+toolbox enter LaTeX
+
+# Add the TeX Live repository if needed
+sudo dnf config-manager --add-repo https://mirrors.tuna.tsinghua.edu.cn/texlive/fedora/
+
+# Install the packages
+sudo dnf install texlive texlive-scheme-full texlive-extra-utils
+
+# Update the packages
+sudo dnf update texlive*
+
+# Verify the installation
+tex --version</code></pre>
+
+    <h4>VSCode &amp; the LaTeX Workshop extension</h4>
+    <p>Install VSCode via Flatpak — the community-maintained version works fine for me, though you could install the official one through layering or a toolbox. After installing VSCode, use the extension marketplace to install the LaTeX Workshop extension.</p>
+    <p>Once LaTeX Workshop is installed, configure it so it can communicate with the LaTeX inside the toolbox by editing VSCode's <code>settings.json</code>. The key idea is to route every tool command through <code>host-spawn</code> into the <code>LaTeX</code> container:</p>
+    <pre><code>// Only if you use the LaTeX Utilities extension for word count etc.
+"latex-utilities.countWord.path": "host-spawn",
+"latex-utilities.countWord.args": ["toolbox", "run", "--container", "LaTeX", "texcount"],
+
+// Required for LaTeX Workshop — each tool wraps its command in host-spawn
+"latex-workshop.latex.tools": [
+  {
+    "name": "latexmk",
+    "command": "host-spawn",
+    "args": [
+      "toolbox", "run", "--container", "LaTeX",
+      "latexmk", "-synctex=1", "-interaction=nonstopmode",
+      "-file-line-error", "-pdf", "-outdir=%OUTDIR%", "%DOC%"
+    ],
+    "env": {}
+  },
+  {
+    "name": "xelatexmk",
+    "command": "host-spawn",
+    "args": [
+      "toolbox", "run", "--container", "LaTeX",
+      "latexmk", "-synctex=1", "-interaction=nonstopmode",
+      "-file-line-error", "-xelatex", "-outdir=%OUTDIR%", "%DOC%"
+    ],
+    "env": {}
+  },
+  {
+    "name": "bibtex",
+    "command": "host-spawn",
+    "args": ["toolbox", "run", "--container", "LaTeX", "bibtex", "%DOCFILE%"],
+    "env": {}
+  }
+  // ... add lualatexmk, pdflatex, tectonic, etc. following the same pattern
+],
+"latex-workshop.linting.chktex.enabled": true,
+"latex-workshop.linting.chktex.exec.path": "host-spawn",
+"latex-workshop.linting.chktex.exec.args": [
+  "toolbox", "run", "--container", "LaTeX",
+  "chktex", "-wall", "-n22", "-n30", "-e16", "-q"
+]</code></pre>
+    <p>This allows LaTeX Workshop to communicate with LaTeX inside the toolbox. The same <code>host-spawn → toolbox run</code> pattern can wrap any additional builders you need (pdflatex, lualatexmk, tectonic, knitr/Rscript, Weave, pweave).</p>
+  </div>
+</div>
+
+<div class="report-footer">
+  <p>Adapted in part from Willi Mutschler, "Fedora Post-Install" (mutschler.dev), with modifications for Fedora Silverblue's immutable filesystem. Dynare compilation steps adapted from the Dynare GitLab instructions for Fedora/CentOS/RHEL.</p>
+</div>
+
+</body>
+</html>

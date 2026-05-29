@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kornai (1979) Framework on Autocratic Governance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #17243d;
+    --navy-mid: #1e3056;
+    --navy-light: #274578;
+    --gold: #9a7b28;
+    --gold-light: #c4a44a;
+    --text: #1a1714;
+    --text-muted: #4f4a44;
+    --text-light: #8a7d76;
+    --bg: #fdfaf6;
+    --bg-alt: #f3f0ea;
+    --bg-card: #ffffff;
+    --border: #ddd5c8;
+    --border-strong: #c0b8ac;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    color: var(--text);
+    background-color: var(--bg);
+    line-height: 1.8;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    border-top: 4px solid var(--navy);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0 2rem;
+    margin-bottom: 3rem;
+  }
+  .masthead-series {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 0.55rem;
+  }
+  .masthead-sub {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 1.4rem;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ABSTRACT */
+  .abstract {
+    background: var(--bg-alt);
+    border-left: 3px solid var(--navy-mid);
+    padding: 1.4rem 1.8rem;
+    margin-bottom: 3rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .abstract-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+  .abstract p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* PART / SECTION HEADERS */
+  .part-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 1.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .part-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.9rem;
+    color: var(--border-strong);
+    min-width: 2rem;
+  }
+  .part-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.38rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ESSAY BODY */
+  .essay-body p {
+    font-size: 0.98rem;
+    line-height: 1.85;
+    margin-bottom: 1.1rem;
+    color: var(--text);
+  }
+  .essay-body em { color: var(--text-muted); }
+  .essay-body strong { color: var(--navy-mid); }
+
+  /* FIGURE */
+  .figure {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-card);
+    padding: 0.5rem;
+  }
+  .figure figcaption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--text-light);
+    margin-top: 0.6rem;
+  }
+
+  /* CALLOUT */
+  .callout-navy {
+    background: #edf2fc;
+    border-left: 3px solid var(--navy-mid);
+    padding: 1rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.6rem 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .callout-navy strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-mid);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* REPORT FOOTER */
+  .report-footer {
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-series">Political Economy — Commentary</div>
+  <h1>Kornai (1979) and the Logic of Autocratic Governance</h1>
+  <div class="masthead-sub">A comment on the soft-budget-constraint framework and its application to autocratic local government</div>
+  <div class="masthead-meta">
+    <span>Domains: Comparative Systems · Public Choice · Governance</span>
+    <span>Key Concepts: Soft Budget Constraint · Resource vs. Demand Constraint · Accountability</span>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>János Kornai's <em>"Resource-Constrained versus Demand-Constrained Systems" (1979)</em> distinguishes firms bound by soft budget constraints from those disciplined by market demand. This commentary argues that the same logic, transplanted from the firm to the local government, offers a neat explanation for why autocratic local governments routinely deviate from the demands of the populace. Where the binding constraint runs upward — toward an appointing superior rather than toward residents — officials face the same structural incentive that drives Kornai's socialist firms toward "investment hunger" regardless of underlying welfare.</p>
+</div>
+
+<!-- PART I -->
+<div class="part-header">
+  <span class="part-num">I</span>
+  <span class="part-title">Introduction</span>
+</div>
+
+<div class="essay-body">
+  <p>After randomly coming across Kornai's work on <em>"Resource-Constrained versus Demand-Constrained Systems" (1979)</em>, I realized that its idea of the soft/hard budget constraint provides a very neat framework to explain why autocratic governments — and especially local governments — so often deviate from the demands of the populace.</p>
+  <p>In Kornai's work, he suggests that firms in socialist systems are subject only to soft budget constraints: the loss from an investment does not damage the financial viability of the firm, because the firm is owned by the state. In a capitalist system, by contrast, firms are immediately constrained by demand from the market, which prevents them from over-occupying social resources. In all circumstances, however, firms prioritize the most immediate constraint, because that constraint decides the firm's survival. Socialist firms therefore suffer from "investment hunger," relentlessly pushing for expansion regardless of actual market demand or the efficient use of resources — expanding to maintain state support until resources are exhausted, and creating shortages along the way.</p>
+</div>
+
+<!-- PART II -->
+<div class="part-header">
+  <span class="part-num">II</span>
+  <span class="part-title">A Political Perspective</span>
+</div>
+
+<div class="essay-body">
+  <p>The detachment of firms from the market could certainly be undesirable. The detachment of a local government from its residents, however, raises far greater issues — and in fact any autocratic state should suffer from this problem to some degree.</p>
+  <p>By the nature of any autocratic system, local government officials are appointed by their superiors, which means their responsibility lies in meeting the needs of those superiors. That need, however, does not necessarily align with the needs of residents. Put into Kornai's framework: a local government in an autocratic state is delimited by its interaction with its superior, while in a democratic state it is delimited by its interaction with local residents. This is analogous to the resource/demand constraint faced by socialist/capitalist firms. Thus, just as socialist firms have no incentive to save resources, autocratic local governments have no incentive to benefit their residents.</p>
+  <p>This lack of incentive persists even when the central government's ultimate goal is to benefit the populace, because any policy relies on local implementation. With its hard constraint bounded by the populace, a local government must achieve a policy in a way that is broadly acceptable to residents. Where the hard constraint is instead bounded by the central government, the policy can be executed in any form whatsoever, so long as it hits the target.</p>
+
+  <figure class="figure">
+    <img src="Mushroom.png" alt="Mushroom-shaped flowchart of autocratic governance">
+    <figcaption>The "mushroom-shaped" flowchart: power flows downward, responsibility flows upward.</figcaption>
+  </figure>
+
+  <p>As one can see from the chart, the local government holds ruling power over the people, while its primary responsibility is not tied to the needs of those people. The local government bears only a secondary responsibility toward the populace — that is, the people influence the central government, which in turn governs the local government.</p>
+  <p>Such detachment between a local government's responsibility and its power has caused issues like the overly stringent lockdown policy during the COVID-19 era in China. The central government's ultimate goal was to reduce the number of cases, which is certainly not wrong in itself. But because the local government had no incentive to benefit its people — especially during such an urgent event — it took every measure at any cost to eliminate any possibility of the virus spreading. This included killing dogs during break-in COVID tests and leaving people suspected of infection in Fangcang hospitals without any actual treatment. These measures plainly harmed the welfare of the general public, and that did not matter, because the local government's primary responsibility — the one that decides the political career of the local governor — was to fulfill the goal of the superior.</p>
+
+  <div class="callout-navy">
+    <strong>Core Claim</strong>
+    Responsibility flows upward; power flows downward. The misalignment is not a bug of poor administration but a structural feature of how the binding constraint is assigned.
+  </div>
+</div>
+
+<!-- PART III -->
+<div class="part-header">
+  <span class="part-num">III</span>
+  <span class="part-title">Conclusion</span>
+</div>
+
+<div class="essay-body">
+  <p>It is sad to say, but I think that any autocratic system — one in which responsibility goes upward while power goes downward — faces the same problem. It appears to be the intrinsic nature of autocratic systems: a steady state toward which any such system converges.</p>
+</div>
+
+<div class="report-footer">
+  <p>Reference: Kornai, J. (1979) "Resource-Constrained versus Demand-Constrained Systems," <em>Econometrica</em>, 47(4). Originally published as a personal commentary; lightly edited for the web.</p>
+</div>
+
+</body>
+</html>
