@@ -71,5 +71,5 @@ export const BREAKPOINTS = {
 } as const
 
 export const OFFICE_HOURS = [
-  { day: 'Fall 2025', time: 'TBD' },
+  { day: 'Fall 2026', time: 'Tuesdays 2:00-4:00 PM PT' },
 ] as const
