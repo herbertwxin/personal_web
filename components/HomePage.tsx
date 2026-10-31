@@ -60,7 +60,7 @@ export function HomePage({ isDark, onNavigateToBlogPost }: HomePageProps) {
                 <div>
                   <div className='mb-4'>
                     <p className='text-base text-tx-secondary'>
-                      Wednesdays 10:00-12:00 AM for Spring 2026
+                      Tuesdays 2:00-4:00 PM for Fall 2026
                     </p>
                   </div>
 
